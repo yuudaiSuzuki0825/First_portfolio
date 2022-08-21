@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Task; // 記述方法に注意。
+
 class TasksController extends Controller
 {
     /**
@@ -13,7 +15,13 @@ class TasksController extends Controller
      */
     public function index()
     {
-        //
+        // 全レコードの内，25件を取得。
+        $tasks = Task::paginate(25);
+
+        // index.blade.phpへ遷移。その際，$tasksを渡している。
+        return view('tasks.index', [
+            'tasks' => $tasks,
+        ]);
     }
 
     /**
@@ -23,7 +31,13 @@ class TasksController extends Controller
      */
     public function create()
     {
-        //
+        // Task（モデルクラス）のインスタンス生成。create.blade.phpのフォームで使用。
+        $task = new Task;
+
+        // create.blade.phpへ遷移。その際，$taskを渡している。
+        return view('tasks.create', [
+            'task' => $task,
+        ]);
     }
 
     /**
@@ -34,7 +48,18 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Task（モデルクラス）のインスタンス生成。
+        $task = new Task;
+
+        // ユーザーが入力したフォーム内容をレコードとして保存。
+        $task->title = $request->title;
+        $task->start = $request->start;
+        $task->end = $request->end;
+        $task->content = $request->content;
+        $task->save();
+
+        // リダイレクト。
+        return redirect('/');
     }
 
     /**
@@ -45,7 +70,13 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        //
+        // id（主キー）を通じて該当レコードを特定し，取得。
+        $task = Task::find($id);
+
+        // edit.blade.phpへ遷移。その際，$taskを渡している。
+        return view('tasks.edit', [
+            'task' => $task,
+        ]);
     }
 
     /**
@@ -57,7 +88,18 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // id（主キー）を通じて該当レコードを特定し，取得。
+        $task = Task::find($id);
+
+        // タスクを更新。
+        $task->title = $request->title;
+        $task->start = $request->start;
+        $task->end = $request->end;
+        $task->content = $request->content;
+        $task->save();
+
+        // リダイレクト。
+        return redirect('/');
     }
 
     /**
@@ -68,6 +110,13 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // id（主キー）を通じて該当レコードを特定し，取得。
+        $task = Task::find($id);
+
+        // タスクを削除。
+        $task->delete();
+
+        // リダイレクト。
+        return redirect('/');
     }
 }
