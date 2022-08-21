@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TasksController@index');
+
+// showアクションを除いている。
+// 参考「https://qiita.com/sympe/items/9297f41d5f7a9d91aa11」。
+Route::resource('tasks', 'TasksController', ['only' => ['index', 'create', 'edit', 'store', 'update', 'destroy']]);
