@@ -1,5 +1,313 @@
 @charset "utf-8";
 
-.header-title {
-    color: red;
+html {
+    font-size: 100%;
 }
+
+body {
+    line-height: 1;
+}
+
+a {
+    text-decoration: none;
+    // color: #ffffff;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.wrapper {
+    padding-bottom: 50px;
+    background-color: #DDDDDD;
+    // position: relative;
+    // z-index: 10;
+}
+
+.header {
+    width: 1400px;
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    // background-color: #333333;
+}
+
+.header-title {
+    font-size: 1.875rem;
+    letter-spacing: 3px;
+    font-family: 'Abril Fatface', cursive;
+}
+
+.header-title a {
+    color: #333333;
+}
+
+.header-title a:hover {
+    transform: scale(1.1);
+    color: #CC0000;
+}
+
+.toggle-menu-button {
+    display: none;
+}
+
+.header-site-menu ul {
+    display: flex;
+}
+
+.header-site-menu ul li {
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    font-family: 'Abril Fatface', cursive;
+}
+
+/*
+.header-site-menu ul li:hover {
+    transform: scale(1.2);
+}
+*/
+
+.header-site-menu a {
+    color: #333333;
+}
+
+.header-site-menu a:hover {
+    transform: scale(1.2);
+    color: #CC0000;
+}
+
+.main-top {
+    // background-image: url(../images/21830aIMGL98851967_TP_V.jpg);
+    font-family: 'Abril Fatface', cursive;
+    text-align: center;
+    position: relative;
+}
+
+.main-top img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center 10%;
+    height: 350px;
+}
+
+.title-area {
+    padding-left: 22%;
+    position: absolute;
+    top: 130px;
+    left: 0;
+}
+
+.main-title {
+    font-size: 1.875rem;
+    letter-spacing: 3px;
+    color: #ffffff;
+    text-shadow: 2px 2px 2px #333333;
+}
+
+.main-sub-title {
+    margin-top: 20px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 2px 2px 1px #AAAAAA;
+}
+
+.flex {
+    padding: 50px 2.5% 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content {
+    width: 72%;
+    background-color: #ffffff;
+    padding: 15px;
+}
+
+.content-title {
+    font-size: 1.875rem;
+    margin-bottom: 15px;
+}
+
+.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.table th {
+    border-bottom: solid 1px #333333;
+}
+
+.table td {
+    border-bottom: solid 1px #333333;
+    padding: 10px;
+}
+
+.table th:nth-of-type(1) {
+    width: 3%;
+}
+
+.table th:nth-of-type(2) {
+    width: 25%;
+}
+
+.table th:nth-of-type(3) {
+    width: 4%;
+}
+
+.table th:nth-of-type(4) {
+    width: 4%;
+}
+
+.table th:nth-of-type(5) {
+    width: 65%;
+}
+
+.form {
+    width: 100%;
+}
+
+.form-label {
+    display: block;
+}
+
+.form-input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    border: solid 1px #333333;
+    padding: 4px 8px;
+}
+
+.form-btn {
+    display: block;
+    width: 100%;
+    color: #ffffff;
+    background-color: #333333;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+.delete {
+    width: 100%;
+}
+
+.delete-btn {
+    display: block;
+    width: 100%;
+    color: #ffffff;
+    background-color: #FFD700;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    margin-top: 8px;
+}
+
+.sidebar {
+    width: 25%;
+    height: 300px;
+    background-color: #ffffff;
+    padding: 15px;
+}
+
+.usage-area dt {
+    font-size: 1.875rem;
+    letter-spacing: 3px;
+    font-family: 'Abril Fatface', cursive;
+}
+
+.usage-area dd {
+    margin-top: 20px;
+    letter-spacing: 1px;
+    line-height: 1.4;
+}
+
+/*
+.make-btn {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1rem;
+    font-family: 'Abril Fatface', cursive;
+}
+*/
+
+/*
+.make-btn:hover {
+    transform: scale(1.2);
+}
+*/
+
+#footer p {
+    text-align: center;
+    font-size: 0.875rem;
+    font-family: 'Abril Fatface', cursive;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .title-area {
+        padding-left: 7%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        position: relative;
+    }
+
+    .header-site-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        z-index: 20;
+    }
+
+    .header-site-menu.is-show {
+        display: block;
+    }
+
+    .header-site-menu a {
+        color: #ffffff;
+        font-size: 1.5rem;
+    }
+
+    .header-site-menu a:hover {
+        color: #CC0000;
+    }
+
+    .toggle-menu-button {
+        display: block; /* buttonタグはデフォでinline-block。*/
+        width: 44px;
+        height: 34px;
+        // background-image: url(../images/sozai_cman_jp_20220822223728.png); /* background-imageプロパティ。背景にする画像を指定できる。urlで指定する。参考「http://www.htmq.com/style/background-image.shtml」*/
+        // background-size: 50%; /* background-sizeプロパティ。背景画像のサイズを指定できる。%は，このタグの親要素を基準にしていない事に注意。背景領域を基準にしているので，今回は横44px・縦34pxのちょうど半分の大きさということになる（150行目参照）。参考「http://www.htmq.com/css3/background-size.shtml」*/
+        // background-position: center; /*background-positionプロパティ。背景画像の位置を指定できる。今回は縦横共に中央に配置している。本来は縦横２つの値を指定しなければならないが，値を1つにした場合は縦横2つともその値になるということになる（今回はcenter centerと全く同じ）。参考「http://www.htmq.com/style/background-position.shtml」*/ 
+        // background-repeat: no-repeat; /* background-repeatプロパティ。背景画像のリピートの仕方を指定できる。デフォ値はrepeat。参考「http://www.htmq.com/style/background-repeat.shtml」*/
+        /* ここからbuttonのデフォルト指定を解除している。テキスト151pも参考になるが右記記事も参考になる。参考「https://prawn-cocktail.com/blog/631/」*/
+        // background-color: transparent; /* buttonタグはデフォで背景色がシルバーに設定されている。参考「http://www.htmq.com/html5/button.shtml」。記事を見るとCSS書いていないのにシルバー色になっている。この初期設定を解除しているのである（背景色を透明にすることで結果的に.headerで指定した白色が背景色となる）。 */
+        // border: none;
+        // border-radius: 0; /* border-radiusプロパティ。要素の角を丸くできる。参考「http://www.htmq.com/css3/border-radius.shtml」*/
+        // outline: none;
+    }
+
+    .main-top {
+        position: relative;
+        z-index: 10;
+    }
+
+    .title-area {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+}
+
