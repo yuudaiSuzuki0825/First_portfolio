@@ -2,6 +2,12 @@
 
 @section('content')
 
+    @if (count($errors) > 0)
+        @foreach ($errors->all() as $error)
+            <p class="error-message">{{ $error }}</p>
+        @endforeach
+    @endif
+
     <div class="flex">
 
         <section class="content">

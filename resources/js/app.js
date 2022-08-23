@@ -1,6 +1,7 @@
 require('./bootstrap');
 
 window.addEventListener('load', function () {
+    // ハンバーガーメニューの実装。
     let button = document.querySelector('.toggle-menu-button');
     let menu = document.querySelector('.header-site-menu');
     button.addEventListener('click', function () {
@@ -10,4 +11,15 @@ window.addEventListener('load', function () {
             menu.classList.add('is-show');
         }
     })
+
+    // ページ上部へ遷移するボタンの実装。
+    const top = () => {
+        if ($(window).scrollTop() >= 350) {
+            $('.go-to-top').fadeIn("slow");
+        } else {
+            $('.go-to-top').fadeOut("slow");
+        }
+    }
+    $(window).on('scroll', top);
+    top();
 })
