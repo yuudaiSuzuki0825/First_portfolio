@@ -15,8 +15,8 @@ class TasksController extends Controller
      */
     public function index()
     {
-        // 全レコードの内，25件を取得。
-        $tasks = Task::paginate(25);
+        // 全レコードを取得。
+        $tasks = Task::all();
 
         // index.blade.phpへ遷移。その際，$tasksを渡している。
         return view('tasks.index', [
@@ -48,6 +48,14 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+        // バリデーション
+        $request->validate([
+            'title' => 'required|max:20',
+            'start' => 'required|max:15',
+            'end' => 'required|max:15',
+            'content' => 'required|max:255',
+        ]);
+
         // Task（モデルクラス）のインスタンス生成。
         $task = new Task;
 
@@ -88,6 +96,14 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // バリデーション
+        $request->validate([
+            'title' => 'required|max:20',
+            'start' => 'required|max:15',
+            'end' => 'required|max:15',
+            'content' => 'required|max:255',
+        ]);
+
         // id（主キー）を通じて該当レコードを特定し，取得。
         $task = Task::find($id);
 

@@ -37,6 +37,9 @@
         <p class="copyright">&copy; 2022 TaskManagement</p>
     </footer>
 
+    <!-- JQueryのCDN。-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- JavaScriptのパス。 -->
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

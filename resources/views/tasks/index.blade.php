@@ -53,4 +53,6 @@
         </aside>
     </div>
 
+    <a href="#" class="go-to-top">トップへ戻る</a>
+
 @endsection
