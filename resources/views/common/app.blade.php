@@ -17,7 +17,7 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header-title"><a href="/">TaskManagement</a></h1>
+        <h1 class="header-title"><a href="/">PlanManagement</a></h1>
         <button class="toggle-menu-button"><img src="{{ asset('img/sozai_cman_jp_20220822223728.png') }}" alt=""></button>
         <div class="header-site-menu">
             <ul>

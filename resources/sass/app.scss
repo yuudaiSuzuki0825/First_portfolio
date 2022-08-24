@@ -85,7 +85,6 @@ img {
 }
 
 .main-top {
-    // background-image: url(../images/21830aIMGL98851967_TP_V.jpg);
     font-family: 'Abril Fatface', cursive;
     text-align: center;
     position: relative;
@@ -331,15 +330,6 @@ img {
         display: block; /* buttonタグはデフォでinline-block。*/
         width: 44px;
         height: 34px;
-        // background-image: url(../images/sozai_cman_jp_20220822223728.png); /* background-imageプロパティ。背景にする画像を指定できる。urlで指定する。参考「http://www.htmq.com/style/background-image.shtml」*/
-        // background-size: 50%; /* background-sizeプロパティ。背景画像のサイズを指定できる。%は，このタグの親要素を基準にしていない事に注意。背景領域を基準にしているので，今回は横44px・縦34pxのちょうど半分の大きさということになる（150行目参照）。参考「http://www.htmq.com/css3/background-size.shtml」*/
-        // background-position: center; /*background-positionプロパティ。背景画像の位置を指定できる。今回は縦横共に中央に配置している。本来は縦横２つの値を指定しなければならないが，値を1つにした場合は縦横2つともその値になるということになる（今回はcenter centerと全く同じ）。参考「http://www.htmq.com/style/background-position.shtml」*/ 
-        // background-repeat: no-repeat; /* background-repeatプロパティ。背景画像のリピートの仕方を指定できる。デフォ値はrepeat。参考「http://www.htmq.com/style/background-repeat.shtml」*/
-        /* ここからbuttonのデフォルト指定を解除している。テキスト151pも参考になるが右記記事も参考になる。参考「https://prawn-cocktail.com/blog/631/」*/
-        // background-color: transparent; /* buttonタグはデフォで背景色がシルバーに設定されている。参考「http://www.htmq.com/html5/button.shtml」。記事を見るとCSS書いていないのにシルバー色になっている。この初期設定を解除しているのである（背景色を透明にすることで結果的に.headerで指定した白色が背景色となる）。 */
-        // border: none;
-        // border-radius: 0; /* border-radiusプロパティ。要素の角を丸くできる。参考「http://www.htmq.com/css3/border-radius.shtml」*/
-        // outline: none;
     }
 
     .main-top {
