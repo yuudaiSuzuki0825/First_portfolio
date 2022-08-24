@@ -315,7 +315,6 @@ img {
     display: block; /* buttonタグはデフォでinline-block。*/
     width: 44px;
     height: 34px;
-    /* ここからbuttonのデフォルト指定を解除している。テキスト151pも参考になるが右記記事も参考になる。参考「https://prawn-cocktail.com/blog/631/」*/
   }
   .main-top {
     position: relative;

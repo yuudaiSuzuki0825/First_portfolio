@@ -5,14 +5,14 @@
     <div class="main-top">
         <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt="">
         <div class="title-area">
-            <h2 class="main-title">Task management streamlines your work.</h2>
+            <h2 class="main-title">Plan management streamlines your work.</h2>
             <h3 class="main-sub-title">効率化を目指したい。</h3>
         </div>
     </div>
 
     <div class="flex">
         <section class="content">
-            <h2 class="content-title">タスク一覧</h2>
+            <h2 class="content-title">計画一覧</h2>
 
             @if (count($tasks) > 0)
                 <table class="table">
@@ -22,7 +22,7 @@
                             <th>テーマ</th>
                             <th>開始日</th>
                             <th>完了日</th>
-                            <th>内容</th>
+                            <th>概要</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +38,7 @@
                     </tbody>
                 </table>
             @else
-                <p class="alt">ここに作成したタスクが表示されます。</p>
+                <p class="alt">ここに作成した計画が表示されます。</p>
             @endif
         </section>
 
@@ -46,13 +46,13 @@
             <div class="usage-area">
                 <dl>
                     <dt>Usage</dt>
-                    <dd>テーマと開始日，完了日，内容を記述してください。<br><br>作成した内容に変更がある場合は，変更したいタスクのidをクリックしてタスク修正ページへ移動してください。タスクの削除もそのページから行えます。</dd>
+                    <dd>Makeをクリックして計画作成ページへ移動してください。<br><br>作成した計画に変更がある場合は，変更したい計画のidをクリックして計画修正ページへ移動してください。計画の削除もそのページから行えます。</dd>
                 </dl>
             </div>
             <!-- <div class="make-btn">{!! link_to_route('tasks.create', 'make', [])!!}</div> -->
         </aside>
     </div>
 
-    <a href="#" class="go-to-top">トップへ戻る</a>
+    <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a>
 
 @endsection
