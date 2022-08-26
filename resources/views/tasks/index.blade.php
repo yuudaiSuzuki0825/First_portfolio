@@ -18,7 +18,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>id</th>
+                            <th></th>
                             <th>テーマ</th>
                             <th>開始日</th>
                             <th>完了日</th>
@@ -28,7 +28,8 @@
                     <tbody>
                         @foreach ($tasks as $task)
                         <tr>
-                            <td>{!! link_to_route('tasks.edit', $task->id, ['task' => $task->id]) !!}</td>
+                            <!-- <td>{!! link_to_route('tasks.edit', $task->id, ['task' => $task->id]) !!}</td> -->
+                            <td>{!! link_to_route('tasks.edit', '🖌', ['task' => $task->id], ['class' => 'pencil']) !!}</td>
                             <td>{{ $task->title }}</td>
                             <td>{{ $task->start }}</td>
                             <td>{{ $task->end }}</td>
@@ -37,6 +38,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $tasks->links() }}
             @else
                 <p class="alt">ここに作成した計画が表示されます。</p>
             @endif

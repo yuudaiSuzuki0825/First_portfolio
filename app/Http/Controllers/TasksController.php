@@ -16,7 +16,7 @@ class TasksController extends Controller
     public function index()
     {
         // 全レコードを取得。
-        $tasks = Task::all();
+        $tasks = Task::paginate(10);
 
         // index.blade.phpへ遷移。その際，$tasksを渡している。
         return view('tasks.index', [

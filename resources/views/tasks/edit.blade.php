@@ -19,20 +19,22 @@
                 {!! Form::text('title', null, ['class' => 'form-input']) !!}
 
                 {!! Form::label('start', '開始日:', ['class' => 'form-label']) !!}
-                {!! Form::text('start', null, ['class' => 'form-input']) !!}
+                {!! Form::date('start',  \Carbon\Carbon::now(), ['class' => 'form-input']) !!}
+                <!-- {!! Form::text('start', null, ['class' => 'form-input']) !!} -->
 
                 {!! Form::label('end', '完了日:', ['class' => 'form-label']) !!}
-                {!! Form::text('end', null, ['class' => 'form-input']) !!}
+                {!! Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-input']) !!}
+                <!-- {!! Form::text('end', null, ['class' => 'form-input']) !!} -->
 
                 {!! Form::label('content', '概要:', ['class' => 'form-label']) !!}
                 {!! Form::text('content', null, ['class' => 'form-input']) !!}
 
-                {!! Form::submit('更新', ['class' => 'form-btn'])!!}
+                {!! Form::submit('更新する', ['class' => 'form-btn'])!!}
 
             {!! Form::close() !!}
 
             {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete'], ['class' => 'delete'])!!}
-                {!! Form::submit('削除', ['class' => 'delete-btn']) !!}
+                {!! Form::submit('削除する', ['class' => 'delete-btn']) !!}
             {!! Form::close() !!}
         </section>
 
