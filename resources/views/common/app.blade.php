@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
     <!-- CSSのパス。 -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/efd87fdfef.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header">

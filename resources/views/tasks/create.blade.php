@@ -19,15 +19,17 @@
             {!! Form::text('title', null, ['class' => 'form-input', "placeholder" => "20字以内"]) !!}
 
             {!! Form::label('start', '開始日:', ['class' => 'form-label']) !!}
-            {!! Form::text('start', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!}
+            {!! Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-input']) !!}
+            <!-- {!! Form::text('start', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!} -->
 
             {!! Form::label('end', '完了日:', ['class' => 'form-label']) !!}
-            {!! Form::text('end', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!}
+            {!! Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-input']) !!}
+            <!-- {!! Form::text('end', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!} -->
 
             {!! Form::label('content', '概要:', ['class' => 'form-label']) !!}
             {!! Form::text('content', null, ['class' => 'form-input', "placeholder" => "255字以内"]) !!}
 
-            {!! Form::submit('作成', ['class' => 'form-btn'])!!}
+            {!! Form::submit('作成する', ['class' => 'form-btn'])!!}
 
             {!! Form::close() !!}
         </section>
