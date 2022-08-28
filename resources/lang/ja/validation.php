@@ -150,7 +150,7 @@ return [
         'title' => 'テーマ',
         'start' => '開始日',
         'end' => '完了日',
-        'content' => '内容'
+        'content' => '概要'
     ],
 
 ];

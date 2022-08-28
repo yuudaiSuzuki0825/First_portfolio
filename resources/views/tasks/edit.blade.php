@@ -34,7 +34,7 @@
             {!! Form::close() !!}
 
             {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete'], ['class' => 'delete'])!!}
-                {!! Form::submit('削除する', ['class' => 'delete-btn']) !!}
+                {!! Form::submit('完了する', ['class' => 'delete-btn']) !!}
             {!! Form::close() !!}
         </section>
 
