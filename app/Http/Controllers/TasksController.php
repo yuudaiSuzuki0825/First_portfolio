@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Task; // 記述方法に注意。
 
+use App\History; // 記述方法に注意。
+
 class TasksController extends Controller
 {
     /**
@@ -16,12 +18,34 @@ class TasksController extends Controller
     public function index()
     {
         // 全レコードを取得。
-        $tasks = Task::paginate(10);
+        // $tasks = Task::paginate(10);
+        $query = Task::query();
+        $tasks = $query->paginate(10);
+
+        // Historiesテーブルのレコード数を取得。
+        $count = History::count();
 
         // index.blade.phpへ遷移。その際，$tasksを渡している。
-        return view('tasks.index', [
-            'tasks' => $tasks,
+        return view('tasks.index', compact('tasks', 'count'));
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
         ]);
+
+        $keyword_title = $request->title;
+
+        $query = Task::query();
+        $tasks = $query->where('title', 'like', '%'.self::escapeLike($keyword_title) .'%')->get();
+
+        return view('tasks.search', compact('tasks'));
+    }
+
+    public static function escapeLike($str)
+    {
+        return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
     }
 
     /**
@@ -128,6 +152,14 @@ class TasksController extends Controller
     {
         // id（主キー）を通じて該当レコードを特定し，取得。
         $task = Task::find($id);
+
+        $history = new History;
+
+        $history->title = $task->title;
+        $history->start = $task->start;
+        $history->end = $task->end;
+        $history->content = $task->content;
+        $history->save();
 
         // タスクを削除。
         $task->delete();

@@ -2,11 +2,12 @@
 
 @section('content')
 
-    @if (count($errors) > 0)
-        @foreach ($errors->all() as $error)
-        <p class="error-message">{{ $error }}</p>
-        @endforeach
-    @endif
+
+    <!-- @if (count($errors) > 0) -->
+        <!-- @foreach ($errors->all() as $error) -->
+        <!-- <p class="error-message">{{ $error }}</p> -->
+        <!-- @endforeach -->
+    <!-- @endif -->
 
     <div class="flex">
 
@@ -14,22 +15,27 @@
             <h2 class="content-title">計画作成</h2>
 
             {!! Form::model($task, ['route' => 'tasks.store'], ['class' => 'form']) !!}
+            <!-- 第二引数をurlにしてもOK。['url' => '/tasks']。 -->
 
             {!! Form::label('title', 'テーマ:', ['class' => 'form-label']) !!}
             {!! Form::text('title', null, ['class' => 'form-input', "placeholder" => "20字以内"]) !!}
+            <p class="error-message">{{ $errors->first('title') }}</p>
 
             {!! Form::label('start', '開始日:', ['class' => 'form-label']) !!}
             {!! Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-input']) !!}
             <!-- {!! Form::text('start', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!} -->
+            <p class="error-message">{{ $errors->first('start') }}</p>
 
             {!! Form::label('end', '完了日:', ['class' => 'form-label']) !!}
             {!! Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-input']) !!}
             <!-- {!! Form::text('end', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!} -->
+            <p class="error-message">{{ $errors->first('end') }}</p>
 
             {!! Form::label('content', '概要:', ['class' => 'form-label']) !!}
             {!! Form::text('content', null, ['class' => 'form-input', "placeholder" => "255字以内"]) !!}
+            <p class="error-message">{{ $errors->first('content') }}</p>
 
-            {!! Form::submit('作成する', ['class' => 'form-btn'])!!}
+            {!! Form::submit('作成する', ['class' => 'form-btn']) !!}
 
             {!! Form::close() !!}
         </section>
