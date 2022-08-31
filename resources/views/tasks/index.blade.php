@@ -14,7 +14,8 @@
         <section class="content">
             <h2 class="content-title">計画一覧</h2>
             <form action="{{ route('tasks.search') }}" method='get'>
-                {{ csrf_field()}}
+                <!-- {{ csrf_field()}} -->
+                @csrf
                 <!-- {{method_field('get')}} -->
                 <label>テーマ:</label>
                 <input type="text" placeholder="テーマを入力して検索。" name="title">
