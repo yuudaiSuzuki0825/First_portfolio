@@ -22,27 +22,34 @@ class TasksController extends Controller
         $query = Task::query();
         $tasks = $query->orderBy('end', 'asc')->paginate(10);
 
-        // Historiesテーブルのレコード数を取得。
+        // tasksテーブルの全レコード数を取得。
+        $tasks_num = $query->count();
+
+        // Historiesテーブルの全レコード数を取得。
         $count = History::count();
 
         // index.blade.phpへ遷移。その際，$tasksを渡している。
-        return view('tasks.index', compact('tasks', 'count'));
+        return view('tasks.index', compact('tasks','tasks_num','count'));
     }
 
     public function search(Request $request)
     {
+        // バリデーション。
         $request->validate([
             'title' => 'required',
         ]);
 
+        // ユーザーが入力した値の取得。
         $keyword_title = $request->title;
 
+        // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
         $query = Task::query();
         $tasks = $query->where('title', 'like', '%'.self::escapeLike($keyword_title) .'%')->orderBy('end', 'asc')->get();
 
         return view('tasks.search', compact('tasks'));
     }
 
+    // searchアクションで使用。
     public static function escapeLike($str)
     {
         return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
@@ -153,8 +160,8 @@ class TasksController extends Controller
         // id（主キー）を通じて該当レコードを特定し，取得。
         $task = Task::find($id);
 
+        // 完了したTasksテーブルの該当レコードをhistoriesテーブルのレコードとして保存（移動）。
         $history = new History;
-
         $history->title = $task->title;
         $history->start = $task->start;
         $history->end = $task->end;
@@ -166,5 +173,32 @@ class TasksController extends Controller
 
         // リダイレクト。
         return redirect('/');
+    }
+
+    public function trace()
+    {
+        // クエリ。
+        $query = History::query();
+        // 完了日を基準に昇順にレコードを並べ替え，10件取得。
+        $histories = $query->orderBy('end', 'asc')->paginate(10);
+        // historiesテーブルの全レコードをカウント。
+        $count = $query->count();
+        // viewに渡す。
+        return view('tasks.trace', [
+            'histories' => $histories,
+            'count' => $count,
+        ]);
+    }
+
+    public function traceDestroy($id)
+    {
+        // クエリ。
+        $query = History::query();
+        // パラメータから受け取ったidを活用して該当するレコードを取得。
+        $history = $query->find($id);
+        // 該当レコードの削除。
+        $history->delete();
+        // リダイレクト。
+        return redirect('tasks/trace');
     }
 }

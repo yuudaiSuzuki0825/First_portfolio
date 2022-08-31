@@ -1,31 +1,11 @@
 @extends('common.app')
 
 @section('content')
-
-    <div class="main-top">
-        <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt="">
-        <div class="title-area">
-            <h2 class="main-title">Plan management streamlines your work.</h2>
-            <h3 class="main-sub-title">効率化を目指したい。</h3>
-        </div>
-    </div>
-
-    <div class="flex">
+<div class="flex">
         <section class="content">
-            <h2 class="content-title">計画一覧</h2>
-            <form action="{{ route('tasks.search') }}" method='get'>
-                <!-- {{ csrf_field()}} -->
-                @csrf
-                <!-- {{method_field('get')}} -->
-                <label>テーマ:</label>
-                <input type="text" placeholder="テーマを入力して検索。" name="title">
-                <button type="submit">検索</button>
-            </form>
-            {!! link_to_route('tasks.trace', '履歴を見る', []) !!}
+            <h2 class="content-title">完了履歴一覧</h2>
 
-            <p>全{{ $tasks_num }}件</p>
-
-            @if (count($tasks) > 0)
+            @if (isset($histories))
                 <table class="table">
                     <thead>
                         <tr>
@@ -37,18 +17,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($tasks as $task)
+                        @foreach ($histories as $history)
                         <tr>
-                            <td>{!! link_to_route('tasks.edit', '🖌', ['task' => $task->id], ['class' => 'pencil']) !!}</td>
-                            <td>{{ $task->title }}</td>
-                            <td>{{ $task->start }}</td>
-                            <td>{{ $task->end }}</td>
-                            <td>{{ $task->content }}</td>
+                            <td>
+                            {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!}
+                                {!! Form::submit('削除する') !!}
+                            {!! Form::close() !!}
+                            </td>
+                            <td>{{ $history->title }}</td>
+                            <td>{{ $history->start }}</td>
+                            <td>{{ $history->end }}</td>
+                            <td>{{ $history->content }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                {{ $tasks->links() }}
+                {{ $histories->links() }}
             @else
                 <p class="alt">ここに作成した計画が表示されます。</p>
             @endif
@@ -68,5 +52,4 @@
     </div>
 
     <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a>
-
 @endsection
