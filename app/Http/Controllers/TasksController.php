@@ -20,7 +20,7 @@ class TasksController extends Controller
         // 全レコードを取得。
         // $tasks = Task::paginate(10);
         $query = Task::query();
-        $tasks = $query->paginate(10);
+        $tasks = $query->orderBy('end', 'asc')->paginate(10);
 
         // Historiesテーブルのレコード数を取得。
         $count = History::count();
@@ -38,7 +38,7 @@ class TasksController extends Controller
         $keyword_title = $request->title;
 
         $query = Task::query();
-        $tasks = $query->where('title', 'like', '%'.self::escapeLike($keyword_title) .'%')->get();
+        $tasks = $query->where('title', 'like', '%'.self::escapeLike($keyword_title) .'%')->orderBy('end', 'asc')->get();
 
         return view('tasks.search', compact('tasks'));
     }
