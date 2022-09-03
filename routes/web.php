@@ -21,3 +21,13 @@ Route::resource('tasks', 'TasksController', ['only' => ['index', 'create', 'edit
 Route::get('tasks/trace', 'TasksController@trace')->name('tasks.trace');
 // 過去の計画完了の履歴を削除する。
 Route::delete('tasks/trace/{id}', 'TasksController@traceDestroy')->name('tasks.traceDestroy');
+// 計画を中断する画面に遷移する。
+Route::get('tasks/{id}/suspend', 'TasksController@breakScreen')->name('tasks.breakScreen');
+// 遂行中の計画を中断する。
+Route::delete('tasks/{id}/suspend', 'TasksController@suspend')->name('tasks.suspend');
+// 中断された計画の一覧を閲覧する。
+Route::get('tasks/suspend_list', 'TasksController@suspensionList')->name('tasks.suspensionList');
+// 中断された計画を再開する。
+Route::delete('tasks/suspend_list/{id}', 'TasksController@replay')->name('tasks.replay');
+// 中断された計画を削除する。
+Route::delete('tasks/suspend_list/{id}/delete', 'TasksController@completeErase')->name('tasks.completeErase');

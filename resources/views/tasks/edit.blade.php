@@ -36,6 +36,8 @@
             {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete'], ['class' => 'delete'])!!}
                 {!! Form::submit('完了する', ['class' => 'delete-btn']) !!}
             {!! Form::close() !!}
+
+            <a href="{{ route('tasks.breakScreen', $task->id) }}">計画を中断する</a>
         </section>
 
         <aside class="sidebar" id="usage">
