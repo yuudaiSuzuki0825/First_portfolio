@@ -8,6 +8,8 @@ use App\Task; // 記述方法に注意。
 
 use App\History; // 記述方法に注意。
 
+use App\Suspension; // 記述方法に注意。
+
 class TasksController extends Controller
 {
     /**
@@ -200,5 +202,39 @@ class TasksController extends Controller
         $history->delete();
         // リダイレクト。
         return redirect('tasks/trace');
+    }
+
+    public function breakScreen($id)
+    {
+        $task = Task::find($id);
+        return view('tasks.suspend', [
+            'task' => $task,
+        ]);
+    }
+
+    public function suspend($id)
+    {
+        $query = Task::query();
+        $task = $query->find($id);
+        $suspension = new Suspension;
+        $suspension->title = $task->title;
+        $suspension->start = $task->start;
+        $suspension->end = $task->end;
+        $suspension->content = $task->content;
+        $suspension->save();
+        $task->delete();
+        return redirect('/');
+    }
+
+    public function suspensionList()
+    {
+    }
+
+    public function replay()
+    {
+    }
+
+    public function completeErase()
+    {
     }
 }
