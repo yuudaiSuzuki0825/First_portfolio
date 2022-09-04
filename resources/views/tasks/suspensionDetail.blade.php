@@ -8,6 +8,7 @@
                 <thead>
                     <tr>
                         <th></th>
+                        <th></th>
                         <th>テーマ</th>
                         <th>開始日</th>
                         <th>完了日</th>
@@ -16,7 +17,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>未定</td>
+                        <td>
+                            <form action="{{ route('tasks.replay', $suspension->id) }}" method="POST">
+                                <button type="submit">再開する</button>
+                                @method('DELETE')
+                                @csrf
+                            </form>
+                        </td>
+                        <td><a href="{{ route('tasks.eraseScreen', $suspension->id) }}">削除する</a></td>
                         <td>{{ $suspension->title }}</td>
                         <td>{{ $suspension->start }}</td>
                         <td>{{ $suspension->end }}</td>

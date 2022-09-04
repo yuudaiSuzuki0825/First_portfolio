@@ -246,11 +246,34 @@ class TasksController extends Controller
         ]);
     }
 
-    public function replay()
+    public function replay($id)
     {
+        $query = Suspension::query();
+        $suspension = $query->find($id);
+        $task = new Task;
+        $task->title = $suspension->title;
+        $task->start = $suspension->start;
+        $task->end = $suspension->end;
+        $task->content = $suspension->content;
+        $task->save();
+        $suspension->delete();
+        return redirect('/');
     }
 
-    public function completeErase()
+    public function eraseScreen($id)
     {
+        $query = Suspension::query();
+        $suspension = $query->find($id);
+        return view('tasks.erase', [
+            'suspension' => $suspension,
+        ]);
+    }
+
+    public function completeErase($id)
+    {
+        $query = Suspension::query();
+        $suspension = $query->find($id);
+        $suspension->delete();
+        return redirect('tasks/suspendList');
     }
 }
