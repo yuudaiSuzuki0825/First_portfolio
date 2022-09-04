@@ -31,5 +31,7 @@ Route::get('tasks/suspendList', 'TasksController@suspensionList')->name('tasks.s
 Route::get('tasks/suspendList/{id}', 'TasksController@suspensionDetail')->name('tasks.suspensionDetail');
 // 中断された計画を再開する。
 Route::delete('tasks/suspendList/{id}', 'TasksController@replay')->name('tasks.replay');
+// 中断された計画を削除する画面に遷移する。
+Route::get('tasks/suspendList/{id}/delete', 'TasksController@eraseScreen')->name('tasks.eraseScreen');
 // 中断された計画を削除する。
 Route::delete('tasks/suspendList/{id}/delete', 'TasksController@completeErase')->name('tasks.completeErase');
