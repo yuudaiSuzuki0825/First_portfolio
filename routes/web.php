@@ -26,8 +26,10 @@ Route::get('tasks/{id}/suspend', 'TasksController@breakScreen')->name('tasks.bre
 // 遂行中の計画を中断する。
 Route::delete('tasks/{id}/suspend', 'TasksController@suspend')->name('tasks.suspend');
 // 中断された計画の一覧を閲覧する。
-Route::get('tasks/suspend_list', 'TasksController@suspensionList')->name('tasks.suspensionList');
+Route::get('tasks/suspendList', 'TasksController@suspensionList')->name('tasks.suspensionList');
+// 中断された計画の詳細を閲覧する。
+Route::get('tasks/suspendList/{id}', 'TasksController@suspensionDetail')->name('tasks.suspensionDetail');
 // 中断された計画を再開する。
-Route::delete('tasks/suspend_list/{id}', 'TasksController@replay')->name('tasks.replay');
+Route::delete('tasks/suspendList/{id}', 'TasksController@replay')->name('tasks.replay');
 // 中断された計画を削除する。
-Route::delete('tasks/suspend_list/{id}/delete', 'TasksController@completeErase')->name('tasks.completeErase');
+Route::delete('tasks/suspendList/{id}/delete', 'TasksController@completeErase')->name('tasks.completeErase');
