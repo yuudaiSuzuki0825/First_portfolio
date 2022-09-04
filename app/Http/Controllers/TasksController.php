@@ -228,6 +228,22 @@ class TasksController extends Controller
 
     public function suspensionList()
     {
+        $query = Suspension::query();
+        $suspensions = $query->orderBy('end', 'asc')->paginate(10);
+        $suspensions_num = $query->count();
+        return view('tasks.suspendList', [
+            'suspensions' => $suspensions,
+            'suspensions_num' => $suspensions_num,
+        ]);
+    }
+
+    public function suspensionDetail($id)
+    {
+        $query = Suspension::query();
+        $suspension = $query->find($id);
+        return view('tasks.suspensionDetail', [
+            'suspension' => $suspension,
+        ]);
     }
 
     public function replay()
