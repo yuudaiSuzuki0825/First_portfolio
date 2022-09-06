@@ -38,15 +38,15 @@ class TasksController extends Controller
     {
         // バリデーション。
         $request->validate([
-            'title' => 'required',
+            'keyword' => 'required',
         ]);
 
         // ユーザーが入力した値の取得。
-        $keyword_title = $request->title;
+        $keyword = $request->keyword;
 
         // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
         $query = Task::query();
-        $tasks = $query->where('title', 'like', '%'.self::escapeLike($keyword_title) .'%')->orderBy('end', 'asc')->get();
+        $tasks = $query->where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
 
         return view('tasks.search', compact('tasks'));
     }

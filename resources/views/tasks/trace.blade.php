@@ -20,9 +20,14 @@
                         @foreach ($histories as $history)
                         <tr>
                             <td>
-                            {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!}
-                                {!! Form::submit('削除する') !!}
-                            {!! Form::close() !!}
+                            <!-- {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!} -->
+                                <!-- {!! Form::submit('削除する') !!} -->
+                            <!-- {!! Form::close() !!} -->
+                            <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
+                                <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
+                                @method('DELETE')
+                                @csrf
+                            </form>
                             </td>
                             <td>{{ $history->title }}</td>
                             <td>{{ $history->start }}</td>

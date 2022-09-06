@@ -17,12 +17,13 @@
                 <!-- {{ csrf_field()}} -->
                 @csrf
                 <!-- {{method_field('get')}} -->
-                <label>テーマ:</label>
-                <input type="text" placeholder="テーマを入力して検索。" name="title">
-                <button type="submit">検索</button>
+                <label>絞り込み:</label>
+                <input type="text" placeholder="キーワードを入力して検索。" name="keyword">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i>検索</button>
             </form>
-            {!! link_to_route('tasks.trace', '履歴を見る', []) !!}
-            <a href="{{ route('tasks.suspensionList') }}">中断された計画を見る</a>
+            <!-- {!! link_to_route('tasks.trace', '履歴を見る', []) !!} -->
+            <a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>履歴を見る</a>
+            <a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-list"></i>中断計画を見る</a>
 
             <p>全{{ $tasks_num }}件</p>
 
@@ -40,7 +41,8 @@
                     <tbody>
                         @foreach ($tasks as $task)
                         <tr>
-                            <td>{!! link_to_route('tasks.edit', '🖌', ['task' => $task->id], ['class' => 'pencil']) !!}</td>
+                            <!-- <td>{!! link_to_route('tasks.edit', '🖌', ['task' => $task->id], ['class' => 'pencil']) !!}</td> -->
+                            <td><a href="{{ route('tasks.edit', $task->id) }}"><i class="fa-solid fa-pencil"></i></a></td>
                             <td>{{ $task->title }}</td>
                             <td>{{ $task->start }}</td>
                             <td>{{ $task->end }}</td>

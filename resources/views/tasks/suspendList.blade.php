@@ -30,7 +30,7 @@
                     <tbody>
                         @foreach ($suspensions as $suspension)
                         <tr>
-                            <td><a href="{{ route('tasks.suspensionDetail', $suspension->id) }}">🖋</a></td>
+                            <td><a href="{{ route('tasks.suspensionDetail', $suspension->id) }}"><i class="fa-solid fa-pencil"></i></a></td>
                             <td>{{ $suspension->title }}</td>
                             <td>{{ $suspension->start }}</td>
                             <td>{{ $suspension->end }}</td>
