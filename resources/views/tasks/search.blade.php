@@ -13,7 +13,7 @@
         <section class="content">
             <h2 class="content-title">計画一覧</h2>
 
-            @if (isset($tasks))
+            @if (count($tasks) > 0)
                 <table class="table">
                     <thead>
                         <tr>
@@ -38,7 +38,7 @@
                     </tbody>
                 </table>
             @else
-                <p class="alt">ここに作成した計画が表示されます。</p>
+                <p class="alt">キーワードを含んだ計画は見つかりませんでした。</p>
             @endif
         </section>
 

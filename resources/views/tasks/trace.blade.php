@@ -4,8 +4,19 @@
 <div class="flex">
         <section class="content">
             <h2 class="content-title">完了履歴一覧</h2>
+            @if ($errors->first('keyword'))
+                <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('keyword') }}</p>
+            @endif
+            <form action="{{ route('tasks.searchHistory') }}" method='get'>
+                <!-- {{ csrf_field()}} -->
+                @csrf
+                <!-- {{method_field('get')}} -->
+                <label>絞り込み:</label>
+                <input type="text" placeholder="キーワードを入力して検索。" name="keyword">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i>検索</button>
+            </form>
 
-            @if (isset($histories))
+            @if (count($histories) > 0)
                 <table class="table">
                     <thead>
                         <tr>
@@ -39,7 +50,7 @@
                 </table>
                 {{ $histories->links() }}
             @else
-                <p class="alt">ここに作成した計画が表示されます。</p>
+                <p class="alt">完了した計画はありません。</p>
             @endif
         </section>
 

@@ -51,7 +51,7 @@ class TasksController extends Controller
         return view('tasks.search', compact('tasks'));
     }
 
-    // searchアクションで使用。
+    // 検索機能で使用。
     public static function escapeLike($str)
     {
         return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
@@ -187,6 +187,28 @@ class TasksController extends Controller
         $count = $query->count();
         // viewに渡す。
         return view('tasks.trace', [
+            'histories' => $histories,
+            'count' => $count,
+        ]);
+    }
+
+    public function searchHistory(Request $request)
+    {
+        // バリデーション。
+        $request->validate([
+            'keyword' => 'required',
+        ]);
+
+        // ユーザーが入力した値の取得。
+        $keyword = $request->keyword;
+
+        $query = History::query();
+        // historiesテーブルの全レコードをカウント。
+        $count = $query->count();
+        // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
+        $histories = $query->where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
+
+        return view('tasks.searchHistory', [
             'histories' => $histories,
             'count' => $count,
         ]);
