@@ -19,21 +19,29 @@
 
             {!! Form::label('title', 'テーマ:', ['class' => 'form-label']) !!}
             {!! Form::text('title', null, ['class' => 'form-input', "placeholder" => "20字以内"]) !!}
-            <p class="error-message">{{ $errors->first('title') }}</p>
+            @if ($errors->first('title'))
+                <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p>
+            @endif
 
             {!! Form::label('start', '開始日:', ['class' => 'form-label']) !!}
             {!! Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-input']) !!}
             <!-- {!! Form::text('start', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!} -->
-            <p class="error-message">{{ $errors->first('start') }}</p>
+            @if ($errors->first('start'))
+                <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('start') }}</p>
+            @endif
 
             {!! Form::label('end', '完了日:', ['class' => 'form-label']) !!}
             {!! Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-input']) !!}
             <!-- {!! Form::text('end', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!} -->
-            <p class="error-message">{{ $errors->first('end') }}</p>
+            @if ($errors->first('end'))
+                <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('end') }}</p>
+            @endif
 
             {!! Form::label('content', '概要:', ['class' => 'form-label']) !!}
             {!! Form::text('content', null, ['class' => 'form-input', "placeholder" => "255字以内"]) !!}
-            <p class="error-message">{{ $errors->first('content') }}</p>
+            @if ($errors->first('content'))
+                <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('content') }}</p>
+            @endif
 
             <!-- {!! Form::submit('作成する', ['class' => 'form-btn']) !!} -->
             <button type="submit"><i class="fa-solid fa-file-circle-plus"></i>作成する</button>

@@ -20,7 +20,7 @@ Route::resource('tasks', 'TasksController', ['only' => ['index', 'create', 'edit
 // 過去の計画完了の履歴を閲覧する。
 Route::get('tasks/trace', 'TasksController@trace')->name('tasks.trace');
 // 過去の計画完了の履歴の絞り込み。
-
+Route::get('tasks/trace/search', 'TasksController@searchHistory')->name('tasks.searchHistory');
 // 過去の計画完了の履歴を削除する。
 Route::delete('tasks/trace/{id}', 'TasksController@traceDestroy')->name('tasks.traceDestroy');
 // 計画を中断する画面に遷移する。

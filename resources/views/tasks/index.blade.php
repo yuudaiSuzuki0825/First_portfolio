@@ -13,6 +13,9 @@
     <div class="flex">
         <section class="content">
             <h2 class="content-title">計画一覧</h2>
+            @if ($errors->first('keyword'))
+                <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('keyword') }}</p>
+            @endif
             <form action="{{ route('tasks.search') }}" method='get'>
                 <!-- {{ csrf_field()}} -->
                 @csrf
@@ -22,7 +25,7 @@
                 <button type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i>検索</button>
             </form>
             <!-- {!! link_to_route('tasks.trace', '履歴を見る', []) !!} -->
-            <a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>履歴を見る</a>
+            <a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴を見る</a>
             <a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-list"></i>中断計画を見る</a>
 
             <p>全{{ $tasks_num }}件</p>
