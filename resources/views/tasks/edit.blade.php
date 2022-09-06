@@ -29,15 +29,21 @@
                 {!! Form::label('content', '概要:', ['class' => 'form-label']) !!}
                 {!! Form::text('content', null, ['class' => 'form-input']) !!}
 
-                {!! Form::submit('更新する', ['class' => 'form-btn'])!!}
+                <!-- {!! Form::submit('更新する', ['class' => 'form-btn'])!!} -->
+                <button type="submit"><i class="fa-solid fa-file-pen"></i>更新する</button>
 
             {!! Form::close() !!}
 
-            {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete'], ['class' => 'delete'])!!}
-                {!! Form::submit('完了する', ['class' => 'delete-btn']) !!}
-            {!! Form::close() !!}
+            <!-- {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete'], ['class' => 'delete'])!!} -->
+                <!-- {!! Form::submit('完了する', ['class' => 'delete-btn']) !!} -->
+            <!-- {!! Form::close() !!} -->
+            <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                <button type="submit"><i class="fa-solid fa-circle-check"></i>完了する</button>
+                @method('DELETE')
+                @csrf
+            </form>
 
-            <a href="{{ route('tasks.breakScreen', $task->id) }}">計画を中断する</a>
+            <a href="{{ route('tasks.breakScreen', $task->id) }}"><i class="fa-solid fa-ban"></i>計画を中断する</a>
         </section>
 
         <aside class="sidebar" id="usage">

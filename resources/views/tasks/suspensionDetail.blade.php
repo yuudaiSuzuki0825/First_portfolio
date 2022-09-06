@@ -19,12 +19,12 @@
                     <tr>
                         <td>
                             <form action="{{ route('tasks.replay', $suspension->id) }}" method="POST">
-                                <button type="submit">再開する</button>
+                                <button type="submit"><i class="fa-solid fa-play"></i>再開する</button>
                                 @method('DELETE')
                                 @csrf
                             </form>
                         </td>
-                        <td><a href="{{ route('tasks.eraseScreen', $suspension->id) }}">削除する</a></td>
+                        <td><a href="{{ route('tasks.eraseScreen', $suspension->id) }}"><i class="fa-solid fa-trash-can"></i>削除する</a></td>
                         <td>{{ $suspension->title }}</td>
                         <td>{{ $suspension->start }}</td>
                         <td>{{ $suspension->end }}</td>

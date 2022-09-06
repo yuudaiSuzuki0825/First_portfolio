@@ -35,7 +35,8 @@
             {!! Form::text('content', null, ['class' => 'form-input', "placeholder" => "255字以内"]) !!}
             <p class="error-message">{{ $errors->first('content') }}</p>
 
-            {!! Form::submit('作成する', ['class' => 'form-btn']) !!}
+            <!-- {!! Form::submit('作成する', ['class' => 'form-btn']) !!} -->
+            <button type="submit"><i class="fa-solid fa-file-circle-plus"></i>作成する</button>
 
             {!! Form::close() !!}
         </section>

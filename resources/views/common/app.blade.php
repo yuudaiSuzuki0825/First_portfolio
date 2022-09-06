@@ -23,8 +23,9 @@
         <button class="toggle-menu-button"><img src="{{ asset('img/sozai_cman_jp_20220822223728.png') }}" alt=""></button>
         <div class="header-site-menu">
             <ul>
-                <li>{!! link_to_route('tasks.create', 'Make', [])!!}</li>
-                <li><a href="#usage">Usage</a></li>
+                <!-- <li>{!! link_to_route('tasks.create', 'Make', [])!!}</li> -->
+                <li><a href="{{ route('tasks.create') }}"><i class="fa-solid fa-circle-plus"></i>作成する</a></li>
+                <li><a href="#usage"><i class="fa-regular fa-message"></i>使い方</a></li>
             </ul>
         </div>
     </header>
