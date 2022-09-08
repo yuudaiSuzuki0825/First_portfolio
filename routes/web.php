@@ -17,10 +17,20 @@ Route::get('/', 'TasksController@index');
 // showアクションを除いている。
 // 参考「https://qiita.com/sympe/items/9297f41d5f7a9d91aa11」。
 Route::resource('tasks', 'TasksController', ['only' => ['index', 'create', 'edit', 'store', 'update', 'destroy']]);
+// 目標作成画面に遷移する。
+Route::get('tasks/makeTarget', 'TasksController@createTarget')->name('tasks.createTarget');
+// 目標を作成する。
+Route::post('tasks/makeTarget', 'TasksController@storeTarget')->name('tasks.storeTarget');
+// 目標編集画面に移動する。
+Route::get('tasks/updateTarget', 'TasksController@editTarget')->name('tasks.editTarget');
+// 目標を編集する。
+Route::post('tasks/updateTarget', 'TasksController@updateTarget')->name('tasks.updateTarget');
 // 過去の計画完了の履歴を閲覧する。
 Route::get('tasks/trace', 'TasksController@trace')->name('tasks.trace');
 // 過去の計画完了の履歴の絞り込み。
 Route::get('tasks/trace/search', 'TasksController@searchHistory')->name('tasks.searchHistory');
+// 過去の計画完了を削除する画面に遷移する。
+Route::get('tasks/trace/{id}', 'TasksController@goToEraseScreen')->name('tasks.goToEraseScreen');
 // 過去の計画完了の履歴を削除する。
 Route::delete('tasks/trace/{id}', 'TasksController@traceDestroy')->name('tasks.traceDestroy');
 // 計画を中断する画面に遷移する。

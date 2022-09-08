@@ -14,6 +14,8 @@
             <h2 class="content-title">完了履歴一覧</h2>
 
             @if (count($histories) > 0)
+                <p>全{{ $histories_count }}件</p>
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -43,8 +45,10 @@
                     </tbody>
                 </table>
             @else
-                <p class="alt">完了した計画はありません。</p>
+                <p class="alt">キーワードを含んだ計画は見つかりませんでした。</p>
             @endif
+
+            <a href="{{ route('tasks.trace') }}">戻る</a>
         </section>
 
         <aside class="sidebar" id="usage">

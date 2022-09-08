@@ -47,6 +47,8 @@
             <button type="submit"><i class="fa-solid fa-file-circle-plus"></i>作成する</button>
 
             {!! Form::close() !!}
+
+            <a href="{{ route('tasks.index') }}">戻る</a>
         </section>
 
         <aside class="sidebar" id="usage">
@@ -54,6 +56,8 @@
                 <dl>
                     <dt>Usage</dt>
                     <dd>Makeをクリックして計画作成ページへ移動してください。<br><br>作成した計画に変更がある場合は，変更したい計画のidをクリックして計画修正ページへ移動してください。</dd>
+                    <dt>完了数</dt>
+                    <dd>{{ $count }}</dd>
                 </dl>
             </div>
         </aside>

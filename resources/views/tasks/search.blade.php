@@ -14,6 +14,8 @@
             <h2 class="content-title">計画一覧</h2>
 
             @if (count($tasks) > 0)
+                <p>全{{ $tasks_search_count }}件</p>
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -40,6 +42,8 @@
             @else
                 <p class="alt">キーワードを含んだ計画は見つかりませんでした。</p>
             @endif
+
+            <a href="{{ route('tasks.index') }}">戻る</a>
         </section>
 
         <aside class="sidebar" id="usage">
@@ -48,6 +52,7 @@
                     <dt>Usage</dt>
                     <dd>Makeをクリックして計画作成ページへ移動してください。<br><br>作成した計画に変更がある場合は，変更したい計画のidをクリックして計画修正ページへ移動してください。計画の削除もそのページから行えます。</dd>
                     <dt>完了数</dt>
+                    <dt>{{ $count }}</dt>
                 </dl>
             </div>
         </aside>

@@ -14,9 +14,9 @@
         <section class="content">
             <h2 class="content-title">中断計画一覧</h2>
 
-            <p>全{{ $suspensions_num }}件</p>
+            @if (count($suspensions) > 0)
+                <p>全{{ $suspensions_num }}件</p>
 
-            @if (isset($suspensions))
                 <table class="table">
                     <thead>
                         <tr>
@@ -41,8 +41,10 @@
                 </table>
                 {{ $suspensions->links() }}
             @else
-                <p class="alt">ここに作成した計画が表示されます。</p>
+                <p class="alt">中断計画はありません。</p>
             @endif
+
+            <a href="{{ route('tasks.index') }}">戻る</a>
         </section>
 
         <aside class="sidebar" id="usage">
@@ -50,6 +52,8 @@
                 <dl>
                     <dt>Usage</dt>
                     <dd>Makeをクリックして計画作成ページへ移動してください。<br><br>作成した計画に変更がある場合は，変更したい計画のidをクリックして計画修正ページへ移動してください。計画の削除もそのページから行えます。</dd>
+                    <dt>完了数</dt>
+                    <dd>{{ $count }}</dd>
                 </dl>
             </div>
         </aside>
