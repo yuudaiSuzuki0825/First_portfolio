@@ -151,7 +151,8 @@ return [
         'start' => '開始日',
         'end' => '完了日',
         'content' => '概要',
-        'keyword' => 'キーワード'
+        'keyword' => 'キーワード',
+        'target' => '目標'
     ],
 
 ];

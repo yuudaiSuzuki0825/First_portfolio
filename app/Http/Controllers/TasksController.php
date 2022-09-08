@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Task; // 記述方法に注意。
 
-use App\History; // 記述方法に注意。
+use App\History;
 
-use App\Suspension; // 記述方法に注意。
+use App\Suspension;
+
+use App\Target;
 
 class TasksController extends Controller
 {
@@ -30,8 +32,15 @@ class TasksController extends Controller
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
 
+        $query = Target::query();
+        if ($query->count() < 0) {
+            $target = NULL;
+        } else {
+            $target = $query->first();
+        }
+
         // index.blade.phpへ遷移。その際，$tasksを渡している。
-        return view('tasks.index', compact('tasks','tasks_num','count'));
+        return view('tasks.index', compact('tasks','tasks_num','count','target'));
     }
 
     public function search(Request $request)
@@ -48,7 +57,13 @@ class TasksController extends Controller
         $query = Task::query();
         $tasks = $query->where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
 
-        return view('tasks.search', compact('tasks'));
+        // Historiesテーブルの全レコード数を取得。
+        $count = History::count();
+
+        // 取得したレコードの件数を取得。
+        $tasks_search_count = $tasks->count();
+
+        return view('tasks.search', compact('tasks', 'count', 'tasks_search_count'));
     }
 
     // 検索機能で使用。
@@ -67,9 +82,13 @@ class TasksController extends Controller
         // Task（モデルクラス）のインスタンス生成。create.blade.phpのフォームで使用。
         $task = new Task;
 
+        // Historiesテーブルの全レコード数を取得。
+        $count = History::count();
+
         // create.blade.phpへ遷移。その際，$taskを渡している。
         return view('tasks.create', [
             'task' => $task,
+            'count' => $count,
         ]);
     }
 
@@ -93,11 +112,17 @@ class TasksController extends Controller
         $task = new Task;
 
         // ユーザーが入力したフォーム内容をレコードとして保存。
-        $task->title = $request->title;
-        $task->start = $request->start;
-        $task->end = $request->end;
-        $task->content = $request->content;
-        $task->save();
+        $task->create([
+            'title' => $request->title,
+            'start' => $request->start,
+            'end' => $request->end,
+            'content' => $request->content,
+        ]);
+        // $task->title = $request->title;
+        // $task->start = $request->start;
+        // $task->end = $request->end;
+        // $task->content = $request->content;
+        // $task->save();
 
         // リダイレクト。
         return redirect('/');
@@ -141,11 +166,17 @@ class TasksController extends Controller
         $task = Task::find($id);
 
         // タスクを更新。
-        $task->title = $request->title;
-        $task->start = $request->start;
-        $task->end = $request->end;
-        $task->content = $request->content;
-        $task->save();
+        $task->create([
+            'title' => $request->title,
+            'start' => $request->start,
+            'end' => $request->end,
+            'content' => $request->content,
+        ]);
+        // $task->title = $request->title;
+        // $task->start = $request->start;
+        // $task->end = $request->end;
+        // $task->content = $request->content;
+        // $task->save();
 
         // リダイレクト。
         return redirect('/');
@@ -174,6 +205,56 @@ class TasksController extends Controller
         $task->delete();
 
         // リダイレクト。
+        return redirect('/');
+    }
+
+    public function createTarget()
+    {
+        $target = new Target;
+
+        // Historiesテーブルの全レコード数を取得。
+        $count = History::count();
+
+        return view('tasks.makeTarget', [
+            'target' => $target,
+            'count' => $count,
+        ]);
+    }
+
+    public function storeTarget(Request $request)
+    {
+        $request->validate([
+            'target' => 'required|max:50',
+        ]);
+
+        $target = new Target;
+        $target->target = $request->target;
+        $target->save();
+        return redirect('/');
+    }
+
+    public function editTarget()
+    {
+        $target = Target::first();
+
+        // Historiesテーブルの全レコード数を取得。
+        $count = History::count();
+
+        return view('tasks.updateTarget', [
+            'target' => $target,
+            'count' => $count,
+        ]);
+    }
+
+    public function updateTarget(Request $request)
+    {
+        $request->validate([
+            'target' => 'required|max:50',
+        ]);
+
+        $target = Target::first();
+        $target->target = $request->target;
+        $target->save();
         return redirect('/');
     }
 
@@ -208,9 +289,22 @@ class TasksController extends Controller
         // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
         $histories = $query->where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
 
+        // 取得したレコードの件数を取得。
+        $histories_count = $histories->count();
+
         return view('tasks.searchHistory', [
             'histories' => $histories,
             'count' => $count,
+            'histories_count' => $histories_count,
+        ]);
+    }
+
+    public function goToEraseScreen($id)
+    {
+        $query = History::query();
+        $history = $query->find($id);
+        return view('tasks.historyErase', [
+            'history' => $history,
         ]);
     }
 
@@ -253,9 +347,14 @@ class TasksController extends Controller
         $query = Suspension::query();
         $suspensions = $query->orderBy('end', 'asc')->paginate(10);
         $suspensions_num = $query->count();
+
+        // Historiesテーブルの全レコード数を取得。
+        $count = History::count();
+
         return view('tasks.suspendList', [
             'suspensions' => $suspensions,
             'suspensions_num' => $suspensions_num,
+            'count' => $count,
         ]);
     }
 
