@@ -166,12 +166,21 @@ class TasksController extends Controller
         $task = Task::find($id);
 
         // タスクを更新。
-        $task->create([
+        // ＊createメソッドを使うと，開始日と完了日がデフォルト指定（予め入力されている日付）の状態でそのほかの内容が一致している全く新しいレコードが作成される現象が起こった。create()ではなく，代わりにfill()を使う必要があった。
+        // $task->create([
+            // 'title' => $request->title,
+            // 'start' => $request->start,
+            // 'end' => $request->end,
+            // 'content' => $request->content,
+        // ]);
+
+        $task->fill([
             'title' => $request->title,
             'start' => $request->start,
             'end' => $request->end,
             'content' => $request->content,
-        ]);
+        ])->save();
+
         // $task->title = $request->title;
         // $task->start = $request->start;
         // $task->end = $request->end;
@@ -224,7 +233,7 @@ class TasksController extends Controller
     public function storeTarget(Request $request)
     {
         $request->validate([
-            'target' => 'required|max:50',
+            'target' => 'required|max:255',
         ]);
 
         $target = new Target;
@@ -249,7 +258,7 @@ class TasksController extends Controller
     public function updateTarget(Request $request)
     {
         $request->validate([
-            'target' => 'required|max:50',
+            'target' => 'required|max:255',
         ]);
 
         $target = Target::first();

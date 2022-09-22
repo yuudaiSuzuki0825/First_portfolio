@@ -10,7 +10,7 @@
         <!-- 第二引数をurlにしてもOK。['url' => '/tasks']。 -->
 
         {!! Form::label('target', '目標:', ['class' => 'form-label']) !!}
-        {!! Form::text('target', null, ['class' => 'form-input', "placeholder" => "20字以内"]) !!}
+        {!! Form::text('target', null, ['class' => 'form-input', "placeholder" => "255字以内"]) !!}
         @if ($errors->first('target'))
             <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('target') }}</p>
         @endif
