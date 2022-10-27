@@ -45,10 +45,11 @@
 
             <!-- {!! Form::submit('作成する', ['class' => 'form-btn']) !!} -->
             <button type="submit"><i class="fa-solid fa-file-circle-plus"></i>作成する</button>
+            <a href="{{ route('tasks.index') }}">戻る</a>
 
             {!! Form::close() !!}
 
-            <a href="{{ route('tasks.index') }}">戻る</a>
+            <!-- <a href="{{ route('tasks.index') }}">戻る</a> -->
         </section>
 
         <aside class="sidebar" id="usage">
