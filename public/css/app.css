@@ -21,7 +21,7 @@ img {
 
 .wrapper {
   padding-bottom: 50px;
-  background-color: #DDDDDD;
+  background-image: radial-gradient(circle, rgb(247, 93, 139), rgb(254, 220, 64));
   position: relative;
 }
 

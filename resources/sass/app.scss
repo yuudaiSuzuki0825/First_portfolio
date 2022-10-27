@@ -23,7 +23,8 @@ img {
 
 .wrapper {
     padding-bottom: 50px;
-    background-color: #DDDDDD;
+    // background-color: #DDDDDD;
+    background-image: radial-gradient(circle, rgba(247, 93, 139, 1), rgba(254, 220, 64, 1));
     position: relative;
     // z-index: 10;
 }
