@@ -51,7 +51,7 @@
                         @foreach ($tasks as $task)
                         <tr>
                             <!-- <td>{!! link_to_route('tasks.edit', '🖌', ['task' => $task->id], ['class' => 'pencil']) !!}</td> -->
-                            <td><a href="{{ route('tasks.edit', $task->id) }}"><i class="fa-solid fa-pencil"></i></a></td>
+                            <td><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
                             <td>{{ $task->title }}</td>
                             <td>{{ $task->start }}</td>
                             <td>{{ $task->end }}</td>
