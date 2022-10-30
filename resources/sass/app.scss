@@ -84,6 +84,41 @@ img {
     color: #CC0000;
 }
 
+// お試し
+.parent-balloon {
+    // .balloon（子要素）でposition: absolute;を使用するため。
+    position: relative;
+}
+
+// お試し
+.parent-balloon .balloon {
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    display: none;
+    padding: 7px;
+    color: white;
+    background-color: #444444;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+// お試し
+.parent-balloon .balloon::before {
+    content: "";
+    position: absolute;
+    top: 97%;
+    left: 20px;
+    border: 6px solid transparent;
+    border-top: 6px solid #444444;
+}
+
+// お試し
+.parent-balloon:hover .balloon {
+    display: inline-block;
+    width: 78px;
+}
+
 .main-top {
     font-family: 'Abril Fatface', cursive;
     text-align: center;
@@ -133,8 +168,14 @@ img {
 
 .content {
     width: 72%;
-    background-color: #ffffff;
+    background-color: white;
+    background-image: linear-gradient(0deg, transparent calc(100% - 1px), #E0FFFF  calc(100% - 1px)),
+        linear-gradient(90deg, transparent calc(100% - 1px), #E0FFFF calc(100% - 1px));
+    background-size: 16px 16px;
+    background-repeat: repeat;
+    background-position: center center;
     padding: 12px 15px;
+    border-radius: 1.5%;
 }
 
 .content-title {
