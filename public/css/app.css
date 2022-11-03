@@ -19,66 +19,6 @@ img {
   max-width: 100%;
 }
 
-.wrapper {
-  padding-bottom: 50px;
-  background-image: linear-gradient(135deg, rgb(105, 234, 203), rgb(215, 98, 252) 67%, rgb(102, 84, 241));
-  position: relative;
-}
-
-.header {
-  width: 1400px;
-  max-width: 95%;
-  margin: 0 auto;
-  padding: 30px 0;
-  display: flex;
-  justify-content: space-between;
-}
-
-.header-title {
-  font-size: 1.875rem;
-  letter-spacing: 3px;
-  font-family: "Abril Fatface", cursive;
-}
-
-.header-title a {
-  color: #333333;
-}
-
-.header-title a:hover {
-  transform: scale(1.1);
-  color: #CC0000;
-}
-
-.toggle-menu-button {
-  display: none;
-}
-
-.header-site-menu ul {
-  display: flex;
-}
-
-.header-site-menu ul li {
-  margin-left: 20px;
-  margin-top: 10px;
-  font-size: 1rem;
-  letter-spacing: 3px;
-  font-family: "Abril Fatface", cursive;
-}
-
-/*
-.header-site-menu ul li:hover {
-    transform: scale(1.2);
-}
-*/
-.header-site-menu a {
-  color: #333333;
-}
-
-.header-site-menu a:hover {
-  transform: scale(1.2);
-  color: #CC0000;
-}
-
 .parent-balloon {
   position: relative;
 }
@@ -109,294 +49,85 @@ img {
   width: 78px;
 }
 
-.main-top {
-  font-family: "Abril Fatface", cursive;
-  text-align: center;
-  position: relative;
-}
-
-.main-top img {
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center 10%;
-     object-position: center 10%;
-  height: 350px;
-}
-
-.title-area {
-  padding-left: 22%;
-  position: absolute;
-  top: 130px;
-  left: 0;
-}
-
-.main-title {
-  font-size: 1.875rem;
-  letter-spacing: 3px;
-  color: #ffffff;
-  text-shadow: 2px 2px 2px #333333;
-}
-
-.main-sub-title {
-  margin-top: 20px;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  color: #ffffff;
-  text-shadow: 2px 2px 1px #AAAAAA;
-}
-
-.error-message {
-  color: #CC0000;
-  font-size: 0.875rem;
-  margin-bottom: 10px;
-}
-
-.flex {
-  padding: 50px 2.5% 0;
+.header {
+  width: 1400px;
+  max-width: 95%;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  padding: 8px;
 }
 
-.content {
-  width: 72%;
-  background-color: white;
-  background-image: linear-gradient(0deg, transparent calc(100% - 1px), #E0FFFF calc(100% - 1px)), linear-gradient(90deg, transparent calc(100% - 1px), #E0FFFF calc(100% - 1px));
-  background-size: 16px 16px;
-  background-repeat: repeat;
-  background-position: center center;
-  padding: 12px 15px;
-  border-radius: 1.5%;
-}
-
-.content-title {
+.header .header-title a {
   font-size: 1.875rem;
-  margin-bottom: 15px;
-}
-
-.table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-}
-
-.table th {
-  border-bottom: solid 1px #333333;
-}
-
-.table td {
-  border-bottom: solid 1px #333333;
-  padding: 10px;
-}
-
-.table th:nth-of-type(1) {
-  width: 3%;
-}
-
-.table th:nth-of-type(2) {
-  width: 25%;
-}
-
-.table th:nth-of-type(3) {
-  width: 4%;
-}
-
-.table th:nth-of-type(4) {
-  width: 4%;
-}
-
-.table th:nth-of-type(5) {
-  width: 65%;
-}
-
-.pencil {
-  font-size: 1.4rem;
-  color: #333333;
-}
-
-.pagination {
-  margin-top: 15px;
-  text-align: center;
-}
-
-.pagination .page-item {
-  display: inline-block;
-  font-size: 1.2rem;
-  padding: 0 5px;
-}
-
-.pagination .page-item .page-link {
-  color: #333333;
-}
-
-.pagination .page-item .page-link:hover {
-  border-bottom: solid 2px #333333;
-}
-
-.pagination .active .page-link {
-  color: #AAAAAA;
-}
-
-.form {
-  width: 100%;
-}
-
-.form-label {
-  display: block;
-}
-
-.form-input {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  border: solid 1px #333333;
-  padding: 4px 8px;
-}
-
-.form-btn {
-  display: block;
-  width: 100%;
-  color: #ffffff;
-  background-color: #333333;
-  text-align: center;
-  margin-top: 16px;
-  padding: 10px 0;
-  border-radius: 5px;
-}
-
-.delete {
-  width: 100%;
-}
-
-.delete-btn {
-  display: block;
-  width: 100%;
-  color: #ffffff;
-  background-color: #FFD700;
-  text-align: center;
-  padding: 10px 0;
-  border-radius: 5px;
-  margin-top: 8px;
-}
-
-.sidebar {
-  width: 25%;
-  height: 300px;
-  background-color: #ffffff;
-  padding: 15px;
-}
-
-.usage-area dt {
-  font-size: 1.875rem;
+  line-height: 56px;
   letter-spacing: 3px;
-  font-family: "Abril Fatface", cursive;
 }
 
-.usage-area dd {
-  margin-top: 20px;
-  letter-spacing: 1px;
-  line-height: 1.4;
+.header .header-site-menu {
+  margin-left: auto;
 }
 
-/*
-.make-btn {
-    display: inline-block;
-    margin-top: 20px;
-    font-size: 1rem;
-    font-family: 'Abril Fatface', cursive;
+.header .header-site-menu nav ul {
+  display: flex;
+  line-height: 56px;
+  align-items: center;
 }
-*/
-/*
-.make-btn:hover {
-    transform: scale(1.2);
+
+.header .header-site-menu nav ul li {
+  font-size: 1.375rem;
 }
-*/
-.go-to-top-parent {
+
+.header .header-site-menu nav ul li + li {
+  margin-left: 30px;
+}
+
+.header .header-site-menu .header-hamburger-menu {
   display: none;
+  margin-left: auto;
 }
 
-.go-to-top {
+.header .header-site-menu .header-hamburger-menu #open {
+  font-size: 1.875rem;
+  display: inline-block;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.header .overlay {
   position: fixed;
-  bottom: 9px;
-  right: 20px;
-  color: #ffffff;
-  background-color: #333333;
-  padding: 10px 20px;
-}
-
-#footer p {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.9);
   text-align: center;
-  font-size: 0.875rem;
-  font-family: "Abril Fatface", cursive;
-  padding: 20px 0;
+  padding: 64px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
 }
 
-@media (min-width: 768px) and (max-width: 1200px) {
-  .flex {
-    flex-direction: column;
-  }
-  .content {
-    width: 100%;
-  }
-  .sidebar {
-    width: 100%;
-    height: 220px;
-    margin-top: 50px;
-  }
-  .title-area {
-    padding-left: 7%;
-  }
+.header .overlay.show {
+  opacity: 1;
+  /* autoが初期値。基本的にはnoneかauto。 */
+  pointer-events: auto;
 }
-@media (max-width: 768px) {
-  .wrapper {
-    padding-bottom: 30px;
-  }
-  .header {
-    position: relative;
-  }
-  .header-site-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
+
+.header .overlay #close {
+  /* 親要素にposition: relative;をあえて指定しないでabsoluteを使うと，包含ブロックを基準に位置が決定される。すなわち，ウィンドウ幅全体に対して位置が決定される。 */
+  /* よって，以下の指定はページ全体を基準に絶対値指定している。 */
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .header .header-site-menu nav ul {
     display: none;
-    z-index: 20;
   }
-  .header-site-menu.is-show {
+  .header .header-site-menu .header-hamburger-menu {
     display: block;
-  }
-  .header-site-menu a {
-    color: #ffffff;
-    font-size: 1.5rem;
-  }
-  .header-site-menu a:hover {
-    color: #CC0000;
-  }
-  .toggle-menu-button {
-    display: block; /* buttonタグはデフォでinline-block。*/
-    width: 44px;
-    height: 34px;
-  }
-  .main-top {
-    position: relative;
-    z-index: 10;
-  }
-  .title-area {
-    padding-left: 4%;
-    padding-right: 4%;
-  }
-  .flex {
-    flex-direction: column;
-    padding-top: 30px;
-  }
-  .content {
-    width: 100%;
-  }
-  .sidebar {
-    width: 100%;
-    height: 220px;
-    margin-top: 30px;
-  }
-  #footer p {
-    padding: 10px 0;
   }
 }

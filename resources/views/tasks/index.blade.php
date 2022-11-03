@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="main-top">
-        <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt="">
+        <!-- <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt=""> -->
         <div class="title-area">
             <h2 class="main-title">Plan management streamlines your work.</h2>
             <h3 class="main-sub-title">効率化を目指したい。</h3>
@@ -18,7 +18,7 @@
 
     <div class="flex">
         <section class="content">
-            <h2 class="content-title">計画一覧</h2>
+            <h2 class="content-title" id="planList">計画一覧</h2>
             @if ($errors->first('keyword'))
                 <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('keyword') }}</p>
             @endif

@@ -18,24 +18,58 @@
     <script src="https://kit.fontawesome.com/efd87fdfef.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- ヘッダー。 -->
     <header class="header">
-        <h1 class="header-title"><a href="/">PlanManagement</a></h1>
-        <button class="toggle-menu-button"><img src="{{ asset('img/sozai_cman_jp_20220822223728.png') }}" alt=""></button>
+        <!-- ロゴ。 -->
+        <h1 class="header-title"><a href="/">Revistart</a></h1>
+        <!-- <button class="toggle-menu-button"><img src="{{ asset('img/sozai_cman_jp_20220822223728.png') }}" alt=""></button> -->
+
+        <!-- ナビゲーションリンク。 -->
+        <!-- PC用。 -->
         <div class="header-site-menu">
-            <ul>
-                <!-- <li>{!! link_to_route('tasks.create', 'Make', [])!!}</li> -->
-                <li><a href="{{ route('tasks.create') }}"><i class="fa-solid fa-circle-plus"></i>作成する</a></li>
-                <li><a href="#usage"><i class="fa-regular fa-message"></i>使い方</a></li>
-            </ul>
+            <!-- ナビゲーションリンク。こちらはアイコンのみ表示。 -->
+            <nav>
+                <ul>
+                    <li><a href="{{ route('tasks.create') }}"><i class="fa-solid fa-circle-plus"></i></a></li>
+                    <li><a href="#usage"><i class="fa-regular fa-message"></i></a></li>
+                    <li><a href="/#planList"><i class="fa-solid fa-list"></i></a></li>
+                    <li><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i></a></li>
+                    <li><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i></a></li>
+                </ul>
+            </nav>
+
+            <div class="header-hamburger-menu">
+                <span id="open"><i class="fa-solid fa-bars"></i></span>
+            </div>
         </div>
+
+        <!-- SP用。 -->
+        <!-- モーダルウィンドウでナビゲーションリンクを表示。ハンバーガーメニューをクリックすると表示される。 -->
+        <div class="overlay">
+            <!-- 「閉じる」ボタン。 -->
+            <span id="close"><i class="fa-solid fa-xmark"></i></span>
+            <!-- ナビゲーションリンク。こちらはアイコンとテキスト両方表示。 -->
+            <nav>
+                <ul>
+                    <li><a href="{{ route('tasks.create') }}"><i class="fa-solid fa-circle-plus"></i>作成する</a></li>
+                    <li><a href="#usage"><i class="fa-regular fa-message"></i>FAQ</a></li>
+                    <li><a href="#planList"><i class="fa-solid fa-list"></i>計画一覧</a></li>
+                    <li><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴</a></li>
+                    <li><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画</a></li>
+                </ul>
+            </nav>
+        </div>
+
     </header>
 
+    <!-- メインコンテンツ。 -->
     <main>
         <div class="wrapper">
             @yield('content')
         </div>
     </main>
 
+    <!-- フッター。 -->
     <footer id="footer">
         <p class="copyright">&copy; 2022 TaskManagement</p>
     </footer>
