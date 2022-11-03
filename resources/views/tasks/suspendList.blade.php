@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="main-top">
-        <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt="">
+        <!-- <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt=""> -->
         <div class="title-area">
             <h2 class="main-title">Plan management streamlines your work.</h2>
             <h3 class="main-sub-title">効率化を目指したい。</h3>

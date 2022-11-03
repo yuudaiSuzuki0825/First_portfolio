@@ -13,6 +13,8 @@ body {
 a {
     // リンクの下線を消しておく。
     text-decoration: none;
+    // 色指定
+    color: #333333;
 }
 
 ul {
@@ -432,7 +434,9 @@ img {
 //     }
 // }
 
-// ヘッダー全体。
+
+// ヘッダー。
+
 .header {
     // 最大幅を指定している。これ以上大きくならない。
     width: 1400px;
@@ -456,6 +460,8 @@ img {
     line-height: 56px;
     // 文字間の隙間指定。
     letter-spacing: 3px;
+    // 色指定
+    color: #333333;
 }
 
 .header .header-site-menu {
@@ -482,7 +488,43 @@ img {
 // 隣接兄弟結合子。MDN参照。
 .header .header-site-menu nav ul li + li {
     // 各アイコンの隙間を作成。
-    margin-left: 30px;
+    margin-left: 55px;
+}
+
+// ナビゲーションリンクのツールチップの指定。
+.header .header-site-menu nav ul li .parent-balloon .header-balloon {
+    // 位置指定のため。.parent-balloon{}参照。
+    position: absolute;
+    top: 30px;
+    left: -28px;
+    // 通常は表示されないようにしている。
+    display: none;
+    padding: 7px;
+    // 16pxと同じ。16×1。
+    font-size: 1rem;
+    // 行間を無しにしている。何故か「作成する」以外のツールチップにて行間が掛かっていたので解除している（コメントアウトして確認してほしい）。
+    // 推測➡.header .header-site-menu nav ul{}のline-height: 56px;を継承していたから？
+    line-height: 1;
+    // 太字の解除をしている。何故か「作成する」ツールチップだけテキストが太字になっていた…（コメントアウトして確認してほしい）。
+    font-weight: normal;
+    color: white;
+    background-color: #444444;
+    border-radius: 5px;
+    // 影指定。
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+// ナビゲーションリンクの各アイコンをホバーするとツールチップが表示されるようにしている。
+.header .header-site-menu nav ul li .parent-balloon:hover .header-balloon {
+    display: inline-block;
+    // 横幅の指定。コメントアウトして確認。
+    width: 78px;
+}
+
+// 「FAQ」ツールチップだけ別の指定にしている（位置の調整などの点で特別な指定が必要だった）。コメントアウトして確認を。
+.header .header-site-menu nav ul li .parent-balloon:hover .header-balloon.second {
+    left: -12px;
+    width: 48px;
 }
 
 .header .header-site-menu .header-hamburger-menu {
@@ -513,6 +555,8 @@ img {
     // マスク部分のナビゲーションリンクを中央寄せ。
     text-align: center;
     padding: 64px;
+    // 要素の重なり順を指定している。一度コメントアウトして挙動確認を。「編集する」ボタンのアイコンがマスク部分の上に乗ってしまいアクセスできてしまう（htmlの構造上の問題だと思われる，下にあるタグが上に重なる仕様？）。
+    z-index: 10;
     // ハンバーガーメニューボタンがクリックされるまでは完全透明にすることで見えないようにしている。
     opacity: 0;
     // ポインターイベントをnoneにすることで，マスク部分のナビゲーションリンクに対してクリックなどの操作を行えないようにしている。
@@ -539,6 +583,26 @@ img {
     // 32pxと同じ。16×2。
     font-size: 2rem;
     cursor: pointer;
+}
+
+.header .overlay nav ul li {
+    font-size: 1.375rem;
+}
+
+.header .overlay nav ul li + li {
+    margin-top: 40px;
+}
+
+.header .overlay nav ul li a i {
+    padding-right: 5px;
+}
+
+// メインコンテンツ。
+
+.wrapper {
+    padding-bottom: 50px;
+    background-image: linear-gradient(135deg, rgba(105, 234, 203, 1), rgba(215, 98, 252, 1) 67%, rgba(102, 84, 241, 1));
+    position: relative;
 }
 
 @media (max-width: 600px) {
