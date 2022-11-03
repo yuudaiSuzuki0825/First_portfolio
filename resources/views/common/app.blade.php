@@ -30,11 +30,11 @@
             <!-- ナビゲーションリンク。こちらはアイコンのみ表示。 -->
             <nav>
                 <ul>
-                    <li><a href="{{ route('tasks.create') }}"><i class="fa-solid fa-circle-plus"></i></a></li>
-                    <li><a href="#usage"><i class="fa-regular fa-message"></i></a></li>
-                    <li><a href="/#planList"><i class="fa-solid fa-list"></i></a></li>
-                    <li><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i></a></li>
-                    <li><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i></a></li>
+                    <li><a href="{{ route('tasks.create') }}" class="parent-balloon"><i class="fa-solid fa-circle-plus"><span class="header-balloon">作成する</span></i></a></li>
+                    <li><a href="#usage" class="parent-balloon"><i class="fa-regular fa-message"></i><span class="header-balloon second">FAQ</span></a></li>
+                    <li><a href="/#planList" class="parent-balloon"><i class="fa-solid fa-list"></i><span class="header-balloon">計画一覧</span></a></li>
+                    <li><a href="{{ route('tasks.trace') }}" class="parent-balloon"><i class="fa-solid fa-clock-rotate-left"></i><span class="header-balloon">完了履歴</span></a></li>
+                    <li><a href="{{ route('tasks.suspensionList') }}" class="parent-balloon"><i class="fa-solid fa-rectangle-list"></i><span class="header-balloon">中断計画</span></a></li>
                 </ul>
             </nav>
 
@@ -53,7 +53,7 @@
                 <ul>
                     <li><a href="{{ route('tasks.create') }}"><i class="fa-solid fa-circle-plus"></i>作成する</a></li>
                     <li><a href="#usage"><i class="fa-regular fa-message"></i>FAQ</a></li>
-                    <li><a href="#planList"><i class="fa-solid fa-list"></i>計画一覧</a></li>
+                    <li><a href="/#planList"><i class="fa-solid fa-list"></i>計画一覧</a></li>
                     <li><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴</a></li>
                     <li><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画</a></li>
                 </ul>
