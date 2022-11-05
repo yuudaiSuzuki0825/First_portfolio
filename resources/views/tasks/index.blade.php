@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <div class="main-top">
-        <!-- <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt=""> -->
-        <div class="title-area">
+    <!-- <div class="main-top">
+        <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt=""> -->
+        <!-- <div class="title-area">
             <h2 class="main-title">Plan management streamlines your work.</h2>
             <h3 class="main-sub-title">効率化を目指したい。</h3>
         </div>
@@ -14,31 +14,57 @@
             <p>{{ $target->target }}</p>
             <a href="{{ route('tasks.editTarget') }}"><i class="fa-solid fa-pencil"></i></a>
         @endif
-    </div>
+    </div> -->
 
-    <div class="flex">
+    <div class="main-area">
+        <!-- サイドパネル。 -->
+        <aside id="left-panel">
+            <!-- ここに「目標」を書く。 -->
+            <!-- クリックするとモーダルウインドウにて「目標」の設定操作が出来るようにしたい。後日実装予定。 -->
+            <i class="fa-solid fa-bullseye"></i>目標
+        </aside>
+
+        <!-- メインコンテンツ。 -->
         <section class="content">
-            <h2 class="content-title" id="planList">計画一覧</h2>
+            <!-- サイドパネルボタン（サイドパネルを開くボタン）。 -->
+            <div id="left-panel-button"><i class="fa-solid fa-chevron-right"></i></div>
+
+            <div class="content-area">
+                <!-- タブメニュー。タブは「計画一覧」「完了履歴」「中断計画」の3種類。 -->
+                <div class="tabMenu">
+                    <!-- 「計画一覧」タブ以外はリンクになっており，各タブのリスト一覧へ遷移することが出来る。 -->
+                    <!-- spanタグで各リストの全件数を表示させる（バッチ）。 -->
+                    <!-- 「計画一覧」の全件数は{{ $tasks_num }}で表示させている。 -->
+                    <h2 class="planListTitle active"><a><i class="fa-solid fa-list"></i>計画一覧<span>{{ $tasks_num }}</span></a></h2>
+                    <h2 class="planListTitle"><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴<span>N</span></a></h2>
+                    <h2 class="planListTitle"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span>N</span></a></h2>
+                </div>
+
+            <!-- 「検索」機能ここから。 -->
+
+            <!-- 「検索」機能のエラーメッセージ。 -->
             @if ($errors->first('keyword'))
                 <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('keyword') }}</p>
             @endif
-            <form action="{{ route('tasks.search') }}" method='get'>
-                <!-- {{ csrf_field()}} -->
-                @csrf
-                <!-- {{method_field('get')}} -->
-                <label>絞り込み:</label>
-                <input type="text" placeholder="キーワードを入力して検索。" name="keyword">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i>検索</button>
-            </form>
-            <!-- {!! link_to_route('tasks.trace', '履歴を見る', []) !!} -->
-            <a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴を見る</a>
-            <a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-list"></i>中断計画を見る</a>
 
-            <p>全{{ $tasks_num }}件</p>
+                <!-- 「検索」機能のフォーム。 -->
+                <form action="{{ route('tasks.search') }}" method='get'>
+                    <!-- {{ csrf_field()}} -->
+                    @csrf
+                    <!-- {{method_field('get')}} -->
+                    <label>絞り込み:</label>
+                    <input type="text" placeholder="キーワードを入力して検索。" name="keyword">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i>検索</button>
+                </form>
+
+            <!-- 「検索」機能ここまで。 -->
+
+            <!-- 「計画一覧」の表示ここから。 -->
 
             @if (count($tasks) > 0)
                 <table class="table">
-                    <thead>
+                    <!-- theadは無くす予定。 -->
+                    <!-- <thead>
                         <tr>
                             <th></th>
                             <th>テーマ</th>
@@ -46,16 +72,17 @@
                             <th>完了日</th>
                             <th>概要</th>
                         </tr>
-                    </thead>
+                    </thead> -->
                     <tbody>
                         @foreach ($tasks as $task)
                         <tr>
                             <!-- <td>{!! link_to_route('tasks.edit', '🖌', ['task' => $task->id], ['class' => 'pencil']) !!}</td> -->
                             <td><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
                             <td>{{ $task->title }}</td>
-                            <td>{{ $task->start }}</td>
-                            <td>{{ $task->end }}</td>
-                            <td>{{ $task->content }}</td>
+                            <td>開始日:{{ $task->start }}</td>
+                            <td>完了日:{{ $task->end }}</td>
+                            <!-- <td>{{ $task->content }}</td> -->
+                            <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i><span class="balloon">開く</span></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -64,9 +91,12 @@
             @else
                 <p class="alt">ここに作成した計画が表示されます。</p>
             @endif
+            </div>
         </section>
 
-        <aside class="sidebar" id="usage">
+        <!-- 「計画一覧」表示ここまで。 -->
+
+        <!-- <aside class="sidebar" id="usage">
             <div class="usage-area">
                 <dl>
                     <dt>Usage</dt>
@@ -75,10 +105,10 @@
                     <dd>{{ $count }}</dd>
                 </dl>
             </div>
-            <!-- <div class="make-btn">{!! link_to_route('tasks.create', 'make', [])!!}</div> -->
-        </aside>
+        </aside> -->
     </div>
 
-    <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a>
+    <!-- ページトップへ遷移するボタン。 -->
+    <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
 
 @endsection

@@ -120,19 +120,65 @@
 
 
 {
-  // const openHamburgerMenu = () => {
-  //     overlay.classList.add('show');
-  // }
-  // DOM操作
+  /* =================================================== */
+  // ハンバーガーメニューの実装。
+
+  /* =================================================== */
+
+  /* DOM操作 */
   var open = document.getElementById('open');
   var overlay = document.querySelector('.overlay');
   var close = document.getElementById('close'); // ハンバーガーメニューボタンをクリックした時。
 
   open.addEventListener('click', function () {
+    // class="show"を追加している。
+    // 「.header .overlay.show{}」を読み込むため。
     overlay.classList.add('show');
-  });
+  }); // オーバーレイ画面の×ボタンがクリックされた時。
+
   close.addEventListener('click', function () {
+    // class="show"を取り除いている。
     overlay.classList.remove('show');
+  });
+  /* =================================================== */
+  // サイドパネルの実装。
+
+  /* =================================================== */
+
+  /* DOM操作 */
+
+  var leftPanelButton = document.getElementById('left-panel-button');
+  var leftPanel = document.getElementById('left-panel'); // サイドパネルのボタンがクリックされた時。
+
+  leftPanelButton.addEventListener('click', function () {
+    // 各Nodeに対してclass="open"を追加している。
+    // 「.wrapper .main-area #left-panel.open{}」を読み込むため。
+    leftPanel.classList.toggle('open'); // 「.wrapper .main-area .content #left-panel-button.open i{}」を読み込むため。
+
+    leftPanelButton.classList.toggle('open');
+  });
+  /* =================================================== */
+  // タブメニューの実装。
+
+  /* =================================================== */
+
+  /* DOM操作 */
+  // class="planListTitle"がつく全てのNode（タグ）を取得し，配列形式で格納（正確にはNodeListとして格納）。
+  // 今回はタブメニューの各タブ（h2タグ）を取得している。index.blade.phpにて確認を。
+
+  var planListTitles = document.querySelectorAll('.planListTitle'); // 先程のNodeList（配列のように扱える）から各Node（各タグ）を取り出すためにforeach文を使用。
+  // title1（自由に命名できる）から各Nodeにアクセスできる。
+
+  planListTitles.forEach(function (title1) {
+    // 各Node（今回はタブメニューの各タブ）がクリックされた時。
+    title1.addEventListener('click', function () {
+      // 再度先程のNodeListにアクセスした上で，一度全てのタブメニューの各タブ（h2タグ）からclass="active"を取り除いている。
+      planListTitles.forEach(function (title2) {
+        title2.classList.remove('active');
+      }); // クリックされた対象（タブメニューの各タブ）に対してclass="active"を追加している。
+
+      title1.classList.add('active');
+    });
   });
 }
 

@@ -5,6 +5,7 @@ html {
 
 body {
   line-height: 1;
+  background-image: linear-gradient(135deg, rgb(105, 234, 203), rgb(215, 98, 252) 67%, rgb(102, 84, 241));
 }
 
 a {
@@ -20,42 +21,20 @@ img {
   max-width: 100%;
 }
 
-.parent-balloon {
-  position: relative;
-}
-
-.parent-balloon .balloon {
-  position: absolute;
-  top: -30px;
-  left: -20px;
-  display: none;
-  padding: 7px;
-  color: white;
-  background-color: #444444;
-  border-radius: 5px;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-.parent-balloon .balloon::before {
-  content: "";
-  position: absolute;
-  top: 97%;
-  left: 20px;
-  border: 6px solid transparent;
-  border-top: 6px solid #444444;
-}
-
-.parent-balloon:hover .balloon {
-  display: inline-block;
-  width: 78px;
-}
-
 .header {
   width: 1400px;
   max-width: 95%;
   margin: 0 auto;
   display: flex;
   padding: 8px;
+}
+
+.header .header-title {
+  transition: transform 0.2s;
+}
+
+.header .header-title:hover {
+  transform: scale(1.1);
 }
 
 .header .header-title a {
@@ -161,6 +140,246 @@ img {
 
 .header .overlay nav ul li a i {
   padding-right: 5px;
+}
+
+.wrapper .main-area {
+  background-color: rgba(238, 238, 238, 0.9);
+  display: flex;
+  padding: 50px 0;
+}
+
+.wrapper .main-area #left-panel {
+  /* 横幅の指定。 */
+  width: 200px;
+  height: 300px;
+  /* 内側の余白。 */
+  padding: 20px;
+  /* 色指定。 */
+  background-color: #333;
+  color: #fff;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  /* 影の指定。 */
+  box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
+  display: none;
+}
+
+.wrapper .main-area #left-panel.open {
+  display: block;
+}
+
+.wrapper .main-area .content {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+.wrapper .main-area .content #left-panel-button {
+  position: absolute;
+  top: 127.74px;
+  left: 0;
+  cursor: pointer;
+  /* 高さ指定。 */
+  height: 36px;
+  /* ボーダーの指定。border-leftはいらないのでnoneにしている。 */
+  border-radius: 0 10px 10px 0;
+  color: #ffffff;
+  background-color: #333333;
+  box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
+}
+
+.wrapper .main-area .content #left-panel-button i {
+  /* marginやpaddingを指定できるようにするため。 */
+  display: inline-block;
+  /* アイコンなのでfont-sizeで大きさ指定を行う。 */
+  font-size: 24px;
+  /* 余白にてポジションの微調整。 */
+  margin-right: 2px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  transition: transform 0.2s;
+}
+
+.wrapper .main-area .content #left-panel-button.open i {
+  transform: rotate(180deg);
+}
+
+.wrapper .main-area .content .content-area {
+  width: 94%;
+  margin: 0 3%;
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+
+.wrapper .main-area .content .content-area .tabMenu {
+  display: flex;
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle {
+  margin-left: 10px;
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle a {
+  display: block;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  padding: 8px 7px 5px;
+  background-color: #fff;
+  color: #333333;
+  border-radius: 8px 8px 0 0;
+  letter-spacing: 0.4rem;
+  transform: none;
+  transition: transform 0.13s;
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle a:hover {
+  transform: scale(1.04, 1.02);
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle.active a {
+  background-color: #333333;
+  color: #fff;
+}
+
+.wrapper .main-area .content .content-area .error-message {
+  position: absolute;
+  top: -42px;
+  left: 62px;
+  background-color: #FF4A52;
+  color: #FFFAFB;
+  padding: 5px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 1.375rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  letter-spacing: 3px;
+  box-shadow: inset 0 0 5px 5px #FF4A60;
+}
+
+.wrapper .main-area .content .content-area form {
+  background-color: #333333;
+  color: #fff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  letter-spacing: 3px;
+}
+
+.wrapper .main-area .content .content-area form label {
+  font-size: 1.125rem;
+}
+
+.wrapper .main-area .content .content-area form input {
+  width: 300px;
+  background-color: #FFFAFB;
+  color: #333;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.wrapper .main-area .content .content-area form button {
+  color: #fff;
+  transition: transform 0.2s;
+  letter-spacing: 3px;
+  font-size: 1.125rem;
+  margin-left: 5px;
+}
+
+.wrapper .main-area .content .content-area form button:hover {
+  transform: scale(1.1);
+}
+
+.wrapper .main-area .content .content-area .table {
+  background-color: #333333;
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+  width: 100%;
+  padding: 0 10px 10px;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr {
+  display: flex;
+  background-color: #555555;
+  border-radius: 4px;
+  padding: 5px;
+  letter-spacing: 2px;
+  transition: transform 0.2s;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr:hover {
+  transform: scale(1.005);
+}
+
+.wrapper .main-area .content .content-area .table tbody tr + tr {
+  margin-top: 15px;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr td {
+  /* テキストの位置調整。フレックスにするが縦並びに変更し，主軸に対して中央に配置している。*/
+  /* これにより，テキストがど真ん中に配置される形になる（微々たる変化，気にならなければ「display: block;」に戻してOK）。*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr td + td {
+  margin-left: 45px;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr #planDetailButton {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr #planDetailButton:hover .balloon {
+  width: 50px;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr td a {
+  display: inline-block;
+  color: #fff;
+}
+
+.parent-balloon {
+  position: relative;
+}
+
+.parent-balloon .balloon {
+  position: absolute;
+  top: -30px;
+  left: -20px;
+  display: none;
+  padding: 7px;
+  letter-spacing: normal;
+  color: #444444;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 1px #333333;
+}
+
+.parent-balloon .balloon::before {
+  content: "";
+  position: absolute;
+  top: 97%;
+  left: 20px;
+  border: 6px solid transparent;
+  border-top: 6px solid #ffffff;
+}
+
+.parent-balloon:hover .balloon {
+  display: inline-block;
+  width: 78px;
+}
+
+.wrapper .main-area .content .content-area .alt {
+  background-color: #333333;
+  color: #fff;
 }
 
 @media (max-width: 600px) {
