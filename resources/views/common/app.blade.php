@@ -71,7 +71,7 @@
 
     <!-- フッター。 -->
     <footer id="footer">
-        <p class="copyright">&copy; 2022 TaskManagement</p>
+        <p class="copyright">&copy; 2022 Revistart</p>
     </footer>
 
     <!-- JQueryのCDN。-->

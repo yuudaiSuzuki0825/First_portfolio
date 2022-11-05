@@ -8,6 +8,8 @@ html {
 body {
     // コーディングしやすくするために行間を1にしておいた。
     line-height: 1;
+    // 背景色の指定。
+    background-image: linear-gradient(135deg, rgba(105, 234, 203, 1), rgba(215, 98, 252, 1) 67%, rgba(102, 84, 241, 1));
 }
 
 a {
@@ -90,40 +92,40 @@ img {
 //     color: #CC0000;
 // }
 
-// お試し
-.parent-balloon {
-    // .balloon（子要素）でposition: absolute;を使用するため。
-    position: relative;
-}
+// // お試し
+// .parent-balloon {
+//     // .balloon（子要素）でposition: absolute;を使用するため。
+//     position: relative;
+// }
 
-// お試し
-.parent-balloon .balloon {
-    position: absolute;
-    top: -30px;
-    left: -20px;
-    display: none;
-    padding: 7px;
-    color: white;
-    background-color: #444444;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
+// // お試し
+// .parent-balloon .balloon {
+//     position: absolute;
+//     top: -30px;
+//     left: -20px;
+//     display: none;
+//     padding: 7px;
+//     color: white;
+//     background-color: #444444;
+//     border-radius: 5px;
+//     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+// }
 
-// お試し
-.parent-balloon .balloon::before {
-    content: "";
-    position: absolute;
-    top: 97%;
-    left: 20px;
-    border: 6px solid transparent;
-    border-top: 6px solid #444444;
-}
+// // お試し
+// .parent-balloon .balloon::before {
+//     content: "";
+//     position: absolute;
+//     top: 97%;
+//     left: 20px;
+//     border: 6px solid transparent;
+//     border-top: 6px solid #444444;
+// }
 
-// お試し
-.parent-balloon:hover .balloon {
-    display: inline-block;
-    width: 78px;
-}
+// // お試し
+// .parent-balloon:hover .balloon {
+//     display: inline-block;
+//     width: 78px;
+// }
 
 // .main-top {
 //     font-family: 'Abril Fatface', cursive;
@@ -434,8 +436,7 @@ img {
 //     }
 // }
 
-
-// ヘッダー。
+// ヘッダーここから。
 
 .header {
     // 最大幅を指定している。これ以上大きくならない。
@@ -450,6 +451,14 @@ img {
     // フレックス。
     display: flex;
     padding: 8px;
+}
+
+.header .header-title {
+    transition: transform .2s;
+}
+
+.header .header-title:hover {
+    transform: scale(1.1);
 }
 
 .header .header-title a {
@@ -597,13 +606,264 @@ img {
     padding-right: 5px;
 }
 
-// メインコンテンツ。
+// ヘッダーここまで。
 
-.wrapper {
-    padding-bottom: 50px;
-    background-image: linear-gradient(135deg, rgba(105, 234, 203, 1), rgba(215, 98, 252, 1) 67%, rgba(102, 84, 241, 1));
+// メインコンテンツここから。
+
+// .wrapper {
+// }
+
+.wrapper .main-area {
+    background-color: rgb(238, 238, 238, 0.9);
+    display: flex;
+    padding: 50px 0;
+}
+
+.wrapper .main-area #left-panel {
+    /* 横幅の指定。 */
+    width: 200px;
+    // 高さの指定。
+    height: 300px;
+    /* 内側の余白。 */
+    padding: 20px;
+    /* 色指定。 */
+    background-color: #333;
+    color: #fff;
+    // 角丸の指定。
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    /* 影の指定。 */
+    box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
+    display: none;
+}
+
+.wrapper .main-area #left-panel.open {
+    display: block;
+}
+
+.wrapper .main-area .content {
+    display: flex;
+    position: relative;
+    // .contentの領域を広げるため。コメントアウトして確認。
+    width: 100%;
+}
+
+.wrapper .main-area .content #left-panel-button {
+    position: absolute;
+    top: 127.74px;
+    left: 0;
+    cursor: pointer;
+    /* 高さ指定。 */
+    height: 36px;
+    /* ボーダーの指定。border-leftはいらないのでnoneにしている。 */
+    border-radius: 0 10px 10px 0;
+    color: #ffffff;
+    background-color: #333333;
+    box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
+}
+
+.wrapper .main-area .content #left-panel-button i {
+    /* marginやpaddingを指定できるようにするため。 */
+    display: inline-block;
+    /* アイコンなのでfont-sizeで大きさ指定を行う。 */
+    font-size: 24px;
+    /* 余白にてポジションの微調整。 */
+    margin-right: 2px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    // アニメーションの調整。
+    transition: transform .2s;
+}
+
+.wrapper .main-area .content #left-panel-button.open i {
+    transform: rotate(180deg);
+}
+
+.wrapper .main-area .content .content-area {
+    // 親要素（.content）に対して94%を横幅に指定。
+    width: 94%;
+    // 親要素（.content）に対して6%をmarginに指定。左右均等に割り振った。
+    margin: 0 3%;
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
+
+.wrapper .main-area .content .content-area .tabMenu {
+    display: flex;
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle {
+    margin-left: 10px;
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle a {
+    // ユーザーの範囲選択操作を不可能にしている。つまりコピーできない。
+    display: block;
+    user-select: none;
+    padding: 8px 7px 5px;
+    background-color: #fff;
+    color: #333333;
+    border-radius: 8px 8px 0 0;
+    letter-spacing: .4rem;
+    transform: none;
+    transition: transform .13s;
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle a:hover {
+    transform: scale(1.04, 1.02);
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle.active a {
+    background-color: #333333;
+    color: #fff;
+}
+
+.wrapper .main-area .content .content-area .error-message {
+    position: absolute;
+    top: -42px;
+    left: 62px;
+    background-color: #FF4A52;
+    color: #FFFAFB;
+    padding: 5px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 1.375rem;
+    user-select: none;
+    letter-spacing: 3px;
+    box-shadow: inset 0 0 5px 5px #FF4A60;
+}
+
+.wrapper .main-area .content .content-area form {
+    background-color: #333333;
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 10px;
+    user-select: none;
+    letter-spacing: 3px;
+}
+
+.wrapper .main-area .content .content-area form label {
+    font-size: 1.125rem;
+}
+
+.wrapper .main-area .content .content-area form input {
+    width: 300px;
+    background-color: #FFFAFB;
+    color: #333;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.wrapper .main-area .content .content-area form button {
+    color: #fff;
+    transition: transform .2s;
+    letter-spacing: 3px;
+    font-size: 1.125rem;
+    margin-left: 5px;
+}
+
+.wrapper .main-area .content .content-area form button:hover {
+    transform: scale(1.1);
+}
+
+// ここからスタート。いよいよリストのコーディング（正念場）。終わり次第，全てのページにおいても新デザインを適用できるようHTMLの構造整理を行う。
+// 次にアコーディオンの実装。各planの概要をアコーディオンで隠す機能を追加したい。
+// その後でコメントを付ける作業。
+.wrapper .main-area .content .content-area .table {
+    background-color: #333333;
+    color: #fff;
+    border-radius: 0 0 8px 8px;
+    width: 100%;
+    padding: 0 10px 10px;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr {
+    display: flex;
+    background-color: #555555;
+    border-radius: 4px;
+    padding: 5px;
+    letter-spacing: 2px;
+    transition: transform .2s;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr:hover {
+    transform: scale(1.005);
+}
+
+.wrapper .main-area .content .content-area .table tbody tr + tr {
+    margin-top: 15px;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr td {
+    // display: block;
+    /* テキストの位置調整。フレックスにするが縦並びに変更し，主軸に対して中央に配置している。*/
+    /* これにより，テキストがど真ん中に配置される形になる（微々たる変化，気にならなければ「display: block;」に戻してOK）。*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr td + td {
+    margin-left: 45px;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr #planDetailButton {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr #planDetailButton:hover .balloon {
+    width: 50px;
+}
+
+.wrapper .main-area .content .content-area .table tbody tr td a {
+    display: inline-block;
+    color: #fff;
+}
+
+// お試し。ツールチップ。
+.parent-balloon {
+    // .balloon（子要素）でposition: absolute;を使用するため。
     position: relative;
 }
+
+// お試し。ツールチップ。
+.parent-balloon .balloon {
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    display: none;
+    padding: 7px;
+    letter-spacing: normal;
+    color: #444444;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 1px #333333;
+}
+
+// お試し。ツールチップ。
+.parent-balloon .balloon::before {
+    content: "";
+    position: absolute;
+    top: 97%;
+    left: 20px;
+    border: 6px solid transparent;
+    border-top: 6px solid #ffffff;
+}
+
+// お試し。ツールチップ。
+.parent-balloon:hover .balloon {
+    display: inline-block;
+    width: 78px;
+}
+
+.wrapper .main-area .content .content-area .alt {
+    background-color: #333333;
+    color: #fff;
+}
+
+// メインコンテンツここまで。
 
 @media (max-width: 600px) {
     .header .header-site-menu nav ul {
