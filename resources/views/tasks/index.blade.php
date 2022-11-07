@@ -38,8 +38,8 @@
                     <!-- spanタグで各リストの全件数を表示させる（バッチ）。 -->
                     <!-- 「計画一覧」の全件数は{{ $tasks_num }}で表示させている。 -->
                     <h2 class="planListTitle active"><a><i class="fa-solid fa-list"></i>計画一覧<span>{{ $tasks_num }}</span></a></h2>
-                    <h2 class="planListTitle"><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴<span>N</span></a></h2>
-                    <h2 class="planListTitle"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span>N</span></a></h2>
+                    <h2 class="planListTitle"><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴<span>{{ $count }}</span></a></h2>
+                    <h2 class="planListTitle"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span>{{ $suspentions_num }}</span></a></h2>
                 </div>
 
             <!-- 「検索」機能ここから。 -->

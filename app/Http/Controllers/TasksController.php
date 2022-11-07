@@ -32,6 +32,9 @@ class TasksController extends Controller
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
 
+        // Suspentionsテーブルの全レコード数を取得。
+        $suspentions_num = Suspension::count();
+
         $query = Target::query();
         if ($query->count() < 0) {
             $target = NULL;
@@ -40,7 +43,7 @@ class TasksController extends Controller
         }
 
         // index.blade.phpへ遷移。その際，$tasksと$tasks_num, $count, $targetを渡している。
-        return view('tasks.index', compact('tasks','tasks_num','count','target'));
+        return view('tasks.index', compact('tasks','tasks_num','count', 'target', 'suspentions_num'));
     }
 
     public function search(Request $request)
@@ -63,10 +66,16 @@ class TasksController extends Controller
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
 
+        // Tasksテーブルの全レコード数を取得。
+        $tasks_num = Task::count();
+
+        // Suspensionsテーブルの全レコード数を取得。
+        $suspensions_num = Suspension::count();
+
         // 絞り込んだレコードの総数を取得。
         $tasks_search_count = $tasks->count();
 
-        return view('tasks.search', compact('tasks', 'count', 'tasks_search_count'));
+        return view('tasks.search', compact('tasks', 'count', 'tasks_search_count', 'tasks_num', 'suspensions_num'));
     }
 
     // 検索機能で使用。
@@ -278,10 +287,16 @@ class TasksController extends Controller
         $histories = $query->orderBy('end', 'asc')->paginate(10);
         // historiesテーブルの全レコードをカウント。
         $count = $query->count();
+        // tasksテーブルの全レコードをカウント。
+        $tasks_num = Task::count();
+        // suspensionsテーブルの全レコードをカウント。
+        $suspensions_num = Suspension::count();
         // viewに渡す。
         return view('tasks.trace', [
             'histories' => $histories,
             'count' => $count,
+            'tasks_num' => $tasks_num,
+            'suspensions_num' => $suspensions_num,
         ]);
     }
 
@@ -302,6 +317,10 @@ class TasksController extends Controller
         $query = History::query();
         // historiesテーブルの全レコードをカウント。
         $count = $query->count();
+        // Tasksテーブルの全レコードをカウント。
+        $tasks_num = Task::count();
+        // Suspensionsテーブルの全レコードをカウント。
+        $suspensions_num = Suspension::count();
         // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
         $histories = $query->where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
 
@@ -312,6 +331,8 @@ class TasksController extends Controller
             'histories' => $histories,
             'count' => $count,
             'histories_count' => $histories_count,
+            'tasks_num' => $tasks_num,
+            'suspensions_num' => $suspensions_num,
         ]);
     }
 
@@ -370,10 +391,14 @@ class TasksController extends Controller
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
 
+        // Tasksテーブルの全レコードを取得。
+        $tasks_num = Task::count();
+
         return view('tasks.suspendList', [
             'suspensions' => $suspensions,
             'suspensions_num' => $suspensions_num,
             'count' => $count,
+            'tasks_num' => $tasks_num,
         ]);
     }
 
@@ -381,8 +406,14 @@ class TasksController extends Controller
     {
         $query = Suspension::query();
         $suspension = $query->find($id);
+        $suspensions_num = $query->count();
+        $tasks_num = Task::count();
+        $count = History::count();
         return view('tasks.suspensionDetail', [
             'suspension' => $suspension,
+            'suspensions_num' => $suspensions_num,
+            'tasks_num' => $tasks_num,
+            'count' => $count,
         ]);
     }
 
