@@ -39,7 +39,7 @@ class TasksController extends Controller
             $target = $query->first();
         }
 
-        // index.blade.phpへ遷移。その際，$tasksを渡している。
+        // index.blade.phpへ遷移。その際，$tasksと$tasks_num, $count, $targetを渡している。
         return view('tasks.index', compact('tasks','tasks_num','count','target'));
     }
 
@@ -47,10 +47,13 @@ class TasksController extends Controller
     {
         // バリデーション。
         $request->validate([
+            // inputタグにおけるname属性の属性値（ユーザーが入力した値）が空かどうかチェックしている。
+            // 空であればエラーメッセージを表示させる（index.blade.phpの$errors参照）。
             'keyword' => 'required',
         ]);
 
-        // ユーザーが入力した値の取得。
+        // ユーザーが入力した値の取得。$requestからユーザーが入力した値にアクセスできる。
+        // 「$request->keyword」でユーザーが入力欄（inputタグ）に入力した値を取り出し，$keywordに代入している。
         $keyword = $request->keyword;
 
         // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
@@ -60,7 +63,7 @@ class TasksController extends Controller
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
 
-        // 取得したレコードの件数を取得。
+        // 絞り込んだレコードの総数を取得。
         $tasks_search_count = $tasks->count();
 
         return view('tasks.search', compact('tasks', 'count', 'tasks_search_count'));
@@ -286,19 +289,23 @@ class TasksController extends Controller
     {
         // バリデーション。
         $request->validate([
+            // inputタグにおけるname属性の属性値（ユーザーが入力した値）が空かどうかチェックしている。
+            // 空であればエラーメッセージを表示させる（trace.blade.phpの$errors参照）。
             'keyword' => 'required',
         ]);
 
-        // ユーザーが入力した値の取得。
+        // ユーザーが入力した値の取得。$requestからユーザーが入力した値にアクセスできる。
+        // 「$request->keyword」でユーザーが入力欄（inputタグ）に入力した値を取り出し，$keywordに代入している。
         $keyword = $request->keyword;
 
+        // クエリ。
         $query = History::query();
         // historiesテーブルの全レコードをカウント。
         $count = $query->count();
         // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
         $histories = $query->where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
 
-        // 取得したレコードの件数を取得。
+        // 絞り込んだレコードの総数を取得。
         $histories_count = $histories->count();
 
         return view('tasks.searchHistory', [
@@ -353,8 +360,11 @@ class TasksController extends Controller
 
     public function suspensionList()
     {
+        // クエリ。以降$queryと書くと「Suspension::」と同じ意味として機能する？
         $query = Suspension::query();
+        // suspensionsテーブルの全レコードを完了日を基準に昇順ソートした上で，最初の10件を取得し$suspensionsに代入。
         $suspensions = $query->orderBy('end', 'asc')->paginate(10);
+        // suspensionsテーブルの全レコード数を取得。これが中断計画の全件数と対応している。
         $suspensions_num = $query->count();
 
         // Historiesテーブルの全レコード数を取得。

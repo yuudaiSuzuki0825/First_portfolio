@@ -16,6 +16,8 @@
         @endif
     </div> -->
 
+    <!-- ここから新規構造。 -->
+
     <div class="main-area">
         <!-- サイドパネル。 -->
         <aside id="left-panel">
@@ -32,7 +34,7 @@
             <div class="content-area">
                 <!-- タブメニュー。タブは「計画一覧」「完了履歴」「中断計画」の3種類。 -->
                 <div class="tabMenu">
-                    <!-- 「計画一覧」タブ以外はリンクになっており，各タブのリスト一覧へ遷移することが出来る。 -->
+                    <!-- 各タブはリンクになっており，各タブのリスト一覧へ遷移することが出来る。 -->
                     <!-- spanタグで各リストの全件数を表示させる（バッチ）。 -->
                     <!-- 「計画一覧」の全件数は{{ $tasks_num }}で表示させている。 -->
                     <h2 class="planListTitle active"><a><i class="fa-solid fa-list"></i>計画一覧<span>{{ $tasks_num }}</span></a></h2>
