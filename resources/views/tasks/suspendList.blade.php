@@ -83,9 +83,9 @@
                 <div class="tabMenu">
                     <!-- 各タブはリンクになっており，各タブのリスト一覧へ遷移することが出来る。 -->
                     <!-- spanタグで各リストの全件数を表示させる（バッチ）。 -->
-                    <h2 class="planListTitle"><a href="/"><i class="fa-solid fa-list"></i>計画一覧<span>N</span></a></h2>
+                    <h2 class="planListTitle"><a href="/"><i class="fa-solid fa-list"></i>計画一覧<span>{{ $tasks_num }}</span></a></h2>
                     <h2 class="planListTitle"><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴<span>{{ $count }}</span></a></h2>
-                    <h2 class="planListTitle"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span>{{ $suspensions_num }}</span></a></h2>
+                    <h2 class="planListTitle active"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span>{{ $suspensions_num }}</span></a></h2>
                 </div>
 
             <!-- 「中断計画」の表示ここから。 -->
@@ -118,12 +118,12 @@
                 </table>
                 {{ $suspensions->links() }}
             @else
-                <p class="alt">完了した計画はありません。</p>
+                <p class="alt">中断した計画はありません。</p>
             @endif
             </div>
         </section>
 
-        <!-- 「完了履歴」表示ここまで。 -->
+        <!-- 「中断計画」表示ここまで。 -->
     </div>
 
     <!-- ページトップへ遷移するボタン。 -->
