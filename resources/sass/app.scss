@@ -616,7 +616,7 @@ img {
 .wrapper .main-area {
     background-color: rgb(238, 238, 238, 0.9);
     display: flex;
-    padding: 50px 0;
+    padding: 59px 0;
 }
 
 .wrapper .main-area #left-panel {
@@ -693,7 +693,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area .tabMenu .planListTitle {
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .wrapper .main-area .content .content-area .tabMenu .planListTitle a {
@@ -707,6 +707,7 @@ img {
     letter-spacing: .4rem;
     transform: none;
     transition: transform .13s;
+    position: relative;
 }
 
 .wrapper .main-area .content .content-area .tabMenu .planListTitle a:hover {
@@ -718,9 +719,24 @@ img {
     color: #fff;
 }
 
+.wrapper .main-area .content .content-area .tabMenu .planListTitle a .badge {
+    position: absolute;
+    top: -10px;
+    left: calc(100% - 10px);
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #FF4A52;
+    color: white;
+    padding-left: 5px;
+    font-size: .875rem;
+    line-height: 20px;
+}
+
 .wrapper .main-area .content .content-area .error-message {
     position: absolute;
-    top: -42px;
+    top: -46.5px;
     left: 62px;
     background-color: #FF4A52;
     color: #FFFAFB;
