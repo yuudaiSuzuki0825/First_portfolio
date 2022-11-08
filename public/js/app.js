@@ -162,6 +162,11 @@
 
   /* =================================================== */
 
+  /* 前置き */
+  // タブメニューの実装の目的はタブのclass属性値の付け外しを行うことで，タブの配色を変化させることであった。
+  // しかし，各ページごとに別々のファイルが用意されているのでそもそも本機能を実装する必要性はなかった（class="active"の付け外しをJavaScriptで制御する必要性がない）。
+  // 一方で，若干の挙動の違いが見られる。試しにコメントアウトしてタグをクリックしてもらいたい。
+
   /* DOM操作 */
   // class="planListTitle"がつく全てのNode（タグ）を取得し，配列形式で格納（正確にはNodeListとして格納）。
   // 今回はタブメニューの各タブ（h2タグ）を取得している。index.blade.phpにて確認を。
@@ -186,31 +191,51 @@
   /* =================================================== */
 
   /* DOM操作。 */
-  // trタグのうちclass="tr"であるもののみNodeListとして取得。
+  // class="tr"の付くタグのみ取得している。NodeList。
 
-  var trs = document.querySelectorAll('.tr'); // console.log('ok');
+  var trs = document.querySelectorAll('.tr'); // 挙動確認用。エラーメッセージがないのに思惑通り動かない場合はconsole.logなどを活用してどの箇所をデバックすれば良いか調べる作業を行おう。
+  // console.log('ok');
 
   trs.forEach(function (tr) {
-    var children = tr.children;
-    console.log('ok');
+    // childrenプロパティにより，tr（Node）の子Nodeを全て取得している。
+    // 各Nodeには配列のように[]でアクセス出来る。
+    // 今回はchildrenにはtdタグ（子Node）が要素として格納されているはずである。
+    var children = tr.children; // デバック用。forEach文が機能しているか確認するため。
 
-    if (tr.hasChildNodes()) {
-      console.log('yes');
-    }
+    /* console.log('ok'); */
+    // hasChildNodes()は呼び出し元のNodeに子Nodeがあるかどうかチェックするメソッド。あればtrueを返す。
+    // デバック用。今回はtr（class="tr"の付いたtrタグのNode）に子要素があるかどうかチェックしている。
 
-    console.log(children.length);
-    console.log(tr.childElementCount);
+    /* if (tr.hasChildNodes()) {
+         console.log('yes');
+       }
+    */
+    // デバック用。tr（親Node，NodeListになっている）の子Nodeの個数を確認している。
+    // 配列のようにlengthプロパティで取得出来る。
+
+    /* console.log(children.length); */
+    // デバック用。tr（親Node，NodeListになっている）の子Nodeの個数を確認している。
+
+    /* console.log(tr.childElementCount); */
+    // trの子Nodeのうち上から5番目のtdタグ（id="planDetailButton"が付いている最後のtdタグ）にアクセスし，そのタグがクリックされたかどうかチェックしている。
+
     children[4].addEventListener('click', function () {
-      console.log('ok'); // children[5].classList.toggle('detailOpen');
-      // tr.parentNode.children[1].classList.toggle('detailOpen');
+      // デバック用。イベントリスナーが実行されているか確認するため。
 
-      console.log(tr.nextElementSibling);
-      tr.nextElementSibling.classList.toggle('detailOpen');
+      /* console.log('ok'); */
+      // デバック用。nextSiblingプロパティとnextElementSiblingプロパティの違いをコンソールにて確認してほしい。
+      // classListにアクセスしたい場合は後者を選択すること。
+
+      /* console.log(tr.nextSibling); */
+
+      /* console.log(tr.nextElementSibling); */
+      // tr（class="tr"の付いたtrタグ）の次の兄弟Nodeにアクセスし（今回はid="planDetailRow"の付いたtrタグ），class="detailOpen"の付け外しを行っている。
+      // これにより#planDetailRow.detailOpen{display: block;}が読み込まれ，表示される。
+      tr.nextElementSibling.classList.toggle('detailOpen'); // trにもclass="detailOpen"の付け外しの処理をしている。
+      // これにより.tr.detailOpen{border-radius: 4px 4px 0 0;}が読み込まれる形になる。
+
       tr.classList.toggle('detailOpen');
-    }); // tr.child.addEventListener('click', () => {
-    //     tr.childNodes[5].classList.add('detailOpen');
-    //     tr.classList.add('detailOpen');
-    // });
+    });
   });
 }
 
