@@ -180,6 +180,38 @@
       title1.classList.add('active');
     });
   });
+  /* =================================================== */
+  // アコーディオンの実装。
+
+  /* =================================================== */
+
+  /* DOM操作。 */
+  // trタグのうちclass="tr"であるもののみNodeListとして取得。
+
+  var trs = document.querySelectorAll('.tr'); // console.log('ok');
+
+  trs.forEach(function (tr) {
+    var children = tr.children;
+    console.log('ok');
+
+    if (tr.hasChildNodes()) {
+      console.log('yes');
+    }
+
+    console.log(children.length);
+    console.log(tr.childElementCount);
+    children[4].addEventListener('click', function () {
+      console.log('ok'); // children[5].classList.toggle('detailOpen');
+      // tr.parentNode.children[1].classList.toggle('detailOpen');
+
+      console.log(tr.nextElementSibling);
+      tr.nextElementSibling.classList.toggle('detailOpen');
+      tr.classList.toggle('detailOpen');
+    }); // tr.child.addEventListener('click', () => {
+    //     tr.childNodes[5].classList.add('detailOpen');
+    //     tr.classList.add('detailOpen');
+    // });
+  });
 }
 
 /***/ }),
