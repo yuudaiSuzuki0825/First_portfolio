@@ -795,6 +795,22 @@ img {
     margin-top: 15px;
 }
 
+// JavaScript。アコーディオン。
+.wrapper .main-area .content .content-area .table tbody .tr.detailOpen {
+    border-radius: 4px 4px 0 0;
+}
+
+.wrapper .main-area .content .content-area .table tbody #planDetailRow {
+    margin-top: 0;
+    display: none;
+    border-radius: 0 0 4px 4px;
+    border-top: #ffffff solid 1px;
+}
+
+.wrapper .main-area .content .content-area .table tbody #planDetailRow.detailOpen {
+    display: block;
+}
+
 .wrapper .main-area .content .content-area .table tbody tr td {
     // display: block;
     /* テキストの位置調整。フレックスにするが縦並びに変更し，主軸に対して中央に配置している。*/
