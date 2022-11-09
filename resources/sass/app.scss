@@ -616,7 +616,7 @@ img {
 .wrapper .main-area {
     background-color: rgb(238, 238, 238, 0.9);
     display: flex;
-    padding: 59px 0;
+    padding: 50px 0;
 }
 
 .wrapper .main-area #left-panel {
@@ -736,14 +736,14 @@ img {
 
 .wrapper .main-area .content .content-area .error-message {
     position: absolute;
-    top: -46.5px;
+    top: -42px;
     left: 62px;
     background-color: #FF4A52;
     color: #FFFAFB;
     padding: 5px;
     border-radius: 3px;
     text-align: center;
-    font-size: 1.375rem;
+    font-size: 1rem;
     user-select: none;
     letter-spacing: 3px;
     box-shadow: inset 0 0 5px 5px #FF4A60;
@@ -800,12 +800,14 @@ img {
     border-radius: 4px;
     padding: 5px;
     letter-spacing: 2px;
-    transition: transform .2s;
+    // アニメーションの微調整。
+    // transition: transform .2s;
 }
 
-.wrapper .main-area .content .content-area .table tbody tr:hover {
-    transform: scale(1.005);
-}
+/* trタグをホバーすると少し大きくなるアニメーションを実装しようと思ったが，ツールチップも合わさると鬱陶しく感じられたので今回は無しとした。　*/
+// .wrapper .main-area .content .content-area .table tbody tr:hover {
+//     transform: scale(1.005);
+// }
 
 .wrapper .main-area .content .content-area .table tbody tr + tr {
     margin-top: 15px;
@@ -821,6 +823,8 @@ img {
     display: none;
     border-radius: 0 0 4px 4px;
     border-top: #ffffff solid 1px;
+    line-height: 1.5;
+    animation: .2s slideDown;
 }
 
 .wrapper .main-area .content .content-area .table tbody #planDetailRow.detailOpen {
@@ -847,6 +851,16 @@ img {
 
 .wrapper .main-area .content .content-area .table tbody tr #planDetailButton:hover .balloon {
     width: 50px;
+}
+
+// アコーディオンのアイコンのアニメーション。
+.wrapper .main-area .content .content-area .table tbody .tr #planDetailButton i {
+    transition: transform .2s;
+}
+
+// アコーディオンのアイコンのアニメーション。
+.wrapper .main-area .content .content-area .table tbody .tr.detailOpen #planDetailButton i {
+    transform: rotate(180deg);
 }
 
 .wrapper .main-area .content .content-area .table tbody tr td a {
@@ -893,6 +907,17 @@ img {
 .wrapper .main-area .content .content-area .alt {
     background-color: #333333;
     color: #fff;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: none;
+        opacity: 1;
+    }
 }
 
 // メインコンテンツここまで。

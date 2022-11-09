@@ -107,7 +107,7 @@
                     </thead> -->
                     <tbody>
                         @foreach ($histories as $history)
-                        <tr>
+                        <tr class="tr">
                             <td>
                                 <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
                                     <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
@@ -119,8 +119,11 @@
                             <td>開始日:{{ $history->start }}</td>
                             <td>完了日:{{ $history->end }}</td>
                             <!-- アイコンをクリックすると計画概要がアコーディオンメニュー形式で表示される。 -->
-                            <!-- <td>{{ $history->content }}</td> -->
                             <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i><span class="balloon">開く</span></td>
+                        </tr>
+                        <!-- 計画の概要。アコーディオンメニューのように表示させる。 -->
+                        <tr id="planDetailRow">
+                            <td>{{ $history->content }}</td>
                         </tr>
                         @endforeach
                     </tbody>

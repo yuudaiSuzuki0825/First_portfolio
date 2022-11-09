@@ -104,14 +104,17 @@
                     </thead> -->
                     <tbody>
                         @foreach ($suspensions as $suspension)
-                        <tr>
+                        <tr class="tr">
                             <td><a href="{{ route('tasks.suspensionDetail', $suspension->id) }}"><i class="fa-solid fa-pencil"></i></a></td>
                             <td>{{ $suspension->title }}</td>
                             <td>開始日:{{ $suspension->start }}</td>
                             <td>完了日:{{ $suspension->end }}</td>
                             <!-- アイコンをクリックすると計画概要がアコーディオンメニュー形式で表示される。 -->
-                            <!-- <td>{{ $suspension->content }}</td> -->
                             <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i><span class="balloon">開く</span></td>
+                        </tr>
+                        <!-- 計画の概要。アコーディオンメニューのように表示させる。 -->
+                        <tr id="planDetailRow">
+                            <td>{{ $suspension->content }}</td>
                         </tr>
                         @endforeach
                     </tbody>
