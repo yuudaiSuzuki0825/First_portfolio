@@ -78,17 +78,13 @@
                     <tbody>
                         @foreach ($tasks as $task)
                         <tr class="tr">
-                            <!-- <td>{!! link_to_route('tasks.edit', '🖌', ['task' => $task->id], ['class' => 'pencil']) !!}</td> -->
                             <td><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
                             <td>{{ $task->title }}</td>
                             <td>開始日:{{ $task->start }}</td>
                             <td>完了日:{{ $task->end }}</td>
-                            <!-- <td>{{ $task->content }}</td> -->
                             <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i><span class="balloon">開く</span></td>
-                            <!-- <tr id="planDetailRow">
-                                <td>{{ $task->content }}</td>
-                            </tr> -->
                         </tr>
+                        <!-- 計画の概要。アコーディオンメニューのように表示させる。 -->
                         <tr id="planDetailRow">
                             <td>{{ $task->content }}</td>
                         </tr>

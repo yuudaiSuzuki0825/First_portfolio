@@ -121,7 +121,7 @@
                     </thead> -->
                     <tbody>
                         @foreach ($histories as $history)
-                        <tr>
+                        <tr class="tr">
                             <td>
                                 <!-- LaravelCollectiveライブラリを使用した場合。 -->
                                 <!-- {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!}
@@ -142,8 +142,11 @@
                             <td>開始日:{{ $history->start }}</td>
                             <td>完了日:{{ $history->end }}</td>
                             <!-- アイコンをクリックすると計画概要がアコーディオンメニュー形式で表示される。 -->
-                            <!-- <td>{{ $history->content }}</td> -->
                             <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i><span class="balloon">開く</span></td>
+                        </tr>
+                        <!-- 計画の概要。アコーディオンメニューのように表示させる。 -->
+                        <tr id="planDetailRow">
+                            <td>{{ $history->content }}</td>
                         </tr>
                         @endforeach
                     </tbody>
