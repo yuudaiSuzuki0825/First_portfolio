@@ -72,6 +72,10 @@
                     <h2 class="planListTitle"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span class="badge">{{ $suspensions_num }}</span></a></h2>
                 </div>
 
+            <!-- 「何か」機能ここから。-->
+                <div class="provisional">ここに「何か」を設置する予定。</div>
+            <!-- 「何か」機能ここまで。 -->
+
                 <table class="table">
                     <!-- theadは無くす予定。 -->
                     <!-- <thead>

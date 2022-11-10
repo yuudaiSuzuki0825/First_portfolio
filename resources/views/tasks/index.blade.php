@@ -42,6 +42,10 @@
                     <h2 class="planListTitle"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span class="badge">{{ $suspentions_num }}</span></a></h2>
                 </div>
 
+            <!-- 「並び替え」機能ここから。-->
+                <div class="provisional">ここに「並び替え」を設置する予定。</div>
+            <!-- 「並び替え」機能ここまで。 -->
+
             <!-- 「検索」機能ここから。 -->
 
             <!-- 「検索」機能のエラーメッセージ。 -->
@@ -114,5 +118,6 @@
 
     <!-- ページトップへ遷移するボタン。 -->
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
+    <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
 
 @endsection

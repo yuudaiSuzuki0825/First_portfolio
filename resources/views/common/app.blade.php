@@ -43,6 +43,9 @@
             </div>
         </div>
 
+        <!-- Intersection Observer APIで監視する空タグ。 -->
+        <div id="monitored"></div>
+
         <!-- SP用。 -->
         <!-- モーダルウィンドウでナビゲーションリンクを表示。ハンバーガーメニューをクリックすると表示される。 -->
         <div class="overlay">

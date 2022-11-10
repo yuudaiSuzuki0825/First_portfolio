@@ -88,6 +88,10 @@
                     <h2 class="planListTitle active"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span class="badge">{{ $suspensions_num }}</span></a></h2>
                 </div>
 
+            <!-- 「並び替え」機能ここから。-->
+                <div class="provisional">ここに「並び替え」を設置する予定。</div>
+            <!-- 「並び替え」機能ここまで。 -->
+
             <!-- 「中断計画」の表示ここから。 -->
 
             @if (count($suspensions) > 0)
