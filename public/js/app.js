@@ -121,6 +121,23 @@
 
 {
   /* =================================================== */
+  // ページトップへ遷移するボタン（アニメーション）の実装。
+
+  /* =================================================== */
+  // とりあえず完成。コメント残しをお願いします。
+
+  /* callback関数の定義。 */
+  var onScrollCallback = function onScrollCallback(entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) {
+        toTop.classList.add('scrolled');
+      } else {
+        toTop.classList.remove('scrolled');
+      }
+    });
+  };
+
+  /* =================================================== */
   // ハンバーガーメニューの実装。
 
   /* =================================================== */
@@ -236,6 +253,26 @@
 
       tr.classList.toggle('detailOpen');
     });
+  });
+  ;
+  /* DOM操作。 */
+
+  var toTop = document.getElementById('to_top');
+  /* インスタンス生成。 */
+
+  var onScrollObserver = new IntersectionObserver(onScrollCallback);
+  /* observeメソッドの呼び出し。 */
+
+  onScrollObserver.observe(document.getElementById('monitored'));
+  /* 遷移するスピードの調整。 */
+
+  toTop.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scroll({
+      top: 0,
+      behavior: "smooth"
+    }); // scroll()やscrollTo()以外にも特定の位置までスクロールしてくれるメソッドがある。
+    // window.scrollBy(0, -window.innerHeight);
   });
 }
 
