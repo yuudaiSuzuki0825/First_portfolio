@@ -41,9 +41,11 @@ Route::delete('tasks/{id}/suspend', 'TasksController@suspend')->name('tasks.susp
 Route::get('tasks/suspendList', 'TasksController@suspensionList')->name('tasks.suspensionList');
 // 中断された計画の詳細を閲覧する。（修正予定，中断➡ソフトデリート）
 Route::get('tasks/suspendList/{id}', 'TasksController@suspensionDetail')->name('tasks.suspensionDetail');
-// 中断された計画を再開する。（修正予定，中断➡ソフトデリート）
-Route::delete('tasks/suspendList/{id}', 'TasksController@replay')->name('tasks.replay');
+// 中断された計画を再開する。（修正予定，中断➡ソフトデリート）⇒ソフトデリート済みのレコードを復元するルートに変更。
+// Route::delete('tasks/suspendList/{id}', 'TasksController@replay')->name('tasks.replay');
+Route::patch('tasks/suspendList/{trashed_task}', 'TasksController@replay')->name('tasks.replay');
 // 中断された計画を削除する画面に遷移する。（削除予定）
 Route::get('tasks/suspendList/{id}/delete', 'TasksController@eraseScreen')->name('tasks.eraseScreen');
-// 中断された計画を削除する。（修正予定，中断➡ソフトデリート）
-Route::delete('tasks/suspendList/{id}/delete', 'TasksController@completeErase')->name('tasks.completeErase');
+// 中断された計画を削除する。（修正予定，中断➡ソフトデリート）⇒ソフトデリート済みのレコードを物理削除するルートに変更。
+// Route::delete('tasks/suspendList/{id}/delete', 'TasksController@completeErase')->name('tasks.completeErase');
+Route::delete('tasks/suspendList/{trashed_task}', 'TasksController@completeErase')->name('tasks.completeErase');

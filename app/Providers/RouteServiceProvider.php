@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
+// 名前空間の指定。trashed_taskで使用。
+use App\Task;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -30,9 +33,14 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+
+        // ソフトデリート済みのレコードを復元するルートに必須。サービスコンテナを確認。
+        // ルートパラメータ（idの値）を第二引数で受け取っている。
+        // 第二引数の関数による返り値（ソフトデリート済みのTaskモデルのインスタンス，$idを使って1つに絞り込んだ）がコントローラの引数として渡される。
+        Route::bind('trashed_task', function ($id) {
+            return Task::onlyTrashed()->find($id);
+        });
     }
 
     /**

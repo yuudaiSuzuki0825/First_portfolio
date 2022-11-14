@@ -110,7 +110,21 @@
                         @foreach ($suspensions as $suspension)
                         <tr class="tr">
                             <!-- ここに「復元する」と「完全削除する」のフォームを設置する予定。tasks.suspensionDetailは廃棄予定。 -->
-                            <td><a href="{{ route('tasks.suspensionDetail', $suspension->id) }}"><i class="fa-solid fa-pencil"></i></a></td>
+                            <!-- <td><a href="{{ route('tasks.suspensionDetail', $suspension->id) }}"><i class="fa-solid fa-pencil"></i></a></td> -->
+                            <td>
+                                <form action="{{ route('tasks.replay', $suspension->id) }}" method="POST">
+                                    <button type="submit"><i class="fa-solid fa-play"></i>再開する</button>
+                                    @method('patch')
+                                    @csrf
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ route('tasks.completeErase', $suspension->id) }}" method="POST">
+                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>完全に削除する</button>
+                                    @method('delete')
+                                    @csrf
+                                </form>
+                            </td>
                             <td>{{ $suspension->title }}</td>
                             <td>開始日:{{ $suspension->start }}</td>
                             <td>完了日:{{ $suspension->end }}</td>
