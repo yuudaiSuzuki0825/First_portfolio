@@ -211,16 +211,18 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
+        // このアクションはソフトデリートするためのもの。
+
         // id（主キー）を通じて該当レコードを特定し，取得。
         $task = Task::find($id);
 
         // 完了したTasksテーブルの該当レコードをhistoriesテーブルのレコードとして保存（移動）。
-        $history = new History;
-        $history->title = $task->title;
-        $history->start = $task->start;
-        $history->end = $task->end;
-        $history->content = $task->content;
-        $history->save();
+        // $history = new History;
+        // $history->title = $task->title;
+        // $history->start = $task->start;
+        // $history->end = $task->end;
+        // $history->content = $task->content;
+        // $history->save();
 
         // タスクを削除。
         $task->delete();
@@ -367,26 +369,57 @@ class TasksController extends Controller
 
     public function suspend($id)
     {
-        $query = Task::query();
-        $task = $query->find($id);
-        $suspension = new Suspension;
-        $suspension->title = $task->title;
-        $suspension->start = $task->start;
-        $suspension->end = $task->end;
-        $suspension->content = $task->content;
-        $suspension->save();
+        // （追記）
+        // このアクションは「完了する」機能のために使用する。後で名称などの変更を済ませておくこと。
+
+        // id（主キー）を通じて該当レコードを特定し，取得。
+        $task = Task::find($id);
+
+        // 完了したTasksテーブルの該当レコードをhistoriesテーブルのレコードとして保存（移動）。
+        $history = new History;
+        $history->title = $task->title;
+        $history->start = $task->start;
+        $history->end = $task->end;
+        $history->content = $task->content;
+        $history->save();
+
+        // タスクを削除。ここまでは論理削除。
         $task->delete();
+        // データベースにはまだ残っているので，delete()の後に以下を呼び出す必要がある。
+        // 以下を実行することで物理削除を行える。
+        $task->forceDelete();
+
+        // リダイレクト。
+        return redirect('/');
+
+        // 以前までの処理。参考までに。
+        // $query = Task::query();
+        // $task = $query->find($id);
+        // $suspension = new Suspension;
+        // $suspension->title = $task->title;
+        // $suspension->start = $task->start;
+        // $suspension->end = $task->end;
+        // $suspension->content = $task->content;
+        // $suspension->save();
+        // $task->delete();
         return redirect('/');
     }
 
     public function suspensionList()
     {
+        // このアクションはソフトデリート済みの計画一覧にアクセスするために使用する。
+
+        $query = Task::query();
+        $suspensions = $query->onlyTrashed()->orderBy('end', 'asc')->paginate(10);
+        $suspensions_num = $query->onlyTrashed()->count();
+
+        // 以下6行は以前の処理。参考までに。
         // クエリ。以降$queryと書くと「Suspension::」と同じ意味として機能する？
-        $query = Suspension::query();
+        // $query = Suspension::query();
         // suspensionsテーブルの全レコードを完了日を基準に昇順ソートした上で，最初の10件を取得し$suspensionsに代入。
-        $suspensions = $query->orderBy('end', 'asc')->paginate(10);
+        // $suspensions = $query->orderBy('end', 'asc')->paginate(10);
         // suspensionsテーブルの全レコード数を取得。これが中断計画の全件数と対応している。
-        $suspensions_num = $query->count();
+        // $suspensions_num = $query->count();
 
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
@@ -404,9 +437,13 @@ class TasksController extends Controller
 
     public function suspensionDetail($id)
     {
-        $query = Suspension::query();
-        $suspension = $query->find($id);
-        $suspensions_num = $query->count();
+        // 廃棄予定。
+
+        // 以下3行は以前の処理。参考までに。
+        // $query = Suspension::query();
+        // $suspension = $query->find($id);
+        // $suspensions_num = $query->count();
+
         $tasks_num = Task::count();
         $count = History::count();
         return view('tasks.suspensionDetail', [

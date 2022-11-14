@@ -147,6 +147,11 @@
             // これにより.tr.detailOpen{border-radius: 4px 4px 0 0;}が読み込まれる形になる。
             tr.classList.toggle('detailOpen');
         });
+        // trの子Nodeの数が1つ増える場合もある（index.blade.phpなど）。その場合への対処として以下を記述した。
+        children[5].addEventListener('click', () => {
+            // trの子Nodeのうち上から6番目のtdタグをクリック➡5番目のそれをクリックした扱いにしてしまうことで（シュミレートすることで）detailOpenの付け外しを達成している。
+            children[4].click();
+        });
     });
 
     /* =================================================== */

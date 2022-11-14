@@ -83,6 +83,14 @@
                         @foreach ($tasks as $task)
                         <tr class="tr">
                             <td><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
+                            <!-- お試し。ここに「完了する」アイコンを設置する予定。 -->
+                            <td>
+                                <form action="{{ route('tasks.suspend', $task->id) }}" method="POST">
+                                    <button type="submit"><i class="fa-solid fa-circle-check"></i>完了する</button>
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
+                            </td>
                             <td>{{ $task->title }}</td>
                             <td>開始日:{{ $task->start }}</td>
                             <td>完了日:{{ $task->end }}</td>
