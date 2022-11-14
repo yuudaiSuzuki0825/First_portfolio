@@ -454,18 +454,27 @@ class TasksController extends Controller
         ]);
     }
 
-    public function replay($id)
+    // 「Task $task」は「Request $request」と同じ仕組み（メソッドインジェクション）。
+    // モデルクラスのインスタンスを引数として受け取る時は，依存定義（モデルクラス名，今回はTask）とそのインスタンス変数（今回は$task）を仮引数として記述すること。
+    public function replay(Task $task)
     {
-        $query = Suspension::query();
-        $suspension = $query->find($id);
-        $task = new Task;
-        $task->title = $suspension->title;
-        $task->start = $suspension->start;
-        $task->end = $suspension->end;
-        $task->content = $suspension->content;
-        $task->save();
-        $suspension->delete();
-        return redirect('/');
+        // このアクションはソフトデリート済みのレコードを復元するために使用する。
+        // 復元処理。メソッドインジェクションで受け取ったソフトデリート済みのTaskモデルのインスタンスからrestore()を呼び出している。
+        $task->restore();
+
+        // 以下9行は以前の処理。参考までに。
+        // $query = Suspension::query();
+        // $suspension = $query->find($id);
+        // $task = new Task;
+        // $task->title = $suspension->title;
+        // $task->start = $suspension->start;
+        // $task->end = $suspension->end;
+        // $task->content = $suspension->content;
+        // $task->save();
+        // $suspension->delete();
+
+        // ソフトデリート済みのレコード一覧ページへリダイレクト。
+        return redirect()->route('tasks.suspensionList');
     }
 
     public function eraseScreen($id)
@@ -477,11 +486,21 @@ class TasksController extends Controller
         ]);
     }
 
-    public function completeErase($id)
+    // 「Task $task」は「Request $request」と同じ仕組み（メソッドインジェクション）。
+    // モデルクラスのインスタンスを引数として受け取る時は，依存定義（モデルクラス名，今回はTask）とそのインスタンス変数（今回は$task）を仮引数として記述すること。
+    public function completeErase(Task $task)
     {
-        $query = Suspension::query();
-        $suspension = $query->find($id);
-        $suspension->delete();
-        return redirect('tasks/suspendList');
+        // このアクションはソフトデリート済みのレコードを物理削除するために使用する。
+        // 物理削除処理。メソッドインジェクションで受け取ったソフトデリート済みのTaskモデルのインスタンスからforceDelete()を呼び出している。
+        $task->forceDelete();
+
+        // 以下4行は以前の処理。参考までに。
+        // $query = Suspension::query();
+        // $suspension = $query->find($id);
+        // $suspension->delete();
+        // return redirect('tasks/suspendList');
+
+        // ソフトデリート済みのレコード一覧ページへリダイレクト。
+        return redirect()->route('tasks.suspensionList');
     }
 }
