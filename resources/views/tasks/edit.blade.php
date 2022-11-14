@@ -128,13 +128,22 @@
 
                 {!! Form::close() !!}
 
-                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                <!-- 「完了する」はindex.blade.phpに移す。 -->
+                <!-- <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                     <button type="submit"><i class="fa-solid fa-circle-check"></i>完了する</button>
                     @method('DELETE')
                     @csrf
-                </form>
+                </form> -->
 
-                <a href="{{ route('tasks.breakScreen', $task->id) }}"><i class="fa-solid fa-ban"></i>計画を中断する</a>
+                <!-- 削除予定。代わりにソフトデリート出来るようにする。 -->
+                <!-- <a href="{{ route('tasks.breakScreen', $task->id) }}"><i class="fa-solid fa-ban"></i>計画を中断する</a> -->
+
+                <!-- ソフトデリート。 -->
+                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                    <button type="submit"><i class="fa-solid fa-circle-check"></i>削除する</button>
+                    @method('DELETE')
+                    @csrf
+                </form>
             </div>
         </section>
 

@@ -124,14 +124,21 @@
   // ページトップへ遷移するボタン（アニメーション）の実装。
 
   /* =================================================== */
-  // とりあえず完成。コメント残しをお願いします。
 
   /* callback関数の定義。 */
+  // 自由に関数を作ってOK。作った関数をIntersectionObserverのインスタンス生成時に第一引数として代入すること。
+  //（交差済み或いは交差前）要素の情報（IntersectionObserverEntry）はentriesで受け取ることが出来る。監視対象として指定した全ての要素の情報が引数として渡される。
   var onScrollCallback = function onScrollCallback(entries) {
+    // entriesに複数の値が格納されていることを想定してforEach文を使用しているが，今回は監視対象1つなのでわざわざforEachを使わなくても良い。
     entries.forEach(function (entry) {
+      // 条件式の意味➡entry（今回は空タグ）が交差済みでかつ現在進行形で交差されていない時（通り過ぎた時）,{}を実行する。
+      // 空のdiv要素（Node, entry）が交差していない＝もう交差し終わったことを意味する（そもそもこの関数が処理されている時点で一度交差されているわけだから交差済みと判断できる）。
+      // 空タグはヘッダーのナビゲーションリンク真下に位置しているのでナビゲーションリンクがスクロールによって画面からほぼ見えなくなったと同時に条件が満たされる。
       if (!entry.isIntersecting) {
+        // class="scrolled"の追加。これにより「.wrapper #to_top.scrolled{}」が読み込まれる。
         toTop.classList.add('scrolled');
       } else {
+        // class="scrolled"が取り除かれる。これによりボタンが透明になる。
         toTop.classList.remove('scrolled');
       }
     });
@@ -252,6 +259,11 @@
       // これにより.tr.detailOpen{border-radius: 4px 4px 0 0;}が読み込まれる形になる。
 
       tr.classList.toggle('detailOpen');
+    }); // trの子Nodeの数が1つ増える場合もある（index.blade.phpなど）。その場合への対処として以下を記述した。
+
+    children[5].addEventListener('click', function () {
+      // trの子Nodeのうち上から6番目のtdタグをクリック➡5番目のそれをクリックした扱いにしてしまうことで（シュミレートすることで）detailOpenの付け外しを達成している。
+      children[4].click();
     });
   });
   ;
@@ -259,20 +271,40 @@
 
   var toTop = document.getElementById('to_top');
   /* インスタンス生成。 */
+  // 上から順に読み進めてほしい…。
+  // IntersectionObserverAPIの利用はIntersectionObserver（クラス）のインスタンスを生成する所から始まる。
+  // 第一引数には関数（callback関数と呼ばれる，自分で自由に定義したものを挿入するのがメジャー）を代入する。
+  // 第二引数にはthreshold（閾値）を代入する。省略可能（その場合，「threshold: 0;」が自動的に適用される）。
+  // 代入されたcallback関数は予め指定した監視対象（要素）が”ある条件”を満たした場合に実行されるもの。これがこのAPIのメイン機能となる。
+  // ある条件というのを指定しているのがthresholdである。
+  // 例えば，「threshold: 0.2;」と指定した場合，0.2は20%を指すので「監視対象と画面が20%交差する」という挙動が”ある条件”として設定される。
+  // 今回の例では，監視対象が画面と0%交差するとonScrollCallbackという関数が呼び出される。
 
-  var onScrollObserver = new IntersectionObserver(onScrollCallback);
+  var onScrollObserver = new IntersectionObserver(onScrollCallback); // 具体的に要素を監視する方法については下記参照。
+
   /* observeメソッドの呼び出し。 */
+  // 作成したIntersectionObserverのインスタンス変数からobserve()を呼び出している。
+  // 引数には監視対象としたい要素（Node）を代入する。
+  // 以下の記述が読み込まれて始めて，監視が実行される。
+  // 今回監視対象に指定しているのは空タグである。空タグなので高さは0。
 
   onScrollObserver.observe(document.getElementById('monitored'));
   /* 遷移するスピードの調整。 */
+  // IntersectionObserverAPIとは無関係なので注意。
 
   toTop.addEventListener('click', function (e) {
-    e.preventDefault();
+    // 既定の動作を止める働きがある。
+    // 今回はaタグ（toTop）のhref="#"へと遷移する動作を停止している。
+    e.preventDefault(); // href="#"へ遷移する動作を停止した代わりに，以下の指定によってページトップへ自動スクロールするようにしている。
+    // 例えば停止した代わりにscroll()を用いればsmoothを指定できるので自動スクロールするスピードを簡単に調整できる。
+    // scroll()の他にscrollTo()やscrollBy()を使ってもOK。
+
     window.scroll({
+      // ページトップに指定。
       top: 0,
+      // 緩やかに移動する指定。
       behavior: "smooth"
-    }); // scroll()やscrollTo()以外にも特定の位置までスクロールしてくれるメソッドがある。
-    // window.scrollBy(0, -window.innerHeight);
+    });
   });
 }
 

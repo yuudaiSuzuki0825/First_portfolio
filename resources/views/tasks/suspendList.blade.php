@@ -109,6 +109,7 @@
                     <tbody>
                         @foreach ($suspensions as $suspension)
                         <tr class="tr">
+                            <!-- ここに「復元する」と「完全削除する」のフォームを設置する予定。tasks.suspensionDetailは廃棄予定。 -->
                             <td><a href="{{ route('tasks.suspensionDetail', $suspension->id) }}"><i class="fa-solid fa-pencil"></i></a></td>
                             <td>{{ $suspension->title }}</td>
                             <td>開始日:{{ $suspension->start }}</td>
