@@ -112,6 +112,13 @@
 
         <!-- 「計画一覧」表示ここまで。 -->
 
+        <!-- マスク部分。 -->
+        <div id="mask" class="hidden"></div>
+        <!-- モーダルウインドウ部分。 -->
+        <section id="modalWindow" class="hidden">
+            <!-- ここに本命の「完了する」ボタンを設置。 -->
+        </section>
+
         <!-- <aside class="sidebar" id="usage">
             <div class="usage-area">
                 <dl>
