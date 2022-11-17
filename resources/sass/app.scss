@@ -944,6 +944,48 @@ img {
     font-size: 2rem;
 }
 
+// モーダルウインドウ部分のコーディング。一か所にまとめてある。
+.wrapper #mask {
+    background: rgba(0, 0, 0, 0.4);
+    // positionをfixedに，topとleft,right,bottomを全て0にすることでマスク部分を作っている。
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.wrapper #mask.hidden {
+    display: none;
+}
+// 「完了する」ボタン（ダミー）がクリックされた後。
+.wrapper #modalWindow {
+    background: #fff;
+    width: 300px;
+    padding: 20px;
+    border-radius: 4px;
+    /* positionプロパティにおいて，absoluteは親要素にposition:relativeを記述しなければならないわけではない。書かない場合は，ページ全体を基準に配置が決定される（包含ブロック，初期包含ブロック）。今回がそれ。*/
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    /* width，left，rightの全てがautoでなく，かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
+    /* この際，topは左右と関係ないのでどのような値であっても問題なし。 */
+    margin: 0 auto;
+    z-index: 100; // モーダルウインドウ部分を一番上に配置するため。
+    display: block;
+}
+//「完了する」ボタン（ダミー）がクリックされる前。
+.wrapper #modalWindow.hidden {
+    display: none;
+}
+.wrapper .main-area .content-area .table tbody #modalWindow.hidden td form {
+    display: none;
+}
+.wrapper .main-area .content-area .table tbody #modalWindow td form {
+    display: block;
+}
+// モーダルウインドウ部分ここまで。
+
 @keyframes slideDown {
     0% {
         transform: translateY(-10px);

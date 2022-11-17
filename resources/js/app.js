@@ -216,4 +216,33 @@
             behavior: "smooth"
         });
     });
+
+    /* =================================================== */
+    // モーダルウインドウの実装。
+    /* =================================================== */
+
+    /* DOM操作 */
+    const modalWindowOpen = document.getElementById('modalWindowOpen');
+    const mask = document.getElementById('mask');
+
+    // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
+    // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
+    trs.forEach(tr => {
+        // tr（class="tr"のついたtrタグ）の子Nodeを全て取得。今回は直下のtdタグを全て取得。
+        let children = tr.children;
+        // 上から2番目の子Node（ダミーの「完了する」ボタン）がクリックされた時。
+        children[1].addEventListener('click', () => {
+            // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前のNode（id="modalWindow"）のclassListにアクセス。
+            // モーダルウインドウ部分を表示させるため。
+            tr.previousElementSibling.classList.remove('hidden');
+            // マスク部分を表示させるため。
+            mask.classList.remove('hidden');
+        });
+        // マスク部分がクリックされた時。
+        mask.addEventListener('click', () => {
+            // class="hidden"を追加することで再度モーダルウインドウ部分とマスク部分を非表示にしている。
+            tr.previousElementSibling.classList.add('hidden');
+            mask.classList.add('hidden');
+        });
+    });
 }

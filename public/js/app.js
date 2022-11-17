@@ -306,6 +306,27 @@
       behavior: "smooth"
     });
   });
+  /* =================================================== */
+  // モーダルウインドウの実装。
+
+  /* =================================================== */
+
+  /* DOM操作 */
+
+  var modalWindowOpen = document.getElementById('modalWindowOpen');
+  var mask = document.getElementById('mask'); // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
+
+  trs.forEach(function (tr) {
+    var children = tr.children;
+    children[1].addEventListener('click', function () {
+      tr.previousElementSibling.classList.remove('hidden');
+      mask.classList.remove('hidden');
+    });
+    mask.addEventListener('click', function () {
+      tr.previousElementSibling.classList.add('hidden');
+      mask.classList.add('hidden');
+    });
+  });
 }
 
 /***/ }),
