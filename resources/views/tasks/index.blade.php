@@ -81,15 +81,28 @@
                     </thead> -->
                     <tbody>
                         @foreach ($tasks as $task)
-                        <tr class="tr">
-                            <td><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
-                            <!-- お試し。ここに「完了する」アイコンを設置する予定。 -->
+                        <!-- モーダルウインドウ部分。 -->
+                        <tr id="modalWindow" class="hidden">
+                            <!-- trの中に子要素として何か挿入したい場合はtdを挟むこと。試しにtdを除いてformタグがどの位置に移動するか確認してみて。 -->
                             <td>
+                                <!-- ここに本命の「完了する」ボタンを設置。 -->
                                 <form action="{{ route('tasks.suspend', $task->id) }}" method="POST">
                                     <button type="submit"><i class="fa-solid fa-circle-check"></i>完了する</button>
                                     @method('DELETE')
                                     @csrf
                                 </form>
+                            </td>
+                        </tr>
+                        <tr class="tr">
+                            <td><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
+                            <!-- お試し。ここに「完了する」アイコン（ダミー）を設置する予定。 -->
+                            <td id="modalWindowOpen">
+                                <!-- <form action="{{ route('tasks.suspend', $task->id) }}" method="POST">
+                                    <button type="submit"><i class="fa-solid fa-circle-check"></i>完了する</button>
+                                    @method('DELETE')
+                                    @csrf
+                                </form> -->
+                                <i class="fa-solid fa-circle-check"></i>完了する
                             </td>
                             <td>{{ $task->title }}</td>
                             <td>開始日:{{ $task->start }}</td>
@@ -112,13 +125,6 @@
 
         <!-- 「計画一覧」表示ここまで。 -->
 
-        <!-- マスク部分。 -->
-        <div id="mask" class="hidden"></div>
-        <!-- モーダルウインドウ部分。 -->
-        <section id="modalWindow" class="hidden">
-            <!-- ここに本命の「完了する」ボタンを設置。 -->
-        </section>
-
         <!-- <aside class="sidebar" id="usage">
             <div class="usage-area">
                 <dl>
@@ -134,5 +140,8 @@
     <!-- ページトップへ遷移するボタン。 -->
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
+
+    <!-- マスク部分。 -->
+    <div id="mask" class="hidden"></div>
 
 @endsection
