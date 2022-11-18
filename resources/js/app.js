@@ -96,7 +96,7 @@
     });
 
     /* =================================================== */
-    // アコーディオンの実装。
+    // アコーディオンの実装。（警告）trace.blade.phpにて致命的なバク発生。tdの個数のズレによるchildren[]の指定が原因。
     /* =================================================== */
 
     /* DOM操作。 */
@@ -222,7 +222,7 @@
     /* =================================================== */
 
     /* DOM操作 */
-    const modalWindowOpen = document.getElementById('modalWindowOpen');
+    // const modalWindowOpen = document.getElementById('modalWindowOpen');
     const mask = document.getElementById('mask');
 
     // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。

@@ -285,7 +285,7 @@ class TasksController extends Controller
     {
         // クエリ。
         $query = History::query();
-        // 完了日を基準に昇順にレコードを並べ替え，10件取得。
+        // 完了日を基準に昇順にレコードを並べ替え, 10件取得。
         $histories = $query->orderBy('end', 'asc')->paginate(10);
         // historiesテーブルの全レコードをカウント。
         $count = $query->count();

@@ -53,7 +53,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $histories->links() }}
             @else
                 <p class="alt">完了した計画はありません。</p>
             @endif
@@ -125,8 +124,17 @@
                     </thead> -->
                     <tbody>
                         @foreach ($histories as $history)
-                        <tr class="tr">
+                        <!-- <tr id="modalWindow" class="hidden">
                             <td>
+                                <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
+                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
+                            </td>
+                        </tr>  -->
+                        <tr class="tr">
+                            <td id="modalWindowOpen">
                                 <!-- LaravelCollectiveライブラリを使用した場合。 -->
                                 <!-- {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!}
                                     {!! Form::submit('削除する') !!}
@@ -140,8 +148,11 @@
                                 </form> -->
 
                                 <!-- モーダルウインドウを実装しない際の代用。 -->
-                                <a href="{{ route('tasks.goToEraseScreen', $history->id) }}"><i class="fa-solid fa-trash-can"></i>削除する</a>
+                                <!-- <a href="{{ route('tasks.goToEraseScreen', $history->id) }}"><i class="fa-solid fa-trash-can"></i>削除する</a> -->
+                                <i class="fa-solid fa-trash-can"></i>削除する
                             </td>
+                            <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
+                            <td class="FirstAid"></td>
                             <td>{{ $history->title }}</td>
                             <td>開始日:{{ $history->start }}</td>
                             <td>完了日:{{ $history->end }}</td>
@@ -167,5 +178,6 @@
 
     <!-- ページトップへ遷移するボタン。 -->
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
+    <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
 
 @endsection
