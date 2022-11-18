@@ -375,6 +375,10 @@ img {
   margin-left: 45px;
 }
 
+.wrapper .main-area .content .content-area .table tbody tr .FirstAid {
+  margin-left: 0;
+}
+
 .wrapper .main-area .content .content-area .table tbody tr #planDetailButton {
   margin-left: auto;
   cursor: pointer;
