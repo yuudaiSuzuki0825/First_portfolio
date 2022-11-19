@@ -113,7 +113,7 @@
         let children = tr.children;
 
         // デバック用。forEach文が機能しているか確認するため。
-        /* console.log('ok'); */
+        console.log('hoge');
 
         // hasChildNodes()は呼び出し元のNodeに子Nodeがあるかどうかチェックするメソッド。あればtrueを返す。
         // デバック用。今回はtr（class="tr"の付いたtrタグのNode）に子要素があるかどうかチェックしている。
@@ -130,10 +130,10 @@
         /* console.log(tr.childElementCount); */
 
         // trの子Nodeのうち上から5番目のtdタグ（id="planDetailButton"が付いている最後のtdタグ）にアクセスし，そのタグがクリックされたかどうかチェックしている。
-        children[4].addEventListener('click', () => {
+        children[5].addEventListener('click', () => {
 
             // デバック用。イベントリスナーが実行されているか確認するため。
-            /* console.log('ok'); */
+            // console.log('hoge');
 
             // デバック用。nextSiblingプロパティとnextElementSiblingプロパティの違いをコンソールにて確認してほしい。
             // classListにアクセスしたい場合は後者を選択すること。
@@ -145,12 +145,15 @@
             tr.nextElementSibling.classList.toggle('detailOpen');
             // trにもclass="detailOpen"の付け外しの処理をしている。
             // これにより.tr.detailOpen{border-radius: 4px 4px 0 0;}が読み込まれる形になる。
+            // また，.wrapper .main-area .content .content-area .table tbody .tr.detailOpen #planDetailButton i{}も読み込まれるのでアイコンが反転する。
             tr.classList.toggle('detailOpen');
         });
         // trの子Nodeの数が1つ増える場合もある（index.blade.phpなど）。その場合への対処として以下を記述した。
-        children[5].addEventListener('click', () => {
+        children[4].addEventListener('click', () => {
             // trの子Nodeのうち上から6番目のtdタグをクリック➡5番目のそれをクリックした扱いにしてしまうことで（シュミレートすることで）detailOpenの付け外しを達成している。
-            children[4].click();
+            children[5].click();
+            // デバック用。
+            /* console.log("hoge"); */
         });
     });
 
