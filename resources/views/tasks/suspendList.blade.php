@@ -108,22 +108,36 @@
                     </thead> -->
                     <tbody>
                         @foreach ($suspensions as $suspension)
+                        <!-- モーダルウインドウ部分。 -->
+                        <tr id="modalWindow" class="hidden">
+                            <td>
+                                <!-- 「完全削除する」ボタン（本命）。 -->
+                                <form action="{{ route('tasks.completeErase', $suspension->id) }}" method="POST">
+                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
+                                    @method('delete')
+                                    @csrf
+                                </form>
+                            </td>
+                        </tr>
                         <tr class="tr">
                             <!-- ここに「復元する」と「完全削除する」のフォームを設置する予定。tasks.suspensionDetailは廃棄予定。 -->
                             <!-- <td><a href="{{ route('tasks.suspensionDetail', $suspension->id) }}"><i class="fa-solid fa-pencil"></i></a></td> -->
                             <td>
+                                <!-- 「復元する」ボタン。 -->
                                 <form action="{{ route('tasks.replay', $suspension->id) }}" method="POST">
-                                    <button type="submit"><i class="fa-solid fa-play"></i>再開する</button>
+                                    <button type="submit"><i class="fa-solid fa-play"></i>復元する</button>
                                     @method('patch')
                                     @csrf
                                 </form>
                             </td>
-                            <td>
-                                <form action="{{ route('tasks.completeErase', $suspension->id) }}" method="POST">
-                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>完全に削除する</button>
+                            <!-- 「完全削除する」アイコン（ダミー）。 -->
+                            <td id="modalWindowOpen">
+                                <!-- <form action="{{ route('tasks.completeErase', $suspension->id) }}" method="POST">
+                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
                                     @method('delete')
                                     @csrf
-                                </form>
+                                </form> -->
+                                <i class="fa-solid fa-trash-can"></i>削除する
                             </td>
                             <td>{{ $suspension->title }}</td>
                             <td>開始日:{{ $suspension->start }}</td>
@@ -151,5 +165,8 @@
     <!-- ページトップへ遷移するボタン。 -->
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
+
+    <!-- マスク部分。 -->
+    <div id="mask" class="hidden"></div>
 
 @endsection
