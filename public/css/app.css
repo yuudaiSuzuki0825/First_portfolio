@@ -375,8 +375,8 @@ img {
   margin-left: 45px;
 }
 
-.wrapper .main-area .content .content-area .table tbody tr .FirstAid {
-  margin-left: 0;
+.wrapper .main-area .content .content-area .table tbody tr #modalWindowOpen {
+  margin-left: 0px;
 }
 
 .wrapper .main-area .content .content-area .table tbody tr #planDetailButton {
@@ -474,12 +474,11 @@ img {
   width: 300px;
   padding: 20px;
   border-radius: 4px;
-  /* positionプロパティにおいて，absoluteは親要素にposition:relativeを記述しなければならないわけではない。書かない場合は，ページ全体を基準に配置が決定される（包含ブロック，初期包含ブロック）。今回がそれ。*/
-  position: absolute;
-  top: 40px;
+  position: fixed;
+  top: 100px;
   left: 0;
   right: 0;
-  /* width，left，rightの全てがautoでなく，かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
+  /* width，left，rightの全てがautoでなく（leftとrightは0），かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
   /* この際，topは左右と関係ないのでどのような値であっても問題なし。 */
   margin: 0 auto;
   z-index: 100;

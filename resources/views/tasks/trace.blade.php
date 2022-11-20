@@ -124,16 +124,19 @@
                     </thead> -->
                     <tbody>
                         @foreach ($histories as $history)
-                        <!-- <tr id="modalWindow" class="hidden">
+                        <tr id="modalWindow" class="hidden">
                             <td>
+                                <!-- 「削除する」アイコン（本命）。 -->
                                 <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
                                     <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
                                     @method('DELETE')
                                     @csrf
                                 </form>
                             </td>
-                        </tr>  -->
+                        </tr>
                         <tr class="tr">
+                            <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
+                            <td class="FirstAid"></td>
                             <td id="modalWindowOpen">
                                 <!-- LaravelCollectiveライブラリを使用した場合。 -->
                                 <!-- {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!}
@@ -149,10 +152,10 @@
 
                                 <!-- モーダルウインドウを実装しない際の代用。 -->
                                 <!-- <a href="{{ route('tasks.goToEraseScreen', $history->id) }}"><i class="fa-solid fa-trash-can"></i>削除する</a> -->
+
+                                <!-- 「削除する」アイコン（ダミー）。 -->
                                 <i class="fa-solid fa-trash-can"></i>削除する
                             </td>
-                            <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
-                            <td class="FirstAid"></td>
                             <td>{{ $history->title }}</td>
                             <td>開始日:{{ $history->start }}</td>
                             <td>完了日:{{ $history->end }}</td>
@@ -179,5 +182,8 @@
     <!-- ページトップへ遷移するボタン。 -->
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
+
+    <!-- マスク部分。 -->
+    <div id="mask" class="hidden"></div>
 
 @endsection
