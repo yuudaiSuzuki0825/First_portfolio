@@ -112,16 +112,6 @@
 
             @if (count($histories) > 0)
                 <table class="table">
-                    <!-- theadは無くす予定。 -->
-                    <!-- <thead>
-                        <tr>
-                            <th></th>
-                            <th>テーマ</th>
-                            <th>開始日</th>
-                            <th>完了日</th>
-                            <th>概要</th>
-                        </tr>
-                    </thead> -->
                     <tbody>
                         @foreach ($histories as $history)
                         <tr id="modalWindow" class="hidden">
@@ -135,8 +125,7 @@
                             </td>
                         </tr>
                         <tr class="tr">
-                            <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
-                            <td class="FirstAid"></td>
+                            <td class="FirstAid"></td> <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
                             <td id="modalWindowOpen">
                                 <!-- LaravelCollectiveライブラリを使用した場合。 -->
                                 <!-- {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!}
@@ -169,6 +158,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <!-- ページネーション。コントローラーのpaginate()とセット。 -->
                 {{ $histories->links() }}
             @else
                 <p class="alt">完了した計画はありません。</p>
@@ -183,7 +173,7 @@
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
 
-    <!-- マスク部分。 -->
+    <!-- マスク部分。モーダルウィンドウで必要。 -->
     <div id="mask" class="hidden"></div>
 
 @endsection
