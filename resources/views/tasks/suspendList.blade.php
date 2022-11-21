@@ -122,7 +122,7 @@
                         <tr class="tr">
                             <!-- ここに「復元する」と「完全削除する」のフォームを設置する予定。tasks.suspensionDetailは廃棄予定。 -->
                             <!-- <td><a href="{{ route('tasks.suspensionDetail', $suspension->id) }}"><i class="fa-solid fa-pencil"></i></a></td> -->
-                            <td>
+                            <td class="FirstAid">
                                 <!-- 「復元する」ボタン。 -->
                                 <form action="{{ route('tasks.replay', $suspension->id) }}" method="POST">
                                     <button type="submit"><i class="fa-solid fa-play"></i>復元する</button>
@@ -152,6 +152,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <!-- ページネーション。コントローラーのpaginate()とセット。 -->
                 {{ $suspensions->links() }}
             @else
                 <p class="alt">中断した計画はありません。</p>
@@ -166,7 +167,7 @@
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
 
-    <!-- マスク部分。 -->
+    <!-- マスク部分。モーダルウィンドウで必要。 -->
     <div id="mask" class="hidden"></div>
 
 @endsection

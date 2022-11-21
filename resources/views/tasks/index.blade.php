@@ -94,7 +94,7 @@
                             </td>
                         </tr>
                         <tr class="tr">
-                            <td><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
+                            <td class="FirstAid"><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
                             <!-- お試し。ここに「完了する」アイコン（ダミー）を設置する予定。 -->
                             <td id="modalWindowOpen">
                                 <!-- <form action="{{ route('tasks.suspend', $task->id) }}" method="POST">
@@ -116,6 +116,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <!-- ページネーション。コントローラーのpaginate()とセット。 -->
                 {{ $tasks->links() }}
             @else
                 <p class="alt">ここに作成した計画が表示されます。</p>
@@ -141,7 +142,7 @@
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
 
-    <!-- マスク部分。 -->
+    <!-- マスク部分。モーダルウィンドウで必要。 -->
     <div id="mask" class="hidden"></div>
 
 @endsection
