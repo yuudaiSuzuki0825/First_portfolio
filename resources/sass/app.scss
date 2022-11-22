@@ -984,12 +984,7 @@ img {
 .wrapper #modalWindow.hidden {
     display: none;
 }
-.wrapper .main-area .content-area .table tbody #modalWindow.hidden td form {
-    display: none;
-}
-.wrapper .main-area .content-area .table tbody #modalWindow td form {
-    display: block;
-}
+
 // モーダルウインドウ部分ここまで。
 
 @keyframes slideDown {

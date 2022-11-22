@@ -144,6 +144,8 @@
                     @method('DELETE')
                     @csrf
                 </form>
+                <!-- ソフトデリート（ダミー）。 -->
+                <!-- <div><i class="fa-solid fa-circle-check"></i>削除する</div> -->
             </div>
         </section>
 
@@ -152,5 +154,9 @@
 
     <!-- ページトップへ遷移するボタン。 -->
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
+    <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
+
+    <!-- マスク部分。モーダルウィンドウで必要。 -->
+    <div id="mask" class="hidden"></div>
 
 @endsection
