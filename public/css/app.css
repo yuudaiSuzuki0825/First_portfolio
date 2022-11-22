@@ -489,14 +489,6 @@ img {
   display: none;
 }
 
-.wrapper .main-area .content-area .table tbody #modalWindow.hidden td form {
-  display: none;
-}
-
-.wrapper .main-area .content-area .table tbody #modalWindow td form {
-  display: block;
-}
-
 @-webkit-keyframes slideDown {
   0% {
     transform: translateY(-10px);

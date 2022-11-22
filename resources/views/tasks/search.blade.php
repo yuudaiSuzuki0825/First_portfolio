@@ -122,7 +122,7 @@
                     </tbody>
                 </table>
             @else
-                <p class="alt">完了した計画はありません。</p>
+                <p class="alt">キーワードに一致した計画はありません。</p>
             @endif
             </div>
         </section>
@@ -132,5 +132,6 @@
 
     <!-- ページトップへ遷移するボタン。 -->
     <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
+    <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
 
 @endsection
