@@ -32,8 +32,8 @@ class TasksController extends Controller
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
 
-        // Suspentionsテーブルの全レコード数を取得。
-        $suspentions_num = Suspension::count();
+        // ソフトデリート済みのTasksテーブルの全レコードを取得。
+        $suspentions_num = $query->onlyTrashed()->count();
 
         $query = Target::query();
         if ($query->count() < 0) {
@@ -291,8 +291,8 @@ class TasksController extends Controller
         $count = $query->count();
         // tasksテーブルの全レコードをカウント。
         $tasks_num = Task::count();
-        // suspensionsテーブルの全レコードをカウント。
-        $suspensions_num = Suspension::count();
+        // ソフトデリート済みのTasksテーブルの全レコードをカウント。
+        $suspensions_num = Task::onlyTrashed()->count();
         // viewに渡す。
         return view('tasks.trace', [
             'histories' => $histories,
