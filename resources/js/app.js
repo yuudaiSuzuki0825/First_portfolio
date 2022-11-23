@@ -225,8 +225,9 @@
     /* =================================================== */
 
     /* DOM操作 */
-    // const modalWindowOpen = document.getElementById('modalWindowOpen');
     const mask = document.getElementById('mask');
+    const modalWindowOpenButton = document.getElementById('modalWindowOpenButton');
+    const modalWindow = document.getElementById('modalWindow');
 
     // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
     // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
@@ -247,5 +248,15 @@
             tr.previousElementSibling.classList.add('hidden');
             mask.classList.add('hidden');
         });
+    });
+
+    modalWindowOpenButton.addEventListener('click', () => {
+        modalWindow.classList.remove('hidden');
+        mask.classList.remove('hidden');
+    });
+
+    mask.addEventListener('click', () => {
+        modalWindow.classList.add('hidden');
+        mask.classList.add('hidden');
     });
 }

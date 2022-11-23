@@ -489,6 +489,14 @@ img {
   display: none;
 }
 
+.wrapper #modalWindowOpen {
+  cursor: pointer;
+}
+
+.wrapper #modalWindowOpenButton {
+  cursor: pointer;
+}
+
 @-webkit-keyframes slideDown {
   0% {
     transform: translateY(-10px);

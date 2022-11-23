@@ -984,6 +984,12 @@ img {
 .wrapper #modalWindow.hidden {
     display: none;
 }
+.wrapper #modalWindowOpen {
+    cursor: pointer;
+}
+.wrapper #modalWindowOpenButton {
+    cursor: pointer;
+}
 
 // モーダルウインドウ部分ここまで。
 

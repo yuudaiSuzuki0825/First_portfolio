@@ -139,13 +139,15 @@
                 <!-- <a href="{{ route('tasks.breakScreen', $task->id) }}"><i class="fa-solid fa-ban"></i>計画を中断する</a> -->
 
                 <!-- ソフトデリート。 -->
-                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
-                    <button type="submit"><i class="fa-solid fa-circle-check"></i>削除する</button>
-                    @method('DELETE')
-                    @csrf
-                </form>
+                <div id="modalWindow" class="hidden">
+                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                        <button type="submit"><i class="fa-solid fa-circle-check"></i>削除する</button>
+                        @method('DELETE')
+                        @csrf
+                    </form>
+                </div>
                 <!-- ソフトデリート（ダミー）。 -->
-                <!-- <div><i class="fa-solid fa-circle-check"></i>削除する</div> -->
+                <div id="modalWindowOpenButton"><i class="fa-solid fa-circle-check"></i>削除する</div>
             </div>
         </section>
 

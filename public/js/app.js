@@ -313,9 +313,10 @@
   /* =================================================== */
 
   /* DOM操作 */
-  // const modalWindowOpen = document.getElementById('modalWindowOpen');
 
-  var mask = document.getElementById('mask'); // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
+  var mask = document.getElementById('mask');
+  var modalWindowOpenButton = document.getElementById('modalWindowOpenButton');
+  var modalWindow = document.getElementById('modalWindow'); // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
   // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
 
   trs.forEach(function (tr) {
@@ -335,6 +336,14 @@
       tr.previousElementSibling.classList.add('hidden');
       mask.classList.add('hidden');
     });
+  });
+  modalWindowOpenButton.addEventListener('click', function () {
+    modalWindow.classList.remove('hidden');
+    mask.classList.remove('hidden');
+  });
+  mask.addEventListener('click', function () {
+    modalWindow.classList.add('hidden');
+    mask.classList.add('hidden');
   });
 }
 
