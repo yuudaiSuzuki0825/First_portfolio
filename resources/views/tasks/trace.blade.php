@@ -101,9 +101,9 @@
                     <!-- {{ csrf_field()}} -->
                     @csrf
                     <!-- {{method_field('get')}} -->
-                    <label>絞り込み:</label>
+                    <!-- <label>絞り込み:</label> -->
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                     <input type="text" placeholder="キーワードを入力して検索。" name="keyword">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i>検索</button>
                 </form>
 
             <!-- 「検索」機能ここまで。 -->
@@ -126,7 +126,7 @@
                         </tr>
                         <tr class="tr">
                             <td class="FirstAid"></td> <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
-                            <td id="modalWindowOpen">
+                            <td id="modalWindowOpen" class="parent-balloon">
                                 <!-- LaravelCollectiveライブラリを使用した場合。 -->
                                 <!-- {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!}
                                     {!! Form::submit('削除する') !!}
@@ -143,7 +143,7 @@
                                 <!-- <a href="{{ route('tasks.goToEraseScreen', $history->id) }}"><i class="fa-solid fa-trash-can"></i>削除する</a> -->
 
                                 <!-- 「削除する」アイコン（ダミー）。 -->
-                                <i class="fa-solid fa-trash-can"></i>削除する
+                                <i class="fa-solid fa-trash-can"></i><span class="balloon">削除する</span>
                             </td>
                             <td>{{ $history->title }}</td>
                             <td>開始日:{{ $history->start }}</td>

@@ -141,13 +141,13 @@
                 <!-- ソフトデリート。 -->
                 <div id="modalWindow" class="hidden">
                     <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
-                        <button type="submit"><i class="fa-solid fa-circle-check"></i>削除する</button>
+                        <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
                         @method('DELETE')
                         @csrf
                     </form>
                 </div>
                 <!-- ソフトデリート（ダミー）。 -->
-                <div id="modalWindowOpenButton"><i class="fa-solid fa-circle-check"></i>削除する</div>
+                <div id="modalWindowOpenButton"><i class="fa-solid fa-trash-can"></i>削除する</div>
             </div>
         </section>
 

@@ -320,8 +320,19 @@ img {
   margin-left: 5px;
 }
 
-.wrapper .main-area .content .content-area form button:hover {
+.wrapper .main-area .content .content-area form button:not(.parent-balloon):hover {
   transform: scale(1.1);
+}
+
+.wrapper .main-area .content .content-area .tr .FirstAid form {
+  background-color: #555555;
+  padding: 0;
+  letter-spacing: normal;
+}
+
+.wrapper .main-area .content .content-area .tr .FirstAid form button {
+  font-size: 1rem;
+  margin-left: 0;
 }
 
 .wrapper .main-area .content .content-area .table {

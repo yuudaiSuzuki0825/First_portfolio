@@ -58,9 +58,9 @@
                     <!-- {{ csrf_field()}} -->
                     @csrf
                     <!-- {{method_field('get')}} -->
-                    <label>絞り込み:</label>
+                    <!-- <label>絞り込み:</label> -->
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
                     <input type="text" placeholder="キーワードを入力して検索。" name="keyword">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i>検索</button>
                 </form>
 
             <!-- 「検索」機能ここまで。 -->
@@ -96,13 +96,13 @@
                         <tr class="tr">
                             <td class="FirstAid"><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
                             <!-- お試し。ここに「完了する」アイコン（ダミー）を設置する予定。 -->
-                            <td id="modalWindowOpen">
+                            <td id="modalWindowOpen" class="parent-balloon">
                                 <!-- <form action="{{ route('tasks.suspend', $task->id) }}" method="POST">
                                     <button type="submit"><i class="fa-solid fa-circle-check"></i>完了する</button>
                                     @method('DELETE')
                                     @csrf
                                 </form> -->
-                                <i class="fa-solid fa-circle-check"></i>完了する
+                                <i class="fa-solid fa-circle-check"></i><span class="balloon">完了する</span>
                             </td>
                             <td>{{ $task->title }}</td>
                             <td>開始日:{{ $task->start }}</td>
