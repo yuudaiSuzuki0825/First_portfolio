@@ -230,13 +230,21 @@ img {
   color: #333333;
   border-radius: 8px 8px 0 0;
   letter-spacing: 0.4rem;
-  transform: none;
-  transition: transform 0.13s;
   position: relative;
 }
 
-.wrapper .main-area .content .content-area .tabMenu .planListTitle a:hover {
-  transform: scale(1.04, 1.02);
+.wrapper .main-area .content .content-area .tabMenu .planListTitle a:hover i {
+  transform: rotate(-360deg);
+  transition: transform 0.5s;
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle a:active i {
+  transition: none;
+  transform: none;
+}
+
+.wrapper .main-area .content .content-area .tabMenu .planListTitle.active a:hover i {
+  transform: none;
 }
 
 .wrapper .main-area .content .content-area .tabMenu .planListTitle.active a {
@@ -249,14 +257,15 @@ img {
   top: -10px;
   left: calc(100% - 10px);
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: auto;
   border-radius: 50%;
   background-color: #FF4A52;
   color: white;
-  padding-left: 5px;
+  padding: 0 4px;
   font-size: 0.875rem;
-  line-height: 20px;
+  line-height: 1.4;
+  letter-spacing: normal;
+  z-index: 10;
 }
 
 /* エラーメッセージ。*/
@@ -474,6 +483,7 @@ img {
   bottom: 0;
   right: 0;
   left: 0;
+  z-index: 50;
 }
 
 .wrapper #mask.hidden {
