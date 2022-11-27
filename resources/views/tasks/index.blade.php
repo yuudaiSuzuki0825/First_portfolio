@@ -85,12 +85,16 @@
                         <tr id="modalWindow" class="hidden">
                             <!-- trの中に子要素として何か挿入したい場合はtdを挟むこと。試しにtdを除いてformタグがどの位置に移動するか確認してみて。 -->
                             <td>
-                                <!-- ここに本命の「完了する」ボタンを設置。 -->
-                                <form action="{{ route('tasks.suspend', $task->id) }}" method="POST">
-                                    <button type="submit"><i class="fa-solid fa-circle-check"></i>完了する</button>
-                                    @method('DELETE')
-                                    @csrf
-                                </form>
+                                <p>本当に完了しますか。完了した計画は履歴から閲覧できます。</p>
+                                <div>
+                                    <span>キャンセル</span>
+                                    <!-- ここに本命の「完了する」ボタンを設置。 -->
+                                    <form action="{{ route('tasks.suspend', $task->id) }}" method="POST" style="background-color: #00A690;">
+                                        <button type="submit">完了</button>
+                                        @method('DELETE')
+                                        @csrf
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         <tr class="tr">

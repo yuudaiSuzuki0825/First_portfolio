@@ -116,12 +116,16 @@
                         @foreach ($histories as $history)
                         <tr id="modalWindow" class="hidden">
                             <td>
-                                <!-- 「削除する」アイコン（本命）。 -->
-                                <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
-                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
-                                    @method('DELETE')
-                                    @csrf
-                                </form>
+                                <p>本当に削除しますか。この操作は元に戻すことができません。</p>
+                                <div>
+                                    <span>キャンセル</span>
+                                    <!-- 「削除する」アイコン（本命）。 -->
+                                    <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
+                                        <button type="submit">削除</button>
+                                        @method('DELETE')
+                                        @csrf
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         <tr class="tr">

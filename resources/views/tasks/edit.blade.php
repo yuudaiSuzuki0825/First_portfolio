@@ -140,11 +140,16 @@
 
                 <!-- ソフトデリート。 -->
                 <div id="modalWindow" class="hidden">
-                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
-                        <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
-                        @method('DELETE')
-                        @csrf
-                    </form>
+                    <p>本当に削除しますか。削除した計画はゴミ箱から閲覧できます。</p>
+                    <div>
+                        <span id="cancelButton">キャンセル</span>
+                        <!-- 「削除する」ボタン（本命）。 -->
+                        <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                            <button type="submit">削除する</button>
+                            @method('DELETE')
+                            @csrf
+                        </form>
+                    </div>
                 </div>
                 <!-- ソフトデリート（ダミー）。 -->
                 <div id="modalWindowOpenButton"><i class="fa-solid fa-trash-can"></i>削除する</div>

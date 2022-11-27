@@ -316,7 +316,8 @@
 
   var mask = document.getElementById('mask');
   var modalWindowOpenButton = document.getElementById('modalWindowOpenButton');
-  var modalWindow = document.getElementById('modalWindow'); // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
+  var modalWindow = document.getElementById('modalWindow');
+  var cancelButton = document.getElementById('cancelButton'); // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
   // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
 
   trs.forEach(function (tr) {
@@ -335,6 +336,13 @@
       // class="hidden"を追加することで再度モーダルウインドウ部分とマスク部分を非表示にしている。
       tr.previousElementSibling.classList.add('hidden');
       mask.classList.add('hidden');
+    }); // 「キャンセル」ボタンがクリックされた時。spanタグは#modalWindowの子要素[0]の子要素[1]の子要素[0]に位置している。
+
+    tr.previousElementSibling.children[0].children[1].children[0].addEventListener('click', function () {
+      // マスク部分がクリックされた時と同じ挙動。
+      mask.click(); // デバック用。
+
+      /* console.log('hoge'); */
     });
   });
   modalWindowOpenButton.addEventListener('click', function () {
@@ -344,6 +352,9 @@
   mask.addEventListener('click', function () {
     modalWindow.classList.add('hidden');
     mask.classList.add('hidden');
+  });
+  cancelButton.addEventListener('click', function () {
+    mask.click();
   });
 }
 

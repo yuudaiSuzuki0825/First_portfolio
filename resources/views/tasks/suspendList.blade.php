@@ -111,12 +111,16 @@
                         <!-- モーダルウインドウ部分。 -->
                         <tr id="modalWindow" class="hidden">
                             <td>
-                                <!-- 「完全削除する」ボタン（本命）。 -->
-                                <form action="{{ route('tasks.completeErase', $suspension->id) }}" method="POST">
-                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
-                                    @method('delete')
-                                    @csrf
-                                </form>
+                                <p>本当に削除しますか。この操作は元に戻すことができません。</p>
+                                <div>
+                                    <span>キャンセル</span>
+                                    <!-- 「完全削除する」ボタン（本命）。 -->
+                                    <form action="{{ route('tasks.completeErase', $suspension->id) }}" method="POST">
+                                        <button type="submit">削除</button>
+                                        @method('delete')
+                                        @csrf
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         <tr class="tr">
