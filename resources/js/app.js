@@ -228,6 +228,7 @@
     const mask = document.getElementById('mask');
     const modalWindowOpenButton = document.getElementById('modalWindowOpenButton');
     const modalWindow = document.getElementById('modalWindow');
+    const cancelButton = document.getElementById('cancelButton');
 
     // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
     // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
@@ -248,15 +249,29 @@
             tr.previousElementSibling.classList.add('hidden');
             mask.classList.add('hidden');
         });
+        // 「キャンセル」ボタンがクリックされた時。spanタグは#modalWindowの子要素[0]の子要素[1]の子要素[0]に位置している。
+        tr.previousElementSibling.children[0].children[1].children[0].addEventListener('click', () => {
+            // マスク部分がクリックされた時と同じ挙動。
+            mask.click();
+            // デバック用。
+            /* console.log('hoge'); */
+        });
     });
 
+    // edit.blade.php用。内容は上記に同じ。
     modalWindowOpenButton.addEventListener('click', () => {
         modalWindow.classList.remove('hidden');
         mask.classList.remove('hidden');
     });
 
+    // edit.blade.php用。内容は上記に同じ。
     mask.addEventListener('click', () => {
         modalWindow.classList.add('hidden');
         mask.classList.add('hidden');
+    });
+
+    // edit.blade.php用。内容は上記に同じ。
+    cancelButton.addEventListener('click', () => {
+        mask.click();
     });
 }

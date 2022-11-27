@@ -510,6 +510,47 @@ img {
   display: none;
 }
 
+.wrapper .main-area .content .content-area #modalWindow div {
+  display: flex;
+}
+
+.wrapper .main-area .content .content-area #modalWindow p {
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  color: #333;
+}
+
+.wrapper .main-area .content .content-area #modalWindow div span {
+  display: block;
+  margin-left: auto;
+  padding: 6px;
+  color: #333;
+  background-color: #E8F2F0;
+  border-radius: 4px;
+  font-size: 1rem;
+  letter-spacing: normal;
+  cursor: pointer;
+}
+
+.wrapper .main-area .content .content-area #modalWindow div form {
+  padding: 0;
+  background-color: #FF4A52;
+  border-radius: 4px;
+  margin-left: 14px;
+}
+
+.wrapper .main-area .content .content-area #modalWindow div form button {
+  color: #fff;
+  letter-spacing: normal;
+  padding: 6px;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.wrapper .main-area .content .content-area #modalWindow div form button:hover {
+  transform: none;
+}
+
 .wrapper #modalWindowOpen {
   cursor: pointer;
 }
