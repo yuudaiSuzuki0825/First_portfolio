@@ -145,7 +145,7 @@
                         <span id="cancelButton">キャンセル</span>
                         <!-- 「削除する」ボタン（本命）。 -->
                         <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
-                            <button type="submit">削除する</button>
+                            <button type="submit">削除</button>
                             @method('DELETE')
                             @csrf
                         </form>

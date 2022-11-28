@@ -13,10 +13,10 @@ class TasksTableSeeder extends Seeder
     {
         for ($i = 0; $i < 50; $i++) {
             DB::table('tasks')->insert([
-                'title' => 'test' . $i,
-                'start' => 'test' . $i,
-                'end' => 'test' . $i,
-                'content' => 'test' . $i
+                'title' => Str::random(10),
+                'start' => "2022-11-28",
+                'end' => "2022-12-31",
+                'content' => Str::random(100),
             ]);
         }
     }
