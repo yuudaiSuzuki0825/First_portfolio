@@ -2,20 +2,6 @@
 
 @section('content')
 
-    <!-- <div class="main-top">
-        <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt=""> -->
-        <!-- <div class="title-area">
-            <h2 class="main-title">Plan management streamlines your work.</h2>
-            <h3 class="main-sub-title">効率化を目指したい。</h3>
-        </div>
-        @if ($target === NULL)
-            <a href="{{ route('tasks.createTarget') }}"><i class="fa-solid fa-circle-plus"></i>新規設定</a>
-        @else
-            <p>{{ $target->target }}</p>
-            <a href="{{ route('tasks.editTarget') }}"><i class="fa-solid fa-pencil"></i></a>
-        @endif
-    </div> -->
-
     <!-- ここから新規構造。 -->
 
     <div class="main-area">

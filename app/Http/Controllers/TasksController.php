@@ -35,15 +35,15 @@ class TasksController extends Controller
         // ソフトデリート済みのTasksテーブルの全レコードを取得。
         $suspentions_num = $query->onlyTrashed()->count();
 
-        $query = Target::query();
-        if ($query->count() < 0) {
-            $target = NULL;
-        } else {
-            $target = $query->first();
-        }
+        // $query = Target::query();
+        // if ($query->count() < 0) {
+        //     $target = NULL;
+        // } else {
+        //     $target = $query->first();
+        // }
 
-        // index.blade.phpへ遷移。その際，$tasksと$tasks_num, $count, $targetを渡している。
-        return view('tasks.index', compact('tasks','tasks_num','count', 'target', 'suspentions_num'));
+        // index.blade.phpへ遷移。その際，$tasksと$tasks_num, $countを渡している。
+        return view('tasks.index', compact('tasks','tasks_num', 'count', 'suspentions_num'));
     }
 
     public function search(Request $request)
