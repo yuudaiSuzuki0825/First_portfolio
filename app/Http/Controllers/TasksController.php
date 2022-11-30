@@ -21,26 +21,17 @@ class TasksController extends Controller
      */
     public function index()
     {
-        // 全レコードを取得。
-        // $tasks = Task::paginate(10);
-        $query = Task::query();
-        $tasks = $query->orderBy('end', 'asc')->paginate(10);
+        // 全レコードを取得。ペジネータ使用。10件ずつレコードを表示。
+        $tasks = Task::orderBy('end', 'asc')->paginate(10, ['*'], 'page', null);
 
         // tasksテーブルの全レコード数を取得。
-        $tasks_num = $query->count();
+        $tasks_num = Task::count();
 
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
 
         // ソフトデリート済みのTasksテーブルの全レコードを取得。
-        $suspentions_num = $query->onlyTrashed()->count();
-
-        // $query = Target::query();
-        // if ($query->count() < 0) {
-        //     $target = NULL;
-        // } else {
-        //     $target = $query->first();
-        // }
+        $suspentions_num = Task::onlyTrashed()->count();
 
         // index.blade.phpへ遷移。その際，$tasksと$tasks_num, $countを渡している。
         return view('tasks.index', compact('tasks','tasks_num', 'count', 'suspentions_num'));
@@ -283,12 +274,10 @@ class TasksController extends Controller
 
     public function trace()
     {
-        // クエリ。
-        $query = History::query();
         // 完了日を基準に昇順にレコードを並べ替え, 10件取得。
-        $histories = $query->orderBy('end', 'asc')->paginate(10);
+        $histories = History::orderBy('end', 'asc')->paginate(10);
         // historiesテーブルの全レコードをカウント。
-        $count = $query->count();
+        $count = History::count();
         // tasksテーブルの全レコードをカウント。
         $tasks_num = Task::count();
         // ソフトデリート済みのTasksテーブルの全レコードをカウント。
