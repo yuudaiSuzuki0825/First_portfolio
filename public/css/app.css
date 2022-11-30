@@ -371,6 +371,7 @@ img {
 
 .wrapper .main-area .content .content-area .table tbody #planDetailRow {
   margin-top: 0;
+  word-break: break-all;
   display: none;
   border-radius: 0 0 4px 4px;
   border-top: #ffffff solid 1px;

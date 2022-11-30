@@ -344,15 +344,18 @@
 
       /* console.log('hoge'); */
     });
-  });
+  }); // edit.blade.php用。内容は上記に同じ。
+
   modalWindowOpenButton.addEventListener('click', function () {
     modalWindow.classList.remove('hidden');
     mask.classList.remove('hidden');
-  });
+  }); // edit.blade.php用。内容は上記に同じ。
+
   mask.addEventListener('click', function () {
     modalWindow.classList.add('hidden');
     mask.classList.add('hidden');
-  });
+  }); // edit.blade.php用。内容は上記に同じ。
+
   cancelButton.addEventListener('click', function () {
     mask.click();
   });

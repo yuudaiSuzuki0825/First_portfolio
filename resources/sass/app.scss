@@ -870,6 +870,8 @@ img {
 
 .wrapper .main-area .content .content-area .table tbody #planDetailRow {
     margin-top: 0;
+    // 自動的に改行を挿入するために使用。コメントアウトして確認して。
+    word-break: break-all; // overflow-wrap: anywhere;でもOK。
     display: none;
     border-radius: 0 0 4px 4px;
     border-top: #ffffff solid 1px;
