@@ -560,6 +560,43 @@ img {
   cursor: pointer;
 }
 
+.pagination {
+  display: flex;
+}
+
+.pagination .page-item {
+  margin-top: 10px;
+}
+
+.pagination .page-item + .page-item {
+  margin-left: 15px;
+}
+
+.pagination .page-item .page-link {
+  display: block;
+  padding: 6px 8px;
+  height: 100%;
+  color: #555555;
+}
+
+.pagination .page-item .page-link:hover {
+  border-bottom: #555555 solid 2px;
+  padding-bottom: 4px;
+}
+
+.pagination .page-item#match .page-link {
+  color: #fff;
+  background-color: #555555;
+  border-radius: 50%;
+}
+
+.pagination .page-item#match .page-link:hover,
+.pagination .page-item#threeDots .page-link:hover,
+.pagination .page-item .page-link#leftTriangle:hover,
+.pagination .page-item .page-link#rightTriangle:hover {
+  border-bottom: none;
+}
+
 @-webkit-keyframes slideDown {
   0% {
     transform: translateY(-10px);

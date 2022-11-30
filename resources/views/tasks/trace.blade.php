@@ -104,7 +104,7 @@
                     </tbody>
                 </table>
                 <!-- ページネーション。コントローラーのpaginate()とセット。 -->
-                {{ $histories->onEachSide(1)->links() }}
+                {{ $histories->onEachSide(2)->links() }}
             @else
                 <p class="alt">完了した計画はありません。</p>
             @endif
