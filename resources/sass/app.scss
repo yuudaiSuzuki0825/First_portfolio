@@ -1063,8 +1063,59 @@ img {
 .wrapper #modalWindowOpenButton {
     cursor: pointer;
 }
-
 // モーダルウインドウ部分ここまで。
+
+// ページネーション部分。bootstrap-4.blade.php或いはデベロッパーツールにてhtml構造を参照してほしい。
+.pagination {
+    // ページネーションリンクを横並びにしている。
+    display: flex;
+}
+
+.pagination .page-item {
+    // ページネーション上部に隙間を作っている。
+    margin-top: 10px;
+}
+
+.pagination .page-item + .page-item {
+    // ページネーションリンク間に隙間を指定している。
+    margin-left: 15px;
+}
+
+// ページネーションリンク（現在ページの番号と不一致のもの）のUI。
+.pagination .page-item .page-link {
+    display: block;
+    padding: 6px 8px;
+    height: 100%;
+    color: #555555;
+}
+
+// 現在ページと不一致の番号（ページネーションリンク）がホバーされた時。
+.pagination .page-item .page-link:hover {
+    // 下線を表示させている。
+    border-bottom: #555555 solid 2px;
+    // 下線の高さ分を差し引いたpadding-bottomを新たに指定している。コメントアウトして確認を。
+    padding-bottom: 4px;
+}
+
+// 現在ページの番号と一致しているページネーションリンク（リンクとしての機能はなし）のUI。
+.pagination .page-item#match .page-link {
+    color: #fff;
+    background-color: #555555;
+    border-radius: 50%;
+}
+
+// ホバーされた時に下線を表示させないため。
+.pagination .page-item#match .page-link:hover,
+.pagination .page-item#threeDots .page-link:hover,
+.pagination .page-item .page-link#leftTriangle:hover,
+.pagination .page-item .page-link#rightTriangle:hover {
+    border-bottom: none;
+}
+
+// ホバーされた時に下線を表示させないため。
+// .pagination .page-item#threeDots .page-link:hover {
+//     border-bottom: none;
+// }
 
 @keyframes slideDown {
     0% {

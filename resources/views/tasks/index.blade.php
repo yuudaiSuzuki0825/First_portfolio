@@ -98,7 +98,7 @@
                 </table>
                 <!-- ページネーション。コントローラーのpaginate()とセット。 -->
                 <!-- 「https://laravel.com/api/6.x/Illuminate/Pagination/LengthAwarePaginator.html#method_onEachSide」 -->
-                {{ $tasks->onEachSide(1)->links() }}
+                {{ $tasks->onEachSide(2)->links() }}
             @else
                 <p class="alt">ここに作成した計画が表示されます。</p>
             @endif

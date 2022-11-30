@@ -85,7 +85,7 @@
                     </tbody>
                 </table>
                 <!-- ページネーション。コントローラーのpaginate()とセット。 -->
-                {{ $suspensions->onEachSide(1)->links() }}
+                {{ $suspensions->onEachSide(2)->links() }}
             @else
                 <p class="alt">中断した計画はありません。</p>
             @endif
