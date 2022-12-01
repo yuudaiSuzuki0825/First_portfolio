@@ -21,6 +21,7 @@ img {
   max-width: 100%;
 }
 
+/* ヘッダーここから。*/
 .header {
   width: 1400px;
   max-width: 95%;
@@ -108,7 +109,7 @@ img {
   background: rgba(255, 255, 255, 0.9);
   text-align: center;
   padding: 64px;
-  z-index: 10;
+  z-index: 1000;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s;
@@ -142,6 +143,7 @@ img {
   padding-right: 5px;
 }
 
+/* ヘッダーここまで。*/
 .wrapper .main-area {
   background-color: rgba(238, 238, 238, 0.9);
   display: flex;
@@ -342,6 +344,18 @@ img {
 .wrapper .main-area .content .content-area .tr .FirstAid form button {
   font-size: 1rem;
   margin-left: 0;
+}
+
+.wrapper .main-area .content .content-area .tr .FirstAid form button #slashIconParent {
+  display: block;
+  margin-top: 1px;
+  position: relative;
+}
+
+.wrapper .main-area .content .content-area .tr .FirstAid form button #slashIconParent #slashIcon {
+  position: absolute;
+  left: -2px;
+  font-size: 0.875rem;
 }
 
 .wrapper .main-area .content .content-area .table {

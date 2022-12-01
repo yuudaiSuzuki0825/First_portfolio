@@ -57,12 +57,13 @@
                             <td class="FirstAid">
                                 <!-- 「復元する」ボタン。 -->
                                 <form action="{{ route('tasks.replay', $suspension->id) }}" method="POST">
-                                    <button type="submit" class="parent-balloon"><i class="fa-solid fa-play"></i><span class="balloon">復元する</span></button>
+                                    <button type="submit" class="parent-balloon"><i class="fa-solid fa-trash-can" id="slashIconParent"><i class="fa-solid fa-slash" id="slashIcon"></i></i><span class="balloon">復元する</span></button>
                                     @method('patch')
                                     @csrf
                                 </form>
                             </td>
                             <!-- 「完全削除する」アイコン（ダミー）。 -->
+                            <!-- <i class="fa-solid fa-play"></i> -->
                             <td id="modalWindowOpen" class="parent-balloon">
                                 <!-- <form action="{{ route('tasks.completeErase', $suspension->id) }}" method="POST">
                                     <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
