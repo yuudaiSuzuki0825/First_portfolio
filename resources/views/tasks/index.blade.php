@@ -77,11 +77,6 @@
                             <td class="FirstAid"><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
                             <!-- お試し。ここに「完了する」アイコン（ダミー）を設置する予定。 -->
                             <td id="modalWindowOpen" class="parent-balloon">
-                                <!-- <form action="{{ route('tasks.suspend', $task->id) }}" method="POST">
-                                    <button type="submit"><i class="fa-solid fa-circle-check"></i>完了する</button>
-                                    @method('DELETE')
-                                    @csrf
-                                </form> -->
                                 <i class="fa-solid fa-circle-check"></i><span class="balloon">完了する</span>
                             </td>
                             <td>{{ $task->title }}</td>

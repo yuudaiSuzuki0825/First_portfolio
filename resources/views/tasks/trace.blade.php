@@ -72,20 +72,11 @@
                         <tr class="tr">
                             <td class="FirstAid"></td> <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
                             <td id="modalWindowOpen" class="parent-balloon">
+
                                 <!-- LaravelCollectiveライブラリを使用した場合。 -->
                                 <!-- {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!}
                                     {!! Form::submit('削除する') !!}
                                 {!! Form::close() !!} -->
-
-                                <!-- ライブラリを使用しない場合。 -->
-                                <!-- <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
-                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
-                                    @method('DELETE')
-                                    @csrf
-                                </form> -->
-
-                                <!-- モーダルウインドウを実装しない際の代用。 -->
-                                <!-- <a href="{{ route('tasks.goToEraseScreen', $history->id) }}"><i class="fa-solid fa-trash-can"></i>削除する</a> -->
 
                                 <!-- 「削除する」アイコン（ダミー）。 -->
                                 <i class="fa-solid fa-trash-can"></i><span class="balloon">削除する</span>

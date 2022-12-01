@@ -12,6 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        $this->call([TasksTableSeeder::class]);
+        // 「Laravel6 シーディング」で検索。
+        $this->call([
+            TasksTableSeeder::class,
+            HistoriesTableSeeder::class,
+        ]);
     }
 }
