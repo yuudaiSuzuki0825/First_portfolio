@@ -17,6 +17,7 @@
             <!-- サイドパネルボタン（サイドパネルを開くボタン）。 -->
             <div id="left-panel-button"><i class="fa-solid fa-chevron-right"></i></div>
 
+            <!-- コンテンツエリア。 -->
             <div class="content-area">
                 <!-- タブメニュー。タブは「計画一覧」「完了履歴」「中断計画」の3種類。 -->
                 <div class="tabMenu">
