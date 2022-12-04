@@ -8,7 +8,7 @@ html {
 body {
     // コーディングしやすくするために行間を1にしておいた。
     line-height: 1;
-    // 背景色の指定。
+    // 背景色の指定。.wrapper .main-area{}のbackground-colorにも注目。メインエリアではこの背景色の上に半透明の白色背景を上に重ねている。
     background-image: linear-gradient(135deg, rgba(105, 234, 203, 1), rgba(215, 98, 252, 1) 67%, rgba(102, 84, 241, 1));
 }
 
@@ -214,17 +214,20 @@ img {
 /* メインコンテンツここから。*/
 
 .wrapper .main-area {
+    // 背景色の指定。body{}のbackground-imageと関連。
     background-color: rgb(238, 238, 238, 0.9);
+    // サイドパネルとメインコンテンツを横並びに。
     display: flex;
     padding: 50px 0;
 }
 
+// サイドパネルのコーディング。
 .wrapper .main-area #left-panel {
-    /* 横幅の指定。 */
+    // 横幅の指定。
     width: 200px;
-    // 高さの指定。
+    // 高さの指定。絶対値指定しないと，例えばレコード数が少ないときに縦に縮んでしまう。
     height: 300px;
-    /* 内側の余白。 */
+    // 内側の余白。
     padding: 20px;
     /* 色指定。 */
     background-color: #333;
@@ -232,80 +235,109 @@ img {
     // 角丸の指定。
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
-    /* 影の指定。 */
+    // 影の指定。
     box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
+    // デフォルトでは非表示。アイコンボタンをクリックすると表示される。
     display: none;
 }
 
+// サイドパネルのアイコンボタンがクリックされた時。
 .wrapper .main-area #left-panel.open {
+    // 非表示➡表示。
     display: block;
 }
 
+// メインコンテンツ。
 .wrapper .main-area .content {
-    display: flex;
+    // ポジショニング指定のため。エラーメッセージのポジショニングでも使用。
     position: relative;
     // .contentの領域を広げるため。コメントアウトして確認。
-    width: 100%;
+    // （考察）↓
+    // MDNに「row または row-reverse を選択した場合、主軸はインライン要素の並ぶ方向に伸びる軸となります。」との記述あり。
+    // かといって.wrapper .main-area .content{}をブロックレベル要素にしても横幅全てを占有する性質とフレックスアイテムとしての性質は相容れないので
+    // 横並びを実現するために後者が優先され，インライン要素としてのふるまいとなった。もし，占有できる最大の横幅（親要素内における最大幅）としてフレックスアイテムを設定したい場合はwidth: 100%;を指定する必要がある。
+    // width: 100%;  // flex-grow: 1;を指定しない場合はこれをコメントアウトして。
+    // 或いはflex-grow: 1;を指定してもOK。
+    // 厳密には上記の考察は誤り？➡flex-basis: auto;（既定値）によってフレックスアイテムの横幅が設定されるが（具体的➡サイドパネルは上記より200px，コンテンツは絶対値指定なしなので最低限の横幅で設定？），分配可能な余白が右端に残る形となる。
+    // その余白を各アイテムに分配するためのプロパティがflex-grow（余白の分配を割合で決定する）。既定値はflex-grow: 0;（サイドパネルにはこれが指定されている）で，コンテンツ側にflex-grow: 1;を指定すれば0:1（0:100）により残り全ての分配可能な余白がコンテンツ側の横幅として設定される形になる（width: 100%;と同じ挙動になる）。
+    flex-grow: 1;
     // 高さの最小値を指定。サイドパネルの高さと同じにした。これにより，計画数が少なくてもcontent部分の高さが300px以下になることはない。
     min-height: 300px;
 }
 
+// サイドパネルボタンのコーディング。
 .wrapper .main-area .content #left-panel-button {
+    // ポジショニング指定。
     position: absolute;
+    // サイドパネルの約半分の高さの位置に来るように調整した。もう少し上手い方法を模索すべきだと思う。
     top: 127.74px;
     left: 0;
+    // ホバーした時のマウスの形を変更した。
     cursor: pointer;
-    /* 高さ指定。 */
+    // 高さ指定。
     height: 36px;
-    /* ボーダーの指定。border-leftはいらないのでnoneにしている。 */
-    border-radius: 0 10px 10px 0;
+    // 色指定。
     color: #ffffff;
     background-color: #333333;
+    // 角丸の指定。左側のみ角丸にしている。
+    border-radius: 0 10px 10px 0;
+    // 影の指定。
     box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
 }
 
 .wrapper .main-area .content #left-panel-button i {
-    /* marginやpaddingを指定できるようにするため。 */
+    // 上下にpaddingの指定をするため。
     display: inline-block;
-    /* アイコンなのでfont-sizeで大きさ指定を行う。 */
-    font-size: 24px;
+    /* アイコンなのでfont-sizeで大きさ指定を行う。1.5×16px=24px。 */
+    font-size: 1.5rem;
     /* 余白にてポジションの微調整。 */
     margin-right: 2px;
     padding-top: 6px;
     padding-bottom: 6px;
-    // アニメーションの調整。
+    // アニメーションの調整（イージング）。
     transition: transform .2s;
 }
 
+// サイドパネルボタンのアイコンのアニメーション指定。ボタンがクリックされた時，以下が読み込まれる（app.jsのサイドパネルの実装を参照）。
 .wrapper .main-area .content #left-panel-button.open i {
+    // アイコンの向きが180度変化する。
     transform: rotate(180deg);
 }
 
+// コンテンツエリアのコーディング。
 .wrapper .main-area .content .content-area {
-    // 親要素（.content）に対して92%を横幅に指定。
+    // 親要素（.content）に対して92%を横幅に指定。サイドパネルボタンはposition指定をしているので「宙に浮いている」扱い（サイドパネルボタン分の横幅を占有していないことになる，乗っかっているイメージ）。
     width: 92%;
-    // 親要素（.content）に対して8%をmarginに指定。左右均等に割り振った。
+    // 親要素（.content）に対して8%をmarginに指定。左右均等に割り振った。つまり，親要素のうち92%分がコンテンツエリアのwidthとして，8%分がそのmarginとして指定されている。
     margin: 0 4%;
     padding-bottom: 10px;
-    border-radius: 10px;
+    // border-radius: 10px;　// 何故この指定を入れたのか分からない…。コメントアウトしても特に変化なかった。
 }
 
+// コンテンツエリアのタブメニューのコーディング。
 .wrapper .main-area .content .content-area .tabMenu {
+    // 各タブを横並びに。
     display: flex;
 }
 
 .wrapper .main-area .content .content-area .tabMenu .planListTitle {
+    // 各タブの余白指定。
     margin-left: 15px;
 }
 
 .wrapper .main-area .content .content-area .tabMenu .planListTitle a {
+    // 上下に余白を指定するため。
     display: block;
     // ユーザーの範囲選択操作を不可能にしている。つまりコピーできない。
     user-select: none;
+    // 内側の余白指定。
     padding: 8px 7px 5px;
+    // 色指定。
     background-color: #fff;
     color: #333333;
+    // 角丸指定。
     border-radius: 8px 8px 0 0;
+    // 文字間の隙間の指定。フォントサイズ同様, remで指定した。
     letter-spacing: .4rem;
     // badgeのpositionプロパティのため。
     position: relative;
@@ -313,9 +345,10 @@ img {
 
 // 各タブメニューがホバーされた時のアイコンのアニメーション指定。
 .wrapper .main-area .content .content-area .tabMenu .planListTitle a:hover i {
+    // 実際にホバーして挙動を確認してほしい。一回転させているだけ。
     transform: rotate(-360deg);
     // 以下の指定をhover側に書くことで，ホバーが外れた時にはtransitionが読み込まれないようにした。
-    // こうすることでホバーが外れた際のアニメーションのイージングが0sになる。よって，一切回転していないように見える。
+    // こうすることでホバーが外れた際のアニメーションのイージングが0sになる。よって，一切回転していないように見える（実際には-360degから0degに変化しているが変化速度は0なので一切動いてないように見える）。
     transition: transform .5s;
 }
 
@@ -331,95 +364,126 @@ img {
     transform: none;
 }
 
+// 選択済みのタブメニューの色を変更している。
 .wrapper .main-area .content .content-area .tabMenu .planListTitle.active a {
     background-color: #333333;
     color: #fff;
 }
 
+// 件数表示のためのバッチのコーディング。
 .wrapper .main-area .content .content-area .tabMenu .planListTitle a .badge {
+    // ポジショニング指定。
     position: absolute;
     top: -10px;
     left: calc(100% - 10px);
     display: inline-block;
-    // バッチの件数の可変に対応させるため。
+    // 件数の可変に対応させるため。絶対値指定してしまうと，例えば件数の桁が増えた際にデザインが崩れてしまう。
     width: auto;
+    // 角丸指定。
     border-radius: 50%;
+    // 色指定。
     background-color: #FF4A52;
     color: white;
     // 左右の内側の余白を指定。
     padding: 0 4px;
-    // htmlのfont-size: 100%;（多分16px）とセット。フォントサイズはremで指定すること。
+    // フォントサイズの指定。16px×0.875=14px。
     font-size: .875rem;
-    // フォントサイズに1.4倍した値が高さとなる。今回heightの代わりとして使用している。
+    // フォントサイズに1.4倍した値が高さとなる（body{}にてline-heightを1にしている）。今回heightの代わりとして使用している。
     line-height: 1.4;
-    // 親要素の方で値を指定していたので上書きするため。
+    // 親要素の方で値を指定していたので上書きしている（.wrapper .main-area .content .content-area .tabMenu .planListTitle a{}参照）。
     letter-spacing: normal;
-    // バッチが隣のタブメニューと重なった際に必ず上に来るように指定した。念のため。
-    z-index: 10;
+    // バッチが隣のタブメニューと重なった際に必ず上に来るように指定した。念のため（正直いらない？）。
+    z-index: 10; // 値はテキトー。とにかく大きい方が上に重なる。
 }
 
-/* エラーメッセージ。*/
+// エラーメッセージのコーディング。
 .wrapper .main-area .content .content-area .error-message {
+    // ポジショニング指定。
     position: absolute;
     top: -42px;
     left: 62px;
+    // 色指定。
     background-color: #FF4A52;
     color: #FFFAFB;
+    // 内側の余白指定。
     padding: 5px;
+    // 角丸指定。
     border-radius: 3px;
-    text-align: center;
-    font-size: 1rem;
+    // text-align: center; // 今回はposition指定をしているので要らない？（通常のブロックレベル要素であればテキスト自体を中央寄せにしたければtext-alignをつかうことになるが…）。
+    // ユーザーの範囲選択操作を不可能にしている。つまりコピーできない。
     user-select: none;
+    // 文字間の隙間の指定。
     letter-spacing: 3px;
+    // 影指定。
     box-shadow: inset 0 0 5px 5px #FF4A60;
 }
 
+// 「仮」。「並べ替え」機能を検索フォームの上に設置しようと構想中。
 .wrapper .main-area .content .content-area .provisional {
+    // 色指定。
     background-color: #333333;
     color: #fff;
+    // 角丸指定。右上・左上のみ作成。
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    // 内側の余白の指定。
     padding: 10px;
+    // ユーザーの範囲選択操作を不可能にしている。つまりコピーできない。
     user-select: none;
+    // 文字間の隙間の指定。
     letter-spacing: 3px;
 }
 
-/* 「検索」フォーム。　*/
+//「検索」フォームのコーディング。
 .wrapper .main-area .content .content-area form {
+    // 色指定。
     background-color: #333333;
     color: #fff;
     // 上の「並び替え（暫定）」ボタンの方に角丸の指定を移した。
     // border-top-left-radius: 8px;
     // border-top-right-radius: 8px;
+    // 内側の余白の指定。
     padding: 0 10px 10px;
+    // ユーザーの範囲選択操作を不可能にしている。つまりコピーできない。
     user-select: none;
+    // 文字間の隙間の指定。
     letter-spacing: 3px;
 }
 
-.wrapper .main-area .content .content-area form label {
-    font-size: 1.125rem;
-}
-
+// 検索フォームの入力欄のコーディング。
 .wrapper .main-area .content .content-area form input {
+    // 横幅指定。
     width: 300px;
+    // 色指定。
     background-color: #FFFAFB;
     color: #333;
+    // 入力欄の内側の余白を指定。これを指定しないと入力する際，やや不便。コメントアウトして確認を。
     padding: 5px;
+    // 角丸指定。
     border-radius: 4px;
 }
 
+// 検索フォームの送信ボタン（虫眼鏡）のコーディング。
 .wrapper .main-area .content .content-area form button {
+    // 色指定。
     color: #fff;
-    transition: transform .2s;
-    letter-spacing: 3px;
-    font-size: 1.125rem;
+    // 微妙な位置調整のため。
     margin-left: 5px;
+    // フォントサイズ指定。16px×1.125=18px。
+    font-size: 1.125rem;
+    // 文字間の隙間の指定。
+    letter-spacing: 3px;
+    // アニメーションの調整（イージング）。
+    transition: transform .2s;
 }
 
+// 検索フォームの送信ボタン（虫眼鏡）のアニメーション指定。ホバーされた時。
 .wrapper .main-area .content .content-area form button:not(.parent-balloon):hover {
+    // 少し拡大。
     transform: scale(1.1);
 }
 
+// ここからスタート（12/4）
 .wrapper .main-area .content .content-area .tr .FirstAid form {
     background-color: #555555;
     padding: 0;
