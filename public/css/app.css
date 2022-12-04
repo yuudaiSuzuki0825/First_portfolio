@@ -359,9 +359,8 @@ img {
   letter-spacing: 2px;
 }
 
-/* trタグをホバーすると少し大きくなるアニメーションを実装しようと思ったが，ツールチップも合わさると鬱陶しく感じられたので今回は無しとした。　*/
 .wrapper .main-area .content .content-area .table tbody tr + tr {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .wrapper .main-area .content .content-area .table tbody .tr.detailOpen {
@@ -384,7 +383,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area .table tbody tr td {
-  /* テキストの位置調整。フレックスにするが縦並びに変更し，主軸に対して中央に配置している。*/
+  /* テキストの位置調整のため。フレックスにするが縦並びに変更し，主軸（縦軸）に対して中央寄せ。*/
   /* これにより，テキストがど真ん中に配置される形になる（微々たる変化，気にならなければ「display: block;」に戻してOK）。*/
   display: flex;
   flex-direction: column;
@@ -399,13 +398,13 @@ img {
   margin-left: 0px;
 }
 
+.wrapper .main-area .content .content-area .table tbody tr .FirstAid {
+  margin-right: 10px;
+}
+
 .wrapper .main-area .content .content-area .table tbody tr #planDetailButton {
   margin-left: auto;
   cursor: pointer;
-}
-
-.wrapper .main-area .content .content-area .table tbody tr #planDetailButton:hover .balloon {
-  width: 50px;
 }
 
 .wrapper .main-area .content .content-area .table tbody .tr #planDetailButton i {
@@ -417,7 +416,6 @@ img {
 }
 
 .wrapper .main-area .content .content-area .table tbody tr td a {
-  display: inline-block;
   color: #fff;
 }
 
@@ -527,7 +525,6 @@ img {
   color: #333;
   background-color: #E8F2F0;
   border-radius: 4px;
-  font-size: 1rem;
   letter-spacing: normal;
   cursor: pointer;
 }
@@ -552,10 +549,6 @@ img {
 }
 
 .wrapper #modalWindowOpen {
-  cursor: pointer;
-}
-
-.wrapper #modalWindowOpenButton {
   cursor: pointer;
 }
 

@@ -83,7 +83,7 @@
                             <td>{{ $task->title }}</td>
                             <td>開始日:{{ $task->start }}</td>
                             <td>完了日:{{ $task->end }}</td>
-                            <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i><span class="balloon">開く</span></td>
+                            <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i></td>
                         </tr>
                         <!-- 計画の概要。アコーディオンメニューのように表示させる。 -->
                         <tr id="planDetailRow">
