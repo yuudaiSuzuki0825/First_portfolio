@@ -71,7 +71,7 @@
                             </td>
                         </tr>
                         <tr class="tr">
-                            <td class="FirstAid"></td> <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
+                            <td></td> <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
                             <td id="modalWindowOpen" class="parent-balloon">
 
                                 <!-- LaravelCollectiveライブラリを使用した場合。 -->
@@ -86,7 +86,7 @@
                             <td>開始日:{{ $history->start }}</td>
                             <td>完了日:{{ $history->end }}</td>
                             <!-- アイコンをクリックすると計画概要がアコーディオンメニュー形式で表示される。 -->
-                            <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i><span class="balloon">開く</span></td>
+                            <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i></td>
                         </tr>
                         <!-- 計画の概要。アコーディオンメニューのように表示させる。 -->
                         <tr id="planDetailRow">

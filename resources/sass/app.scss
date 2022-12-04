@@ -249,7 +249,7 @@ img {
 
 // メインコンテンツ。
 .wrapper .main-area .content {
-    // ポジショニング指定のため。エラーメッセージのポジショニングでも使用。
+    // ポジショニングのため。エラーメッセージのポジショニングでも使用。
     position: relative;
     // .contentの領域を広げるため。コメントアウトして確認。
     // （考察）↓
@@ -267,7 +267,7 @@ img {
 
 // サイドパネルボタンのコーディング。
 .wrapper .main-area .content #left-panel-button {
-    // ポジショニング指定。
+    // ポジショニング。
     position: absolute;
     // サイドパネルの約半分の高さの位置に来るように調整した。もう少し上手い方法を模索すべきだと思う。
     top: 127.74px;
@@ -372,7 +372,7 @@ img {
 
 // 件数表示のためのバッチのコーディング。
 .wrapper .main-area .content .content-area .tabMenu .planListTitle a .badge {
-    // ポジショニング指定。
+    // ポジショニング。
     position: absolute;
     top: -10px;
     left: calc(100% - 10px);
@@ -398,7 +398,7 @@ img {
 
 // エラーメッセージのコーディング。
 .wrapper .main-area .content .content-area .error-message {
-    // ポジショニング指定。
+    // ポジショニング。
     position: absolute;
     top: -42px;
     left: 62px;
@@ -483,191 +483,248 @@ img {
     transform: scale(1.1);
 }
 
-// ここからスタート（12/4）
+// suspendList.blade.phpのみに関係するコーディング。「復元する」フォームのコーディング。
 .wrapper .main-area .content .content-area .tr .FirstAid form {
+    // 色指定。
     background-color: #555555;
+    // 内側の余白指定。
     padding: 0;
+    // 文字間の隙間の指定。
     letter-spacing: normal;
 }
 
+// suspendList.blade.phpのみに関係するコーディング。「復元する」ボタンのコーディング。重複したスタイル指定なのでいずれ修正を。
 .wrapper .main-area .content .content-area .tr .FirstAid form button {
+    // .wrapper .main-area .content .content-area form button{}のfont-size: 1.125rem;を上書きするため。コメントアウトして確認を。
     font-size: 1rem;
+    // .wrapper .main-area .content .content-area form button{}のmargin-left: 5px;を上書きするため。
     margin-left: 0;
 }
 
 // 「復元する」ボタンのカスタマイズ。スラッシュアイコンとゴミ箱アイコンを重ねるため。
 .wrapper .main-area .content .content-area .tr .FirstAid form button #slashIconParent {
-    // marginを指定するため。
+    // margin-topを指定するため。
     display: block;
     // コメントアウトして確認を。若干縦軸のズレが生じてしまう（positionの影響？）。
     margin-top: 1px;
-    // ポジショニング指定で必要。
+    // ポジショニングで必要。
     position: relative;
 }
 
-.wrapper .main-area .content .content-area .tr .FirstAid form button  #slashIconParent #slashIcon {
+// 「復元する」ボタンのカスタマイズ。スラッシュアイコンとゴミ箱アイコンを重ねるため。
+.wrapper .main-area .content .content-area .tr .FirstAid form button #slashIconParent #slashIcon {
     // スラッシュアイコンをゴミ箱アイコンの上に重ねている。
     position: absolute;
     left: -2px;
-    // スラッシュアイコンのサイズ調整。
+    // スラッシュアイコンのサイズ調整。16px×0.875=14px。
     font-size: .875rem;
 }
 
-// ここからスタート。いよいよリストのコーディング（正念場）。終わり次第，全てのページにおいても新デザインを適用できるようHTMLの構造整理を行う。
-// 次にアコーディオンの実装。各planの概要をアコーディオンで隠す機能を追加したい。
-// その後でコメントを付ける作業。
 .wrapper .main-area .content .content-area .table {
+    // 色指定。
     background-color: #333333;
     color: #fff;
+    // 角丸指定。右下と左下だけ。
     border-radius: 0 0 8px 8px;
+    // tableタグはブロックレベル要素のようにデフォルトで親要素限界まで横幅を占有するわけではない。コメントアウトして確認を。
     width: 100%;
+    // 内側の余白指定。
     padding: 0 10px 10px;
 }
 
+// 全てのtrタグに対してのコーディング。
 .wrapper .main-area .content .content-area .table tbody tr {
+    // 全てのtdタグを横並びに。
     display: flex;
+    // 色指定。
     background-color: #555555;
+    // 角丸指定。
     border-radius: 4px;
+    // 内側の余白指定。
     padding: 5px;
+    // 文字間の隙間の指定。
     letter-spacing: 2px;
-    // アニメーションの微調整。
-    // transition: transform .2s;
 }
 
-/* trタグをホバーすると少し大きくなるアニメーションを実装しようと思ったが，ツールチップも合わさると鬱陶しく感じられたので今回は無しとした。　*/
-// .wrapper .main-area .content .content-area .table tbody tr:hover {
-//     transform: scale(1.005);
-// }
-
+// 隣接兄弟結合子。レコード間の隙間を指定している。
 .wrapper .main-area .content .content-area .table tbody tr + tr {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
-// JavaScript。アコーディオン。
+// アコーディオンのアニメーション。app.jsで制御している。
 .wrapper .main-area .content .content-area .table tbody .tr.detailOpen {
+    // 角丸指定。アコーディオンが開いている場合には，右下・左下の角丸を解除している。
     border-radius: 4px 4px 0 0;
 }
 
+// アコーディオン（計画概要）のコーディング。
 .wrapper .main-area .content .content-area .table tbody #planDetailRow {
+    // .wrapper .main-area .content .content-area .table tbody tr + tr{}のmargin-top: 10;を上書きするため。
     margin-top: 0;
-    // 自動的に改行を挿入するために使用。コメントアウトして確認して。
+    // はみ出しそうになったら自動で折り返してくれる機能を提供。コメントアウトして確認。
     word-break: break-all; // overflow-wrap: anywhere;でもOK。
+    // デフォでは非表示。
     display: none;
+    // 角丸指定。右下・左下のみ。
     border-radius: 0 0 4px 4px;
+    // 区切り線を引くため。
     border-top: #ffffff solid 1px;
+    // 行間の指定。範囲選択した際に，選択部分（青の部分）が重なるのを防ぐため。コメントアウトして確認を。
     line-height: 1.5;
+    // transitionの代わり（イージングの指定）。キーフレーム（「slideDown」でファイル内検索してみて）。
     animation: .2s slideDown;
 }
 
+// アコーディオンのアイコンボタンがクリックされた時。app.js参照。
 .wrapper .main-area .content .content-area .table tbody #planDetailRow.detailOpen {
+    // 非表示➡表示。
     display: block;
 }
 
+// tdタグのコーディング。
 .wrapper .main-area .content .content-area .table tbody tr td {
-    // display: block;
-    /* テキストの位置調整。フレックスにするが縦並びに変更し，主軸に対して中央に配置している。*/
+    /* テキストの位置調整のため。フレックスにするが縦並びに変更し，主軸（縦軸）に対して中央寄せ。*/
     /* これにより，テキストがど真ん中に配置される形になる（微々たる変化，気にならなければ「display: block;」に戻してOK）。*/
     display: flex;
+    // フレックスアイテムの主軸の変更。
     flex-direction: column;
+    // フレックスアイテムの配置を主軸に対して行う。
     justify-content: center;
 }
 
+// 隣接兄弟結合子。td間にmargin-leftを指定している。
 .wrapper .main-area .content .content-area .table tbody tr td + td {
     margin-left: 45px;
 }
 
 // 応急処置。trace.blade.phpはtdの数の関係で空タグのtd（class="FirstAid"）を追加する必要があった。
+// ＊ここはどうにかすべき。いつまでも空タグのtdで代用すべきではない。
 .wrapper .main-area .content .content-area .table tbody tr #modalWindowOpen {
+    // .wrapper .main-area .content .content-area .table tbody tr td + td{}のmargin-left: 45px;を上書きしている。
     margin-left: 0px;
 }
 
+// 応急処置。もし「空のtdタグ」問題が解消されない場合は，trace.blade.phpの先頭のtdタグ（class="tr"のtrタグ内の）からclass="FirstAid"を削除してindexとsuspendListの方ではclass="FirstAid"を追加する形でスタイル指定しよう。
+.wrapper .main-area .content .content-area .table tbody tr .FirstAid {
+    margin-right: 10px;
+}
+
+// アコーディオンのアイコンボタンのコーディング。
 .wrapper .main-area .content .content-area .table tbody tr #planDetailButton {
+    // .wrapper .main-area .content .content-area .table tbody tr td + td{}のmargin-left: 45px;を上書きしている。
+    // autoにすることで残り全ての占有可能な領域をmargin-leftの値として分配している。コメントアウトして確認を。
     margin-left: auto;
+    // ホバー時のマウスの形を変更。
     cursor: pointer;
 }
 
-.wrapper .main-area .content .content-area .table tbody tr #planDetailButton:hover .balloon {
-    width: 50px;
-}
-
-// アコーディオンのアイコンのアニメーション。
+// アコーディオンのアイコンボタンのアニメーション。
 .wrapper .main-area .content .content-area .table tbody .tr #planDetailButton i {
+    // アニメーションの調整（イージング）。
     transition: transform .2s;
 }
 
-// アコーディオンのアイコンのアニメーション。
+// アコーディオンのアイコンボタンがクリックされた時。app.js参照。
 .wrapper .main-area .content .content-area .table tbody .tr.detailOpen #planDetailButton i {
+    // アイコンが反転する。
     transform: rotate(180deg);
 }
 
+// index.blade.phpのみ。「編集する」ボタンのコーディング。
 .wrapper .main-area .content .content-area .table tbody tr td a {
-    display: inline-block;
+    // 色指定。
     color: #fff;
 }
 
-// お試し。ツールチップ。
+// ツールチップのコーディング。ツールチップ（spanタグ）の親要素の指定。ヘッダー部分とメインコンテンツ部分両方とも以下の指定が必要。
 .parent-balloon {
-    // .balloon（子要素）でposition: absolute;を使用するため。
+    // ポジショニングのため。
     position: relative;
 }
 
-// お試し。ツールチップ。
+// メインコンテンツのツールチップのコーディング。
 .parent-balloon .balloon {
+    // ポジショニング。
     position: absolute;
     top: -30px;
     left: -20px;
+    // 通常時は非表示。
     display: none;
+    // 内側の余白指定。
     padding: 7px;
+    // 文字間の隙間の指定。
     letter-spacing: normal;
+    // 色指定。
     color: #444444;
     background-color: #ffffff;
+    // 角丸指定。
     border-radius: 5px;
+    // 影指定。
     box-shadow: 2px 2px 2px 1px #333333;
 }
 
-// お試し。ツールチップ。
+// メインコンテンツのツールチップのコーディング続き。疑似要素を使用して「▽」を作成している。
 .parent-balloon .balloon::before {
+    // 中身はなし。「▽」の作成と関連。
     content: "";
+    // ポジショニング。
     position: absolute;
     top: 97%;
     left: 20px;
+    // 以下の指定で「▽」を作成している。「CSS border 三角」で検索。
     border: 6px solid transparent;
     border-top: 6px solid #ffffff;
 }
 
-// お試し。ツールチップ。
+// メインコンテンツのツールチップのアニメーション指定。アイコンがホバーされた時。
 .parent-balloon:hover .balloon {
+    // 非表示➡表示。
     display: inline-block;
+    // 横幅指定。コメントアウトして確認。文字数に応じてそれぞれ微調整が必要。
     width: 78px;
 }
 
+// レコードが0の場合に表示される文言のコーディング。適宜改良が必要。
 .wrapper .main-area .content .content-area .alt {
+    // 色指定。
     background-color: #333333;
     color: #fff;
 }
 
+// ページトップへ遷移するボタンのコーディング。
 .wrapper #to_top {
-    position: fixed;
+    // 包含ブロックがページ全体になっている点に注意。親要素にposition: relative;を指定しないパターン。
+    position: fixed; // ポジショニング。ページ全体に対しての位置指定。
     bottom: 10px;
     right: 10px;
+    // 色指定。
     color: #333333;
     background-color: #fff;
     // アイコンの型抜き。コメントアウトして確認してみてほしい。
     border-radius: 50%;
+    // スクロールされてヘッダー部分が画面から見えなくなるまでは完全透明にしている。
     opacity: 0;
+    // アニメーションの調整（イージング）。
     transition: opacity .3s;
 }
 
+// ページトップへ遷移するボタンのアニメーション。スクロールされてヘッダー部分が完全に画面から見えなくなった時。app.js参照。
 .wrapper #to_top.scrolled {
+    // 完全透明➡不透明。
     opacity: 1;
 }
 
+// ページトップへ遷移するボタンのコーディング続き。
 .wrapper #to_top i {
+    // アイコンの大きさはフォントサイズで調整する。16px×2=32px。
     font-size: 2rem;
 }
 
-// モーダルウインドウ部分のコーディング。一か所にまとめてある。
+// モーダルウインドウここから。
+
+// マスク部分のコーディング。
 .wrapper #mask {
+    // 背景色の指定。若干透明にしている。
     background: rgba(0, 0, 0, 0.4);
     // positionをfixedに，topとleft,right,bottomを全て0にすることでマスク部分を作っている。
     position: fixed;
@@ -675,75 +732,113 @@ img {
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 50;
+    // 要素の重なり順を指定している。
+    // .wrapper .main-area .content .content-area .tabMenu .planListTitle a .badge{}のz-index: 10;より大きい値を指定する必要がある。
+    z-index: 50;  // 試しにコメントアウトして確認してみよう。確かにhtml構造上一番下にあるので一切のz-index指定がない状態であれば問題なく上に重なって表示される。
 }
+
+// マスク部分のコーディング続き。app.js参照。
 .wrapper #mask.hidden {
+    // 通常時は以下の指定を読み込む（表示されない）が，例えば「完了する」ボタンがクリックされた時にはclass="hidden"が外されるので表示される。
     display: none;
 }
 
-// 「完了する」ボタン（ダミー）がクリックされた後。
+// 「完了する」「削除する」ボタン（ダミー）がクリックされると，マスク部分とともにモーダルウインドウ部分が表示される。
 .wrapper #modalWindow {
+    // 色指定。
     background: #fff;
+    // 横幅指定。
     width: 300px;
+    // 内側の余白指定。
     padding: 20px;
+    // 角丸指定。
     border-radius: 4px;
     // fixedを指定。親要素（厳密には包含ブロック）はページ全体となる。
-    position: fixed;
+    position: fixed; // ページ全体を基準にポジショニング。
     top: 100px;
     left: 0;
     right: 0;
     /* width，left，rightの全てがautoでなく（leftとrightは0），かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
     /* この際，topは左右と関係ないのでどのような値であっても問題なし。 */
     margin: 0 auto;
-    z-index: 100; // モーダルウインドウ部分を一番上に配置するため。
+    // 要素の重なり順を調整。モーダルウインドウ部分を一番上に配置するため。その次にマスク部分。
+    z-index: 100;
+    // class="hidden"が取り外されている時は，表示。app.jsで制御している。
     display: block;
 }
-//「完了する」ボタン（ダミー）がクリックされる前。
+
+//「完了する」「削除する」ボタン（ダミー）がクリックされる前。app.js参照。
 .wrapper #modalWindow.hidden {
+    // class="hidden"が付いている時は，非表示。
     display: none;
 }
+
+// モーダルウインドウ部分の中身のコーディング。
 .wrapper .main-area .content .content-area #modalWindow div {
+    // 「キャンセル」と「削除（ないし完了）」ボタンを横並びに。
     display: flex;
 }
+
+// モーダルウインドウ部分の中身のコーディング続き。
 .wrapper .main-area .content .content-area #modalWindow p {
-    margin-bottom: 15px;
-    letter-spacing: 2px;
-    color: #333;
+    // 注意書きのコーディング。
+    margin-bottom: 15px; // 外側の余白の指定。
+    letter-spacing: 2px; // 文字間の隙間の指定。
+    color: #333; // 色指定。
 }
+
+// モーダルウインドウ部分の中身のコーディング続き。
 .wrapper .main-area .content .content-area #modalWindow div span {
-    display: block;
-    margin-left: auto;
-    padding: 6px;
+    // 「キャンセル」ボタンのコーディング。
+    display: block; // 上下の余白を指定するため（padding）。
+    margin-left: auto; // justify-contentを代わりに指定してもOK。分配可能な余白を全て「キャンセル」ボタンのmargin-leftに割り当てることで右寄せを実現。
+    padding: 6px; // 内側の余白指定。
+    // 色指定。
     color: #333;
     background-color: #E8F2F0;
+    // 角丸指定。
     border-radius: 4px;
-    font-size: 1rem;
+    // 文字間の隙間の指定。
     letter-spacing: normal;
+    // ホバー時のマウスの形を変更。
     cursor: pointer;
 }
+
+// モーダルウインドウ部分の中身のコーディング続き。
 .wrapper .main-area .content .content-area #modalWindow div form {
-    padding: 0; // 別のformタグのスタイル指定を取り消すため。
-    background-color: #FF4A52;
-    border-radius: 4px;
-    margin-left: 14px;
+    // 「完了」「削除」ボタンのコーディング。
+    padding: 0; // .wrapper .main-area .content .content-area form{}のpadding指定を上書きするため。
+    background-color: #FF4A52; // 色指定。なお「完了」ボタンに関してはhtmlの方で別の背景色を指定している。
+    border-radius: 4px; // 角丸指定。
+    margin-left: 14px; // 外側の余白指定。
 }
+
+// モーダルウインドウ部分の中身のコーディング続き。
 .wrapper .main-area .content .content-area #modalWindow div form button {
+    // 「完了」「削除」ボタンのコーディング続き。
     color: #fff;
+    // 文字間の隙間の指定。
     letter-spacing: normal;
+    // 内側の余白指定。
     padding: 6px;
+    // .wrapper .main-area .content .content-area form button{}のfont-size: 1.125rem;を上書きするため。
     font-size: 1rem;
+    // .wrapper .main-area .content .content-area form button{}のmargin-left: 5px;を上書きするため。
     margin: 0;
 }
+
+// .wrapper .main-area .content .content-area form button:not(.parent-balloon):hover{}のtransform: scale(1.1);を上書きするため。
 .wrapper .main-area .content .content-area #modalWindow div form button:hover {
+    // アニメーションを無効にしている。
     transform: none;
 }
+
+// 「完了する」「削除する」ボタン（ダミー）にホバーされた時にマウスの形を変更。
 .wrapper #modalWindowOpen {
     cursor: pointer;
 }
-.wrapper #modalWindowOpenButton {
-    cursor: pointer;
-}
-// モーダルウインドウ部分ここまで。
+
+// モーダルウインドウここまで。
 
 // ページネーション部分。bootstrap-4.blade.php或いはデベロッパーツールにてhtml構造を参照してほしい。
 .pagination {
@@ -792,8 +887,7 @@ img {
     border-bottom: none;
 }
 
-
-
+// キーフレーム。
 @keyframes slideDown {
     0% {
         transform: translateY(-10px);
