@@ -852,11 +852,11 @@ img {
 }
 
 .pagination .page-item + .page-item {
-    // ページネーションリンク間に隙間を指定している。
+    // ページネーションリンク間に隙間を作っている。
     margin-left: 15px;
 }
 
-// ページネーションリンク（現在ページの番号と不一致のもの）のUI。
+// 現在ページの番号と一致していないページネーションリンクのUI。
 .pagination .page-item .page-link {
     display: block;
     padding: 6px 8px;
@@ -864,7 +864,7 @@ img {
     color: #555555;
 }
 
-// 現在ページと不一致の番号（ページネーションリンク）がホバーされた時。
+// 現在ページの番号と一致していないページネーションリンクがホバーされた時。
 .pagination .page-item .page-link:hover {
     // 下線を表示させている。
     border-bottom: #555555 solid 2px;
