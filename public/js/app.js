@@ -194,8 +194,13 @@
   /* DOM操作。 */
   // class="tr"の付くタグのみ取得している。NodeList。
 
-  var trs = document.querySelectorAll('.tr'); // 挙動確認用。エラーメッセージがないのに思惑通り動かない場合はconsole.logなどを活用してどの箇所をデバックすれば良いか調べる作業を行おう。
-  // console.log('ok');
+  var trs = document.querySelectorAll('.tr'); // 全アコーディオンを開閉するボタン。
+
+  var AllplanDetailButton = document.getElementById('AllplanDetailButton'); // 全アコーディオンを開閉するボタンのアイコン。
+
+  var AllplanDetailButtonChild = AllplanDetailButton.firstElementChild; // 挙動確認用。エラーメッセージがないのに思惑通り動かない場合はconsole.logなどを活用してどの箇所をデバックすれば良いか調べる作業を行おう。
+
+  /* console.log('ok'); */
 
   trs.forEach(function (tr) {
     // childrenプロパティにより，tr（Node）の子Nodeを全て取得している。
@@ -203,7 +208,8 @@
     // 今回はchildrenにはtdタグ（子Node）が要素として格納されているはずである。
     var children = tr.children; // デバック用。forEach文が機能しているか確認するため。
 
-    console.log('hoge'); // hasChildNodes()は呼び出し元のNodeに子Nodeがあるかどうかチェックするメソッド。あればtrueを返す。
+    /* console.log('hoge'); */
+    // hasChildNodes()は呼び出し元のNodeに子Nodeがあるかどうかチェックするメソッド。あればtrueを返す。
     // デバック用。今回はtr（class="tr"の付いたtrタグのNode）に子要素があるかどうかチェックしている。
 
     /* if (tr.hasChildNodes()) {
@@ -221,7 +227,8 @@
 
     children[5].addEventListener('click', function () {
       // デバック用。イベントリスナーが実行されているか確認するため。
-      // console.log('hoge');
+
+      /* console.log('hoge'); */
       // デバック用。nextSiblingプロパティとnextElementSiblingプロパティの違いをコンソールにて確認してほしい。
       // classListにアクセスしたい場合は後者を選択すること。
 
@@ -243,6 +250,64 @@
 
       /* console.log("hoge"); */
     });
+  }); // 全アコーディオンの開閉を制御している。
+
+  AllplanDetailButton.addEventListener('click', function () {
+    // 表示されている開閉ボタンのアイコンに応じて処理を分岐。
+    if (AllplanDetailButtonChild.className === 'fa-solid fa-unlock') {
+      // デバック用。
+
+      /* console.log('hoge1'); */
+      // 上記と同じくtrs(class="tr"のついた全てのNode)の各Nodeにアクセスしている。
+      trs.forEach(function (tr) {
+        // デバック用。
+
+        /* console.log('hoge2'); */
+        // 計画概要のtrタグのclass属性が何もなく，かつclass="tr"のtrタグにdetailOpen（class属性値）が付いていない時。
+        if (tr.nextElementSibling.className === '' && tr.className === 'tr') {
+          // デバック用。
+
+          /* console.log('hoge3'); */
+          // 計画概要のtrタグとclass="tr"のtrタグ両方にdetailOpen（class属性値）を追加している。
+          tr.nextElementSibling.classList.add('detailOpen');
+          tr.classList.add('detailOpen');
+        } else if (tr.nextElementSibling.className === '' && tr.className === 'tr detailOpen') {
+          // こちらは計画概要のtrタグのclass属性には何も付いていないが，class="tr"のtrタグにdetailOpen（class属性値）が付いている場合。
+          // class="tr"のtrタグの方にはdetailOpen（class属性値）を追加する必要はない。
+          tr.nextElementSibling.classList.add('detailOpen');
+        }
+      });
+    } else {
+      // デバック用。
+
+      /* console.log('hoge4'); */
+      // 上記と同じくtrs(class="tr"のついた全てのNode)の各Nodeにアクセスしている。
+      trs.forEach(function (tr) {
+        // デバック用。
+
+        /* console.log('hoge5'); */
+        // 計画概要のtrタグのclass属性がdetailOpenであり，かつclass="tr"のtrタグにdetailOpen（class属性値）が付いていない時。
+        if (tr.nextElementSibling.className === 'detailOpen' && tr.className === 'tr') {
+          // デバック用。
+
+          /* console.log('hoge6'); */
+          // 計画概要のtrタグの方にだけclass="detailOpen"を取り除けばOK。
+          tr.nextElementSibling.classList.remove('detailOpen');
+        } else if (tr.nextElementSibling.className === 'detailOpen' && tr.className === 'tr detailOpen') {
+          // こちらは計画概要のtrタグとclass="tr"のtrタグ両方のdetailOpen（class属性値）を取り除いている。
+          tr.nextElementSibling.classList.remove('detailOpen');
+          tr.classList.remove('detailOpen');
+        }
+      });
+    } // 開閉と同時にボタンのアイコンを変更。font Awesome。
+    // 開く前はロックのアイコン。開いた後はアンロックのアイコン。
+
+
+    if (AllplanDetailButtonChild.className === 'fa-solid fa-unlock') {
+      AllplanDetailButtonChild.className = 'fa-solid fa-lock';
+    } else {
+      AllplanDetailButtonChild.className = 'fa-solid fa-unlock';
+    }
   });
   ;
   /* DOM操作。 */
