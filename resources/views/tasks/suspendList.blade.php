@@ -97,6 +97,9 @@
         <!-- 「中断計画」表示ここまで。 -->
     </div>
 
+    <!-- 全アコーディオンを開閉するボタン -->
+    <div id="AllplanDetailButton"><i class="fa-solid fa-unlock"></i></div>
+
     <!-- ページトップへ遷移するボタン。 -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
 

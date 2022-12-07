@@ -474,6 +474,21 @@ img {
   font-size: 2rem;
 }
 
+.wrapper #AllplanDetailButton {
+  position: fixed;
+  bottom: 60px;
+  right: 10px;
+  color: #fff;
+  background-color: #333;
+  padding: 5.015px 6.9px 5.665px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.wrapper #AllplanDetailButton i {
+  font-size: 1.3rem;
+}
+
 .wrapper #mask {
   background: rgba(0, 0, 0, 0.4);
   position: fixed;
