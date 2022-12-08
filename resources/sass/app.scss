@@ -729,17 +729,25 @@ img {
     // 色指定。
     color: #fff;
     background-color: #333;
+    // 内側の余白指定。縦横両方とも32pxになるようにfont-sizeの値を変更しながら微調整を行った。
     padding: 5.015px 6.9px 5.665px;
     // アイコンの型抜き。コメントアウトして確認してみてほしい。
     border-radius: 50%;
+    // ホバー時のマウスの形を変更。
     cursor: pointer;
     // スクロールされてヘッダー部分が画面から見えなくなるまでは完全透明にしている。
-    // opacity: 0;
+    opacity: 0;
     // アニメーションの調整（イージング）。
-    // transition: opacity .3s;
+    transition: opacity .3s;
+}
+
+// 全アコーディオンを開閉するボタンのアニメーション。スクロールされてヘッダー部分が完全に画面から見えなくなった時。app.js参照。
+.wrapper #AllplanDetailButton.scrolled {
+    opacity: 1;
 }
 
 .wrapper #AllplanDetailButton i {
+    // アイコンの大きさを調整。縦横両方とも32pxになるようにpaddingの値を変更しながら微調整した。
     font-size: 1.3rem;
 }
 
