@@ -105,7 +105,7 @@
     </div>
 
     <!-- 全アコーディオンを開閉するボタン -->
-    <div id="AllplanDetailButton"><i class="fa-solid fa-unlock"></i></div>
+    <div id="AllplanDetailButton"><i class="fa-solid fa-unlock" id="AllplanDetailButtonChild"></i></div>
 
     <!-- ページトップへ遷移するボタン。 -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>

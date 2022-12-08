@@ -98,7 +98,7 @@
 
 {
   /* =================================================== */
-  // ページトップへ遷移するボタン（アニメーション）の実装。
+  // ページトップへ遷移するボタン（アニメーション）の実装。IntersectionObserverAPI。
 
   /* =================================================== */
 
@@ -113,10 +113,14 @@
       // 空タグはヘッダーのナビゲーションリンク真下に位置しているのでナビゲーションリンクがスクロールによって画面からほぼ見えなくなったと同時に条件が満たされる。
       if (!entry.isIntersecting) {
         // class="scrolled"の追加。これにより「.wrapper #to_top.scrolled{}」が読み込まれる。
-        toTop.classList.add('scrolled');
+        toTop.classList.add('scrolled'); // 上記に同じ。これにより「.wrapper #AllplanDetailButton.scrolled{}」が読み込まれる。AllplanDetailButton（Node）はアコーディオンにてDOM操作済み（全アコーディオンを開閉するボタン）。
+
+        AllplanDetailButton.classList.add('scrolled');
       } else {
         // class="scrolled"が取り除かれる。これによりボタンが透明になる。
-        toTop.classList.remove('scrolled');
+        toTop.classList.remove('scrolled'); // 上記に同じ。AllplanDetailButton（Node）はアコーディオンにてDOM操作済み（全アコーディオンを開閉するボタン）。
+
+        AllplanDetailButton.classList.remove('scrolled');
       }
     });
   };

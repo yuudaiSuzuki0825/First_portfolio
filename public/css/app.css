@@ -483,6 +483,12 @@ img {
   padding: 5.015px 6.9px 5.665px;
   border-radius: 50%;
   cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.wrapper #AllplanDetailButton.scrolled {
+  opacity: 1;
 }
 
 .wrapper #AllplanDetailButton i {
