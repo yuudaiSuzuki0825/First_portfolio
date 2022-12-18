@@ -882,6 +882,7 @@ img {
     margin-top: 10px;
 }
 
+// 隣接兄弟結合子。
 .pagination .page-item + .page-item {
     // ページネーションリンク間に隙間を作っている。
     margin-left: 15px;
@@ -919,12 +920,15 @@ img {
 }
 
 // キーフレーム。
+// display: none;からdisplay: block;に変化する時にアニメーションを付けたい場合にはanimationプロパティを使う必要がある。
+// 理由⇒transitionプロパティは変化前と変化後の状態がDOMツリー上に存在することが必須だが，display: none;の場合はDOMツリーからは除外されている（変化前の状態が保持されない）ので使用できない。代わりにanimationプロパティを使用する必要がある。
 @keyframes slideDown {
     0% {
         transform: translateY(-10px);
         opacity: 0;
     }
     100% {
+        // translateY(-10px)➡translateY(0)。
         transform: none;
         opacity: 1;
     }
