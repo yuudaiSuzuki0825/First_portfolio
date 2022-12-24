@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Task; // 記述方法に注意。
+use App\Task; // 名前空間。左記記述がないとコントローラー内で「App\Task::count();」のようにいちいち「App\」を書かないといけなくなる。
 
 use App\History;
 
@@ -21,7 +21,8 @@ class TasksController extends Controller
      */
     public function index()
     {
-        // 全レコードを取得。ペジネータ使用。10件ずつレコードを表示。
+        // 全レコードを取得。具体的には完了日が昇順になるようにソートした上でペジネータ―により10件ずつ取得している。
+        // paginate()は基本的には第一引数のみでOK。
         $tasks = Task::orderBy('end', 'asc')->paginate(10, ['*'], 'page', null);
 
         // tasksテーブルの全レコード数を取得。
@@ -33,7 +34,7 @@ class TasksController extends Controller
         // ソフトデリート済みのTasksテーブルの全レコードを取得。
         $suspentions_num = Task::onlyTrashed()->count();
 
-        // index.blade.phpへ遷移。その際，$tasksと$tasks_num, $countを渡している。
+        // index.blade.phpへ遷移。その際，$tasksと$tasks_num, $count，$suspentions_numを渡している。
         return view('tasks.index', compact('tasks','tasks_num', 'count', 'suspentions_num'));
     }
 
@@ -41,7 +42,7 @@ class TasksController extends Controller
     {
         // バリデーション。
         $request->validate([
-            // inputタグにおけるname属性の属性値（ユーザーが入力した値）が空かどうかチェックしている。
+            // inputタグにおけるname属性の属性値である「request（name="request"より…）」に対応しているユーザーの入力値が空かどうかチェックしている。
             // 空であればエラーメッセージを表示させる（index.blade.phpの$errors参照）。
             'keyword' => 'required',
         ]);
@@ -51,8 +52,7 @@ class TasksController extends Controller
         $keyword = $request->keyword;
 
         // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
-        $query = Task::query();
-        $tasks = $query->where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
+        $tasks = Task::where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
 
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
@@ -60,16 +60,17 @@ class TasksController extends Controller
         // Tasksテーブルの全レコード数を取得。
         $tasks_num = Task::count();
 
-        // Suspensionsテーブルの全レコード数を取得。
+        // ソフトデリート済みのTasksテーブルの全レコード数を取得。
         $suspensions_num = Suspension::count();
 
-        // 絞り込んだレコードの総数を取得。
+        // 絞り込んだレコードの総数を取得。現状この値を使ってはない…。
         $tasks_search_count = $tasks->count();
 
+        // search.blade.phpへ遷移。その際，$tasksと$count, $tasks_search_count, $tasks_num, $suspensions_numを渡している。
         return view('tasks.search', compact('tasks', 'count', 'tasks_search_count', 'tasks_num', 'suspensions_num'));
     }
 
-    // 検索機能で使用。
+    // 検索機能で使用。詳細については理解不足…（コピペ）。
     public static function escapeLike($str)
     {
         return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
