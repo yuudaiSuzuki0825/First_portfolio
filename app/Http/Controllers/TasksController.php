@@ -81,18 +81,15 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         // Task（モデルクラス）のインスタンス生成。create.blade.phpのフォームで使用。
         $task = new Task;
 
-        // Historiesテーブルの全レコード数を取得。
-        $count = History::count();
-
         // create.blade.phpへ遷移。その際，$taskを渡している。
         return view('tasks.create', [
             'task' => $task,
-            'count' => $count,
         ]);
     }
 
@@ -116,17 +113,13 @@ class TasksController extends Controller
         $task = new Task;
 
         // ユーザーが入力したフォーム内容をレコードとして保存。
+        // create()を使うためにはTaskモデルクラス内で$fillableの指定をする必要がある（Task.php参照）。
         $task->create([
             'title' => $request->title,
             'start' => $request->start,
             'end' => $request->end,
             'content' => $request->content,
         ]);
-        // $task->title = $request->title;
-        // $task->start = $request->start;
-        // $task->end = $request->end;
-        // $task->content = $request->content;
-        // $task->save();
 
         // リダイレクト。
         return redirect('/');
@@ -169,27 +162,16 @@ class TasksController extends Controller
         // id（主キー）を通じて該当レコードを特定し，取得。
         $task = Task::find($id);
 
-        // タスクを更新。
-        // ＊createメソッドを使うと，開始日と完了日がデフォルト指定（予め入力されている日付）の状態でそのほかの内容が一致している全く新しいレコードが作成される現象が起こった。create()ではなく，代わりにfill()を使う必要があった。
-        // $task->create([
-            // 'title' => $request->title,
-            // 'start' => $request->start,
-            // 'end' => $request->end,
-            // 'content' => $request->content,
-        // ]);
+        // 複数カラムの更新を行っている。fill()はcreate()のように記述する。最後にsave()を付ける事。
+        // $task->fill([
+        //     'title' => $request->title,
+        //     'start' => $request->start,
+        //     'end' => $request->end,
+        //     'content' => $request->content,
+        // ])->save();
 
-        $task->fill([
-            'title' => $request->title,
-            'start' => $request->start,
-            'end' => $request->end,
-            'content' => $request->content,
-        ])->save();
-
-        // $task->title = $request->title;
-        // $task->start = $request->start;
-        // $task->end = $request->end;
-        // $task->content = $request->content;
-        // $task->save();
+        // 実はこれだけで上記の処理が出来てしまう。$requestからall()を呼び出すことで全てのカラム(プロパティ)の値にアクセスしている？
+        $task->fill($request->all())->save();
 
         // リダイレクト。
         return redirect('/');
