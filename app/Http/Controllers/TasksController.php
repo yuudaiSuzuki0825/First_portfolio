@@ -42,7 +42,7 @@ class TasksController extends Controller
     {
         // バリデーション。
         $request->validate([
-            // inputタグにおけるname属性の属性値である「request（name="request"より…）」に対応しているユーザーの入力値が空かどうかチェックしている。
+            // inputタグにおけるname属性の属性値である「request（name="request"より…）」に対応しているユーザーの入力値（value属性の属性値）が空かどうかチェックしている。
             // 空であればエラーメッセージを表示させる（index.blade.phpの$errors参照）。
             'keyword' => 'required',
         ]);
@@ -51,8 +51,8 @@ class TasksController extends Controller
         // 「$request->keyword」でユーザーが入力欄（inputタグ）に入力した値を取り出し，$keywordに代入している。
         $keyword = $request->keyword;
 
-        // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
-        $tasks = Task::where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
+        // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を10件ずつ取得。
+        $tasks = Task::where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->paginate(10);
 
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
@@ -185,26 +185,18 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        // このアクションはソフトデリートするためのもの。
 
         // id（主キー）を通じて該当レコードを特定し，取得。
         $task = Task::find($id);
 
-        // 完了したTasksテーブルの該当レコードをhistoriesテーブルのレコードとして保存（移動）。
-        // $history = new History;
-        // $history->title = $task->title;
-        // $history->start = $task->start;
-        // $history->end = $task->end;
-        // $history->content = $task->content;
-        // $history->save();
-
-        // タスクを削除。
+        // タスクを削除（ソフトデリート）。
         $task->delete();
 
         // リダイレクト。
         return redirect('/');
     }
 
+    // 以下のアクションは未定（フォルダ機能）。
     public function createTarget()
     {
         $target = new Target;
@@ -218,6 +210,7 @@ class TasksController extends Controller
         ]);
     }
 
+    // 以下のアクションは未定（フォルダ機能）。
     public function storeTarget(Request $request)
     {
         $request->validate([
@@ -230,6 +223,7 @@ class TasksController extends Controller
         return redirect('/');
     }
 
+    // 以下のアクションは未定（フォルダ機能）。
     public function editTarget()
     {
         $target = Target::first();
@@ -243,6 +237,7 @@ class TasksController extends Controller
         ]);
     }
 
+    // 以下のアクションは未定（フォルダ機能）。
     public function updateTarget(Request $request)
     {
         $request->validate([
@@ -265,7 +260,7 @@ class TasksController extends Controller
         $tasks_num = Task::count();
         // ソフトデリート済みのTasksテーブルの全レコードをカウント。
         $suspensions_num = Task::onlyTrashed()->count();
-        // viewに渡す。
+        // trace.blade.phpに遷移。その際，$historiesと$count, $tasks_num, $suspensions_numを渡している。
         return view('tasks.trace', [
             'histories' => $histories,
             'count' => $count,
@@ -278,7 +273,7 @@ class TasksController extends Controller
     {
         // バリデーション。
         $request->validate([
-            // inputタグにおけるname属性の属性値（ユーザーが入力した値）が空かどうかチェックしている。
+            // inputタグにおけるname属性の属性値である「request（name="request"より…）」に対応しているユーザーの入力値（value属性の属性値）が空かどうかチェックしている。
             // 空であればエラーメッセージを表示させる（trace.blade.phpの$errors参照）。
             'keyword' => 'required',
         ]);
@@ -287,26 +282,21 @@ class TasksController extends Controller
         // 「$request->keyword」でユーザーが入力欄（inputタグ）に入力した値を取り出し，$keywordに代入している。
         $keyword = $request->keyword;
 
-        // クエリ。
-        $query = History::query();
         // historiesテーブルの全レコードをカウント。
-        $count = $query->count();
+        $count = History::count();
         // Tasksテーブルの全レコードをカウント。
         $tasks_num = Task::count();
-        // Suspensionsテーブルの全レコードをカウント。
-        $suspensions_num = Suspension::count();
-        // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を取得。
-        $histories = $query->where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->get();
+        // ソフトデリート済みのTasksテーブルの全レコードをカウント。
+        $suspensions_num = Task::onlyTrashed()->count();
+        // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を10件ずつ取得。
+        $histories = History::where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->paginate(10);
 
-        // 絞り込んだレコードの総数を取得。
-        $histories_count = $histories->count();
-
+        // searchHistory.blade.phpへ遷移。その際，$historiesと$count, $tasks_num, $suspensions_numを渡している。
         return view('tasks.searchHistory', [
             'histories' => $histories,
             'count' => $count,
-            'histories_count' => $histories_count,
             'tasks_num' => $tasks_num,
-            'suspensions_num' => $suspensions_num,
+            'suspensions_num' => $suspensions_num
         ]);
     }
 
