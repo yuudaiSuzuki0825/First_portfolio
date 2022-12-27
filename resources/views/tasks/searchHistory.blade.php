@@ -1,72 +1,6 @@
 @extends('common.app')
 
 @section('content')
-    <!-- 以前作成したもの。消してもOK。 -->
-    <!-- <div class="main-top">
-        <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt="">
-        <div class="title-area">
-            <h2 class="main-title">Plan management streamlines your work.</h2>
-            <h3 class="main-sub-title">効率化を目指したい。</h3>
-        </div>
-    </div>
-
-    <div class="flex">
-        <section class="content">
-            <h2 class="content-title">完了履歴一覧</h2>
-
-            @if (count($histories) > 0)
-                <p>全{{ $histories_count }}件</p>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>テーマ</th>
-                            <th>開始日</th>
-                            <th>完了日</th>
-                            <th>概要</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($histories as $history)
-                        <tr>
-                            <td>
-                                <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
-                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
-                                    @method('DELETE')
-                                    @csrf
-                                </form>
-                            </td>
-                            <td>{{ $history->title }}</td>
-                            <td>{{ $history->start }}</td>
-                            <td>{{ $history->end }}</td>
-                            <td>{{ $history->content }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @else
-                <p class="alt">キーワードを含んだ計画は見つかりませんでした。</p>
-            @endif
-
-            <a href="{{ route('tasks.trace') }}">戻る</a>
-        </section>
-
-        <aside class="sidebar" id="usage">
-            <div class="usage-area">
-                <dl>
-                    <dt>Usage</dt>
-                    <dd>Makeをクリックして計画作成ページへ移動してください。<br><br>作成した計画に変更がある場合は，変更したい計画のidをクリックして計画修正ページへ移動してください。計画の削除もそのページから行えます。</dd>
-                    <dt>完了数</dt>
-                    <dt>{{ $count }}</dt>
-                </dl>
-            </div>
-        </aside>
-    </div> -->
-
-    <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
-
-    <!-- ここから新規構造。 -->
 
     <div class="main-area">
         <!-- サイドパネル。 -->
@@ -132,6 +66,11 @@
                         @endforeach
                     </tbody>
                 </table>
+                <!-- ページネーション。コントローラーのpaginate()とセット。 -->
+                <!-- 「https://laravel.com/api/6.x/Illuminate/Pagination/LengthAwarePaginator.html#method_onEachSide」 -->
+                <!-- また，検索条件が反映されずにページ遷移してしまう挙動を修正するために「appends(request()->query())」を追加した。 -->
+                <!-- 「https://qiita.com/wbraver/items/b95814d6383172b07a58」 -->
+                {{ $histories->appends(request()->query())->onEachSide(2)->links() }}
             @else
                 <p class="alt">完了した計画はありません。</p>
             @endif

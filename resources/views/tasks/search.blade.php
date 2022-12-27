@@ -121,6 +121,11 @@
                         @endforeach
                     </tbody>
                 </table>
+                <!-- ページネーション。コントローラーのpaginate()とセット。 -->
+                <!-- 「https://laravel.com/api/6.x/Illuminate/Pagination/LengthAwarePaginator.html#method_onEachSide」 -->
+                <!-- また，検索条件が反映されずにページ遷移してしまう挙動を修正するために「appends(request()->query())」を追加した。 -->
+                <!-- 「https://qiita.com/wbraver/items/b95814d6383172b07a58」 -->
+                {{ $tasks->appends(request()->query())->onEachSide(2)->links() }}
             @else
                 <p class="alt">キーワードに一致した計画はありません。</p>
             @endif
