@@ -35,13 +35,13 @@ Route::get('tasks/trace/{id}', 'TasksController@goToEraseScreen')->name('tasks.g
 Route::delete('tasks/trace/{id}', 'TasksController@traceDestroy')->name('tasks.traceDestroy');
 // 計画を中断する画面に遷移する。（削除予定）
 Route::get('tasks/{id}/suspend', 'TasksController@breakScreen')->name('tasks.breakScreen');
-// 遂行中の計画を中断する。（修正予定，中断➡ソフトデリート）
+// 遂行中の計画を完了する。
 Route::delete('tasks/{id}/suspend', 'TasksController@suspend')->name('tasks.suspend');
-// 中断された計画の一覧を閲覧する。（修正予定，中断➡ソフトデリート）
+// ソフトデリートされた計画の一覧を閲覧する。
 Route::get('tasks/suspendList', 'TasksController@suspensionList')->name('tasks.suspensionList');
-// 中断された計画の詳細を閲覧する。（修正予定，中断➡ソフトデリート）
+// 中断された計画の詳細を閲覧する。（削除予定）
 Route::get('tasks/suspendList/{id}', 'TasksController@suspensionDetail')->name('tasks.suspensionDetail');
-// 中断された計画を再開する。（修正予定，中断➡ソフトデリート）⇒ソフトデリート済みのレコードを復元するルートに変更。
+// ソフトデリートされた計画を復元する。
 // Route::delete('tasks/suspendList/{id}', 'TasksController@replay')->name('tasks.replay');
 Route::patch('tasks/suspendList/{trashed_task}', 'TasksController@replay')->name('tasks.replay');
 // 中断された計画を削除する画面に遷移する。（削除予定）
