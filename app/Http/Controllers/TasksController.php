@@ -10,7 +10,7 @@ use App\History;
 
 use App\Suspension;
 
-use App\Target;
+// use App\Target;
 
 class TasksController extends Controller
 {
@@ -61,9 +61,9 @@ class TasksController extends Controller
         $tasks_num = Task::count();
 
         // ソフトデリート済みのTasksテーブルの全レコード数を取得。
-        $suspensions_num = Suspension::count();
+        $suspensions_num = Task::onlyTrashed()->count();
 
-        // 絞り込んだレコードの総数を取得。現状この値を使ってはない…。
+        // 絞り込んだレコードの総数を取得。今後利用予定。
         $tasks_search_count = $tasks->count();
 
         // search.blade.phpへ遷移。その際，$tasksと$count, $tasks_search_count, $tasks_num, $suspensions_numを渡している。
@@ -82,6 +82,7 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    // 計画一覧ページに組み込む予定。
     public function create()
     {
         // Task（モデルクラス）のインスタンス生成。create.blade.phpのフォームで使用。
@@ -131,6 +132,8 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //  計画一覧ページに組み込む予定。
     public function edit($id)
     {
         // id（主キー）を通じて該当レコードを特定し，取得。
@@ -196,63 +199,9 @@ class TasksController extends Controller
         return redirect('/');
     }
 
-    // 以下のアクションは未定（フォルダ機能）。
-    public function createTarget()
-    {
-        $target = new Target;
-
-        // Historiesテーブルの全レコード数を取得。
-        $count = History::count();
-
-        return view('tasks.makeTarget', [
-            'target' => $target,
-            'count' => $count,
-        ]);
-    }
-
-    // 以下のアクションは未定（フォルダ機能）。
-    public function storeTarget(Request $request)
-    {
-        $request->validate([
-            'target' => 'required|max:255',
-        ]);
-
-        $target = new Target;
-        $target->target = $request->target;
-        $target->save();
-        return redirect('/');
-    }
-
-    // 以下のアクションは未定（フォルダ機能）。
-    public function editTarget()
-    {
-        $target = Target::first();
-
-        // Historiesテーブルの全レコード数を取得。
-        $count = History::count();
-
-        return view('tasks.updateTarget', [
-            'target' => $target,
-            'count' => $count,
-        ]);
-    }
-
-    // 以下のアクションは未定（フォルダ機能）。
-    public function updateTarget(Request $request)
-    {
-        $request->validate([
-            'target' => 'required|max:255',
-        ]);
-
-        $target = Target::first();
-        $target->target = $request->target;
-        $target->save();
-        return redirect('/');
-    }
-
     public function trace()
     {
-        // 完了日を基準に昇順にレコードを並べ替え, 10件取得。
+        // 完了日を基準に昇順にレコードを並べ替え, 10件ずつ取得。
         $histories = History::orderBy('end', 'asc')->paginate(10);
         // historiesテーブルの全レコードをカウント。
         $count = History::count();
@@ -278,8 +227,8 @@ class TasksController extends Controller
             'keyword' => 'required',
         ]);
 
-        // ユーザーが入力した値の取得。$requestからユーザーが入力した値にアクセスできる。
-        // 「$request->keyword」でユーザーが入力欄（inputタグ）に入力した値を取り出し，$keywordに代入している。
+        // ユーザーが入力した値の取得。$requestからユーザーの入力値にアクセスできる。
+        // 「$request->keyword」でユーザーが入力欄（inputタグ）に入力した値（value属性の属性値）を取り出し，$keywordに代入している。
         $keyword = $request->keyword;
 
         // historiesテーブルの全レコードをカウント。
@@ -300,16 +249,6 @@ class TasksController extends Controller
         ]);
     }
 
-    // 削除予定。
-    public function goToEraseScreen($id)
-    {
-        $query = History::query();
-        $history = $query->find($id);
-        return view('tasks.historyErase', [
-            'history' => $history,
-        ]);
-    }
-
     public function traceDestroy($id)
     {
         // URLパラメータから受け取ったidを活用してHistoriesテーブルから該当レコードを取得。
@@ -320,24 +259,16 @@ class TasksController extends Controller
         return redirect('tasks/trace');
     }
 
-    // 削除予定。
-    public function breakScreen($id)
-    {
-        $task = Task::find($id);
-        return view('tasks.suspend', [
-            'task' => $task,
-        ]);
-    }
-
     public function suspend($id)
     {
         // （追記）
         // このアクションは「完了する」機能のために使用する。後で名称などの変更を済ませておくこと。
+        // 完了したTasksテーブルの該当レコードをhistoriesテーブルのレコードとして保存（移動）。
 
         // id（主キー）を通じて該当レコードを特定し，取得。
         $task = Task::find($id);
 
-        // 完了したTasksテーブルの該当レコードをhistoriesテーブルのレコードとして保存（移動）。
+        // Historyモデルクラスのインスタンスを生成。
         $history = new History;
 
         // Tasksテーブルの該当レコードを元にHistoriesテーブルの新規レコードを作成している。
@@ -348,10 +279,9 @@ class TasksController extends Controller
             'content' => $task->content,
         ]);
 
-        // タスクを削除。ここまでは論理削除。
+        // Tasksテーブルの該当レコードを削除。ここまでは論理削除。Hitoriesテーブルの方に移したので用済み。
         $task->delete();
-        // データベースにはまだ残っているので，delete()の後に以下を呼び出す必要がある。
-        // 以下を実行することで物理削除を行える。
+        // データベースにはまだ残っているので，delete()の後に以下を呼び出す必要がある（物理削除）。
         $task->forceDelete();
 
         // リダイレクト。
@@ -372,7 +302,7 @@ class TasksController extends Controller
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
 
-        // Tasksテーブルの全レコードを取得。こちらはソフトデリートではない方。
+        // Tasksテーブルの全レコードを取得（こちらはソフトデリートではない方）。
         $tasks_num = Task::count();
 
         // suspendList.blade.phpに遷移。その際，$suspensionsと$suspensions_num, $count, $tasks_numを渡している。
@@ -381,26 +311,6 @@ class TasksController extends Controller
             'suspensions_num' => $suspensions_num,
             'count' => $count,
             'tasks_num' => $tasks_num,
-        ]);
-    }
-
-    // 削除予定。
-    public function suspensionDetail($id)
-    {
-        // 廃棄予定。
-
-        // 以下3行は以前の処理。参考までに。
-        // $query = Suspension::query();
-        // $suspension = $query->find($id);
-        // $suspensions_num = $query->count();
-
-        $tasks_num = Task::count();
-        $count = History::count();
-        return view('tasks.suspensionDetail', [
-            'suspension' => $suspension,
-            'suspensions_num' => $suspensions_num,
-            'tasks_num' => $tasks_num,
-            'count' => $count,
         ]);
     }
 
@@ -417,16 +327,6 @@ class TasksController extends Controller
         return redirect('tasks/suspendList');
         // もしくは以下の記述でもOK。こちらはルーティングを指定している。
         // return redirect()->route('tasks.suspensionList');
-    }
-
-    // 削除予定。
-    public function eraseScreen($id)
-    {
-        $query = Suspension::query();
-        $suspension = $query->find($id);
-        return view('tasks.erase', [
-            'suspension' => $suspension,
-        ]);
     }
 
     // 「Task $task」は「Request $request」と同じ仕組み（メソッドインジェクション）。
