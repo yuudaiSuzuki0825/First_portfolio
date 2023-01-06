@@ -1,68 +1,6 @@
 @extends('common.app')
 
 @section('content')
-    <!-- 以前作成したもの。消してもOK。 -->
-    <!-- <div class="main-top">
-        <img src="{{ asset('img/gorimepresetV8_TP_V.jpg') }}" alt="">
-        <div class="title-area">
-            <h2 class="main-title">Plan management streamlines your work.</h2>
-            <h3 class="main-sub-title">効率化を目指したい。</h3>
-        </div>
-    </div> -->
-
-    <!-- <div class="flex">
-        <section class="content">
-            <h2 class="content-title">計画一覧</h2>
-
-            @if (count($tasks) > 0)
-                <p>全{{ $tasks_search_count }}件</p>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>テーマ</th>
-                            <th>開始日</th>
-                            <th>完了日</th>
-                            <th>概要</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($tasks as $task)
-                        <tr> -->
-                            <!-- <td>{!! link_to_route('tasks.edit', '🖌', ['task' => $task->id], ['class' => 'pencil']) !!}</td> -->
-                            <!-- <td><a href="{{ route('tasks.edit', $task->id) }}"><i class="fa-solid fa-pencil"></i></a></td>
-                            <td>{{ $task->title }}</td>
-                            <td>{{ $task->start }}</td>
-                            <td>{{ $task->end }}</td>
-                            <td>{{ $task->content }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @else
-                <p class="alt">キーワードを含んだ計画は見つかりませんでした。</p>
-            @endif
-
-            <a href="{{ route('tasks.index') }}">戻る</a>
-        </section>
-
-        <aside class="sidebar" id="usage">
-            <div class="usage-area">
-                <dl>
-                    <dt>Usage</dt>
-                    <dd>Makeをクリックして計画作成ページへ移動してください。<br><br>作成した計画に変更がある場合は，変更したい計画のidをクリックして計画修正ページへ移動してください。計画の削除もそのページから行えます。</dd>
-                    <dt>完了数</dt>
-                    <dt>{{ $count }}</dt>
-                </dl>
-            </div>
-        </aside>
-    </div>
-
-    <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
-
-    <!-- ここから新規構造。 -->
-
     <div class="main-area">
         <!-- サイドパネル。 -->
         <aside id="left-panel">
@@ -81,7 +19,7 @@
                 <div class="tabMenu">
                     <!-- 各タブはリンクになっており，各タブのリスト一覧へ遷移することが出来る。 -->
                     <!-- spanタグで各リストの全件数を表示させる（バッチ）。 -->
-                    <h2 class="planListTitle"><a href="/"><i class="fa-solid fa-list"></i>計画一覧<span class="badge">{{ $tasks_num }}</span></a></h2>
+                    <h2 class="planListTitle active"><a href="/"><i class="fa-solid fa-list"></i>計画一覧<span class="badge">{{ $tasks_num }}</span></a></h2>
                     <h2 class="planListTitle"><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴<span class="badge">{{ $count }}</span></a></h2>
                     <h2 class="planListTitle"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span class="badge">{{ $suspensions_num }}</span></a></h2>
                 </div>
@@ -90,24 +28,34 @@
                 <div class="provisional">ここに「何か」を設置する予定。</div>
             <!-- 「何か」機能ここまで。 -->
 
-            <!-- 「中断計画」の表示ここから。 -->
+            <!-- 「計画一覧」の表示ここから。 -->
 
             @if (count($tasks) > 0)
                 <table class="table">
-                    <!-- theadは無くす予定。 -->
-                    <!-- <thead>
-                        <tr>
-                            <th></th>
-                            <th>テーマ</th>
-                            <th>開始日</th>
-                            <th>完了日</th>
-                            <th>概要</th>
-                        </tr>
-                    </thead> -->
                     <tbody>
                         @foreach ($tasks as $task)
+                        <!-- モーダルウインドウ部分。 -->
+                        <tr id="modalWindow" class="hidden">
+                            <!-- trの中に子要素として何か挿入したい場合はtdを挟むこと。試しにtdを除いてformタグがどの位置に移動するか確認してみて。 -->
+                            <td>
+                                <p>本当に完了しますか。完了した計画は履歴から閲覧できます。</p>
+                                <div>
+                                    <span>キャンセル</span>
+                                    <!-- ここに本命の「完了する」ボタンを設置。 -->
+                                    <form action="{{ route('tasks.suspend', $task->id) }}" method="POST" style="background-color: #00A690;">
+                                        <button type="submit">完了</button>
+                                        @method('DELETE')
+                                        @csrf
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
                         <tr class="tr">
-                            <td><a href="{{ route('tasks.edit', $task->id) }}"><i class="fa-solid fa-pencil"></i></a></td>
+                            <td class="FirstAid"><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
+                            <!-- 「完了する」アイコン（ダミー）。 -->
+                            <td id="modalWindowOpen" class="parent-balloon">
+                                <i class="fa-solid fa-circle-check"></i><span class="balloon">完了する</span>
+                            </td>
                             <td>{{ $task->title }}</td>
                             <td>開始日:{{ $task->start }}</td>
                             <td>完了日:{{ $task->end }}</td>
@@ -132,11 +80,16 @@
             </div>
         </section>
 
-        <!-- 「完了履歴」表示ここまで。 -->
+        <!-- 「計画一覧」表示ここまで。 -->
     </div>
 
+    <!-- 全アコーディオンを開閉するボタン -->
+    <div id="AllplanDetailButton"><i class="fa-solid fa-unlock" id="AllplanDetailButtonChild"></i></div>
+
     <!-- ページトップへ遷移するボタン。 -->
-    <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
+
+    <!-- マスク部分。モーダルウィンドウで必要。 -->
+    <div id="mask" class="hidden"></div>
 
 @endsection

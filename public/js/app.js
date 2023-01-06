@@ -131,6 +131,8 @@
     });
   };
 
+  // ページごとに読み込むjsファイルを変更する必要がある（複数ファイルに分割すること）。
+
   /* =================================================== */
   // ハンバーガーメニューの実装。
 
@@ -366,10 +368,7 @@
 
   /* DOM操作 */
 
-  var mask = document.getElementById('mask');
-  var modalWindowOpenButton = document.getElementById('modalWindowOpenButton');
-  var modalWindow = document.getElementById('modalWindow');
-  var cancelButton = document.getElementById('cancelButton'); // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
+  var mask = document.getElementById('mask'); // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
   // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
 
   trs.forEach(function (tr) {
@@ -396,20 +395,6 @@
 
       /* console.log('hoge'); */
     });
-  }); // edit.blade.php用。内容は上記に同じ。
-
-  modalWindowOpenButton.addEventListener('click', function () {
-    modalWindow.classList.remove('hidden');
-    mask.classList.remove('hidden');
-  }); // edit.blade.php用。内容は上記に同じ。
-
-  mask.addEventListener('click', function () {
-    modalWindow.classList.add('hidden');
-    mask.classList.add('hidden');
-  }); // edit.blade.php用。内容は上記に同じ。
-
-  cancelButton.addEventListener('click', function () {
-    mask.click();
   });
 }
 

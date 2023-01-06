@@ -275,9 +275,6 @@
 
     /* DOM操作 */
     const mask = document.getElementById('mask');
-    const modalWindowOpenButton = document.getElementById('modalWindowOpenButton');
-    const modalWindow = document.getElementById('modalWindow');
-    const cancelButton = document.getElementById('cancelButton');
 
     // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
     // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
@@ -305,22 +302,5 @@
             // デバック用。
             /* console.log('hoge'); */
         });
-    });
-
-    // edit.blade.php用。内容は上記に同じ。
-    modalWindowOpenButton.addEventListener('click', () => {
-        modalWindow.classList.remove('hidden');
-        mask.classList.remove('hidden');
-    });
-
-    // edit.blade.php用。内容は上記に同じ。
-    mask.addEventListener('click', () => {
-        modalWindow.classList.add('hidden');
-        mask.classList.add('hidden');
-    });
-
-    // edit.blade.php用。内容は上記に同じ。
-    cancelButton.addEventListener('click', () => {
-        mask.click();
     });
 }

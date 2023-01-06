@@ -1,7 +1,6 @@
 @extends('common.app')
 
 @section('content')
-
     <div class="main-area">
         <!-- サイドパネル。 -->
         <aside id="left-panel">
@@ -21,7 +20,7 @@
                     <!-- 各タブはリンクになっており，各タブのリスト一覧へ遷移することが出来る。 -->
                     <!-- spanタグで各リストの全件数を表示させる（バッチ）。 -->
                     <h2 class="planListTitle"><a href="/"><i class="fa-solid fa-list"></i>計画一覧<span class="badge">{{ $tasks_num }}</span></a></h2>
-                    <h2 class="planListTitle"><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴<span class="badge">{{ $count }}</span></a></h2>
+                    <h2 class="planListTitle active"><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴<span class="badge">{{ $count }}</span></a></h2>
                     <h2 class="planListTitle"><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画<span class="badge">{{ $suspensions_num }}</span></a></h2>
                 </div>
 
@@ -29,29 +28,38 @@
                 <div class="provisional">ここに「何か」を設置する予定。</div>
             <!-- 「何か」機能ここまで。 -->
 
-            <!-- 「中断計画」の表示ここから。 -->
+            <!-- 「完了履歴」の表示ここから。 -->
 
             @if (count($histories) > 0)
                 <table class="table">
-                    <!-- theadは無くす予定。 -->
-                    <!-- <thead>
-                        <tr>
-                            <th></th>
-                            <th>テーマ</th>
-                            <th>開始日</th>
-                            <th>完了日</th>
-                            <th>概要</th>
-                        </tr>
-                    </thead> -->
                     <tbody>
                         @foreach ($histories as $history)
-                        <tr class="tr">
+                        <!-- モーダルウィンドウ部分。 -->
+                        <tr id="modalWindow" class="hidden">
                             <td>
-                                <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
-                                    <button type="submit"><i class="fa-solid fa-trash-can"></i>削除する</button>
-                                    @method('DELETE')
-                                    @csrf
-                                </form>
+                                <p>本当に削除しますか。この操作は元に戻すことができません。</p>
+                                <div>
+                                    <span>キャンセル</span>
+                                    <!-- 「削除する」アイコン（本命）。 -->
+                                    <form action="{{ route('tasks.traceDestroy', $history->id) }}" method="POST">
+                                        <button type="submit">削除</button>
+                                        @method('DELETE')
+                                        @csrf
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="tr">
+                            <td></td> <!-- JavaScriptの方で致命的なバグ発生。その対処としてtdの空タグを設置した。 -->
+                            <td id="modalWindowOpen" class="parent-balloon">
+
+                                <!-- LaravelCollectiveライブラリを使用した場合。 -->
+                                <!-- {!! Form::model($history, ['route' => ['tasks.traceDestroy', $history->id], 'method' => 'delete'])!!}
+                                    {!! Form::submit('削除する') !!}
+                                {!! Form::close() !!} -->
+
+                                <!-- 「削除する」アイコン（ダミー）。 -->
+                                <i class="fa-solid fa-trash-can"></i><span class="balloon">削除する</span>
                             </td>
                             <td>{{ $history->title }}</td>
                             <td>開始日:{{ $history->start }}</td>
@@ -80,8 +88,13 @@
         <!-- 「完了履歴」表示ここまで。 -->
     </div>
 
+    <!-- 全アコーディオンを開閉するボタン -->
+    <div id="AllplanDetailButton"><i class="fa-solid fa-unlock"></i></div>
+
     <!-- ページトップへ遷移するボタン。 -->
-    <!-- <div class="go-to-top-parent"></div><a href="#" class="go-to-top">トップへ戻る</a> -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
+
+    <!-- マスク部分。モーダルウィンドウで必要。 -->
+    <div id="mask" class="hidden"></div>
 
 @endsection
