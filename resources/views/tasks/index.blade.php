@@ -76,13 +76,14 @@
                         </tr>
                         <tr class="tr">
                             <td class="FirstAid"><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
-                            <!-- お試し。ここに「完了する」アイコン（ダミー）を設置する予定。 -->
+                            <!-- 「完了する」アイコン（ダミー）。 -->
                             <td id="modalWindowOpen" class="parent-balloon">
                                 <i class="fa-solid fa-circle-check"></i><span class="balloon">完了する</span>
                             </td>
                             <td>{{ $task->title }}</td>
                             <td>開始日:{{ $task->start }}</td>
                             <td>完了日:{{ $task->end }}</td>
+                            <!-- アイコンをクリックすると計画概要がアコーディオンメニュー形式で表示される。 -->
                             <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i></td>
                         </tr>
                         <!-- 計画の概要。アコーディオンメニューのように表示させる。 -->

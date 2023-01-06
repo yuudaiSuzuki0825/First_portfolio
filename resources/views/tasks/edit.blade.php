@@ -22,7 +22,7 @@
                 {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put'], ['class' => 'form']) !!}
 
                     {!! Form::label('title', 'テーマ:', ['class' => 'form-label']) !!}
-                    {!! Form::text('title', null, ['class' => 'form-input']) !!}
+                    {!! Form::text('title', null, ['class' => 'form-input', "placeholder" => "20字以内"]) !!}
                     @if ($errors->first('title'))
                         <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p>
                     @endif
@@ -42,7 +42,7 @@
                     @endif
 
                     {!! Form::label('content', '概要:', ['class' => 'form-label']) !!}
-                    {!! Form::text('content', null, ['class' => 'form-input']) !!}
+                    {!! Form::text('content', null, ['class' => 'form-input', "placeholder" => "255字以内"]) !!}
                     @if ($errors->first('content'))
                         <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('content') }}</p>
                     @endif

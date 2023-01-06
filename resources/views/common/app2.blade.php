@@ -78,6 +78,6 @@
     </footer>
 
     <!-- JavaScriptのパス。 -->
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/hoge.js') }}"></script>
 </body>
 </html>

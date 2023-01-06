@@ -434,6 +434,7 @@ img {
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 1px #333333;
+  pointer-events: none;
 }
 
 .parent-balloon .balloon::before {
