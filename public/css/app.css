@@ -29,11 +29,9 @@ img {
   display: flex;
   padding: 8px;
 }
-
 .header .header-title {
   transition: transform 0.2s;
 }
-
 .header .header-title:hover {
   transform: scale(1.1);
 }

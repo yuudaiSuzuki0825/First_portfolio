@@ -45,19 +45,21 @@ img {
     // フレックス。
     display: flex;
     padding: 8px;
+
+    // タイトルをホバーすると少し拡大表示されるアニメーションのカスタマイズ。変化スピードの調整。
+    .header-title {
+        // アニメーションのイージング指定。
+        transition: transform .2s;
+
+        // タイトルがホバーされた時。
+        &:hover {
+            // 拡大表示する指定をしている。
+            transform: scale(1.1);
+        }
+    }
 }
 
-// タイトルをホバーすると少し拡大表示されるアニメーションのカスタマイズ。変化スピードの調整。
-.header .header-title {
-    // アニメーションのイージング指定。
-    transition: transform .2s;
-}
-
-// タイトルがホバーされた時。
-.header .header-title:hover {
-    // 拡大表示する指定をしている。
-    transform: scale(1.1);
-}
+// 以下からsassの記法で書き直そう。
 
 .header .header-title a {
     // html{font-size: 100%;}を指定した後，各タグでremを用いて指定すること。
