@@ -10,7 +10,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #333333;
+  color: #4d4d4d;
 }
 
 ul {
@@ -21,7 +21,6 @@ img {
   max-width: 100%;
 }
 
-/* ヘッダーここから。*/
 .header {
   width: 1400px;
   max-width: 95%;
@@ -35,28 +34,23 @@ img {
 .header .header-title:hover {
   transform: scale(1.1);
 }
-
 .header .header-title a {
   font-size: 1.875rem;
   line-height: 56px;
   letter-spacing: 3px;
   color: #333333;
 }
-
 .header .header-site-menu {
   margin-left: auto;
 }
-
 .header .header-site-menu nav ul {
   display: flex;
   line-height: 56px;
   align-items: center;
 }
-
 .header .header-site-menu nav ul li {
   font-size: 1.375rem;
 }
-
 .header .header-site-menu nav ul li + li {
   margin-left: 55px;
 }

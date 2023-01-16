@@ -1,5 +1,16 @@
 @charset "utf-8";
 
+// ＊scssにおいて，「//」を使ってコメントアウトするとcssファイルにコンパイルした際に，コメントがソースから消える‼
+
+// 変数の定義は以下に…。
+$black_333333: #333333;
+// 16px×1.875=30px。html{}
+$fontSize_30px: 1.875rem;
+// 16px×1.375=22px。html{}を参照。
+$fontSize_22px: 1.375rem;
+// 例えば，「$imgDir: "../img/";」のように定義しておいて，「background: url($imgDir + "bg.png");」と記述することも可能。ないしは，「background: url("#{$imgDir}bg.png")」でも可。
+// scssの組み込み関数で適宜利用しよう。
+
 html {
     // ここで100%と指定し，各タグではremを使ってfont-sizeの調整を行うこと。
     font-size: 100%;
@@ -16,7 +27,8 @@ a {
     // リンクの下線を消しておく。
     text-decoration: none;
     // 色指定
-    color: #333333;
+    // SCSSの組み込み関数（lighten()）。
+    color: lighten($black_333333, 10%);
 }
 
 ul {
@@ -30,7 +42,7 @@ img {
     max-width: 100%;
 }
 
-/* ヘッダーここから。*/
+// ヘッダー。
 
 .header {
     // 最大幅を指定している。これ以上大きくならない。
@@ -44,62 +56,66 @@ img {
     margin: 0 auto;
     // フレックス。
     display: flex;
-    padding: 8px;
+    // scss記法の練習。8pxと同じ意味。#{}について調べておくこと。
+    padding: #{4 + 4}px;
 
+    // sass/scssの入れ子構造。
     // タイトルをホバーすると少し拡大表示されるアニメーションのカスタマイズ。変化スピードの調整。
     .header-title {
         // アニメーションのイージング指定。
         transition: transform .2s;
 
-        // タイトルがホバーされた時。
+        // タイトルがホバーされた時（「.header-title:hover」と同じ意味になる）。
         &:hover {
             // 拡大表示する指定をしている。
             transform: scale(1.1);
         }
+
+        a {
+            // html{font-size: 100%;}を指定した後，各タグでremを用いて指定すること。
+            // 例）html{font-size: 100%;}は16pxを表すので以下の指定は16×1.875=30pxとなる。
+            // 変数の定義参照。
+            font-size: $fontSize_30px;
+            // 行間の指定。
+            line-height: 56px;
+            // 文字間の隙間指定。
+            letter-spacing: 3px;
+            // 色指定
+            color: $black_333333;
+        }
+    }
+
+    .header-site-menu {
+        // marginはリセットCSSによりデフォで0。marginをautoにすると取りうる範囲の限界まで空白を占有してくれる。
+        // margin-rightは0なので結果として右端にナビゲーションリンクがくっつくまでmargin-leftの範囲が大きくなる➡右寄せになる。
+        // 実際の挙動を確認して。
+        margin-left: auto;
+
+        nav ul {
+            // フレックス。横並びを実現。
+            display: flex;
+            // 行間を指定。
+            line-height: 56px;
+            // フレックスアイテムの交差軸に対して中央寄せ。フレックスアイテムは主軸は横。
+            // すなわち，縦軸に対して中央に配置される。
+            // ＊以下の指定の意味ないかも…。
+            align-items: center;
+
+            li {
+                // 変数の定義参照。
+                font-size: $fontSize_22px;
+            }
+
+            // 隣接兄弟結合子。
+            li + li {
+                // 各アイコンの隙間を指定している。先頭のliにはmargin-leftの指定をしていない。
+                margin-left: 55px;
+            }
+        }
     }
 }
 
-// 以下からsassの記法で書き直そう。
-
-.header .header-title a {
-    // html{font-size: 100%;}を指定した後，各タグでremを用いて指定すること。
-    // 例）html{font-size: 100%;}は16pxを表すので以下の指定は16×1.875=30pxとなる。
-    font-size: 1.875rem;
-    // 行間の指定。
-    line-height: 56px;
-    // 文字間の隙間指定。
-    letter-spacing: 3px;
-    // 色指定
-    color: #333333;
-}
-
-.header .header-site-menu {
-    // marginはリセットCSSによりデフォで0。marginをautoにすると取りうる範囲の限界まで空白を占有してくれる。
-    // margin-rightは0なので結果として右端にナビゲーションリンクがくっつくまでmargin-leftの範囲が大きくなる➡右寄せになる。
-    // 実際の挙動を確認して。
-    margin-left: auto;
-}
-
-.header .header-site-menu nav ul {
-    // フレックス。横並びを実現。
-    display: flex;
-    // 行間を指定。
-    line-height: 56px;
-    // フレックスアイテムの交差軸に対して中央寄せ。フレックスアイテムは主軸は横。
-    // すなわち，縦軸に対して中央に配置される。
-    align-items: center;
-}
-
-.header .header-site-menu nav ul li {
-    // 22pxと同じ。16px×1.375。html{}を参照。
-    font-size: 1.375rem;
-}
-
-// 隣接兄弟結合子。
-.header .header-site-menu nav ul li + li {
-    // 各アイコンの隙間を指定している。
-    margin-left: 55px;
-}
+// ここからscssの記法で書く。
 
 // ナビゲーションリンクのツールチップの指定。
 .header .header-site-menu nav ul li .parent-balloon .header-balloon {
