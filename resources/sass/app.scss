@@ -3,13 +3,76 @@
 // ＊scssにおいて，「//」を使ってコメントアウトするとcssファイルにコンパイルした際に，コメントがソースから消える‼
 
 // 変数の定義は以下に…。
+
+// 黒色の指定。
 $black_333333: #333333;
+
 // 16px×1.875=30px。html{}
 $fontSize_30px: 1.875rem;
+
 // 16px×1.375=22px。html{}を参照。
 $fontSize_22px: 1.375rem;
-// 例えば，「$imgDir: "../img/";」のように定義しておいて，「background: url($imgDir + "bg.png");」と記述することも可能。ないしは，「background: url("#{$imgDir}bg.png")」でも可。
-// scssの組み込み関数で適宜利用しよう。
+
+// （追記）ツールチップの指定をまとめておきたい。
+
+// ナビゲーションリンクのツールチップのスタイル指定を以下にまとめた。
+@mixin header-balloon {
+    // 位置指定のため。.parent-balloon{}参照。
+    position: absolute;
+    top: 30px;
+    left: -28px;
+    // 通常は表示されないようにしている。
+    display: none;
+    padding: 7px;
+    // 16pxと同じ。16px×1。html{}参照。
+    font-size: 1rem;
+    // 行間を無しにしている。何故か「作成する」以外のツールチップにて行間が掛かっていたので解除している（コメントアウトして確認してほしい）。
+    // 推測➡.header .header-site-menu nav ul{}のline-height: 56px;を継承していたから？
+    line-height: 1;
+    // 太字の解除をしている。何故か「作成する」ツールチップだけテキストが太字になっていた…（コメントアウトして確認してほしい）。
+    font-weight: normal;
+    color: white;
+    background-color: #444444;
+    border-radius: 5px;
+    // 影指定。
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+// その他便利なSCSSの記法について↓↓↓
+// ・例えば，「$imgDir: "../img/";」のように定義しておいて，「background: url($imgDir + "bg.png");」と記述することも可能。
+// ないしは，「background: url("#{$imgDir}bg.png")」でも可（文字列の中で変数を展開するパターン，テンプレートリテラルみたい）。
+
+// ・scssの組み込み関数で適宜利用しよう。lighten()など。
+
+// ・@ifで条件分岐が出来る。
+// 例）
+// $debugMode: true;
+// #main {
+//     @if $debugMode == true {
+//         color: red;　　// trueならこちらが適用される。
+//     } @else {
+//         color: green;　　// 上記以外（false）ならこちらが適用される。
+//     }
+// }
+
+// ・@forや@whileでループ分を作ることも出来る。
+
+// ・リスト（配列？）と@eachも利用できる。
+// 例）
+// $colors: black, white, red;
+// @each $color in $colors {
+//     .#{$color}-image {
+//         color: $color;
+//     }
+// }
+// ＊（追記）@each $color in black, white, red {} でも同じ意味になる（リストの中身が短いときは便利）。
+
+// ・関数を作って呼び出すことも出来る（デバック機能もある）。
+
+// ・ファイル分割が出来るが，@importではなく@useを代わりに用いること（前者は廃止される，sassのバージョン確認）。
+
+// ・@mixinと@extend（継承）も試してみよう。
+
 
 html {
     // ここで100%と指定し，各タグではremを使ってfont-sizeの調整を行うこと。
@@ -104,6 +167,37 @@ img {
             li {
                 // 変数の定義参照。
                 font-size: $fontSize_22px;
+
+                .parent-balloon {
+
+                    .header-balloon {
+                        // ミックスイン。header-balloonでまとめたスタイルを呼び出した。
+                        @include  header-balloon;
+                    }
+
+                    // ナビゲーションリンクの各アイコンをホバーするとツールチップが表示されるようにしている。
+                    &:hover {
+
+                        .header-balloon {
+                            // ミックスイン。header-balloonでまとめたスタイルを呼び出した。
+                            @include  header-balloon;
+                            display: inline-block;
+                            // 横幅の指定。コメントアウトして確認。
+                            width: 78px;
+                        }
+
+                        // 「FAQ」ツールチップだけ別の指定にしている（位置の調整などの点で特別な指定が必要だった）。コメントアウトして確認を。
+                        .header-balloon.second {
+                            // ミックスイン。header-balloonでまとめたスタイルを呼び出した。
+                            @include  header-balloon;
+                            display: inline-block;
+
+                            // ここから本命の指定。
+                            left: -12px;
+                            width: 48px;
+                        }
+                    }
+                }
             }
 
             // 隣接兄弟結合子。
@@ -115,43 +209,7 @@ img {
     }
 }
 
-// ここからscssの記法で書く。
-
-// ナビゲーションリンクのツールチップの指定。
-.header .header-site-menu nav ul li .parent-balloon .header-balloon {
-    // 位置指定のため。.parent-balloon{}参照。
-    position: absolute;
-    top: 30px;
-    left: -28px;
-    // 通常は表示されないようにしている。
-    display: none;
-    padding: 7px;
-    // 16pxと同じ。16px×1。html{}参照。
-    font-size: 1rem;
-    // 行間を無しにしている。何故か「作成する」以外のツールチップにて行間が掛かっていたので解除している（コメントアウトして確認してほしい）。
-    // 推測➡.header .header-site-menu nav ul{}のline-height: 56px;を継承していたから？
-    line-height: 1;
-    // 太字の解除をしている。何故か「作成する」ツールチップだけテキストが太字になっていた…（コメントアウトして確認してほしい）。
-    font-weight: normal;
-    color: white;
-    background-color: #444444;
-    border-radius: 5px;
-    // 影指定。
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-// ナビゲーションリンクの各アイコンをホバーするとツールチップが表示されるようにしている。
-.header .header-site-menu nav ul li .parent-balloon:hover .header-balloon {
-    display: inline-block;
-    // 横幅の指定。コメントアウトして確認。
-    width: 78px;
-}
-
-// 「FAQ」ツールチップだけ別の指定にしている（位置の調整などの点で特別な指定が必要だった）。コメントアウトして確認を。
-.header .header-site-menu nav ul li .parent-balloon:hover .header-balloon.second {
-    left: -12px;
-    width: 48px;
-}
+// SCSS記法ここから書き直し。
 
 .header .header-site-menu .header-hamburger-menu {
     // PC画面では非表示にするため。SP画面では表示させる。
