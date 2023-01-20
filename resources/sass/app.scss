@@ -206,52 +206,52 @@ img {
                 margin-left: 55px;
             }
         }
+
+        .header-hamburger-menu {
+            // PC画面では非表示にするため。SP画面では表示させる。
+            display: none;
+            // ハンバーガーメニューボタンを右寄せにするため。
+            margin-left: auto;
+
+            #open {
+                // 30pxと同じ。16px×1.875。html{}参照。
+                font-size: 1.875rem;
+                // margin-topを指定するために変更した。
+                display: inline-block;
+                margin-top: 10px;
+                // ホバー時のマウスの形を指定している。
+                cursor: pointer;
+            }
+        }
+    }
+
+    .overlay {
+        // マスク部分の作成。position: fixed;とtop,bottom,right,left: 0;で作成できる。
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        // マスク部分の背景指定。
+        background: rgba(255,255,255,0.9);
+        // マスク部分のナビゲーションリンクを中央寄せ。
+        text-align: center;
+        padding: 64px;
+        // 要素の重なり順を指定している。一度コメントアウトして挙動確認を。「編集する」ボタンのアイコンがマスク部分の上に乗ってしまいアクセスできてしまう（htmlの構造上の問題だと思われる，下にあるタグが上に重なる仕様）。
+        z-index: 1000; // ここの値は適当。上に重ねるタグにより大きい値を指定すれば大丈夫。
+        // ハンバーガーメニューボタンがクリックされるまでは完全透明にすることで見えないようにしている。
+        opacity: 0;
+        // ポインターイベントをnoneにすることで，マスク部分のナビゲーションリンクに対してクリックなどの操作を行えないようにしている。
+        // htmlのタグ配置的にはマスク部分のナビゲーションリンクの方が上に重なるが，「完全に透明化andクリックできない」によってあたかもそこにないようにしている。
+        // 一方でdisplay:none;ではないのでNodeツリーから消去されているわけではない。
+        // よって，変化前（完全透明andクリックできない）と変化後（不透明andクリックできる，.header .overlay.show{}参照）の状態を維持できるのでtransitionを活用したアニメーションを実装できる。
+        pointer-events: none;
+        // アニメーションの指定。
+        transition: opacity .4s;
     }
 }
 
-// SCSS記法ここから書き直し。
-
-.header .header-site-menu .header-hamburger-menu {
-    // PC画面では非表示にするため。SP画面では表示させる。
-    display: none;
-    // ハンバーガーメニューボタンを右寄せにするため。
-    margin-left: auto;
-}
-
-.header .header-site-menu .header-hamburger-menu #open {
-    // 30pxと同じ。16px×1.875。html{}参照。
-    font-size: 1.875rem;
-    // margin-topを指定するために変更した。
-    display: inline-block;
-    margin-top: 10px;
-    // ホバー時のマウスの形を指定している。
-    cursor: pointer;
-}
-
-.header .overlay {
-    // マスク部分の作成。position: fixed;とtop,bottom,right,left: 0;で作成できる。
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    // マスク部分の背景指定。
-    background: rgba(255,255,255,0.9);
-    // マスク部分のナビゲーションリンクを中央寄せ。
-    text-align: center;
-    padding: 64px;
-    // 要素の重なり順を指定している。一度コメントアウトして挙動確認を。「編集する」ボタンのアイコンがマスク部分の上に乗ってしまいアクセスできてしまう（htmlの構造上の問題だと思われる，下にあるタグが上に重なる仕様）。
-    z-index: 1000; // ここの値は適当。上に重ねるタグにより大きい値を指定すれば大丈夫。
-    // ハンバーガーメニューボタンがクリックされるまでは完全透明にすることで見えないようにしている。
-    opacity: 0;
-    // ポインターイベントをnoneにすることで，マスク部分のナビゲーションリンクに対してクリックなどの操作を行えないようにしている。
-    // htmlのタグ配置的にはマスク部分のナビゲーションリンクの方が上に重なるが，「完全に透明化andクリックできない」によってあたかもそこにないようにしている。
-    // 一方でdisplay:none;ではないのでNodeツリーから消去されているわけではない。
-    // よって，変化前（完全透明andクリックできない）と変化後（不透明andクリックできる，.header .overlay.show{}参照）の状態を維持できるのでtransitionを活用したアニメーションを実装できる。
-    pointer-events: none;
-    // アニメーションの指定。
-    transition: opacity .4s;
-}
+// SCSSここから。
 
 .header .overlay.show {
     opacity: 1;

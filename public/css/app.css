@@ -101,19 +101,16 @@ img {
 .header .header-site-menu nav ul li + li {
   margin-left: 55px;
 }
-
 .header .header-site-menu .header-hamburger-menu {
   display: none;
   margin-left: auto;
 }
-
 .header .header-site-menu .header-hamburger-menu #open {
   font-size: 1.875rem;
   display: inline-block;
   margin-top: 10px;
   cursor: pointer;
 }
-
 .header .overlay {
   position: fixed;
   top: 0;
