@@ -16,12 +16,17 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/efd87fdfef.js" crossorigin="anonymous"></script>
+    <script>
+        @if ($errors->any())
+            alert("計画作成ないし編集に失敗しました。字数制限と未入力にご注意下さい。");
+        @endif
+    </script>
 </head>
 <body>
     <!-- ヘッダー。 -->
     <header class="header">
         <!-- ロゴ。 -->
-        <h1 class="header-title"><a href="/">Revistart</a></h1>
+        <h1 class="header-title"><a href="/" id="revistart">Revistart</a></h1>
         <!-- <button class="toggle-menu-button"><img src="{{ asset('img/sozai_cman_jp_20220822223728.png') }}" alt=""></button> -->
 
         <!-- ナビゲーションリンク。 -->
@@ -34,7 +39,7 @@
                     <li><a href="#usage" class="parent-balloon"><i class="fa-regular fa-message"></i><span class="header-balloon second">FAQ</span></a></li>
                     <li><a href="/" class="parent-balloon"><i class="fa-solid fa-list"></i><span class="header-balloon">計画一覧</span></a></li>
                     <li><a href="{{ route('tasks.trace') }}" class="parent-balloon"><i class="fa-solid fa-clock-rotate-left"></i><span class="header-balloon">完了履歴</span></a></li>
-                    <li><a href="{{ route('tasks.suspensionList') }}" class="parent-balloon"><i class="fa-solid fa-rectangle-list"></i><span class="header-balloon">中断計画</span></a></li>
+                    <li><a href="{{ route('tasks.suspensionList') }}" class="parent-balloon" id="hoge"><i class="fa-solid fa-rectangle-list"></i><span class="header-balloon">中断計画</span></a></li>
                 </ul>
             </nav>
 
@@ -77,6 +82,14 @@
         <p class="copyright">&copy; 2022 Revistart</p>
     </footer>
 
+    @php
+        $yes = "hoge";
+    @endphp
+
+    <script>
+        const hoge = @json($yes);
+        console.log("hoge");
+    </script>
     <!-- JavaScriptのパス。 -->
     <script src="{{ mix('js/app.js') }}"></script>
 </body>

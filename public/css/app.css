@@ -227,7 +227,7 @@ img {
 }
 
 .wrapper .main-area .content.open {
-  max-width: 69%;
+  max-width: 68.7%;
 }
 
 .wrapper .main-area .content #left-panel-button {
@@ -571,6 +571,11 @@ img {
 
 .wrapper #sub-left-panel-button i {
   font-size: 1.3rem;
+  transition: transform 0.2s;
+}
+
+.wrapper #sub-left-panel-button.open i {
+  transform: rotate(180deg);
 }
 
 .wrapper #mask {
@@ -605,6 +610,66 @@ img {
 
 .wrapper #modalWindow.hidden {
   display: none;
+}
+
+.wrapper #subModalWindow {
+  background: #fff;
+  width: 400px;
+  padding: 5px;
+  border-radius: 4px;
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  /* width，left，rightの全てがautoでなく（leftとrightは0），かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
+  /* この際，topは左右と関係ないのでどのような値であっても問題なし。 */
+  margin: 0 auto;
+  z-index: 100;
+  display: block;
+}
+
+.wrapper #subModalWindow.hidden {
+  display: none;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow form button#task-delete {
+  opacity: 0;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow .form-label {
+  display: block;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  margin-top: 15px;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow .form-input {
+  display: block;
+  width: 100%;
+  color: #fff;
+  background-color: #555555;
+  padding: 8px;
+  border-radius: 4px;
+  margin: 5px 0;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow .form-input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.wrapper .main-area .content .content-area #subModalWindow .form-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.wrapper .main-area .content .content-area #subModalWindow .error-message {
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
 .wrapper .main-area .content .content-area #modalWindow div {

@@ -187,6 +187,7 @@
   subLeftPanelButton.addEventListener('click', function () {
     // 上記Nodeをクリックした扱いにしている。
     leftPanelButton.click();
+    subLeftPanelButton.classList.toggle('open');
   });
   /* =================================================== */
   // タブメニューの実装。
@@ -386,7 +387,9 @@
 
   /* DOM操作 */
 
-  var mask = document.getElementById('mask'); // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
+  var mask = document.getElementById('mask');
+  /* モーダルウインドウ1つ目。*/
+  // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
   // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
 
   trs.forEach(function (tr) {
@@ -394,7 +397,36 @@
     var children = tr.children; // 上から2番目の子Node（ダミーの「完了する」ボタン）がクリックされた時。
 
     children[1].addEventListener('click', function () {
-      // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前のNode（id="modalWindow"）のclassListにアクセス。
+      // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前の更に一個前のNode（id="modalWindow"）のclassListにアクセス。
+      // モーダルウインドウ部分を表示させるため。
+      tr.previousElementSibling.previousElementSibling.classList.remove('hidden'); // マスク部分を表示させるため。
+
+      mask.classList.remove('hidden');
+    }); // マスク部分がクリックされた時。
+
+    mask.addEventListener('click', function () {
+      // class="hidden"を追加することで再度モーダルウインドウ部分とマスク部分を非表示にしている。
+      tr.previousElementSibling.previousElementSibling.classList.add('hidden');
+      mask.classList.add('hidden');
+    }); // 「キャンセル」ボタンがクリックされた時。spanタグは#modalWindowの子要素[0]の子要素[1]の子要素[0]に位置している。
+
+    tr.previousElementSibling.previousElementSibling.children[0].children[1].children[0].addEventListener('click', function () {
+      // マスク部分がクリックされた時と同じ挙動。
+      mask.click(); // デバック用。
+
+      /* console.log('hoge'); */
+    });
+  });
+  /* モーダルウインドウ2つ目。 */
+  // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
+  // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
+
+  trs.forEach(function (tr) {
+    // tr（class="tr"のついたtrタグ）の子Nodeを全て取得。今回は直下のtdタグを全て取得。
+    var children = tr.children; // 先頭の子Node（「編集する」ボタン）がクリックされた時。
+
+    children[0].addEventListener('click', function () {
+      // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前ののNodeのclassListにアクセス。
       // モーダルウインドウ部分を表示させるため。
       tr.previousElementSibling.classList.remove('hidden'); // マスク部分を表示させるため。
 
@@ -405,13 +437,46 @@
       // class="hidden"を追加することで再度モーダルウインドウ部分とマスク部分を非表示にしている。
       tr.previousElementSibling.classList.add('hidden');
       mask.classList.add('hidden');
-    }); // 「キャンセル」ボタンがクリックされた時。spanタグは#modalWindowの子要素[0]の子要素[1]の子要素[0]に位置している。
+    }); // 個数を確認。エラーメッセージが一切表示されていない場合は12個の子Nodeで構成。相対的なアクセスのために個数を厳密に判定する必要があった。
 
-    tr.previousElementSibling.children[0].children[1].children[0].addEventListener('click', function () {
-      // マスク部分がクリックされた時と同じ挙動。
-      mask.click(); // デバック用。
+    if (tr.previousElementSibling.children[0].children[0].children.length == 12) {
+      tr.previousElementSibling.children[0].children[0].children[11].addEventListener('click', function () {
+        console.log('hoge');
 
-      /* console.log('hoge'); */
+        if (!confirm('本当に削除しますか？')) {
+          return;
+        } // console.log(tr.previousElementSibling.children[0].children);
+
+
+        tr.previousElementSibling.children[0].children[1].children[0].click();
+      }); // エラーメッセージが1個表示されているとき。
+    } else if (tr.previousElementSibling.children[0].children[0].children.length === 13) {
+      tr.previousElementSibling.children[0].children[0].children[12].addEventListener('click', function () {
+        console.log('hoge');
+
+        if (!confirm('本当に削除しますか？')) {
+          return;
+        } // console.log(tr.previousElementSibling.children[0].children);
+
+
+        tr.previousElementSibling.children[0].children[1].children[0].click();
+      }); // エラーメッセージが2個表示されているとき。
+    } else if (tr.previousElementSibling.children[0].children[0].children.length === 14) {
+      tr.previousElementSibling.children[0].children[0].children[13].addEventListener('click', function () {
+        console.log('hoge');
+
+        if (!confirm('本当に削除しますか？')) {
+          return;
+        } // console.log(tr.previousElementSibling.children[0].children);
+
+
+        tr.previousElementSibling.children[0].children[1].children[0].click();
+      });
+    } // デバック用。以下のようにchildrenの中身を確認して相対的なアクセスをしよう。
+
+
+    tr.previousElementSibling.children[0].children[0].addEventListener('click', function () {
+      console.log(tr.previousElementSibling.children[0].children[0].children);
     });
   });
 }

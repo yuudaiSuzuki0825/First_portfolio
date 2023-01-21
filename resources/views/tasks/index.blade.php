@@ -6,9 +6,7 @@
 
     <div class="main-area">
         <!-- サイドパネル。 -->
-        <aside id="left-panel">
-            <!-- ここに「目標」を書く。 -->
-            <!-- クリックするとモーダルウインドウにて「目標」の設定操作が出来るようにしたい。後日実装予定。 -->
+        <aside id="left-panel" class="open">
             <h2>計画作成</h2>
             {!! Form::model($task, ['route' => 'tasks.store'], ['class' => 'form']) !!}
                 <!-- 第二引数をurlにしてもOK。['url' => '/tasks']。 -->
@@ -16,28 +14,29 @@
                 {!! Form::label('title', 'テーマ', ['class' => 'form-label']) !!}
                 {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内"]) !!}
                 @if ($errors->first('title'))
-                    <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p>
+                     <!-- <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p> -->
+                     <!-- <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>字数制限と未入力にご注意下さい。</p> -->
                 @endif
 
                 {!! Form::label('start', '開始日', ['class' => 'form-label']) !!}
                 {!! Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-input start-input']) !!}
                 <!-- {!! Form::text('start', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!} -->
-                @if ($errors->first('start'))
+                <!-- @if ($errors->first('start'))
                     <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('start') }}</p>
-                @endif
+                @endif -->
 
                 {!! Form::label('end', '完了日', ['class' => 'form-label']) !!}
                 {!! Form::date('end', \Carbon\Carbon::now(), ['class' => 'form-input end-input']) !!}
                 <!-- {!! Form::text('end', null, ['class' => 'form-input', "placeholder" => "15字以内"]) !!} -->
-                @if ($errors->first('end'))
+                <!-- @if ($errors->first('end'))
                     <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('end') }}</p>
-                @endif
+                @endif -->
 
                 {!! Form::label('content', '概要', ['class' => 'form-label']) !!}
                 {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内"]) !!}
-                @if ($errors->first('content'))
+                <!-- @if ($errors->first('content'))
                     <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('content') }}</p>
-                @endif
+                @endif -->
 
                 <!-- {!! Form::submit('作成する', ['class' => 'form-btn']) !!} -->
                 <button type="submit" class="create-button"><i class="fa-solid fa-file-circle-plus"></i> 作成する</button>
@@ -47,7 +46,7 @@
         </aside>
 
         <!-- メインコンテンツ。 -->
-        <section class="content">
+        <section class="content open">
             <!-- サイドパネルボタン（サイドパネルを開くボタン）。 -->
             <div id="left-panel-button"><i class="fa-solid fa-chevron-right"></i></div>
 
@@ -92,7 +91,7 @@
                 <table class="table">
                     <tbody>
                         @foreach ($tasks as $task)
-                        <!-- モーダルウインドウ部分。 -->
+                        <!-- モーダルウインドウ部分その１。 -->
                         <tr id="modalWindow" class="hidden">
                             <!-- trの中に子要素として何か挿入したい場合はtdを挟むこと。試しにtdを除いてformタグがどの位置に移動するか確認してみて。 -->
                             <td>
@@ -108,8 +107,55 @@
                                 </div>
                             </td>
                         </tr>
+                        <!-- モーダルウインドウ部分その２。 -->
+                        <tr id="subModalWindow" class="hidden">
+                            <td>
+                                <!-- <h2>計画更新</h2> -->
+
+                                {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put'], ['class' => 'form']) !!}
+
+                                    {!! Form::label('title', 'テーマ:', ['class' => 'form-label']) !!}
+                                    {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内"]) !!}
+                                    <!-- @if ($errors->first('title'))
+                                        <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p>
+                                    @endif -->
+
+                                    {!! Form::label('start', '開始日:', ['class' => 'form-label']) !!}
+                                    <!-- Carbonライブラリを活用していても他と同じく第二引数にnullを指定すればLaravelCollectiveライブラリの仕様により自動的にデータベース上の開始日の値が入った状態で表示出来る。 -->
+                                    {!! Form::date('start',  null, ['class' => 'form-input start-input']) !!}
+                                    <!-- @if ($errors->first('start'))
+                                        <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('start') }}</p>
+                                    @endif -->
+
+                                    {!! Form::label('end', '完了日:', ['class' => 'form-label']) !!}
+                                    <!-- Carbonライブラリを活用していても他と同じく第二引数にnullを指定すればLaravelCollectiveライブラリの仕様により自動的にデータベース上の完了日の値が入った状態で表示出来る。 -->
+                                    {!! Form::date('end', null, ['class' => 'form-input end-input']) !!}
+                                    <!-- @if ($errors->first('end'))
+                                        <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('end') }}</p>
+                                    @endif -->
+
+                                    {!! Form::label('content', '概要:', ['class' => 'form-label']) !!}
+                                    {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内"]) !!}
+                                    <!-- @if ($errors->first('content'))
+                                        <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('content') }}</p>
+                                    @endif -->
+
+                                    <!-- {!! Form::submit('更新する', ['class' => 'form-btn'])!!} -->
+                                    <button type="submit"><i class="fa-solid fa-file-pen"></i>更新する</button>
+
+                                    <div><i class="fa-solid fa-trash-can"></i>削除する</div>
+
+                                {!! Form::close() !!}
+
+                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                                        <button type="submit" id="task-delete">削除</button>
+                                        @method('DELETE')
+                                        @csrf
+                                </form>
+                            </td>
+                        </tr>
                         <tr class="tr">
-                            <td class="FirstAid"><a href="{{ route('tasks.edit', $task->id) }}" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
+                            <td class="FirstAid"><a href="#" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
                             <!-- 「完了する」アイコン（ダミー）。 -->
                             <td id="modalWindowOpen" class="parent-balloon">
                                 <i class="fa-solid fa-circle-check"></i><span class="balloon">完了する</span>

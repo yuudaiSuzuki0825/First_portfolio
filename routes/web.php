@@ -11,6 +11,8 @@
 |
 */
 
+/*　メソッドとURIが全く一緒のルーティングを複数作ってはいけない。URIを変更したりputからpatchに変えるなどの工夫を。 */
+
 // 計画一覧の検索機能。検索結果を表示させる。
 Route::get('tasks/search', 'TasksController@search')->name('tasks.search');
 // 計画一覧を閲覧する。
