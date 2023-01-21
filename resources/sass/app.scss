@@ -392,7 +392,7 @@ img {
 // サイドパネルボタンが押下された時。
 .wrapper .main-area .content.open {
     // メインコンテンツの最大幅を指定している。これを指定しないとアコーディオンの開閉時に横幅の挙動がおかしくなる。コメントアウトして確認を。
-    max-width: 69%;
+    max-width: 68.7%;
 }
 
 // サイドパネルボタンのコーディング。
@@ -912,6 +912,13 @@ img {
 // 右側のサイドパネルボタン（アイコン）の大きさ指定。
 .wrapper #sub-left-panel-button i {
     font-size: 1.3rem;
+    // アニメーションの調整（イージング）。
+    transition: transform .2s;
+}
+
+.wrapper #sub-left-panel-button.open i {
+    // アイコンの向きが180度変化する。
+    transform: rotate(180deg);
 }
 
 // モーダルウインドウここから。
@@ -966,6 +973,71 @@ img {
     // class="hidden"が付いている時は，非表示。
     display: none;
 }
+
+// サブのモーダルウインドウここから。
+.wrapper #subModalWindow {
+     // 色指定。
+     background: #fff;
+     // 横幅指定。
+     width: 400px;
+     // 内側の余白指定。
+     padding: 5px;
+     // 角丸指定。
+     border-radius: 4px;
+     // fixedを指定。親要素（厳密には包含ブロック）はページ全体となる。
+     position: fixed; // ページ全体を基準にポジショニング。
+     top: 20px;
+     left: 0;
+     right: 0;
+     /* width，left，rightの全てがautoでなく（leftとrightは0），かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
+     /* この際，topは左右と関係ないのでどのような値であっても問題なし。 */
+     margin: 0 auto;
+     // 要素の重なり順を調整。モーダルウインドウ部分を一番上に配置するため。その次にマスク部分。
+     z-index: 100;
+     // class="hidden"が取り外されている時は，表示。app.jsで制御している。
+     display: block;
+}
+.wrapper #subModalWindow.hidden {
+    display: none;
+}
+.wrapper .main-area .content .content-area #subModalWindow form button#task-delete {
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+}
+.wrapper .main-area .content .content-area #subModalWindow .form-label {
+    // 横幅一杯まで占有するため。
+    display: block;
+    // 範囲選択できなくしている。
+    user-select: none;
+    // 外側の余白指定。
+    margin-top: 15px;
+}
+.wrapper .main-area .content .content-area #subModalWindow .form-input {
+    // 横幅一杯まで占有するため。
+    display: block;
+    // 横幅指定。絶対値の指定でも構わないが，概要欄が大きくなりすぎる可能性があるので親要素内に収める必要がある。デベロッパーツールで数値を変えて確認を。
+    width: 100%;
+    // 色指定。
+    color: #fff;
+    background-color: #555555;
+    // 内側の余白指定。
+    padding: 8px;
+    // 角丸指定。
+    border-radius: 4px;
+    // 外側の余白指定。
+    margin: 5px 0;
+}
+.wrapper .main-area .content .content-area #subModalWindow .form-input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+.wrapper .main-area .content .content-area #subModalWindow .error-message {
+    // エラーメッセージの指定。別のエラーメッセージのposition指定を解除している。
+    position: relative;
+    top: 0;
+    left: 0;
+}
+// サブのモーダルウインドウここまで。
 
 // モーダルウインドウ部分の中身のコーディング。
 .wrapper .main-area .content .content-area #modalWindow div {

@@ -69,8 +69,11 @@ class TasksController extends Controller
         // 絞り込んだレコードの総数を取得。今後利用予定。
         $tasks_search_count = $tasks->count();
 
+        // Task（モデルクラス）のインスタンス生成。計画の新規作成に必要。
+        $task = new Task;
+
         // search.blade.phpへ遷移。その際，$tasksと$count, $tasks_search_count, $tasks_num, $suspensions_numを渡している。
-        return view('tasks.search', compact('tasks', 'count', 'tasks_search_count', 'tasks_num', 'suspensions_num'));
+        return view('tasks.search', compact('tasks', 'count', 'tasks_search_count', 'tasks_num', 'suspensions_num', 'task'));
     }
 
     // 検索機能で使用。詳細については理解不足…（コピペ）。
@@ -212,12 +215,15 @@ class TasksController extends Controller
         $tasks_num = Task::count();
         // ソフトデリート済みのTasksテーブルの全レコードをカウント。
         $suspensions_num = Task::onlyTrashed()->count();
+        // Task（モデルクラス）のインスタンス生成。計画の新規作成に必要。
+        $task = new Task;
         // trace.blade.phpに遷移。その際，$historiesと$count, $tasks_num, $suspensions_numを渡している。
         return view('tasks.trace', [
             'histories' => $histories,
             'count' => $count,
             'tasks_num' => $tasks_num,
             'suspensions_num' => $suspensions_num,
+            'task' => $task
         ]);
     }
 
@@ -242,13 +248,16 @@ class TasksController extends Controller
         $suspensions_num = Task::onlyTrashed()->count();
         // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を10件ずつ取得。
         $histories = History::where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->paginate(10);
+        // Task（モデルクラス）のインスタンス生成。計画の新規作成に必要。
+        $task = new Task;
 
         // searchHistory.blade.phpへ遷移。その際，$historiesと$count, $tasks_num, $suspensions_numを渡している。
         return view('tasks.searchHistory', [
             'histories' => $histories,
             'count' => $count,
             'tasks_num' => $tasks_num,
-            'suspensions_num' => $suspensions_num
+            'suspensions_num' => $suspensions_num,
+            'task' => $task
         ]);
     }
 
@@ -308,12 +317,16 @@ class TasksController extends Controller
         // Tasksテーブルの全レコードを取得（こちらはソフトデリートではない方）。
         $tasks_num = Task::count();
 
+        // Task（モデルクラス）のインスタンス生成。計画の新規作成に必要。
+        $task = new Task;
+
         // suspendList.blade.phpに遷移。その際，$suspensionsと$suspensions_num, $count, $tasks_numを渡している。
         return view('tasks.suspendList', [
             'suspensions' => $suspensions,
             'suspensions_num' => $suspensions_num,
             'count' => $count,
             'tasks_num' => $tasks_num,
+            'task' => $task
         ]);
     }
 
