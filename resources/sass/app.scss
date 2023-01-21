@@ -300,9 +300,9 @@ img {
 // サイドパネルのコーディング。
 .wrapper .main-area #left-panel {
     // 横幅の指定。
-    width: 200px;
+    width: 30%;
     // 高さの指定。絶対値指定しないと，例えばレコード数が少ないときに縦に縮んでしまう。
-    height: 300px;
+    height: 580px;
     // 内側の余白。
     padding: 20px;
     /* 色指定。 */
@@ -316,6 +316,55 @@ img {
     // デフォルトでは非表示。アイコンボタンをクリックすると表示される。
     display: none;
 }
+
+// サイドパネルの計画作成欄のコーディングここから。
+.wrapper .main-area #left-panel form .form-label {
+    // 横幅一杯まで占有するため。
+    display: block;
+    // 範囲選択できなくしている。
+    user-select: none;
+    // 外側の余白指定。
+    margin-top: 15px;
+}
+.wrapper .main-area #left-panel form .form-input {
+    // 横幅一杯まで占有するため。
+    display: block;
+    // 横幅指定。絶対値の指定でも構わないが，概要欄が大きくなりすぎる可能性があるので親要素内に収める必要がある。デベロッパーツールで数値を変えて確認を。
+    width: 100%;
+    // 色指定。
+    color: #fff;
+    background-color: #555555;
+    // 内側の余白指定。
+    padding: 8px;
+    // 角丸指定。
+    border-radius: 4px;
+    // 外側の余白指定。
+    margin: 5px 0;
+}
+// プレースホルダーの色の変更をしている。「::placeholder」が必要。
+.wrapper .main-area #left-panel form .form-input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+// エラーメッセージ。
+.wrapper .main-area #left-panel form .error-message {
+    // 色指定。
+    color: #FF4A52;
+}
+// 「作成する」ボタンのコーディング。
+.wrapper .main-area #left-panel form .create-button {
+    // 色指定。
+    color: #fff;
+    background-color: #555555;
+    // 外側の余白指定。
+    margin-top: 15px;
+    // 内側の余白指定。
+    padding: 8px;
+    // 角丸指定。
+    border-radius: 4px;
+    // 範囲選択できなくしている。
+    user-select: none;
+}
+// ここまでサイドパネルの計画作成欄のコーディング。
 
 // サイドパネルのアイコンボタンがクリックされた時。
 .wrapper .main-area #left-panel.open {
@@ -339,6 +388,11 @@ img {
     flex-grow: 1;
     // 高さの最小値を指定。サイドパネルの高さと同じにした。これにより，計画数が少なくてもcontent部分の高さが300px以下になることはない。
     min-height: 300px;
+}
+// サイドパネルボタンが押下された時。
+.wrapper .main-area .content.open {
+    // メインコンテンツの最大幅を指定している。これを指定しないとアコーディオンの開閉時に横幅の挙動がおかしくなる。コメントアウトして確認を。
+    max-width: 69%;
 }
 
 // サイドパネルボタンのコーディング。
@@ -791,7 +845,7 @@ img {
     opacity: 1;
 }
 
-// ページトップへ遷移するボタンのコーディング続き。
+// ページトップへ遷移するボタン（アイコン）の大きさ指定。
 .wrapper #to_top i {
     // アイコンの大きさはフォントサイズで調整する。16px×2=32px。
     font-size: 2rem;
@@ -823,8 +877,40 @@ img {
     opacity: 1;
 }
 
+// 全アコーディオンを開閉するボタン（アイコン）の大きさ指定。
 .wrapper #AllplanDetailButton i {
     // アイコンの大きさを調整。縦横両方とも32pxになるようにpaddingの値を変更しながら微調整した。
+    font-size: 1.3rem;
+}
+
+// 右側のサイドパネルボタンのコーディング。
+.wrapper #sub-left-panel-button {
+    // 包含ブロックがページ全体になっている点に注意。親要素にposition: relative;を指定しないパターン。
+    position: fixed; // ポジショニング。ページ全体に対しての位置指定。
+    bottom: 110px;
+    right: 10px;
+    // 色指定。
+    color: #fff;
+    background-color: #333;
+    // 内側の余白指定。縦横両方とも32pxになるようにfont-sizeの値を変更しながら微調整を行った。
+    padding: 5.015px 8.2px 5.665px;
+    // アイコンの型抜き。コメントアウトして確認してみてほしい。
+    border-radius: 50%;
+    // ホバー時のマウスの形を変更。
+    cursor: pointer;
+    // スクロールされてヘッダー部分が画面から見えなくなるまでは完全透明にしている。
+    opacity: 0;
+    // アニメーションの調整（イージング）。
+    transition: opacity .3s;
+}
+
+// 右側のサイドパネルボタンのアニメーション。スクロールされてヘッダー部分が完全に画面から見えなくなった時。app.js参照。
+.wrapper #sub-left-panel-button.scrolled {
+    opacity: 1;
+}
+
+// 右側のサイドパネルボタン（アイコン）の大きさ指定。
+.wrapper #sub-left-panel-button i {
     font-size: 1.3rem;
 }
 
