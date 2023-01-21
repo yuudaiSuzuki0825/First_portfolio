@@ -116,9 +116,12 @@
         toTop.classList.add('scrolled'); // 「計画一覧」「完了履歴」「ゴミ箱」においてレコード数が0件の際には全アコーディオンを開閉するボタンを表示させないようにしている。
 
         if (!trs.length < 1) {
-          // 上記に同じ。これにより「.wrapper #AllplanDetailButton.scrolled{}」が読み込まれる。AllplanDetailButton（Node）はアコーディオンにてDOM操作済み（全アコーディオンを開閉するボタン）。
+          // 上記に同じ。これにより「.wrapper #AllplanDetailButton.scrolled{}」が読み込まれる。AllplanDetailButton（Node）はアコーディオンの実装にてDOM操作済み（全アコーディオンを開閉するボタン）。
           AllplanDetailButton.classList.add('scrolled');
-        }
+        } // 上記に同じ。これにより，「.wrapper #sub-left-panel-button.scrolled{}」が読み込まれる。subLeftPanelButton（Node）はサイドパネルの実装にてDOM操作済み。
+
+
+        subLeftPanelButton.classList.add('scrolled');
       } else {
         // class="scrolled"が取り除かれる。これによりボタンが透明になる。
         toTop.classList.remove('scrolled'); // 「計画一覧」「完了履歴」「ゴミ箱」においてレコード数が0件の際には全アコーディオンを開閉するボタンを表示させないようにしている。
@@ -126,7 +129,10 @@
         if (!trs.length < 1) {
           // 上記に同じ。AllplanDetailButton（Node）はアコーディオンにてDOM操作済み（全アコーディオンを開閉するボタン）。
           AllplanDetailButton.classList.remove('scrolled');
-        }
+        } // 上記に同じ。subLeftPanelButton（Node）はサイドパネルの実装にてDOM操作済み。
+
+
+        subLeftPanelButton.classList.remove('scrolled');
       }
     });
   };
@@ -161,14 +167,26 @@
   /* DOM操作 */
 
   var leftPanelButton = document.getElementById('left-panel-button');
-  var leftPanel = document.getElementById('left-panel'); // サイドパネルのボタンがクリックされた時。
+  var subLeftPanelButton = document.getElementById('sub-left-panel-button');
+  var leftPanel = document.getElementById('left-panel');
+  var content = document.querySelector('.content');
+  var titleInput = document.querySelector('.title-input'); // サイドパネルのボタンがクリックされた時。
 
   leftPanelButton.addEventListener('click', function () {
     // 各Nodeに対してclass="open"を追加している。
     // 「.wrapper .main-area #left-panel.open{}」を読み込むため。
     leftPanel.classList.toggle('open'); // 「.wrapper .main-area .content #left-panel-button.open i{}」を読み込むため。
 
-    leftPanelButton.classList.toggle('open');
+    leftPanelButton.classList.toggle('open'); // 「.wrapper .main-area .content.open[}」を読み込むため。
+
+    content.classList.toggle('open'); // サイドパネルをクリックした直後，即座にテーマ入力するのを手助けするため。押下と同時に入力欄にフォーカス。
+
+    titleInput.focus();
+  }); // 右側のサイドパネルボタンがクリックされた時。
+
+  subLeftPanelButton.addEventListener('click', function () {
+    // 上記Nodeをクリックした扱いにしている。
+    leftPanelButton.click();
   });
   /* =================================================== */
   // タブメニューの実装。

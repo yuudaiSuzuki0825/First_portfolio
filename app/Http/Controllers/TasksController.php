@@ -34,8 +34,11 @@ class TasksController extends Controller
         // ソフトデリート済みのTasksテーブルの全レコードを取得。
         $suspentions_num = Task::onlyTrashed()->count();
 
+        // Task（モデルクラス）のインスタンス生成。計画の新規作成に必要。
+        $task = new Task;
+
         // index.blade.phpへ遷移。その際，$tasksと$tasks_num, $count，$suspentions_numを渡している。
-        return view('tasks.index', compact('tasks','tasks_num', 'count', 'suspentions_num'));
+        return view('tasks.index', compact('tasks','tasks_num', 'count', 'suspentions_num', 'task'));
     }
 
     public function search(Request $request)
