@@ -288,22 +288,20 @@
     });
 
     /* =================================================== */
-    // モーダルウインドウの実装。
+    // モーダルウインドウの実装その１。
     /* =================================================== */
 
-    /* DOM操作 */
+    /* DOM操作。これはその2でも使用する。 */
     const mask = document.getElementById('mask');
-
-    /* モーダルウインドウ1つ目。*/
 
     // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
     // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
     trs.forEach(tr => {
         // tr（class="tr"のついたtrタグ）の子Nodeを全て取得。今回は直下のtdタグを全て取得。
         let children = tr.children;
-        // 上から2番目の子Node（ダミーの「完了する」ボタン）がクリックされた時。
+        // id="modalWindowOpen"のtdタグ（ダミーの「完了する」ボタン）がクリックされた時。
         children[1].addEventListener('click', () => {
-            // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前の更に一個前のNode（id="modalWindow"）のclassListにアクセス。
+            // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前の更に一個前のNode（id="modalWindow"，モーダルウインドウその１の方）のclassListにアクセス。
             // モーダルウインドウ部分を表示させるため。
             tr.previousElementSibling.previousElementSibling.classList.remove('hidden');
             // マスク部分を表示させるため。
@@ -311,11 +309,11 @@
         });
         // マスク部分がクリックされた時。
         mask.addEventListener('click', () => {
-            // class="hidden"を追加することで再度モーダルウインドウ部分とマスク部分を非表示にしている。
+            // class="hidden"を追加することで再度モーダルウインドウ部分（その１）とマスク部分を非表示にしている。
             tr.previousElementSibling.previousElementSibling.classList.add('hidden');
             mask.classList.add('hidden');
         });
-        // 「キャンセル」ボタンがクリックされた時。spanタグは#modalWindowの子要素[0]の子要素[1]の子要素[0]に位置している。
+        // 「キャンセル」ボタンがクリックされた時。「キャンセル」ボタンは#modalWindowの子要素[0]（td）の子要素[1]（div）の子要素[0]（span）に位置している。
         tr.previousElementSibling.previousElementSibling.children[0].children[1].children[0].addEventListener('click', () => {
             // マスク部分がクリックされた時と同じ挙動。
             mask.click();
@@ -325,7 +323,9 @@
     });
 
 
-    /* モーダルウインドウ2つ目。 */
+    /* =================================================== */
+    // モーダルウインドウの実装その２。
+    /* =================================================== */
 
     // ＊以下で使用しているtrs（NodeList）はアコーディオンの実装時にDOM操作済み。
     // trsの各Node（class="tr"のついたtrタグ）にforEach文でアクセス。
@@ -334,7 +334,7 @@
         let children = tr.children;
         // 先頭の子Node（「編集する」ボタン）がクリックされた時。
         children[0].addEventListener('click', () => {
-            // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前ののNodeのclassListにアクセス。
+            // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前のNode（id="subModalWindow）のclassListにアクセス。
             // モーダルウインドウ部分を表示させるため。
             tr.previousElementSibling.classList.remove('hidden');
             // マスク部分を表示させるため。
@@ -347,44 +347,62 @@
             mask.classList.add('hidden');
         });
 
-        // 個数を確認。エラーメッセージが一切表示されていない場合は12個の子Nodeで構成。相対的なアクセスのために個数を厳密に判定する必要があった。
+        // 条件式➡class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭の子Node（form）内の子Nodeの全個数をカウントし，12個かどうか判定。
+        // 計画編集のエラーメッセージをダイアログで一括して出すのではなく，各カラムごとに表示させる場合は下記条件分岐が必要になる。
+        // すなわち，エラーメッセージの個数分，子Nodeの相対位置がずれるのでその対策をしている。
+        // lengthが12の時はエラーメッセージが一切無いとき。
         if (tr.previousElementSibling.children[0].children[0].children.length == 12) {
+            // class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭の子Node（form）の先頭から12番目のタグ（配列の添え字番号の形式なので1ずれている）にアクセスし，それがクリックされた時の挙動を命令している。
             tr.previousElementSibling.children[0].children[0].children[11].addEventListener('click', () => {
-                console.log('hoge');
+                // デバック用。
+                /* console.log('hoge'); */
+
+                // ユーザーに削除の最終確認を取っている。
                 if (!confirm('本当に削除しますか？')) {
+                    // キャンセルを押下した場合は早期リターンで以降の処理をスキップ。
                     return;
                 }
 
-                // console.log(tr.previousElementSibling.children[0].children);
+                // class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭から2番目の子Node（form）にアクセスし，クリックした扱いにしている。クリックしたのは「削除」ボタン（本命）。
                 tr.previousElementSibling.children[0].children[1].children[0].click();
             });
-            // エラーメッセージが1個表示されているとき。
+        // lengthが13の時はエラーメッセージが1個表示されているとき（種類は問わない）。
         } else if (tr.previousElementSibling.children[0].children[0].children.length === 13) {
+            // class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭の子Node（form）の先頭から13番目（エラーメッセージ1個分ずれた）のタグ（配列の添え字番号の形式なので1ずれている）にアクセスし，それがクリックされた時の挙動を命令している。
             tr.previousElementSibling.children[0].children[0].children[12].addEventListener('click', () => {
-                console.log('hoge');
+                // デバック用。
+                /* console.log('hoge'); */
+
+                // ユーザーに削除の最終確認を取っている。
                 if (!confirm('本当に削除しますか？')) {
+                    // キャンセルを押下した場合は早期リターンで以降の処理をスキップ。
                     return;
                 }
 
-                // console.log(tr.previousElementSibling.children[0].children);
+                // class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭から2番目の子Node（form）にアクセスし，クリックした扱いにしている。クリックしたのは「削除」ボタン（本命）。
                 tr.previousElementSibling.children[0].children[1].children[0].click();
             });
-            // エラーメッセージが2個表示されているとき。
+        // lengthが14の時はエラーメッセージが2個表示されているとき（種類は問わない）。
         } else if (tr.previousElementSibling.children[0].children[0].children.length === 14) {
+            // class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭の子Node（form）の先頭から14番目（エラーメッセージ2個分ずれた）のタグ（配列の添え字番号の形式なので1ずれている）にアクセスし，それがクリックされた時の挙動を命令している。
             tr.previousElementSibling.children[0].children[0].children[13].addEventListener('click', () => {
-                console.log('hoge');
+                // デバック用。
+                /* console.log('hoge'); */
+
+                // ユーザーに削除の最終確認を取っている。
                 if (!confirm('本当に削除しますか？')) {
+                    // キャンセルを押下した場合は早期リターンで以降の処理をスキップ。
                     return;
                 }
 
-                // console.log(tr.previousElementSibling.children[0].children);
+                // class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭から2番目の子Node（form）にアクセスし，クリックした扱いにしている。クリックしたのは「削除」ボタン（本命）。
                 tr.previousElementSibling.children[0].children[1].children[0].click();
             });
         }
 
-        // デバック用。以下のようにchildrenの中身を確認して相対的なアクセスをしよう。
-        tr.previousElementSibling.children[0].children[0].addEventListener('click', () => {
-            console.log(tr.previousElementSibling.children[0].children[0].children);
-        });
+        // デバック用。以下のようにchildrenの中身を確認することで参考にしよう。
+        // tr.previousElementSibling.children[0].children[0].addEventListener('click', () => {
+        //     console.log(tr.previousElementSibling.children[0].children[0].children);
+        // });
     });
 }

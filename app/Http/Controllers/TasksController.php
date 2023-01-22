@@ -83,24 +83,6 @@ class TasksController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    // 計画一覧ページに組み込む予定。
-    public function create()
-    {
-        // Task（モデルクラス）のインスタンス生成。create.blade.phpのフォームで使用。
-        $task = new Task;
-
-        // create.blade.phpへ遷移。その際，$taskを渡している。
-        return view('tasks.create', [
-            'task' => $task,
-        ]);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -130,25 +112,6 @@ class TasksController extends Controller
 
         // リダイレクト。
         return redirect('/');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    //  計画一覧ページに組み込む予定。
-    public function edit($id)
-    {
-        // id（主キー）を通じて該当レコードを特定し，取得。
-        $task = Task::find($id);
-
-        // edit.blade.phpへ遷移。その際，$taskを渡している。
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
     }
 
     /**

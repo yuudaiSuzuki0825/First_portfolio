@@ -17,8 +17,8 @@
 Route::get('tasks/search', 'TasksController@search')->name('tasks.search');
 // 計画一覧を閲覧する。
 Route::get('/', 'TasksController@index');
-// 通常の計画（Task）に対するCRUDルーティング。showアクションは除いている。ここでのdestroyアクションは論理削除を行っている。
-Route::resource('tasks', 'TasksController', ['only' => ['index', 'create', 'edit', 'store', 'update', 'destroy']]);
+// 通常の計画（Task）に対するCRUDルーティング。showとcreate,editは除いている。ここでのdestroyアクションは論理削除を行っている。
+Route::resource('tasks', 'TasksController', ['only' => ['index', 'store', 'update', 'destroy']]);
 // 完了履歴を閲覧する。
 Route::get('tasks/trace', 'TasksController@trace')->name('tasks.trace');
 // 過去の計画完了の履歴を削除する。
