@@ -1,4 +1,4 @@
-@extends('common.app')
+@extends('common.app2')
 
 @section('content')
     <!-- ここから新規構造。 -->

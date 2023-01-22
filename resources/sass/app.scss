@@ -926,7 +926,7 @@ img {
 // マスク部分のコーディング。
 .wrapper #mask {
     // 背景色の指定。若干透明にしている。
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     // positionをfixedに，topとleft,right,bottomを全て0にすることでマスク部分を作っている。
     position: fixed;
     top: 0;

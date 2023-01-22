@@ -579,7 +579,7 @@ img {
 }
 
 .wrapper #mask {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   position: fixed;
   top: 0;
   bottom: 0;
