@@ -207,7 +207,7 @@ img {
 
 .wrapper .main-area #left-panel form .create-button {
   color: #fff;
-  background-color: #555555;
+  background-color: #5588BB;
   margin-top: 15px;
   padding: 8px;
   border-radius: 4px;
@@ -614,11 +614,12 @@ img {
 
 .wrapper #subModalWindow {
   background: #fff;
-  width: 400px;
-  padding: 5px;
+  width: 500px;
+  height: 513px;
+  padding: 8px;
   border-radius: 4px;
   position: fixed;
-  top: 20px;
+  top: 30px;
   left: 0;
   right: 0;
   /* width，left，rightの全てがautoでなく（leftとrightは0），かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
@@ -630,6 +631,15 @@ img {
 
 .wrapper #subModalWindow.hidden {
   display: none;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow form {
+  padding-bottom: 10px;
+  border-radius: 4px;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow form#task-delete-form {
+  background: transparent;
 }
 
 .wrapper .main-area .content .content-area #subModalWindow form button#task-delete {
@@ -656,6 +666,7 @@ img {
   padding: 8px;
   border-radius: 4px;
   margin: 5px 0;
+  line-height: 1.5;
 }
 
 .wrapper .main-area .content .content-area #subModalWindow .form-input::-moz-placeholder {
@@ -664,6 +675,44 @@ img {
 
 .wrapper .main-area .content .content-area #subModalWindow .form-input::placeholder {
   color: rgba(255, 255, 255, 0.7);
+}
+
+.wrapper .main-area .content .content-area #subModalWindow form #update-button {
+  transition: none;
+  margin-left: 0px;
+  margin-top: 15px;
+  letter-spacing: normal;
+  background-color: #5588BB;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow form #update-button:hover {
+  transform: none;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow form #task-delete-decoying {
+  position: absolute;
+  bottom: 17.6px;
+  left: 150px;
+  color: #fff;
+  background-color: #FF4A52;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow form #return-button {
+  position: absolute;
+  bottom: 17.6px;
+  left: 290px;
+  color: #fff;
+  background-color: #555555;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 1.125rem;
+  cursor: pointer;
 }
 
 .wrapper .main-area .content .content-area #subModalWindow .error-message {

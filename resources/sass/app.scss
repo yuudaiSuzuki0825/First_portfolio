@@ -354,7 +354,7 @@ img {
 .wrapper .main-area #left-panel form .create-button {
     // 色指定。
     color: #fff;
-    background-color: #555555;
+    background-color: #5588BB;
     // 外側の余白指定。
     margin-top: 15px;
     // 内側の余白指定。
@@ -979,14 +979,15 @@ img {
      // 色指定。
      background: #fff;
      // 横幅指定。
-     width: 400px;
+     width: 500px;
+     height: 513px;
      // 内側の余白指定。
-     padding: 5px;
+     padding: 8px;
      // 角丸指定。
      border-radius: 4px;
      // fixedを指定。親要素（厳密には包含ブロック）はページ全体となる。
      position: fixed; // ページ全体を基準にポジショニング。
-     top: 20px;
+     top: 30px;
      left: 0;
      right: 0;
      /* width，left，rightの全てがautoでなく（leftとrightは0），かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
@@ -999,6 +1000,13 @@ img {
 }
 .wrapper #subModalWindow.hidden {
     display: none;
+}
+.wrapper .main-area .content .content-area #subModalWindow form {
+    padding-bottom: 10px;
+    border-radius: 4px;
+}
+.wrapper .main-area .content .content-area #subModalWindow form#task-delete-form {
+    background: transparent;
 }
 .wrapper .main-area .content .content-area #subModalWindow form button#task-delete {
     opacity: 0;
@@ -1027,9 +1035,47 @@ img {
     border-radius: 4px;
     // 外側の余白指定。
     margin: 5px 0;
+    // line-height: 1.5;
 }
 .wrapper .main-area .content .content-area #subModalWindow .form-input::placeholder {
     color: rgba(255,255,255,0.7);
+}
+.wrapper .main-area .content .content-area #subModalWindow form #update-button {
+    // 打消し。
+    transition: none;
+    // 打消し。
+    margin-left: 0px;
+    margin-top: 15px;
+    letter-spacing: normal;
+    background-color:#5588BB;
+    padding: 8px;
+    border-radius: 4px;
+}
+.wrapper .main-area .content .content-area #subModalWindow form #update-button:hover {
+    // 打消し。
+    transform: none;
+}
+.wrapper .main-area .content .content-area #subModalWindow form #task-delete-decoying {
+    position: absolute;
+    bottom: 17.6px;
+    left: 150px;
+    color: #fff;
+    background-color: #FF4A52;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 1.125rem;
+    cursor: pointer;
+}
+.wrapper .main-area .content .content-area #subModalWindow form #return-button {
+    position: absolute;
+    bottom: 17.6px;
+    left: 290px;
+    color: #fff;
+    background-color: #555555;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 1.125rem;
+    cursor: pointer;
 }
 .wrapper .main-area .content .content-area #subModalWindow .error-message {
     // エラーメッセージの指定。別のエラーメッセージのposition指定を解除している。
