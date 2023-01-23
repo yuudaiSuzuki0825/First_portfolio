@@ -438,12 +438,18 @@
       // class="hidden"を追加することで再度モーダルウインドウ部分とマスク部分を非表示にしている。
       tr.previousElementSibling.classList.add('hidden');
       mask.classList.add('hidden');
+    }); // 「戻る」ボタンがクリックされた時。
+
+    tr.previousElementSibling.children[0].children[0].children[12].addEventListener('click', function () {
+      mask.click(); // デバック用。
+
+      /* console.log('hogehoge'); */
     }); // 条件式➡class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭の子Node（form）内の子Nodeの全個数をカウントし，12個かどうか判定。
     // 計画編集のエラーメッセージをダイアログで一括して出すのではなく，各カラムごとに表示させる場合は下記条件分岐が必要になる。
     // すなわち，エラーメッセージの個数分，子Nodeの相対位置がずれるのでその対策をしている。
-    // lengthが12の時はエラーメッセージが一切無いとき。
+    // lengthが13の時はエラーメッセージが一切無いとき。
 
-    if (tr.previousElementSibling.children[0].children[0].children.length == 12) {
+    if (tr.previousElementSibling.children[0].children[0].children.length == 13) {
       // class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭の子Node（form）の先頭から12番目のタグ（配列の添え字番号の形式なので1ずれている）にアクセスし，それがクリックされた時の挙動を命令している。
       tr.previousElementSibling.children[0].children[0].children[11].addEventListener('click', function () {
         // デバック用。
@@ -457,8 +463,8 @@
 
 
         tr.previousElementSibling.children[0].children[1].children[0].click();
-      }); // lengthが13の時はエラーメッセージが1個表示されているとき（種類は問わない）。
-    } else if (tr.previousElementSibling.children[0].children[0].children.length === 13) {
+      }); // lengthが14の時はエラーメッセージが1個表示されているとき（種類は問わない）。
+    } else if (tr.previousElementSibling.children[0].children[0].children.length === 14) {
       // class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭の子Node（form）の先頭から13番目（エラーメッセージ1個分ずれた）のタグ（配列の添え字番号の形式なので1ずれている）にアクセスし，それがクリックされた時の挙動を命令している。
       tr.previousElementSibling.children[0].children[0].children[12].addEventListener('click', function () {
         // デバック用。
@@ -472,8 +478,8 @@
 
 
         tr.previousElementSibling.children[0].children[1].children[0].click();
-      }); // lengthが14の時はエラーメッセージが2個表示されているとき（種類は問わない）。
-    } else if (tr.previousElementSibling.children[0].children[0].children.length === 14) {
+      }); // lengthが15の時はエラーメッセージが2個表示されているとき（種類は問わない）。
+    } else if (tr.previousElementSibling.children[0].children[0].children.length === 15) {
       // class="tr"のtrタグによって，相対的にアクセスされたid="subModalWindow"のtrタグの先頭の子Node（td）の先頭の子Node（form）の先頭から14番目（エラーメッセージ2個分ずれた）のタグ（配列の添え字番号の形式なので1ずれている）にアクセスし，それがクリックされた時の挙動を命令している。
       tr.previousElementSibling.children[0].children[0].children[13].addEventListener('click', function () {
         // デバック用。
