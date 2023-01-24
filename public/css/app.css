@@ -615,7 +615,7 @@ img {
 .wrapper #subModalWindow {
   background: #fff;
   width: 500px;
-  height: 513px;
+  height: 500px;
   padding: 8px;
   border-radius: 4px;
   position: fixed;
@@ -644,10 +644,10 @@ img {
 
 .wrapper .main-area .content .content-area #subModalWindow form button#task-delete {
   opacity: 0;
-  pointer-events: none;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  pointer-events: none;
 }
 
 .wrapper .main-area .content .content-area #subModalWindow .form-label {
@@ -677,6 +677,10 @@ img {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.wrapper .main-area .content .content-area #subModalWindow .form-input.textarea-input {
+  height: 150px;
+}
+
 .wrapper .main-area .content .content-area #subModalWindow form #update-button {
   transition: none;
   margin-left: 0px;
@@ -693,7 +697,7 @@ img {
 
 .wrapper .main-area .content .content-area #subModalWindow form #task-delete-decoying {
   position: absolute;
-  bottom: 17.6px;
+  bottom: 18.2px;
   left: 150px;
   color: #fff;
   background-color: #FF4A52;
@@ -705,7 +709,7 @@ img {
 
 .wrapper .main-area .content .content-area #subModalWindow form #return-button {
   position: absolute;
-  bottom: 17.6px;
+  bottom: 18.2px;
   left: 290px;
   color: #fff;
   background-color: #555555;
