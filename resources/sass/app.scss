@@ -374,7 +374,7 @@ img {
 
 // メインコンテンツ。
 .wrapper .main-area .content {
-    // ポジショニングのため。エラーメッセージのポジショニングでも使用。
+    // ポジショニングのため。エラーメッセージやモーダルウインドウのポジショニングでも使用。
     position: relative;
     // .contentの領域を広げるため。コメントアウトして確認。
     // （考察）↓
@@ -980,7 +980,7 @@ img {
      background: #fff;
      // 横幅指定。
      width: 500px;
-     height: 513px;
+     height: 500px;
      // 内側の余白指定。
      padding: 8px;
      // 角丸指定。
@@ -998,20 +998,25 @@ img {
      // class="hidden"が取り外されている時は，表示。app.jsで制御している。
      display: block;
 }
+// デフォではclass="hidden"がついているが，「編集する」ボタンを押下するとJavaScriptの処理で以下が読み込まれなくなる。
 .wrapper #subModalWindow.hidden {
     display: none;
 }
 .wrapper .main-area .content .content-area #subModalWindow form {
+    // 内側の余白指定。
     padding-bottom: 10px;
+    // 角丸指定。
     border-radius: 4px;
 }
 .wrapper .main-area .content .content-area #subModalWindow form#task-delete-form {
-    background: transparent;
+    // 背景色を透明にしている。本命の「削除」ボタンはユーザーが視認できずかつクリック出来ないように配慮してスタイル指定している。
+    background: transparent; // コメントアウトして挙動確認を。
 }
 .wrapper .main-area .content .content-area #subModalWindow form button#task-delete {
+    // 本命の「削除」ボタンを完全透明にし，範囲選択を禁止し，クリックをできないようにしている。ユーザーが視認できずかつクリック出来ないように配慮するため。
     opacity: 0;
-    pointer-events: none;
     user-select: none;
+    pointer-events: none;
 }
 .wrapper .main-area .content .content-area #subModalWindow .form-label {
     // 横幅一杯まで占有するため。
@@ -1035,46 +1040,69 @@ img {
     border-radius: 4px;
     // 外側の余白指定。
     margin: 5px 0;
-    // line-height: 1.5;
+    line-height: 1.5;
 }
 .wrapper .main-area .content .content-area #subModalWindow .form-input::placeholder {
+    // プレイスホルダーの色指定。「::placeholder」のように記述すること。
     color: rgba(255,255,255,0.7);
 }
+.wrapper .main-area .content .content-area #subModalWindow .form-input.textarea-input{
+    // 概要の高さを指定。
+    height: 150px;
+}
 .wrapper .main-area .content .content-area #subModalWindow form #update-button {
-    // 打消し。
+    // 上記のスタイル指定の打消しを行っている。
     transition: none;
-    // 打消し。
+    // 上記のスタイル指定の打消しを行っている。
     margin-left: 0px;
     margin-top: 15px;
     letter-spacing: normal;
+    // 背景色の指定。
     background-color:#5588BB;
+    // 内側の余白指定。
     padding: 8px;
+    // 角丸指定。
     border-radius: 4px;
 }
 .wrapper .main-area .content .content-area #subModalWindow form #update-button:hover {
-    // 打消し。
+    // 上記のスタイル指定の打消しを行っている。
     transform: none;
 }
+// デコイの「削除する」ボタンのコーディング。
 .wrapper .main-area .content .content-area #subModalWindow form #task-delete-decoying {
+    // position指定のため。親要素は「.wrapper .main-area .content{}」となる（ページ内検索で確認してみよう）。
     position: absolute;
-    bottom: 17.6px;
+    // bottomの指定は「戻る」ボタンの値を一致させよう。フレックスで「更新する」と「削除する」，「戻る」を並列させようと考えたが今回はpositionを使用した。
+    bottom: 18.2px;
     left: 150px;
+    // 色指定。
     color: #fff;
     background-color: #FF4A52;
+    // 内側の余白指定。
     padding: 8px;
+    // 角丸指定。
     border-radius: 4px;
+    // フォントサイズの指定。
     font-size: 1.125rem;
+    // ホバー時のマウスの形の指定。
     cursor: pointer;
 }
 .wrapper .main-area .content .content-area #subModalWindow form #return-button {
+    // position指定のため。親要素は「.wrapper .main-area .content{}」となる（ページ内検索で確認してみよう）。
     position: absolute;
-    bottom: 17.6px;
+    // bottomの指定は「削除する」ボタンの値を一致させよう。フレックスで「更新する」と「削除する」，「戻る」を並列させようと考えたが今回はpositionを使用した。
+    bottom: 18.2px;
     left: 290px;
+    // 色指定。
     color: #fff;
     background-color: #555555;
+    // 内側の余白指定。
     padding: 8px;
+    // 角丸指定。
     border-radius: 4px;
+    // フォントサイズの指定。
     font-size: 1.125rem;
+    // ホバー時のマウスの形の指定。
     cursor: pointer;
 }
 .wrapper .main-area .content .content-area #subModalWindow .error-message {
