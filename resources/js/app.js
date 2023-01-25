@@ -411,4 +411,25 @@
         //     console.log(tr.previousElementSibling.children[0].children[0].children);
         // });
     });
+
+    // 以下のメソッドはバックエンドの処理によって, id="success-msg"のdivタグが表示された際に実行される。
+    function fadeOut() {
+        // 早期リターン。
+        if (!successMsg) {
+            return;
+        }
+        // 「.wrapper #success-msg.none{}」を読み込むため。
+        successMsg.classList.add('none');
+    }
+
+    /* DOM操作。 */
+    const successMsg = document.getElementById('success-msg');
+    // 2.5秒後に以下の関数が実行される。
+    setTimeout(fadeOut, 2500);
+
+    /* =================================================== */
+    // 其の他。
+    /* =================================================== */
+    console.log(Laravel.name);
+    console.log(Laravel.array);
 }

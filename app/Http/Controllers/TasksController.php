@@ -98,6 +98,8 @@ class TasksController extends Controller
             'content' => 'required|max:255',
         ]);
 
+        session()->flash('ok', '正常に動作しました。');
+
         // Task（モデルクラス）のインスタンス生成。
         $task = new Task;
 
@@ -130,6 +132,8 @@ class TasksController extends Controller
             'end' => 'required|max:15',
             'content' => 'required|max:255',
         ]);
+
+        session()->flash('ok', '正常に動作しました。');
 
         // id（主キー）を通じて該当レコードを特定し，取得。
         $task = Task::find($id);

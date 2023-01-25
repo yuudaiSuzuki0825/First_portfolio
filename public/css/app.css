@@ -769,6 +769,35 @@ img {
   cursor: pointer;
 }
 
+.wrapper #success-msg {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  width: 300px;
+  padding: 10px 10px;
+  margin: 0 auto;
+  font-size: 1.375rem;
+  text-align: center;
+  color: #fff;
+  background-color: #00A690;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: opacity 0.3s;
+}
+
+.wrapper #success-msg.none {
+  opacity: 0;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.wrapper #success-msg #success-msg-icon {
+  font-size: 2rem;
+}
+
 .pagination {
   display: flex;
 }

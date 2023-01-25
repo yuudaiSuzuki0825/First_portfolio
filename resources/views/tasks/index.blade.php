@@ -196,6 +196,11 @@
     <!-- ページトップへ遷移するボタン。 -->
     <a href="#" id="to_top"><i class="fa-solid fa-circle-chevron-up"></i></a>
 
+    <!-- 「正常に動作しました」メッセージ。 -->
+    @if (session()->has('ok'))
+        <div id="success-msg"><i class="fa-regular fa-circle-check" id="success-msg-icon"></i><br><br>Good job!<br>{{ session()->get('ok') }}</div>
+    @endif
+
     <!-- マスク部分。モーダルウィンドウで必要。 -->
     <div id="mask" class="hidden"></div>
 
