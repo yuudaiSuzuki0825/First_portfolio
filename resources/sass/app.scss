@@ -1178,6 +1178,45 @@ img {
     cursor: pointer;
 }
 
+// 「正常に動作しました」メッセージの表示と自動透過機能の実装。
+.wrapper #success-msg {
+    // ポジショニング。
+    position: absolute;
+    top: 20px;
+    // leftとrightを0に，widthを絶対値指定した上でmarginの左右をautoにすると，中央寄せになる。
+    left: 0;
+    right: 0;
+    // 横幅指定。
+    width: 300px;
+    // 内側の余白指定。
+    padding: 10px 10px;
+    // 中央寄せ。
+    margin: 0 auto;
+    // フォントサイズ指定。
+    font-size: 1.375rem;
+    // テキストを中央揃えにしている。
+    text-align: center;
+    // 色指定。
+    color: #fff;
+    background-color: #00A690;
+    // 角丸指定。
+    border-radius: 4px;
+    // 要素の重なりを一番上にしている。
+    z-index: 1000;
+    // イージング。
+    transition: opacity 0.3s;
+}
+// 「正常に動作しました」メッセージ表示後に2.5秒後に読み込まれる。app.jsにて「2.5秒」と検索。
+.wrapper #success-msg.none {
+    // 完全透明にし，範囲選択を禁止にし，クリックできないようにしている。
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+}
+.wrapper #success-msg #success-msg-icon {
+    font-size: 2rem;
+}
+
 // モーダルウインドウここまで。
 
 // ページネーション部分。bootstrap-4.blade.php或いはデベロッパーツールにてhtml構造を参照してほしい。

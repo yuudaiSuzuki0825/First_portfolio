@@ -82,13 +82,23 @@
         <p class="copyright">&copy; 2022 Revistart</p>
     </footer>
 
+    <!-- 以下はちょっとした実験。 -->
     @php
         $yes = "hoge";
+        $we = "hoge2";
+        $name = "hoge3";
+        $array = ['hoge!', 'hoge!!', 'hoge!!!'];
     @endphp
 
     <script>
         const hoge = @json($yes);
+        const hoge2 = '{{$we}}';
         console.log("hoge");
+        console.log(hoge2);
+
+        window.Laravel = {};
+        window.Laravel.name = @json($name);
+        window.Laravel.array = @json($array);
     </script>
     <!-- JavaScriptのパス。 -->
     <script src="{{ mix('js/app.js') }}"></script>

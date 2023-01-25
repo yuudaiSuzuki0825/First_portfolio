@@ -137,6 +137,19 @@
     });
   };
 
+  // 以下のメソッドはバックエンドの処理によって, id="success-msg"のdivタグが表示された際に実行される。
+  var fadeOut = function fadeOut() {
+    // 早期リターン。
+    if (!successMsg) {
+      return;
+    } // 「.wrapper #success-msg.none{}」を読み込むため。
+
+
+    successMsg.classList.add('none');
+  };
+  /* DOM操作。 */
+
+
   // ページごとに読み込むjsファイルを変更する必要がある（複数ファイルに分割すること）。
 
   /* =================================================== */
@@ -500,6 +513,16 @@
     // });
 
   });
+  var successMsg = document.getElementById('success-msg'); // 2.5秒後に以下の関数が実行される。
+
+  setTimeout(fadeOut, 2500);
+  /* =================================================== */
+  // 其の他。
+
+  /* =================================================== */
+
+  console.log(Laravel.name);
+  console.log(Laravel.array);
 }
 
 /***/ }),
