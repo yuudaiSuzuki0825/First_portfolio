@@ -98,8 +98,6 @@ class TasksController extends Controller
             'content' => 'required|max:255',
         ]);
 
-        session()->flash('ok', '正常に動作しました。');
-
         // Task（モデルクラス）のインスタンス生成。
         $task = new Task;
 
@@ -111,6 +109,9 @@ class TasksController extends Controller
             'end' => $request->end,
             'content' => $request->content,
         ]);
+
+        // セッションにて処理が成功したことを伝えている。
+        session()->flash('ok', '正常に動作しました。');
 
         // リダイレクト。
         return redirect('/');
@@ -133,8 +134,6 @@ class TasksController extends Controller
             'content' => 'required|max:255',
         ]);
 
-        session()->flash('ok', '正常に動作しました。');
-
         // id（主キー）を通じて該当レコードを特定し，取得。
         $task = Task::find($id);
 
@@ -148,6 +147,9 @@ class TasksController extends Controller
 
         // 実はこれだけで上記の処理が出来てしまう。$requestからall()を呼び出すことで全てのカラム(プロパティ)の値にアクセスしている？
         $task->fill($request->all())->save();
+
+        // セッションにて処理が成功したことを伝えている。
+        session()->flash('ok', '正常に動作しました。');
 
         // リダイレクト。
         return redirect('/');

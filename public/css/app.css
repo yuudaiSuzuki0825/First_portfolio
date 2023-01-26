@@ -28,30 +28,30 @@ img {
   display: flex;
   padding: 8px;
 }
-.header .header-title {
+.header-title {
   transition: transform 0.2s;
 }
-.header .header-title:hover {
+.header-title:hover {
   transform: scale(1.1);
 }
-.header .header-title a {
+.header-title a {
   font-size: 1.875rem;
   line-height: 56px;
   letter-spacing: 3px;
   color: #333333;
 }
-.header .header-site-menu {
+.header-site-menu {
   margin-left: auto;
 }
-.header .header-site-menu nav ul {
+.header-site-menu nav ul {
   display: flex;
   line-height: 56px;
   align-items: center;
 }
-.header .header-site-menu nav ul li {
+.header-site-menu nav ul li {
   font-size: 1.375rem;
 }
-.header .header-site-menu nav ul li .parent-balloon .header-balloon {
+.header-site-menu nav ul li .parent-balloon .header-balloon {
   position: absolute;
   top: 30px;
   left: -28px;
@@ -65,7 +65,7 @@ img {
   border-radius: 5px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
-.header .header-site-menu nav ul li .parent-balloon:hover .header-balloon {
+.header-site-menu nav ul li .parent-balloon:hover .header-balloon {
   position: absolute;
   top: 30px;
   left: -28px;
@@ -81,7 +81,7 @@ img {
   display: inline-block;
   width: 78px;
 }
-.header .header-site-menu nav ul li .parent-balloon:hover .header-balloon.second {
+.header-site-menu nav ul li .parent-balloon:hover .header-balloon.second {
   position: absolute;
   top: 30px;
   left: -28px;
@@ -98,14 +98,14 @@ img {
   left: -12px;
   width: 48px;
 }
-.header .header-site-menu nav ul li + li {
+.header-site-menu nav ul li + li {
   margin-left: 55px;
 }
-.header .header-site-menu .header-hamburger-menu {
+.header-site-menu .header-hamburger-menu {
   display: none;
   margin-left: auto;
 }
-.header .header-site-menu .header-hamburger-menu #open {
+.header-site-menu .header-hamburger-menu #open {
   font-size: 1.875rem;
   display: inline-block;
   margin-top: 10px;
