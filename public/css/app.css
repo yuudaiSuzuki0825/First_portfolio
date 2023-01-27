@@ -125,13 +125,6 @@ img {
   pointer-events: none;
   transition: opacity 0.4s;
 }
-
-.header .overlay.show {
-  opacity: 1;
-  /* autoが初期値。基本的にはnoneかauto。 */
-  pointer-events: auto;
-}
-
 .header .overlay #close {
   /* 親要素にposition: relative;をあえて指定しないでabsoluteを使うと，包含ブロックを基準に位置が決定される。すなわち，ウィンドウ幅全体に対して位置が決定される。 */
   /* よって，以下の指定はページ全体を基準に絶対値指定している。 */
@@ -141,20 +134,21 @@ img {
   font-size: 2rem;
   cursor: pointer;
 }
-
 .header .overlay nav ul li {
   font-size: 1.375rem;
 }
-
 .header .overlay nav ul li + li {
   margin-top: 40px;
 }
-
 .header .overlay nav ul li a i {
   padding-right: 5px;
 }
+.header .overlay.show {
+  opacity: 1;
+  /* autoが初期値。基本的にはnoneかauto。 */
+  pointer-events: auto;
+}
 
-/* ヘッダーここまで。*/
 /* メインコンテンツここから。*/
 .wrapper .main-area {
   background-color: rgba(238, 238, 238, 0.9);
@@ -332,6 +326,11 @@ img {
           user-select: none;
   letter-spacing: 3px;
   box-shadow: inset 0 0 5px 5px #FF4A60;
+  transition: opacity 0.3s;
+}
+
+.wrapper .main-area .content .content-area .error-message.none {
+  opacity: 0;
 }
 
 .wrapper .main-area .content .content-area .provisional {
@@ -432,6 +431,10 @@ img {
   line-height: 1.5;
   -webkit-animation: 0.2s slideDown;
           animation: 0.2s slideDown;
+}
+
+.wrapper .main-area .content .content-area .table tbody #planDetailRow td {
+  white-space: pre-line;
 }
 
 .wrapper .main-area .content .content-area .table tbody #planDetailRow.detailOpen {

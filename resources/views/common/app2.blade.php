@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/efd87fdfef.js" crossorigin="anonymous"></script>
+    <script>
+        @if ($errors->any())
+            alert("操作に失敗しました。字数制限や未入力などに気を付けてください。");
+        @endif
+    </script>
 </head>
 <body>
     <!-- ヘッダー。 -->

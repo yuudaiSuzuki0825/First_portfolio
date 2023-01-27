@@ -250,46 +250,43 @@ img {
         pointer-events: none;
         // アニメーションの指定。
         transition: opacity .4s;
+
+        #close {
+            /* 親要素にposition: relative;をあえて指定しないでabsoluteを使うと，包含ブロックを基準に位置が決定される。すなわち，ウィンドウ幅全体に対して位置が決定される。 */
+            /* よって，以下の指定はページ全体を基準に絶対値指定している。 */
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            // 32pxと同じ。16px×2。
+            font-size: 2rem;
+            // ホバー時のマウスの形の指定をしている。
+            cursor: pointer;
+        }
+
+        nav ul li {
+            // html{}参照。
+            font-size: 1.375rem;
+        }
+
+        // 隣接兄弟結合子。
+        nav ul li + li {
+            margin-top: 40px;
+        }
+
+        nav ul li a i {
+            padding-right: 5px;
+        }
+    }
+
+    .overlay.show {
+        opacity: 1;
+        /* autoが初期値。基本的にはnoneかauto。 */
+        pointer-events: auto;
     }
 }
 
-// SCSSここから。
-
-.header .overlay.show {
-    opacity: 1;
-    /* autoが初期値。基本的にはnoneかauto。 */
-    pointer-events: auto;
-}
-
-.header .overlay #close {
-    /* 親要素にposition: relative;をあえて指定しないでabsoluteを使うと，包含ブロックを基準に位置が決定される。すなわち，ウィンドウ幅全体に対して位置が決定される。 */
-    /* よって，以下の指定はページ全体を基準に絶対値指定している。 */
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    // 32pxと同じ。16px×2。
-    font-size: 2rem;
-    // ホバー時のマウスの形の指定をしている。
-    cursor: pointer;
-}
-
-.header .overlay nav ul li {
-    // html{}参照。
-    font-size: 1.375rem;
-}
-
-// 隣接兄弟結合子。
-.header .overlay nav ul li + li {
-    margin-top: 40px;
-}
-
-.header .overlay nav ul li a i {
-    padding-right: 5px;
-}
-
-/* ヘッダーここまで。*/
-
 /* メインコンテンツここから。*/
+// SCSSここから。
 
 .wrapper .main-area {
     // 背景色の指定。body{}のbackground-imageと関連。
@@ -548,6 +545,13 @@ img {
     letter-spacing: 3px;
     // 影指定。
     box-shadow: inset 0 0 5px 5px #FF4A60;
+    // イージング。
+    transition: opacity .3s;
+}
+
+.wrapper .main-area .content .content-area .error-message.none {
+    // 完全透明にし，範囲選択を禁止にし，クリックできないようにしている。
+    opacity: 0;
 }
 
 // 「仮」。「並べ替え」機能を検索フォームの上に設置しようと構想中。
@@ -705,6 +709,12 @@ img {
     line-height: 1.5;
     // transitionの代わり（イージングの指定）。キーフレーム（「slideDown」でファイル内検索してみて）。
     animation: .2s slideDown;
+}
+
+// アコーディオン（計画概要）のコーディング続き。
+.wrapper .main-area .content .content-area .table tbody #planDetailRow td {
+    // 改行を反映させるため。以下を指定しないと改行を入力しても半角スペースとして処理されてしまう。
+    white-space: pre-line;
 }
 
 // アコーディオンのアイコンボタンがクリックされた時。app.js参照。

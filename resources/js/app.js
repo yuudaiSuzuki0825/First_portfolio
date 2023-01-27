@@ -413,7 +413,7 @@
     });
 
     // 以下のメソッドはバックエンドの処理によって, id="success-msg"のdivタグが表示された際に実行される。
-    function fadeOut() {
+    function fadeOut1() {
         // 早期リターン。
         if (!successMsg) {
             return;
@@ -422,14 +422,29 @@
         successMsg.classList.add('none');
     }
 
-    /* DOM操作。 */
-    const successMsg = document.getElementById('success-msg');
-    // 2.5秒後に以下の関数が実行される。
-    setTimeout(fadeOut, 2500);
-
     /* =================================================== */
     // 其の他。
     /* =================================================== */
+
+    // 以下のメソッドはバックエンドの処理によって, id="success-msg"のdivタグが表示された際に実行される。
+    function fadeOut2() {
+        // 早期リターン。
+        if (!nonKeywordError) {
+            return;
+        }
+        // 「.wrapper #success-msg.none{}」を読み込むため。
+        nonKeywordError.classList.add('none');
+    }
+
+    /* DOM操作。 */
+    const successMsg = document.getElementById('success-msg');
+    const nonKeywordError = document.getElementById('non-keyword-error');
+    // 2.5秒後に以下の関数が実行される。
+    setTimeout(fadeOut1, 2500);
+    setTimeout(fadeOut2, 2500);
+
+    // ------------------------
+
     console.log(Laravel.name);
     console.log(Laravel.array);
 }
