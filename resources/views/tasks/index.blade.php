@@ -12,7 +12,7 @@
                 <!-- 第二引数をurlにしてもOK。['url' => '/tasks']。 -->
 
                 {!! Form::label('title', 'テーマ', ['class' => 'form-label']) !!}
-                {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内"]) !!}
+                {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内・未入力不可"]) !!}
                 @if ($errors->first('title'))
                      <!-- <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p> -->
                      <!-- <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>字数制限と未入力にご注意下さい。</p> -->
@@ -33,7 +33,7 @@
                 @endif -->
 
                 {!! Form::label('content', '概要', ['class' => 'form-label']) !!}
-                {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内"]) !!}
+                {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内・未入力不可"]) !!}
                 <!-- @if ($errors->first('content'))
                     <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('content') }}</p>
                 @endif -->
@@ -70,7 +70,7 @@
 
             <!-- 「検索」機能のエラーメッセージ。 -->
             @if ($errors->first('keyword'))
-                <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('keyword') }}</p>
+                <p class="error-message" id="non-keyword-error"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('keyword') }}</p>
             @endif
 
                 <!-- 「検索」機能のフォーム。 -->
@@ -115,7 +115,7 @@
                                 {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put'], ['class' => 'form']) !!}
 
                                     {!! Form::label('title', 'テーマ:', ['class' => 'form-label']) !!}
-                                    {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内"]) !!}
+                                    {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内・未入力不可"]) !!}
                                     <!-- @if ($errors->first('title'))
                                         <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p>
                                     @endif -->
@@ -135,7 +135,7 @@
                                     @endif -->
 
                                     {!! Form::label('content', '概要:', ['class' => 'form-label']) !!}
-                                    {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内"]) !!}
+                                    {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内・未入力不可"]) !!}
                                     <!-- @if ($errors->first('content'))
                                         <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('content') }}</p>
                                     @endif -->

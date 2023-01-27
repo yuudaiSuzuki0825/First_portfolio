@@ -67,7 +67,7 @@
 
             <!-- 「検索」機能のエラーメッセージ。 -->
             @if ($errors->first('keyword'))
-                <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('keyword') }}</p>
+                <p class="error-message" id="non-keyword-error"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('keyword') }}</p>
             @endif
 
                 <!-- 「検索」機能のフォーム。 -->

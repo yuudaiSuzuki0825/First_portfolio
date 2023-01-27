@@ -18,7 +18,7 @@
     <script src="https://kit.fontawesome.com/efd87fdfef.js" crossorigin="anonymous"></script>
     <script>
         @if ($errors->any())
-            alert("計画作成ないし編集に失敗しました。字数制限と未入力にご注意下さい。");
+            alert("操作に失敗しました。字数制限や未入力などに気を付けてください。");
         @endif
     </script>
 </head>
