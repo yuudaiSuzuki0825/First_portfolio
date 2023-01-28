@@ -82,8 +82,7 @@ html {
 body {
     // コーディングしやすくするために行間を1にしておいた。
     line-height: 1;
-    // 背景色の指定。.wrapper .main-area{}のbackground-colorにも注目。メインエリアではこの背景色の上に半透明の白色背景を上に重ねている。
-    background-image: linear-gradient(135deg, rgba(105, 234, 203, 1), rgba(215, 98, 252, 1) 67%, rgba(102, 84, 241, 1));
+    height: 100vh;
 }
 
 a {
@@ -106,6 +105,12 @@ img {
 }
 
 // ヘッダー。
+
+// header部分だけリニアカラーをつける。
+#header-background-color {
+    // 背景色の指定。
+    background-image: linear-gradient(135deg, rgba(105, 234, 203, 1), rgba(215, 98, 252, 1) 67%, rgba(102, 84, 241, 1));
+}
 
 .header {
     // 最大幅を指定している。これ以上大きくならない。
@@ -294,6 +299,7 @@ img {
     // サイドパネルとメインコンテンツを横並びに。
     display: flex;
     padding: 50px 0;
+    // min-height: 85%;
 }
 
 // サイドパネルのコーディング。
@@ -879,7 +885,7 @@ img {
     // ホバー時のマウスの形を変更。
     cursor: pointer;
     // スクロールされてヘッダー部分が画面から見えなくなるまでは完全透明にしている。
-    opacity: 0;
+    opacity: 1;
     // アニメーションの調整（イージング）。
     transition: opacity .3s;
 }
@@ -911,7 +917,7 @@ img {
     // ホバー時のマウスの形を変更。
     cursor: pointer;
     // スクロールされてヘッダー部分が画面から見えなくなるまでは完全透明にしている。
-    opacity: 0;
+    opacity: 1;
     // アニメーションの調整（イージング）。
     transition: opacity .3s;
 }
@@ -1278,6 +1284,11 @@ img {
 .pagination .page-item .page-link#rightTriangle:hover {
     border-bottom: none;
 }
+
+// フッター。
+// #footer {
+//     height: 80px;
+// }
 
 // キーフレーム。
 // display: none;からdisplay: block;に変化する時にアニメーションを付けたい場合にはanimationプロパティを使う必要がある。

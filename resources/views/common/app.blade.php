@@ -24,51 +24,53 @@
 </head>
 <body>
     <!-- ヘッダー。 -->
-    <header class="header">
-        <!-- ロゴ。 -->
-        <h1 class="header-title"><a href="/" id="revistart">Revistart</a></h1>
-        <!-- <button class="toggle-menu-button"><img src="{{ asset('img/sozai_cman_jp_20220822223728.png') }}" alt=""></button> -->
+    <div id="header-background-color">
+        <header class="header">
+            <!-- ロゴ。 -->
+            <h1 class="header-title"><a href="/" id="revistart">Revistart</a></h1>
+            <!-- <button class="toggle-menu-button"><img src="{{ asset('img/sozai_cman_jp_20220822223728.png') }}" alt=""></button> -->
 
-        <!-- ナビゲーションリンク。 -->
-        <!-- PC用。 -->
-        <div class="header-site-menu">
-            <!-- ナビゲーションリンク。こちらはアイコンのみ表示。 -->
-            <nav>
-                <ul>
-                    <li><a href="#" class="parent-balloon"><i class="fa-solid fa-circle-plus"></i><span class="header-balloon">作成する</span></a></li>
-                    <li><a href="#usage" class="parent-balloon"><i class="fa-regular fa-message"></i><span class="header-balloon second">FAQ</span></a></li>
-                    <li><a href="/" class="parent-balloon"><i class="fa-solid fa-list"></i><span class="header-balloon">計画一覧</span></a></li>
-                    <li><a href="{{ route('tasks.trace') }}" class="parent-balloon"><i class="fa-solid fa-clock-rotate-left"></i><span class="header-balloon">完了履歴</span></a></li>
-                    <li><a href="{{ route('tasks.suspensionList') }}" class="parent-balloon" id="hoge"><i class="fa-solid fa-rectangle-list"></i><span class="header-balloon">中断計画</span></a></li>
-                </ul>
-            </nav>
+            <!-- ナビゲーションリンク。 -->
+            <!-- PC用。 -->
+            <div class="header-site-menu">
+                <!-- ナビゲーションリンク。こちらはアイコンのみ表示。 -->
+                <nav>
+                    <ul>
+                        <li><a href="#" class="parent-balloon"><i class="fa-solid fa-circle-plus"></i><span class="header-balloon">作成する</span></a></li>
+                        <li><a href="#usage" class="parent-balloon"><i class="fa-regular fa-message"></i><span class="header-balloon second">FAQ</span></a></li>
+                        <li><a href="/" class="parent-balloon"><i class="fa-solid fa-list"></i><span class="header-balloon">計画一覧</span></a></li>
+                        <li><a href="{{ route('tasks.trace') }}" class="parent-balloon"><i class="fa-solid fa-clock-rotate-left"></i><span class="header-balloon">完了履歴</span></a></li>
+                        <li><a href="{{ route('tasks.suspensionList') }}" class="parent-balloon" id="hoge"><i class="fa-solid fa-rectangle-list"></i><span class="header-balloon">中断計画</span></a></li>
+                    </ul>
+                </nav>
 
-            <div class="header-hamburger-menu">
-                <span id="open"><i class="fa-solid fa-bars"></i></span>
+                <div class="header-hamburger-menu">
+                    <span id="open"><i class="fa-solid fa-bars"></i></span>
+                </div>
             </div>
-        </div>
 
-        <!-- Intersection Observer APIで監視する空タグ。 -->
-        <div id="monitored"></div>
+            <!-- Intersection Observer APIで監視する空タグ。 -->
+            <div id="monitored"></div>
 
-        <!-- SP用。 -->
-        <!-- モーダルウィンドウでナビゲーションリンクを表示。ハンバーガーメニューをクリックすると表示される。 -->
-        <div class="overlay">
-            <!-- 「閉じる」ボタン。 -->
-            <span id="close"><i class="fa-solid fa-xmark"></i></span>
-            <!-- ナビゲーションリンク。こちらはアイコンとテキスト両方表示。 -->
-            <nav>
-                <ul>
-                    <li><a href="#"><i class="fa-solid fa-circle-plus"></i>作成する</a></li>
-                    <li><a href="#usage"><i class="fa-regular fa-message"></i>FAQ</a></li>
-                    <li><a href="/#planList"><i class="fa-solid fa-list"></i>計画一覧</a></li>
-                    <li><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴</a></li>
-                    <li><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画</a></li>
-                </ul>
-            </nav>
-        </div>
+            <!-- SP用。 -->
+            <!-- モーダルウィンドウでナビゲーションリンクを表示。ハンバーガーメニューをクリックすると表示される。 -->
+            <div class="overlay">
+                <!-- 「閉じる」ボタン。 -->
+                <span id="close"><i class="fa-solid fa-xmark"></i></span>
+                <!-- ナビゲーションリンク。こちらはアイコンとテキスト両方表示。 -->
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fa-solid fa-circle-plus"></i>作成する</a></li>
+                        <li><a href="#usage"><i class="fa-regular fa-message"></i>FAQ</a></li>
+                        <li><a href="/#planList"><i class="fa-solid fa-list"></i>計画一覧</a></li>
+                        <li><a href="{{ route('tasks.trace') }}"><i class="fa-solid fa-clock-rotate-left"></i>完了履歴</a></li>
+                        <li><a href="{{ route('tasks.suspensionList') }}"><i class="fa-solid fa-rectangle-list"></i>中断計画</a></li>
+                    </ul>
+                </nav>
+            </div>
 
-    </header>
+        </header>
+    </div>
 
     <!-- メインコンテンツ。 -->
     <main>

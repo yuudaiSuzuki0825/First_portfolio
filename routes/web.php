@@ -33,3 +33,5 @@ Route::get('tasks/suspendList', 'TasksController@suspensionList')->name('tasks.s
 Route::patch('tasks/suspendList/{trashed_task}', 'TasksController@replay')->name('tasks.replay');
 // ソフトデリートされた計画を物理削除する。
 Route::delete('tasks/suspendList/{trashed_task}', 'TasksController@completeErase')->name('tasks.completeErase');
+
+

@@ -5,7 +5,7 @@ html {
 
 body {
   line-height: 1;
-  background-image: linear-gradient(135deg, rgb(105, 234, 203), rgb(215, 98, 252) 67%, rgb(102, 84, 241));
+  height: 100vh;
 }
 
 a {
@@ -19,6 +19,10 @@ ul {
 
 img {
   max-width: 100%;
+}
+
+#header-background-color {
+  background-image: linear-gradient(135deg, rgb(105, 234, 203), rgb(215, 98, 252) 67%, rgb(102, 84, 241));
 }
 
 .header {
@@ -429,8 +433,7 @@ img {
   border-radius: 0 0 4px 4px;
   border-top: #ffffff solid 1px;
   line-height: 1.5;
-  -webkit-animation: 0.2s slideDown;
-          animation: 0.2s slideDown;
+  animation: 0.2s slideDown;
 }
 
 .wrapper .main-area .content .content-area .table tbody #planDetailRow td {
@@ -543,7 +546,7 @@ img {
   padding: 5.015px 6.9px 5.665px;
   border-radius: 50%;
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s;
 }
 
@@ -564,7 +567,7 @@ img {
   padding: 5.015px 8.2px 5.665px;
   border-radius: 50%;
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s;
 }
 
@@ -836,17 +839,6 @@ img {
 .pagination .page-item .page-link#leftTriangle:hover,
 .pagination .page-item .page-link#rightTriangle:hover {
   border-bottom: none;
-}
-
-@-webkit-keyframes slideDown {
-  0% {
-    transform: translateY(-10px);
-    opacity: 0;
-  }
-  100% {
-    transform: none;
-    opacity: 1;
-  }
 }
 
 @keyframes slideDown {
