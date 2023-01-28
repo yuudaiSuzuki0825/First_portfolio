@@ -14,7 +14,7 @@ class HistoriesTableSeeder extends Seeder
     public function run()
     {
         // 「Laravel6 シーディング」で検索。
-        for ($i = 0; $i < 500; $i++) {
+        for ($i = 0; $i < 900; $i++) {
             DB::table('histories')->insert([
                 'title' => Str::random(20), // 引数で指定した文字分のランダムな文字列を生成。
                 'start' => "2022-11-28",

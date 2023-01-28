@@ -23,7 +23,7 @@ class TasksController extends Controller
     {
         // 全レコードを取得。具体的には完了日が昇順になるようにソートした上でペジネータ―により10件ずつ取得している。
         // paginate()は基本的には第一引数のみでOK。
-        $tasks = Task::orderBy('end', 'asc')->paginate(10, ['*'], 'page', null);
+        $tasks = Task::orderBy('end', 'asc')->paginate(20, ['*'], 'page', null);
 
         // tasksテーブルの全レコード数を取得。
         $tasks_num = Task::count();
@@ -55,7 +55,7 @@ class TasksController extends Controller
         $keyword = $request->keyword;
 
         // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を10件ずつ取得。
-        $tasks = Task::where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->paginate(10);
+        $tasks = Task::where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->paginate(20);
 
         // Historiesテーブルの全レコード数を取得。
         $count = History::count();
@@ -177,7 +177,7 @@ class TasksController extends Controller
     public function trace()
     {
         // 完了日を基準に昇順にレコードを並べ替え, 10件ずつ取得。
-        $histories = History::orderBy('end', 'asc')->paginate(10);
+        $histories = History::orderBy('end', 'asc')->paginate(20);
         // historiesテーブルの全レコードをカウント。
         $count = History::count();
         // tasksテーブルの全レコードをカウント。
@@ -216,7 +216,7 @@ class TasksController extends Controller
         // ソフトデリート済みのTasksテーブルの全レコードをカウント。
         $suspensions_num = Task::onlyTrashed()->count();
         // ユーザーが入力した値を活用してレコードの絞り込みを行い，完了日を基準に昇順に並び替えた該当レコード群を10件ずつ取得。
-        $histories = History::where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->paginate(10);
+        $histories = History::where('title', 'like', '%'.self::escapeLike($keyword) .'%')->orWhere('content', 'like', '%'.self::escapeLike($keyword) .'%')->orderBy('end', 'asc')->paginate(20);
         // Task（モデルクラス）のインスタンス生成。計画の新規作成に必要。
         $task = new Task;
 
@@ -275,7 +275,7 @@ class TasksController extends Controller
         // このアクションはソフトデリート済みの計画一覧にアクセスするために使用する。
 
         // ソフトデリート済みのTasksテーブルのレコードを10件ずつ取得。
-        $suspensions = Task::onlyTrashed()->orderBy('end', 'asc')->paginate(10);
+        $suspensions = Task::onlyTrashed()->orderBy('end', 'asc')->paginate(20);
 
         // ソフトデリート済みのTasksテーブルの全レコード数を取得。
         $suspensions_num = Task::onlyTrashed()->count();
