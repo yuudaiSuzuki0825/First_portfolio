@@ -73,6 +73,10 @@ $fontSize_22px: 1.375rem;
 
 // ・@mixinと@extend（継承）も試してみよう。
 
+// 色メモ
+// https://colorhunt.co/palette/f2d7d9d3cedf9cb4cc748da6
+// F2D7D9, D3CEDF, 9CB4CC, 748DA6
+
 
 html {
     // ここで100%と指定し，各タグではremを使ってfont-sizeの調整を行うこと。
@@ -82,7 +86,9 @@ html {
 body {
     // コーディングしやすくするために行間を1にしておいた。
     line-height: 1;
+    // 高さを画面いっぱいにするために記述。「CSS　高さ　画面いっぱい」で検索。
     height: 100vh;
+    background-color: #D3CEDF;
 }
 
 a {
@@ -109,7 +115,8 @@ img {
 // header部分だけリニアカラーをつける。
 #header-background-color {
     // 背景色の指定。
-    background-image: linear-gradient(135deg, rgba(105, 234, 203, 1), rgba(215, 98, 252, 1) 67%, rgba(102, 84, 241, 1));
+    // background-image: linear-gradient(135deg, rgba(105, 234, 203, 1), rgba(215, 98, 252, 1) 67%, rgba(102, 84, 241, 1));
+    background-color: #D3CEDF;
 }
 
 .header {
@@ -294,8 +301,9 @@ img {
 // SCSSここから。
 
 .wrapper .main-area {
-    // 背景色の指定。body{}のbackground-imageと関連。
-    background-color: rgb(238, 238, 238, 0.9);
+    // 背景色の指定。
+    // background-color: rgb(238, 238, 238, 0.9);
+    background-color: #F2D7D9;
     // サイドパネルとメインコンテンツを横並びに。
     display: flex;
     padding: 50px 0;
@@ -311,13 +319,14 @@ img {
     // 内側の余白。
     padding: 20px;
     /* 色指定。 */
-    background-color: #333;
+    // background-color: #333;
+    background-color: #748DA6;
     color: #fff;
     // 角丸の指定。
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
     // 影の指定。
-    box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
+    box-shadow: inset 0 0 5px 5px #66829e;
     // デフォルトでは非表示。アイコンボタンをクリックすると表示される。
     display: none;
 }
@@ -339,6 +348,7 @@ img {
     // 色指定。
     color: #fff;
     background-color: #555555;
+    // background-color: #D3CEDF;
     // 内側の余白指定。
     padding: 8px;
     // 角丸指定。
@@ -350,16 +360,17 @@ img {
 .wrapper .main-area #left-panel form .form-input::placeholder {
     color: rgba(255,255,255,0.7);
 }
-// エラーメッセージ。
-.wrapper .main-area #left-panel form .error-message {
-    // 色指定。
-    color: #FF4A52;
-}
+// エラーメッセージ。現在未使用。
+// .wrapper .main-area #left-panel form .error-message {
+//     // 色指定。
+//     color: #FF4A52;
+// }
 // 「作成する」ボタンのコーディング。
 .wrapper .main-area #left-panel form .create-button {
     // 色指定。
     color: #fff;
-    background-color: #5588BB;
+    // background-color: #0E70FF;
+    background-color: #00A690;
     // 外側の余白指定。
     margin-top: 15px;
     // 内側の余白指定。
@@ -368,6 +379,9 @@ img {
     border-radius: 4px;
     // 範囲選択できなくしている。
     user-select: none;
+}
+.wrapper .main-area #left-panel form .create-button:focus {
+    background-color: #00c4aa;
 }
 // ここまでサイドパネルの計画作成欄のコーディング。
 
@@ -397,7 +411,7 @@ img {
 // サイドパネルボタンが押下された時。
 .wrapper .main-area .content.open {
     // メインコンテンツの最大幅を指定している。これを指定しないとアコーディオンの開閉時に横幅の挙動がおかしくなる。コメントアウトして確認を。
-    max-width: 68.7%;
+    max-width: 68.7%; // 右下の3つの固定ボタンの位置関係上，70%は避けている。本来はサイドパネルが30%になるので70%にすべきだと思われる。
 }
 
 // サイドパネルボタンのコーディング。
@@ -413,11 +427,11 @@ img {
     height: 36px;
     // 色指定。
     color: #ffffff;
-    background-color: #333333;
+    background-color: #748DA6;
     // 角丸の指定。左側のみ角丸にしている。
     border-radius: 0 10px 10px 0;
     // 影の指定。
-    box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
+    box-shadow: inset 0 0 5px 5px #66829e;
 }
 
 .wrapper .main-area .content #left-panel-button i {
@@ -468,7 +482,8 @@ img {
     // 内側の余白指定。
     padding: 8px 7px 5px;
     // 色指定。
-    background-color: #fff;
+    // background-color: #fff;
+    background-color: #9CB4CC;
     color: #333333;
     // 角丸指定。
     border-radius: 8px 8px 0 0;
@@ -501,7 +516,8 @@ img {
 
 // 選択済みのタブメニューの色を変更している。
 .wrapper .main-area .content .content-area .tabMenu .planListTitle.active a {
-    background-color: #333333;
+    // background-color: #333333;
+    background-color: #748DA6;
     color: #fff;
 }
 
@@ -563,7 +579,8 @@ img {
 // 「仮」。「並べ替え」機能を検索フォームの上に設置しようと構想中。
 .wrapper .main-area .content .content-area .provisional {
     // 色指定。
-    background-color: #333333;
+    // background-color: #333333;
+    background-color: #748DA6;
     color: #fff;
     // 角丸指定。右上・左上のみ作成。
     border-top-left-radius: 8px;
@@ -579,7 +596,8 @@ img {
 //「検索」フォームのコーディング。
 .wrapper .main-area .content .content-area form {
     // 色指定。
-    background-color: #333333;
+    // background-color: #333333;
+    background-color: #748DA6;
     color: #fff;
     // 上の「並び替え（暫定）」ボタンの方に角丸の指定を移した。
     // border-top-left-radius: 8px;
@@ -597,12 +615,17 @@ img {
     // 横幅指定。
     width: 300px;
     // 色指定。
-    background-color: #FFFAFB;
+    background-color: #555555;
+    // background-color: #748DA6;
     color: #333;
     // 入力欄の内側の余白を指定。これを指定しないと入力する際，やや不便。コメントアウトして確認を。
     padding: 5px;
     // 角丸指定。
     border-radius: 4px;
+}
+
+.wrapper .main-area .content .content-area form input::placeholder {
+    color: rgba(255,255,255,0.7);
 }
 
 // 検索フォームの送信ボタン（虫眼鏡）のコーディング。
@@ -629,6 +652,7 @@ img {
 .wrapper .main-area .content .content-area .tr .FirstAid form {
     // 色指定。
     background-color: #555555;
+    background-color: #9CB4CC;
     // 内側の余白指定。
     padding: 0;
     // 文字間の隙間の指定。
@@ -664,7 +688,8 @@ img {
 
 .wrapper .main-area .content .content-area .table {
     // 色指定。
-    background-color: #333333;
+    // background-color: #333333;
+    background-color: #748DA6;
     color: #fff;
     // 角丸指定。右下と左下だけ。
     border-radius: 0 0 8px 8px;
@@ -679,7 +704,8 @@ img {
     // 全てのtdタグを横並びに。
     display: flex;
     // 色指定。
-    background-color: #555555;
+    // background-color: #555555;
+    background-color: #9CB4CC;
     // 角丸指定。
     border-radius: 4px;
     // 内側の余白指定。
@@ -720,7 +746,7 @@ img {
 // アコーディオン（計画概要）のコーディング続き。
 .wrapper .main-area .content .content-area .table tbody #planDetailRow td {
     // 改行を反映させるため。以下を指定しないと改行を入力しても半角スペースとして処理されてしまう。
-    white-space: pre-line;
+    white-space: pre-wrap;
 }
 
 // アコーディオンのアイコンボタンがクリックされた時。app.js参照。
@@ -836,7 +862,8 @@ img {
 // レコードが0の場合に表示される文言のコーディング。適宜改良が必要。
 .wrapper .main-area .content .content-area .alt {
     // 色指定。
-    background-color: #333333;
+    // background-color: #333333;
+    background-color: #748DA6;
     color: #fff;
 }
 
@@ -1076,7 +1103,8 @@ img {
     margin-top: 15px;
     letter-spacing: normal;
     // 背景色の指定。
-    background-color:#5588BB;
+    // background-color:#0E70FF;
+    background-color: #00A690;
     // 内側の余白指定。
     padding: 8px;
     // 角丸指定。
@@ -1085,6 +1113,9 @@ img {
 .wrapper .main-area .content .content-area #subModalWindow form #update-button:hover {
     // 上記のスタイル指定の打消しを行っている。
     transform: none;
+}
+.wrapper .main-area .content .content-area #subModalWindow form #update-button:focus {
+    background-color: #00c4aa;
 }
 // デコイの「削除する」ボタンのコーディング。
 .wrapper .main-area .content .content-area #subModalWindow form #task-delete-decoying {
@@ -1105,6 +1136,9 @@ img {
     // ホバー時のマウスの形の指定。
     cursor: pointer;
 }
+// .wrapper .main-area .content .content-area #subModalWindow form #task-delete-decoying:hover {
+//     background-color: #ff7e85;
+// }
 .wrapper .main-area .content .content-area #subModalWindow form #return-button {
     // position指定のため。親要素は「.wrapper .main-area .content{}」となる（ページ内検索で確認してみよう）。
     position: absolute;

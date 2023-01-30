@@ -114,28 +114,28 @@
 
                                 {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put'], ['class' => 'form']) !!}
 
-                                    {!! Form::label('title', 'テーマ:', ['class' => 'form-label']) !!}
-                                    {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内・未入力不可"]) !!}
+                                    {!! Form::label('title', 'テーマ', ['class' => 'form-label']) !!}
+                                    {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内・未入力不可", 'id' => 'title-input']) !!}
                                     <!-- @if ($errors->first('title'))
                                         <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p>
                                     @endif -->
 
-                                    {!! Form::label('start', '開始日:', ['class' => 'form-label']) !!}
+                                    {!! Form::label('start', '開始日', ['class' => 'form-label']) !!}
                                     <!-- Carbonライブラリを活用していても他と同じく第二引数にnullを指定すればLaravelCollectiveライブラリの仕様により自動的にデータベース上の開始日の値が入った状態で表示出来る。 -->
                                     {!! Form::date('start',  null, ['class' => 'form-input start-input']) !!}
                                     <!-- @if ($errors->first('start'))
                                         <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('start') }}</p>
                                     @endif -->
 
-                                    {!! Form::label('end', '完了日:', ['class' => 'form-label']) !!}
+                                    {!! Form::label('end', '完了日', ['class' => 'form-label']) !!}
                                     <!-- Carbonライブラリを活用していても他と同じく第二引数にnullを指定すればLaravelCollectiveライブラリの仕様により自動的にデータベース上の完了日の値が入った状態で表示出来る。 -->
                                     {!! Form::date('end', null, ['class' => 'form-input end-input']) !!}
                                     <!-- @if ($errors->first('end'))
                                         <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('end') }}</p>
                                     @endif -->
 
-                                    {!! Form::label('content', '概要:', ['class' => 'form-label']) !!}
-                                    {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内・未入力不可"]) !!}
+                                    {!! Form::label('content', '概要', ['class' => 'form-label']) !!}
+                                    {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内・未入力不可", 'id' => 'textarea-input']) !!}
                                     <!-- @if ($errors->first('content'))
                                         <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('content') }}</p>
                                     @endif -->

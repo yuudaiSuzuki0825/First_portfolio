@@ -6,6 +6,7 @@ html {
 body {
   line-height: 1;
   height: 100vh;
+  background-color: #D3CEDF;
 }
 
 a {
@@ -22,7 +23,7 @@ img {
 }
 
 #header-background-color {
-  background-image: linear-gradient(135deg, rgb(105, 234, 203), rgb(215, 98, 252) 67%, rgb(102, 84, 241));
+  background-color: #D3CEDF;
 }
 
 .header {
@@ -155,7 +156,7 @@ img {
 
 /* メインコンテンツここから。*/
 .wrapper .main-area {
-  background-color: rgba(238, 238, 238, 0.9);
+  background-color: #F2D7D9;
   display: flex;
   padding: 50px 0;
 }
@@ -165,11 +166,11 @@ img {
   height: 580px;
   padding: 20px;
   /* 色指定。 */
-  background-color: #333;
+  background-color: #748DA6;
   color: #fff;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
-  box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
+  box-shadow: inset 0 0 5px 5px #66829e;
   display: none;
 }
 
@@ -199,19 +200,19 @@ img {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.wrapper .main-area #left-panel form .error-message {
-  color: #FF4A52;
-}
-
 .wrapper .main-area #left-panel form .create-button {
   color: #fff;
-  background-color: #5588BB;
+  background-color: #00A690;
   margin-top: 15px;
   padding: 8px;
   border-radius: 4px;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+}
+
+.wrapper .main-area #left-panel form .create-button:focus {
+  background-color: #00c4aa;
 }
 
 .wrapper .main-area #left-panel.open {
@@ -235,9 +236,9 @@ img {
   cursor: pointer;
   height: 36px;
   color: #ffffff;
-  background-color: #333333;
+  background-color: #748DA6;
   border-radius: 0 10px 10px 0;
-  box-shadow: inset 0 0 5px 5px rgb(32, 31, 31);
+  box-shadow: inset 0 0 5px 5px #66829e;
 }
 
 .wrapper .main-area .content #left-panel-button i {
@@ -275,7 +276,7 @@ img {
      -moz-user-select: none;
           user-select: none;
   padding: 8px 7px 5px;
-  background-color: #fff;
+  background-color: #9CB4CC;
   color: #333333;
   border-radius: 8px 8px 0 0;
   letter-spacing: 0.4rem;
@@ -297,7 +298,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area .tabMenu .planListTitle.active a {
-  background-color: #333333;
+  background-color: #748DA6;
   color: #fff;
 }
 
@@ -338,7 +339,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area .provisional {
-  background-color: #333333;
+  background-color: #748DA6;
   color: #fff;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -350,7 +351,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area form {
-  background-color: #333333;
+  background-color: #748DA6;
   color: #fff;
   padding: 0 10px 10px;
   -webkit-user-select: none;
@@ -361,10 +362,18 @@ img {
 
 .wrapper .main-area .content .content-area form input {
   width: 300px;
-  background-color: #FFFAFB;
+  background-color: #555555;
   color: #333;
   padding: 5px;
   border-radius: 4px;
+}
+
+.wrapper .main-area .content .content-area form input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.wrapper .main-area .content .content-area form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .wrapper .main-area .content .content-area form button {
@@ -381,6 +390,7 @@ img {
 
 .wrapper .main-area .content .content-area .tr .FirstAid form {
   background-color: #555555;
+  background-color: #9CB4CC;
   padding: 0;
   letter-spacing: normal;
 }
@@ -403,7 +413,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area .table {
-  background-color: #333333;
+  background-color: #748DA6;
   color: #fff;
   border-radius: 0 0 8px 8px;
   width: 100%;
@@ -412,7 +422,7 @@ img {
 
 .wrapper .main-area .content .content-area .table tbody tr {
   display: flex;
-  background-color: #555555;
+  background-color: #9CB4CC;
   border-radius: 4px;
   padding: 5px;
   letter-spacing: 2px;
@@ -437,7 +447,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area .table tbody #planDetailRow td {
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 
 .wrapper .main-area .content .content-area .table tbody #planDetailRow.detailOpen {
@@ -514,7 +524,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area .alt {
-  background-color: #333333;
+  background-color: #748DA6;
   color: #fff;
 }
 
@@ -692,13 +702,17 @@ img {
   margin-left: 0px;
   margin-top: 15px;
   letter-spacing: normal;
-  background-color: #5588BB;
+  background-color: #00A690;
   padding: 8px;
   border-radius: 4px;
 }
 
 .wrapper .main-area .content .content-area #subModalWindow form #update-button:hover {
   transform: none;
+}
+
+.wrapper .main-area .content .content-area #subModalWindow form #update-button:focus {
+  background-color: #00c4aa;
 }
 
 .wrapper .main-area .content .content-area #subModalWindow form #task-delete-decoying {
