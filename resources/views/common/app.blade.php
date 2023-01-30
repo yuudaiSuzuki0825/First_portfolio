@@ -102,6 +102,7 @@
         window.Laravel.name = @json($name);
         window.Laravel.array = @json($array);
     </script>
+
     <!-- JavaScriptのパス。 -->
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
