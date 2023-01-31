@@ -93,14 +93,14 @@
     @endphp
 
     <script>
-        const hoge = @json($yes);
-        const hoge2 = '{{$we}}';
-        console.log("hoge");
-        console.log(hoge2);
+        // const hoge = @json($yes);
+        // const hoge2 = '{{$we}}';
+        // console.log("hoge");
+        // console.log(hoge2);
 
-        window.Laravel = {};
-        window.Laravel.name = @json($name);
-        window.Laravel.array = @json($array);
+        // window.Laravel = {};
+        // window.Laravel.name = @json($name);
+        // window.Laravel.array = @json($array);
     </script>
 
     <!-- JavaScriptのパス。 -->
