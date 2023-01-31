@@ -143,11 +143,15 @@
                                     <!-- {!! Form::submit('更新する', ['class' => 'form-btn'])!!} -->
                                     <button type="submit" id="update-button"><i class="fa-solid fa-file-pen"></i>更新する</button>
 
-                                    <div id="task-delete-decoying"><i class="fa-solid fa-trash-can"></i>削除する</div>
+                                    <!-- <div id="task-delete-decoying"><i class="fa-solid fa-trash-can"></i>削除する</div>
 
-                                    <div id="return-button"><i class="fa-solid fa-rotate-left"></i>戻る</div>
+                                    <div id="return-button"><i class="fa-solid fa-rotate-left"></i>戻る</div> -->
 
                                 {!! Form::close() !!}
+
+                                <button id="task-delete-decoying"><i class="fa-solid fa-trash-can"></i>削除する</button>
+
+                                <button id="return-button"><i class="fa-solid fa-rotate-left"></i>戻る</button>
 
                                 <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" id="task-delete-form">
                                         <button type="submit" id="task-delete">削除</button>

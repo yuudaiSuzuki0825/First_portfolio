@@ -77,7 +77,6 @@ $fontSize_22px: 1.375rem;
 // https://colorhunt.co/palette/f2d7d9d3cedf9cb4cc748da6
 // F2D7D9, D3CEDF, 9CB4CC, 748DA6
 
-
 html {
     // ここで100%と指定し，各タグではremを使ってfont-sizeの調整を行うこと。
     font-size: 100%;
@@ -88,7 +87,7 @@ body {
     line-height: 1;
     // 高さを画面いっぱいにするために記述。「CSS　高さ　画面いっぱい」で検索。
     height: 100vh;
-    background-color: #D3CEDF;
+    background-color: #d3cedf;
 }
 
 a {
@@ -116,7 +115,7 @@ img {
 #header-background-color {
     // 背景色の指定。
     // background-image: linear-gradient(135deg, rgba(105, 234, 203, 1), rgba(215, 98, 252, 1) 67%, rgba(102, 84, 241, 1));
-    background-color: #D3CEDF;
+    background-color: #d3cedf;
 }
 
 .header {
@@ -139,7 +138,7 @@ img {
     // 「&」はSCSSの記法。親要素のセレクタ名が入る。今回は「.header」が入る。
     &-title {
         // アニメーションのイージング指定。
-        transition: transform .2s;
+        transition: transform 0.2s;
 
         // タイトルがホバーされた時（「.header-title:hover」と同じ意味になる）。
         &:hover {
@@ -183,18 +182,16 @@ img {
                 font-size: $fontSize_22px;
 
                 .parent-balloon {
-
                     .header-balloon {
                         // ミックスイン。header-balloonでまとめたスタイルを呼び出した。
-                        @include  header-balloon;
+                        @include header-balloon;
                     }
 
                     // ナビゲーションリンクの各アイコンをホバーするとツールチップが表示されるようにしている。
                     &:hover {
-
                         .header-balloon {
                             // ミックスイン。header-balloonでまとめたスタイルを呼び出した。
-                            @include  header-balloon;
+                            @include header-balloon;
                             display: inline-block;
                             // 横幅の指定。コメントアウトして確認。
                             width: 78px;
@@ -203,7 +200,7 @@ img {
                         // 「FAQ」ツールチップだけ別の指定にしている（位置の調整などの点で特別な指定が必要だった）。コメントアウトして確認を。
                         .header-balloon.second {
                             // ミックスイン。header-balloonでまとめたスタイルを呼び出した。
-                            @include  header-balloon;
+                            @include header-balloon;
                             display: inline-block;
 
                             // ここから本命の指定。
@@ -247,7 +244,7 @@ img {
         right: 0;
         left: 0;
         // マスク部分の背景指定。
-        background: rgba(255,255,255,0.9);
+        background: rgba(255, 255, 255, 0.9);
         // マスク部分のナビゲーションリンクを中央寄せ。
         text-align: center;
         padding: 64px;
@@ -261,7 +258,7 @@ img {
         // よって，変化前（完全透明andクリックできない）と変化後（不透明andクリックできる，.header .overlay.show{}参照）の状態を維持できるのでtransitionを活用したアニメーションを実装できる。
         pointer-events: none;
         // アニメーションの指定。
-        transition: opacity .4s;
+        transition: opacity 0.4s;
 
         #close {
             /* 親要素にposition: relative;をあえて指定しないでabsoluteを使うと，包含ブロックを基準に位置が決定される。すなわち，ウィンドウ幅全体に対して位置が決定される。 */
@@ -303,7 +300,7 @@ img {
 .wrapper .main-area {
     // 背景色の指定。
     // background-color: rgb(238, 238, 238, 0.9);
-    background-color: #F2D7D9;
+    background-color: #f2d7d9;
     // サイドパネルとメインコンテンツを横並びに。
     display: flex;
     padding: 50px 0;
@@ -320,7 +317,7 @@ img {
     padding: 20px;
     /* 色指定。 */
     // background-color: #333;
-    background-color: #748DA6;
+    background-color: #748da6;
     color: #fff;
     // 角丸の指定。
     border-top-right-radius: 50px;
@@ -358,7 +355,7 @@ img {
 }
 // プレースホルダーの色の変更をしている。「::placeholder」が必要。
 .wrapper .main-area #left-panel form .form-input::placeholder {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
 }
 // エラーメッセージ。現在未使用。
 // .wrapper .main-area #left-panel form .error-message {
@@ -370,7 +367,7 @@ img {
     // 色指定。
     color: #fff;
     // background-color: #0E70FF;
-    background-color: #00A690;
+    background-color: #00a690;
     // 外側の余白指定。
     margin-top: 15px;
     // 内側の余白指定。
@@ -427,7 +424,7 @@ img {
     height: 36px;
     // 色指定。
     color: #ffffff;
-    background-color: #748DA6;
+    background-color: #748da6;
     // 角丸の指定。左側のみ角丸にしている。
     border-radius: 0 10px 10px 0;
     // 影の指定。
@@ -444,7 +441,7 @@ img {
     padding-top: 6px;
     padding-bottom: 6px;
     // アニメーションの調整（イージング）。
-    transition: transform .2s;
+    transition: transform 0.2s;
 }
 
 // サイドパネルボタンのアイコンのアニメーション指定。ボタンがクリックされた時，以下が読み込まれる（app.jsのサイドパネルの実装を参照）。
@@ -483,12 +480,12 @@ img {
     padding: 8px 7px 5px;
     // 色指定。
     // background-color: #fff;
-    background-color: #9CB4CC;
+    background-color: #9cb4cc;
     color: #333333;
     // 角丸指定。
     border-radius: 8px 8px 0 0;
     // 文字間の隙間の指定。フォントサイズ同様, remで指定した。
-    letter-spacing: .4rem;
+    letter-spacing: 0.4rem;
     // badgeのpositionプロパティのため。
     position: relative;
 }
@@ -499,7 +496,7 @@ img {
     transform: rotate(-360deg);
     // 以下の指定をhover側に書くことで，ホバーが外れた時にはtransitionが読み込まれないようにした。
     // こうすることでホバーが外れた際のアニメーションのイージングが0sになる。よって，一切回転していないように見える（実際には-360degから0degに変化しているが変化速度は0なので一切動いてないように見える）。
-    transition: transform .5s;
+    transition: transform 0.5s;
 }
 
 // 以下の指定をすることで，クリックされた時にはアイコンのアニメーションが起こらないように制御している。一度以下の指定をコメントアウトして確認を。
@@ -517,7 +514,7 @@ img {
 // 選択済みのタブメニューの色を変更している。
 .wrapper .main-area .content .content-area .tabMenu .planListTitle.active a {
     // background-color: #333333;
-    background-color: #748DA6;
+    background-color: #748da6;
     color: #fff;
 }
 
@@ -533,12 +530,12 @@ img {
     // 角丸指定。
     border-radius: 50%;
     // 色指定。
-    background-color: #FF4A52;
+    background-color: #ff4a52;
     color: white;
     // 左右の内側の余白を指定。
     padding: 0 4px;
     // フォントサイズの指定。16px×0.875=14px。
-    font-size: .875rem;
+    font-size: 0.875rem;
     // フォントサイズに1.4倍した値が高さとなる（body{}にてline-heightを1にしている）。今回heightの代わりとして使用している。
     line-height: 1.4;
     // 親要素の方で値を指定していたので上書きしている（.wrapper .main-area .content .content-area .tabMenu .planListTitle a{}参照）。
@@ -554,8 +551,8 @@ img {
     top: -42px;
     left: 62px;
     // 色指定。
-    background-color: #FF4A52;
-    color: #FFFAFB;
+    background-color: #ff4a52;
+    color: #fffafb;
     // 内側の余白指定。
     padding: 5px;
     // 角丸指定。
@@ -566,9 +563,9 @@ img {
     // 文字間の隙間の指定。
     letter-spacing: 3px;
     // 影指定。
-    box-shadow: inset 0 0 5px 5px #FF4A60;
+    box-shadow: inset 0 0 5px 5px #ff4a60;
     // イージング。
-    transition: opacity .3s;
+    transition: opacity 0.3s;
 }
 
 .wrapper .main-area .content .content-area .error-message.none {
@@ -580,7 +577,7 @@ img {
 .wrapper .main-area .content .content-area .provisional {
     // 色指定。
     // background-color: #333333;
-    background-color: #748DA6;
+    background-color: #748da6;
     color: #fff;
     // 角丸指定。右上・左上のみ作成。
     border-top-left-radius: 8px;
@@ -597,7 +594,7 @@ img {
 .wrapper .main-area .content .content-area form {
     // 色指定。
     // background-color: #333333;
-    background-color: #748DA6;
+    background-color: #748da6;
     color: #fff;
     // 上の「並び替え（暫定）」ボタンの方に角丸の指定を移した。
     // border-top-left-radius: 8px;
@@ -625,7 +622,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area form input::placeholder {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 // 検索フォームの送信ボタン（虫眼鏡）のコーディング。
@@ -639,7 +636,7 @@ img {
     // 文字間の隙間の指定。
     letter-spacing: 3px;
     // アニメーションの調整（イージング）。
-    transition: transform .2s;
+    transition: transform 0.2s;
 }
 
 // 検索フォームの送信ボタン（虫眼鏡）のアニメーション指定。ホバーされた時。
@@ -652,7 +649,7 @@ img {
 .wrapper .main-area .content .content-area .tr .FirstAid form {
     // 色指定。
     background-color: #555555;
-    background-color: #9CB4CC;
+    background-color: #9cb4cc;
     // 内側の余白指定。
     padding: 0;
     // 文字間の隙間の指定。
@@ -683,13 +680,13 @@ img {
     position: absolute;
     left: -2px;
     // スラッシュアイコンのサイズ調整。16px×0.875=14px。
-    font-size: .875rem;
+    font-size: 0.875rem;
 }
 
 .wrapper .main-area .content .content-area .table {
     // 色指定。
     // background-color: #333333;
-    background-color: #748DA6;
+    background-color: #748da6;
     color: #fff;
     // 角丸指定。右下と左下だけ。
     border-radius: 0 0 8px 8px;
@@ -705,7 +702,7 @@ img {
     display: flex;
     // 色指定。
     // background-color: #555555;
-    background-color: #9CB4CC;
+    background-color: #9cb4cc;
     // 角丸指定。
     border-radius: 4px;
     // 内側の余白指定。
@@ -740,7 +737,7 @@ img {
     // 行間の指定。範囲選択した際に，選択部分（青の部分）が重なるのを防ぐため。コメントアウトして確認を。
     line-height: 1.5;
     // transitionの代わり（イージングの指定）。キーフレーム（「slideDown」でファイル内検索してみて）。
-    animation: .2s slideDown;
+    animation: 0.2s slideDown;
 }
 
 // アコーディオン（計画概要）のコーディング続き。
@@ -795,7 +792,7 @@ img {
 // アコーディオンのアイコンボタンのアニメーション。
 .wrapper .main-area .content .content-area .table tbody .tr #planDetailButton i {
     // アニメーションの調整（イージング）。
-    transition: transform .2s;
+    transition: transform 0.2s;
 }
 
 // アコーディオンのアイコンボタンがクリックされた時。app.js参照。
@@ -863,7 +860,7 @@ img {
 .wrapper .main-area .content .content-area .alt {
     // 色指定。
     // background-color: #333333;
-    background-color: #748DA6;
+    background-color: #748da6;
     color: #fff;
 }
 
@@ -881,7 +878,7 @@ img {
     // スクロールされてヘッダー部分が画面から見えなくなるまでは完全透明にしている。
     opacity: 0;
     // アニメーションの調整（イージング）。
-    transition: opacity .3s;
+    transition: opacity 0.3s;
 }
 
 // ページトップへ遷移するボタンのアニメーション。スクロールされてヘッダー部分が完全に画面から見えなくなった時。app.js参照。
@@ -914,7 +911,7 @@ img {
     // スクロールされてヘッダー部分が画面から見えなくなるまでは完全透明にしている。
     opacity: 1;
     // アニメーションの調整（イージング）。
-    transition: opacity .3s;
+    transition: opacity 0.3s;
 }
 
 // 全アコーディオンを開閉するボタンのアニメーション。スクロールされてヘッダー部分が完全に画面から見えなくなった時。app.js参照。
@@ -946,7 +943,7 @@ img {
     // スクロールされてヘッダー部分が画面から見えなくなるまでは完全透明にしている。
     opacity: 1;
     // アニメーションの調整（イージング）。
-    transition: opacity .3s;
+    transition: opacity 0.3s;
 }
 
 // 右側のサイドパネルボタンのアニメーション。スクロールされてヘッダー部分が完全に画面から見えなくなった時。app.js参照。
@@ -958,7 +955,7 @@ img {
 .wrapper #sub-left-panel-button i {
     font-size: 1.3rem;
     // アニメーションの調整（イージング）。
-    transition: transform .2s;
+    transition: transform 0.2s;
 }
 
 .wrapper #sub-left-panel-button.open i {
@@ -980,7 +977,7 @@ img {
     left: 0;
     // 要素の重なり順を指定している。
     // .wrapper .main-area .content .content-area .tabMenu .planListTitle a .badge{}のz-index: 10;より大きい値を指定する必要がある。
-    z-index: 50;  // 試しにコメントアウトして確認してみよう。確かにhtml構造上一番下にあるので一切のz-index指定がない状態であれば問題なく上に重なって表示される。
+    z-index: 50; // 試しにコメントアウトして確認してみよう。確かにhtml構造上一番下にあるので一切のz-index指定がない状態であれば問題なく上に重なって表示される。
 }
 
 // マスク部分のコーディング続き。app.js参照。
@@ -1021,27 +1018,27 @@ img {
 
 // サブのモーダルウインドウここから。
 .wrapper #subModalWindow {
-     // 色指定。
-     background: #fff;
-     // 横幅指定。
-     width: 500px;
-     height: 500px;
-     // 内側の余白指定。
-     padding: 8px;
-     // 角丸指定。
-     border-radius: 4px;
-     // fixedを指定。親要素（厳密には包含ブロック）はページ全体となる。
-     position: fixed; // ページ全体を基準にポジショニング。
-     top: 30px;
-     left: 0;
-     right: 0;
-     /* width，left，rightの全てがautoでなく（leftとrightは0），かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
-     /* この際，topは左右と関係ないのでどのような値であっても問題なし。 */
-     margin: 0 auto;
-     // 要素の重なり順を調整。モーダルウインドウ部分を一番上に配置するため。その次にマスク部分。
-     z-index: 100;
-     // class="hidden"が取り外されている時は，表示。app.jsで制御している。
-     display: block;
+    // 色指定。
+    background: #fff;
+    // 横幅指定。
+    width: 500px;
+    height: 500px;
+    // 内側の余白指定。
+    padding: 8px;
+    // 角丸指定。
+    border-radius: 4px;
+    // fixedを指定。親要素（厳密には包含ブロック）はページ全体となる。
+    position: fixed; // ページ全体を基準にポジショニング。
+    top: 30px;
+    left: 0;
+    right: 0;
+    /* width，left，rightの全てがautoでなく（leftとrightは0），かつmargin-right，margin-leftがともにautoである場合には，左右のmarginが等しくなるようにmarginが設定される，らしい（CSSの仕様）。 */
+    /* この際，topは左右と関係ないのでどのような値であっても問題なし。 */
+    margin: 0 auto;
+    // 要素の重なり順を調整。モーダルウインドウ部分を一番上に配置するため。その次にマスク部分。
+    z-index: 100;
+    // class="hidden"が取り外されている時は，表示。app.jsで制御している。
+    display: block;
 }
 // デフォではclass="hidden"がついているが，「編集する」ボタンを押下するとJavaScriptの処理で以下が読み込まれなくなる。
 .wrapper #subModalWindow.hidden {
@@ -1089,9 +1086,9 @@ img {
 }
 .wrapper .main-area .content .content-area #subModalWindow .form-input::placeholder {
     // プレイスホルダーの色指定。「::placeholder」のように記述すること。
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
 }
-.wrapper .main-area .content .content-area #subModalWindow .form-input.textarea-input{
+.wrapper .main-area .content .content-area #subModalWindow .form-input.textarea-input {
     // 概要の高さを指定。
     height: 150px;
 }
@@ -1104,7 +1101,7 @@ img {
     letter-spacing: normal;
     // 背景色の指定。
     // background-color:#0E70FF;
-    background-color: #00A690;
+    background-color: #00a690;
     // 内側の余白指定。
     padding: 8px;
     // 角丸指定。
@@ -1118,7 +1115,7 @@ img {
     background-color: #00c4aa;
 }
 // デコイの「削除する」ボタンのコーディング。
-.wrapper .main-area .content .content-area #subModalWindow form #task-delete-decoying {
+.wrapper .main-area .content .content-area #subModalWindow td #task-delete-decoying {
     // position指定のため。親要素は「.wrapper .main-area .content{}」となる（ページ内検索で確認してみよう）。
     position: absolute;
     // bottomの指定は「戻る」ボタンの値を一致させよう。フレックスで「更新する」と「削除する」，「戻る」を並列させようと考えたが今回はpositionを使用した。
@@ -1126,7 +1123,7 @@ img {
     left: 150px;
     // 色指定。
     color: #fff;
-    background-color: #FF4A52;
+    background-color: #ff4a52;
     // 内側の余白指定。
     padding: 8px;
     // 角丸指定。
@@ -1136,10 +1133,10 @@ img {
     // ホバー時のマウスの形の指定。
     cursor: pointer;
 }
-// .wrapper .main-area .content .content-area #subModalWindow form #task-delete-decoying:hover {
-//     background-color: #ff7e85;
-// }
-.wrapper .main-area .content .content-area #subModalWindow form #return-button {
+.wrapper .main-area .content .content-area #subModalWindow td #task-delete-decoying:focus {
+    background-color: #ff7e85;
+}
+.wrapper .main-area .content .content-area #subModalWindow td #return-button {
     // position指定のため。親要素は「.wrapper .main-area .content{}」となる（ページ内検索で確認してみよう）。
     position: absolute;
     // bottomの指定は「削除する」ボタンの値を一致させよう。フレックスで「更新する」と「削除する」，「戻る」を並列させようと考えたが今回はpositionを使用した。
@@ -1156,6 +1153,9 @@ img {
     font-size: 1.125rem;
     // ホバー時のマウスの形の指定。
     cursor: pointer;
+}
+.wrapper .main-area .content .content-area #subModalWindow td #return-button:focus {
+    background: #8a8a8a;
 }
 .wrapper .main-area .content .content-area #subModalWindow .error-message {
     // エラーメッセージの指定。別のエラーメッセージのposition指定を解除している。
@@ -1187,7 +1187,7 @@ img {
     padding: 6px; // 内側の余白指定。
     // 色指定。
     color: #333;
-    background-color: #E8F2F0;
+    background-color: #e8f2f0;
     // 角丸指定。
     border-radius: 4px;
     // 文字間の隙間の指定。
@@ -1200,7 +1200,7 @@ img {
 .wrapper .main-area .content .content-area #modalWindow div form {
     // 「完了」「削除」ボタンのコーディング。
     padding: 0; // .wrapper .main-area .content .content-area form{}のpadding指定を上書きするため。
-    background-color: #FF4A52; // 色指定。なお「完了」ボタンに関してはhtmlの方で別の背景色を指定している。
+    background-color: #ff4a52; // 色指定。なお「完了」ボタンに関してはhtmlの方で別の背景色を指定している。
     border-radius: 4px; // 角丸指定。
     margin-left: 14px; // 外側の余白指定。
 }
@@ -1250,7 +1250,7 @@ img {
     text-align: center;
     // 色指定。
     color: #fff;
-    background-color: #00A690;
+    background-color: #00a690;
     // 角丸指定。
     border-radius: 4px;
     // 要素の重なりを一番上にしている。
@@ -1320,9 +1320,12 @@ img {
 }
 
 // フッター。
-// #footer {
-//     height: 80px;
-// }
+#footer p {
+    text-align: center;
+    font-size: 1.375rem;
+    line-height: 40px;
+    color: #333333;
+}
 
 // キーフレーム。
 // display: none;からdisplay: block;に変化する時にアニメーションを付けたい場合にはanimationプロパティを使う必要がある。
