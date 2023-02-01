@@ -345,8 +345,6 @@
             tr.previousElementSibling.classList.remove("hidden");
             // マスク部分を表示させるため。
             mask.classList.remove("hidden");
-            titleInput2.focus();
-            titleInput2.setSelectionRange(titleInput2.value.length, titleInput2.value.length);
         });
         // マスク部分がクリックされた時。
         mask.addEventListener("click", () => {
@@ -371,6 +369,7 @@
                 return;
             }
 
+            // 本命の削除ボタンをクリック扱いにしている。
             tr.previousElementSibling.children[0].children[3].children[0].click();
         });
 
@@ -566,210 +565,472 @@
         }
     });
 
-    // -----titleInput2からtextareaInput2に移動-----
+    trs.forEach((tr) => {
+        let children = tr.children;
 
-    titleInput2.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowDown" && titleInput2.selectionStart == titleInput2.value.length) {
-            flg = true;
-            // デバック用。
-            console.log("hoge");
-        }
-    });
-
-    titleInput2.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowDown" && flg) {
-            // デバック用。
-            console.log("hoge2");
-            flg = false;
-            textareaInput2.focus();
-            textareaInput2.setSelectionRange(
-                textareaInput2.value.length,
-                textareaInput2.value.length
+        // 編集ボタンをクリックしたらテーマ欄にフォーカスされるようにするため。
+        children[0].addEventListener("click", () => {
+            // フォーカス。
+            tr.previousElementSibling.children[0].children[0].children[3].focus();
+            // フォーカス後の選択中の現在地点の決定。末尾に設定。
+            tr.previousElementSibling.children[0].children[0].children[3].setSelectionRange(
+                tr.previousElementSibling.children[0].children[0].children[3].value.length,
+                tr.previousElementSibling.children[0].children[0].children[3].value.length
             );
-        }
+        });
+
+        // テーマから概要へ移動。
+
+        tr.previousElementSibling.children[0].children[0].children[3].addEventListener(
+            "keydown",
+            (e) => {
+                if (
+                    e.code == "ArrowDown" &&
+                    tr.previousElementSibling.children[0].children[0].children[3].selectionStart ==
+                        tr.previousElementSibling.children[0].children[0].children[3].value.length
+                ) {
+                    flg = true;
+                    // デバック用。
+                    console.log("hoge");
+                }
+            }
+        );
+
+        tr.previousElementSibling.children[0].children[0].children[3].addEventListener(
+            "keyup",
+            (e) => {
+                if (e.code == "ArrowDown" && flg) {
+                    // デバック用。
+                    console.log("hoge2");
+                    flg = false;
+                    tr.previousElementSibling.children[0].children[0].children[9].focus();
+                    tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(
+                        tr.previousElementSibling.children[0].children[0].children[9].value.length,
+                        tr.previousElementSibling.children[0].children[0].children[9].value.length
+                    );
+                }
+            }
+        );
+
+        // 概要からテーマへ移動。
+
+        tr.previousElementSibling.children[0].children[0].children[9].addEventListener(
+            "keydown",
+            (e) => {
+                if (
+                    e.code == "ArrowUp" &&
+                    tr.previousElementSibling.children[0].children[0].children[9].selectionStart ==
+                        0
+                ) {
+                    flg = true;
+                    // デバック用。
+                    console.log("hoge");
+                }
+            }
+        );
+
+        tr.previousElementSibling.children[0].children[0].children[9].addEventListener(
+            "keyup",
+            (e) => {
+                if (e.code == "ArrowUp" && flg) {
+                    // デバック用。
+                    console.log("hoge2");
+                    flg = false;
+                    tr.previousElementSibling.children[0].children[0].children[3].focus();
+                    tr.previousElementSibling.children[0].children[0].children[3].setSelectionRange(
+                        tr.previousElementSibling.children[0].children[0].children[3].value.length,
+                        tr.previousElementSibling.children[0].children[0].children[3].value.length
+                    );
+                }
+            }
+        );
+
+        // 概要から更新ボタンへ移動。
+
+        tr.previousElementSibling.children[0].children[0].children[9].addEventListener(
+            "keydown",
+            (e) => {
+                if (
+                    e.code == "ArrowDown" &&
+                    tr.previousElementSibling.children[0].children[0].children[9].selectionStart ==
+                        tr.previousElementSibling.children[0].children[0].children[9].value.length
+                ) {
+                    flg = true;
+                    // デバック用。
+                    console.log("hoge");
+                }
+            }
+        );
+
+        tr.previousElementSibling.children[0].children[0].children[9].addEventListener(
+            "keyup",
+            (e) => {
+                if (e.code == "ArrowDown" && flg) {
+                    // デバック用。
+                    console.log("hoge2");
+                    flg = false;
+                    tr.previousElementSibling.children[0].children[0].children[10].focus();
+                }
+            }
+        );
+
+        // 更新ボタンから概要へ移動。
+
+        tr.previousElementSibling.children[0].children[0].children[10].addEventListener(
+            "keydown",
+            (e) => {
+                if (e.code == "ArrowUp") {
+                    flg = true;
+                    // デバック用。
+                    console.log("hoge");
+                }
+            }
+        );
+
+        tr.previousElementSibling.children[0].children[0].children[10].addEventListener(
+            "keyup",
+            (e) => {
+                if (e.code == "ArrowUp" && flg) {
+                    // デバック用。
+                    console.log("hoge100");
+                    flg = false;
+                    tr.previousElementSibling.children[0].children[0].children[9].focus();
+                    tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(
+                        tr.previousElementSibling.children[0].children[0].children[9].value.length,
+                        tr.previousElementSibling.children[0].children[0].children[9].value.length
+                    );
+                }
+            }
+        );
+
+        // 更新ボタンから削除ボタンへ移動。
+        tr.previousElementSibling.children[0].children[0].children[10].addEventListener(
+            "keydown",
+            (e) => {
+                if (e.code == "ArrowRight") {
+                    flg = true;
+                    // デバック用。
+                    console.log("hoge110");
+                }
+            }
+        );
+
+        tr.previousElementSibling.children[0].children[0].children[10].addEventListener(
+            "keyup",
+            (e) => {
+                if (e.code == "ArrowRight" && flg) {
+                    // デバック用。
+                    console.log("hoge111");
+                    flg = false;
+                    tr.previousElementSibling.children[0].children[1].focus();
+                    console.log("hoge112");
+                }
+            }
+        );
+
+        // 削除ボタンから更新ボタンへ移動。
+
+        tr.previousElementSibling.children[0].children[1].addEventListener("keydown", (e) => {
+            if (e.code == "ArrowLeft") {
+                flg = true;
+                // デバック用。
+                console.log("hoge113");
+            }
+        });
+
+        tr.previousElementSibling.children[0].children[1].addEventListener("keyup", (e) => {
+            if (e.code == "ArrowLeft" && flg) {
+                // デバック用。
+                console.log("hoge114");
+                flg = false;
+                tr.previousElementSibling.children[0].children[0].children[10].focus();
+                console.log("hoge115");
+            }
+        });
+
+        // 削除ボタンから戻るボタンへ移動。
+
+        tr.previousElementSibling.children[0].children[1].addEventListener("keydown", (e) => {
+            if (e.code == "ArrowRight") {
+                console.log("hoge116");
+                flg = true;
+            }
+        });
+
+        tr.previousElementSibling.children[0].children[1].addEventListener("keyup", (e) => {
+            if (e.code == "ArrowRight" && flg) {
+                console.log("hoge117");
+                flg = false;
+                tr.previousElementSibling.children[0].children[2].focus();
+            }
+        });
+
+        // 戻るボタンから削除するボタンへ移動。
+
+        tr.previousElementSibling.children[0].children[2].addEventListener("keydown", (e) => {
+            if (e.code == "ArrowLeft") {
+                console.log("hoge118");
+                flg = true;
+            }
+        });
+
+        tr.previousElementSibling.children[0].children[2].addEventListener("keyup", (e) => {
+            if (e.code == "ArrowLeft" && flg) {
+                console.log("hoge119");
+                flg = false;
+                tr.previousElementSibling.children[0].children[1].focus();
+            }
+        });
+
+        // 削除ボタンから概要へ移動。
+
+        tr.previousElementSibling.children[0].children[1].addEventListener("keydown", (e) => {
+            if (e.code == "ArrowUp") {
+                flg = true;
+                // デバック用。
+                console.log("hoge120");
+            }
+        });
+
+        tr.previousElementSibling.children[0].children[1].addEventListener("keyup", (e) => {
+            if (e.code == "ArrowUp" && flg) {
+                // デバック用。
+                console.log("hoge121");
+                flg = false;
+                tr.previousElementSibling.children[0].children[0].children[9].focus();
+                tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(
+                    tr.previousElementSibling.children[0].children[0].children[9].value.length,
+                    tr.previousElementSibling.children[0].children[0].children[9].value.length
+                );
+            }
+        });
+
+        // 戻るボタンから概要へ移動。
+
+        tr.previousElementSibling.children[0].children[2].addEventListener("keydown", (e) => {
+            if (e.code == "ArrowUp") {
+                flg = true;
+                // デバック用。
+                console.log("hoge122");
+            }
+        });
+
+        tr.previousElementSibling.children[0].children[2].addEventListener("keyup", (e) => {
+            if (e.code == "ArrowUp" && flg) {
+                // デバック用。
+                console.log("hoge123");
+                flg = false;
+                tr.previousElementSibling.children[0].children[0].children[9].focus();
+                tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(
+                    tr.previousElementSibling.children[0].children[0].children[9].value.length,
+                    tr.previousElementSibling.children[0].children[0].children[9].value.length
+                );
+            }
+        });
     });
 
-    // -----textareaInput2からtitleInput2に移動-----
+    // titleInput2.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowDown" && titleInput2.selectionStart == titleInput2.value.length) {
+    //         flg = true;
+    //         // デバック用。
+    //         console.log("hoge");
+    //     }
+    // });
 
-    textareaInput2.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowUp" && textareaInput2.selectionStart == 0) {
-            flg = true;
-            // デバック用。
-            console.log("hoge");
-        }
-    });
+    // titleInput2.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowDown" && flg) {
+    //         // デバック用。
+    //         console.log("hoge2");
+    //         flg = false;
+    //         textareaInput2.focus();
+    //         textareaInput2.setSelectionRange(
+    //             textareaInput2.value.length,
+    //             textareaInput2.value.length
+    //         );
+    //     }
+    // });
 
-    textareaInput2.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowUp" && flg) {
-            // デバック用。
-            console.log("hoge2");
-            flg = false;
-            titleInput2.focus();
-            titleInput2.setSelectionRange(titleInput2.value.length, titleInput2.value.length);
-        }
-    });
+    // // -----textareaInput2からtitleInput2に移動-----
 
-    // -----textareaInput2からupdateButtonに移動-----
+    // textareaInput2.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowUp" && textareaInput2.selectionStart == 0) {
+    //         flg = true;
+    //         // デバック用。
+    //         console.log("hoge");
+    //     }
+    // });
 
-    textareaInput2.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowDown" && textareaInput2.selectionStart == textareaInput2.value.length) {
-            flg = true;
-            // デバック用。
-            console.log("hoge");
-        }
-    });
+    // textareaInput2.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowUp" && flg) {
+    //         // デバック用。
+    //         console.log("hoge2");
+    //         flg = false;
+    //         titleInput2.focus();
+    //         titleInput2.setSelectionRange(titleInput2.value.length, titleInput2.value.length);
+    //     }
+    // });
 
-    textareaInput2.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowDown" && flg) {
-            // デバック用。
-            console.log("hoge2");
-            flg = false;
-            updateButton.focus();
-        }
-    });
+    // // -----textareaInput2からupdateButtonに移動-----
 
-    // -----updateButtonからtextareaInput2に移動-----
+    // textareaInput2.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowDown" && textareaInput2.selectionStart == textareaInput2.value.length) {
+    //         flg = true;
+    //         // デバック用。
+    //         console.log("hoge");
+    //     }
+    // });
 
-    updateButton.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowUp") {
-            flg = true;
-            // デバック用。
-            console.log("hoge");
-        }
-    });
+    // textareaInput2.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowDown" && flg) {
+    //         // デバック用。
+    //         console.log("hoge2");
+    //         flg = false;
+    //         updateButton.focus();
+    //     }
+    // });
 
-    updateButton.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowUp" && flg) {
-            // デバック用。
-            console.log("hoge100");
-            flg = false;
-            textareaInput2.focus();
-            textareaInput2.setSelectionRange(
-                textareaInput2.value.length,
-                textareaInput2.value.length
-            );
-        }
-    });
+    // // -----updateButtonからtextareaInput2に移動-----
 
-    // -----updateButtonからtaskDeleteDecoyingに移動-----
+    // updateButton.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowUp") {
+    //         flg = true;
+    //         // デバック用。
+    //         console.log("hoge");
+    //     }
+    // });
 
-    updateButton.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowRight") {
-            flg = true;
-            // デバック用。
-            console.log("hoge110");
-        }
-    });
+    // updateButton.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowUp" && flg) {
+    //         // デバック用。
+    //         console.log("hoge100");
+    //         flg = false;
+    //         textareaInput2.focus();
+    //         textareaInput2.setSelectionRange(
+    //             textareaInput2.value.length,
+    //             textareaInput2.value.length
+    //         );
+    //     }
+    // });
 
-    updateButton.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowRight" && flg) {
-            // デバック用。
-            console.log("hoge111");
-            flg = false;
-            taskDeleteDecoying.focus();
-            console.log("hoge112");
-        }
-    });
+    // // -----updateButtonからtaskDeleteDecoyingに移動-----
 
-    // -----taskDeleteDecoyingからupdateButtonに移動-----
+    // updateButton.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowRight") {
+    //         flg = true;
+    //         // デバック用。
+    //         console.log("hoge110");
+    //     }
+    // });
 
-    taskDeleteDecoying.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowLeft") {
-            flg = true;
-            // デバック用。
-            console.log("hoge113");
-        }
-    });
+    // updateButton.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowRight" && flg) {
+    //         // デバック用。
+    //         console.log("hoge111");
+    //         flg = false;
+    //         taskDeleteDecoying.focus();
+    //         console.log("hoge112");
+    //     }
+    // });
 
-    taskDeleteDecoying.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowLeft" && flg) {
-            // デバック用。
-            console.log("hoge114");
-            flg = false;
-            updateButton.focus();
-            console.log("hoge115");
-        }
-    });
+    // // -----taskDeleteDecoyingからupdateButtonに移動-----
 
-    // -----taskDeleteDecoyingからreturnButtonに移動-----
+    // taskDeleteDecoying.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowLeft") {
+    //         flg = true;
+    //         // デバック用。
+    //         console.log("hoge113");
+    //     }
+    // });
 
-    taskDeleteDecoying.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowRight") {
-            console.log("hoge116");
-            flg = true;
-        }
-    });
+    // taskDeleteDecoying.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowLeft" && flg) {
+    //         // デバック用。
+    //         console.log("hoge114");
+    //         flg = false;
+    //         updateButton.focus();
+    //         console.log("hoge115");
+    //     }
+    // });
 
-    taskDeleteDecoying.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowRight" && flg) {
-            console.log("hoge117");
-            flg = false;
-            returnButton.focus();
-        }
-    });
+    // // -----taskDeleteDecoyingからreturnButtonに移動-----
 
-    // -----returnButtonからtaskDeleteDecoyingに移動-----
+    // taskDeleteDecoying.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowRight") {
+    //         console.log("hoge116");
+    //         flg = true;
+    //     }
+    // });
 
-    returnButton.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowLeft") {
-            console.log("hoge118");
-            flg = true;
-        }
-    });
+    // taskDeleteDecoying.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowRight" && flg) {
+    //         console.log("hoge117");
+    //         flg = false;
+    //         returnButton.focus();
+    //     }
+    // });
 
-    returnButton.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowLeft" && flg) {
-            console.log("hoge119");
-            flg = false;
-            taskDeleteDecoying.focus();
-        }
-    });
+    // // -----returnButtonからtaskDeleteDecoyingに移動-----
 
-    // -----taskDeleteDecoyingからtextareaInput2に移動-----
+    // returnButton.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowLeft") {
+    //         console.log("hoge118");
+    //         flg = true;
+    //     }
+    // });
 
-    taskDeleteDecoying.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowUp") {
-            flg = true;
-            // デバック用。
-            console.log("hoge120");
-        }
-    });
+    // returnButton.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowLeft" && flg) {
+    //         console.log("hoge119");
+    //         flg = false;
+    //         taskDeleteDecoying.focus();
+    //     }
+    // });
 
-    taskDeleteDecoying.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowUp" && flg) {
-            // デバック用。
-            console.log("hoge121");
-            flg = false;
-            textareaInput2.focus();
-            textareaInput2.setSelectionRange(
-                textareaInput2.value.length,
-                textareaInput2.value.length
-            );
-        }
-    });
+    // // -----taskDeleteDecoyingからtextareaInput2に移動-----
 
-    // -----returnButtonからtextareaInput2に移動-----
+    // taskDeleteDecoying.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowUp") {
+    //         flg = true;
+    //         // デバック用。
+    //         console.log("hoge120");
+    //     }
+    // });
 
-    returnButton.addEventListener("keydown", (e) => {
-        if (e.code == "ArrowUp") {
-            flg = true;
-            // デバック用。
-            console.log("hoge122");
-        }
-    });
+    // taskDeleteDecoying.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowUp" && flg) {
+    //         // デバック用。
+    //         console.log("hoge121");
+    //         flg = false;
+    //         textareaInput2.focus();
+    //         textareaInput2.setSelectionRange(
+    //             textareaInput2.value.length,
+    //             textareaInput2.value.length
+    //         );
+    //     }
+    // });
 
-    returnButton.addEventListener("keyup", (e) => {
-        if (e.code == "ArrowUp" && flg) {
-            // デバック用。
-            console.log("hoge123");
-            flg = false;
-            textareaInput2.focus();
-            textareaInput2.setSelectionRange(
-                textareaInput2.value.length,
-                textareaInput2.value.length
-            );
-        }
-    });
+    // // -----returnButtonからtextareaInput2に移動-----
+
+    // returnButton.addEventListener("keydown", (e) => {
+    //     if (e.code == "ArrowUp") {
+    //         flg = true;
+    //         // デバック用。
+    //         console.log("hoge122");
+    //     }
+    // });
+
+    // returnButton.addEventListener("keyup", (e) => {
+    //     if (e.code == "ArrowUp" && flg) {
+    //         // デバック用。
+    //         console.log("hoge123");
+    //         flg = false;
+    //         textareaInput2.focus();
+    //         textareaInput2.setSelectionRange(
+    //             textareaInput2.value.length,
+    //             textareaInput2.value.length
+    //         );
+    //     }
+    // });
 
     // ------------------------
 
