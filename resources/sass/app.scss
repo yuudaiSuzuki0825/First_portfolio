@@ -295,73 +295,80 @@ img {
 }
 
 /* メインコンテンツここから。*/
-// SCSSここから。
 
-.wrapper .main-area {
-    // 背景色の指定。
-    // background-color: rgb(238, 238, 238, 0.9);
-    background-color: #f2d7d9;
-    // サイドパネルとメインコンテンツを横並びに。
-    display: flex;
-    padding: 50px 0;
-    // min-height: 85%;
+.wrapper {
+    .main-area {
+        // 背景色の指定。
+        // background-color: rgb(238, 238, 238, 0.9);
+        background-color: #f2d7d9;
+        // サイドパネルとメインコンテンツを横並びに。
+        display: flex;
+        padding: 50px 0;
+        // min-height: 85%;
+
+        // サイドパネルのコーディング。
+        #left-panel {
+            // 横幅の指定。
+            width: 30%;
+            // 高さの指定。絶対値指定しないと，例えばレコード数が少ないときに縦に縮んでしまう。
+            height: 580px;
+            // 内側の余白。
+            padding: 20px;
+            /* 色指定。 */
+            // background-color: #333;
+            background-color: #748da6;
+            color: #fff;
+            // 角丸の指定。
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            // 影の指定。
+            box-shadow: inset 0 0 5px 5px #66829e;
+            // デフォルトでは非表示。アイコンボタンをクリックすると表示される。
+            display: none;
+
+            // サイドパネルの計画作成欄のコーディングここから。
+            form .form-label {
+                // 横幅一杯まで占有するため。
+                display: block;
+                // 範囲選択できなくしている。
+                user-select: none;
+                // 外側の余白指定。
+                margin-top: 15px;
+            }
+
+            form .form-input {
+                // 横幅一杯まで占有するため。
+                display: block;
+                // 横幅指定。絶対値の指定でも構わないが，概要欄が大きくなりすぎる可能性があるので親要素内に収める必要がある。デベロッパーツールで数値を変えて確認を。
+                width: 100%;
+                // 色指定。
+                color: #fff;
+                background-color: #555555;
+                // background-color: #D3CEDF;
+                // 内側の余白指定。
+                padding: 8px;
+                // 角丸指定。
+                border-radius: 4px;
+                // 外側の余白指定。
+                margin: 5px 0;
+            }
+
+            // プレースホルダーの色の変更をしている。「::placeholder」が必要。
+            form .form-input::placeholder {
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+    }
 }
 
-// サイドパネルのコーディング。
-.wrapper .main-area #left-panel {
-    // 横幅の指定。
-    width: 30%;
-    // 高さの指定。絶対値指定しないと，例えばレコード数が少ないときに縦に縮んでしまう。
-    height: 580px;
-    // 内側の余白。
-    padding: 20px;
-    /* 色指定。 */
-    // background-color: #333;
-    background-color: #748da6;
-    color: #fff;
-    // 角丸の指定。
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    // 影の指定。
-    box-shadow: inset 0 0 5px 5px #66829e;
-    // デフォルトでは非表示。アイコンボタンをクリックすると表示される。
-    display: none;
-}
-
-// サイドパネルの計画作成欄のコーディングここから。
-.wrapper .main-area #left-panel form .form-label {
-    // 横幅一杯まで占有するため。
-    display: block;
-    // 範囲選択できなくしている。
-    user-select: none;
-    // 外側の余白指定。
-    margin-top: 15px;
-}
-.wrapper .main-area #left-panel form .form-input {
-    // 横幅一杯まで占有するため。
-    display: block;
-    // 横幅指定。絶対値の指定でも構わないが，概要欄が大きくなりすぎる可能性があるので親要素内に収める必要がある。デベロッパーツールで数値を変えて確認を。
-    width: 100%;
-    // 色指定。
-    color: #fff;
-    background-color: #555555;
-    // background-color: #D3CEDF;
-    // 内側の余白指定。
-    padding: 8px;
-    // 角丸指定。
-    border-radius: 4px;
-    // 外側の余白指定。
-    margin: 5px 0;
-}
-// プレースホルダーの色の変更をしている。「::placeholder」が必要。
-.wrapper .main-area #left-panel form .form-input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
 // エラーメッセージ。現在未使用。
 // .wrapper .main-area #left-panel form .error-message {
 //     // 色指定。
 //     color: #FF4A52;
 // }
+
+// SCSSここから。
+
 // 「作成する」ボタンのコーディング。
 .wrapper .main-area #left-panel form .create-button {
     // 色指定。
@@ -832,6 +839,7 @@ img {
     border-radius: 5px;
     // 影指定。
     box-shadow: 2px 2px 2px 1px #333333;
+    // クリックなどをできないようにしている。
     pointer-events: none;
 }
 
