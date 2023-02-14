@@ -441,6 +441,10 @@
         // });
     });
 
+    /* =================================================== */
+    // 「GoodJob」通知のアニメーション。
+    /* =================================================== */
+
     // 以下のメソッドはバックエンドの処理によって, id="success-msg"のdivタグが表示された際に実行される。
     function fadeOut1() {
         // 早期リターン。
@@ -450,10 +454,6 @@
         // 「.wrapper #success-msg.none{}」を読み込むため。
         successMsg.classList.add("none");
     }
-
-    /* =================================================== */
-    // 「GoodJob」通知のアニメーション。
-    /* =================================================== */
 
     // 以下のメソッドはバックエンドの処理によって, id="success-msg"のdivタグが表示された際に実行される。
     function fadeOut2() {
@@ -576,6 +576,13 @@
     });
 
     // -----編集欄-----
+
+    // -----注意点-----
+    // tr.previousElementSibling.children[0].children[0].children[3]はテーマ入力欄（inputタグ）を指している。
+    // tr.previousElementSibling.children[0].children[0].children[9]は概要入力欄（textareaタグ）を指している。
+    // tr.previousElementSibling.children[0].children[0].children[10]は更新ボタンを指している。
+    // tr.previousElementSibling.children[0].children[1]は削除ボタンを指している。
+    // tr.previousElementSibling.children[0].children[2]は戻るボタンを指している。
 
     // モーダルウィンドウの際と同じ手順。tr（class="tr"のついたtrタグ）にアクセスしている。
     trs.forEach((tr) => {

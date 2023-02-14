@@ -160,7 +160,6 @@ img {
   display: flex;
   padding: 50px 0;
 }
-
 .wrapper .main-area #left-panel {
   width: 30%;
   height: 580px;
@@ -173,7 +172,6 @@ img {
   box-shadow: inset 0 0 5px 5px #66829e;
   display: none;
 }
-
 .wrapper .main-area #left-panel form .form-label {
   display: block;
   -webkit-user-select: none;
@@ -181,7 +179,6 @@ img {
           user-select: none;
   margin-top: 15px;
 }
-
 .wrapper .main-area #left-panel form .form-input {
   display: block;
   width: 100%;
@@ -191,11 +188,9 @@ img {
   border-radius: 4px;
   margin: 5px 0;
 }
-
 .wrapper .main-area #left-panel form .form-input::-moz-placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
-
 .wrapper .main-area #left-panel form .form-input::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
