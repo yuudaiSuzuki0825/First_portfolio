@@ -194,7 +194,6 @@ img {
 .wrapper .main-area #left-panel form .form-input::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
-
 .wrapper .main-area #left-panel form .create-button {
   color: #fff;
   background-color: #00a690;
@@ -205,25 +204,17 @@ img {
      -moz-user-select: none;
           user-select: none;
 }
-
 .wrapper .main-area #left-panel form .create-button:focus {
   background-color: #00c4aa;
 }
-
 .wrapper .main-area #left-panel.open {
   display: block;
 }
-
 .wrapper .main-area .content {
   position: relative;
   flex-grow: 1;
   min-height: 300px;
 }
-
-.wrapper .main-area .content.open {
-  max-width: 68.7%;
-}
-
 .wrapper .main-area .content #left-panel-button {
   position: absolute;
   top: 127.74px;
@@ -234,6 +225,9 @@ img {
   background-color: #748da6;
   border-radius: 0 10px 10px 0;
   box-shadow: inset 0 0 5px 5px #66829e;
+}
+.wrapper .main-area .content.open {
+  max-width: 68.7%;
 }
 
 .wrapper .main-area .content #left-panel-button i {

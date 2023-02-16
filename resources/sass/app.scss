@@ -357,86 +357,81 @@ img {
             form .form-input::placeholder {
                 color: rgba(255, 255, 255, 0.7);
             }
+
+            // 「作成する」ボタンのコーディング。
+            form .create-button {
+                // 色指定。
+                color: #fff;
+                // background-color: #0E70FF;
+                background-color: #00a690;
+                // 外側の余白指定。
+                margin-top: 15px;
+                // 内側の余白指定。
+                padding: 8px;
+                // 角丸指定。
+                border-radius: 4px;
+                // 範囲選択できなくしている。
+                user-select: none;
+
+                &:focus {
+                    background-color: #00c4aa;
+                }
+            }
+        }
+
+        // サイドパネルのアイコンボタンがクリックされた時。
+        #left-panel.open {
+            // 非表示➡表示。
+            display: block;
+        }
+
+        // メインコンテンツ。
+        .content {
+            // ポジショニングのため。エラーメッセージやモーダルウインドウのポジショニングでも使用。
+            position: relative;
+            // .contentの領域を広げるため。コメントアウトして確認。
+            // （考察）↓
+            // MDNに「row または row-reverse を選択した場合、主軸はインライン要素の並ぶ方向に伸びる軸となります。」との記述あり。
+            // かといって.wrapper .main-area .content{}をブロックレベル要素にしても横幅全てを占有する性質とフレックスアイテムとしての性質は相容れないので
+            // 横並びを実現するために後者が優先され，インライン要素としてのふるまいとなった。もし，占有できる最大の横幅（親要素内における最大幅）としてフレックスアイテムを設定したい場合はwidth: 100%;を指定する必要がある。
+            // width: 100%;  // flex-grow: 1;を指定しない場合はこれをコメントアウトして。
+            // 或いはflex-grow: 1;を指定してもOK。
+            // 厳密には上記の考察は誤り？➡flex-basis: auto;（既定値）によってフレックスアイテムの横幅が設定されるが（具体的➡サイドパネルは上記より200px，コンテンツは絶対値指定なしなので最低限の横幅で設定？），分配可能な余白が右端に残る形となる。
+            // その余白を各アイテムに分配するためのプロパティがflex-grow（余白の分配を割合で決定する）。既定値はflex-grow: 0;（サイドパネルにはこれが指定されている）で，コンテンツ側にflex-grow: 1;を指定すれば0:1（0:100）により残り全ての分配可能な余白がコンテンツ側の横幅として設定される形になる（width: 100%;と同じ挙動になる）。
+            flex-grow: 1;
+            // 高さの最小値を指定。サイドパネルの高さと同じにした。これにより，計画数が少なくてもcontent部分の高さが300px以下になることはない。
+            min-height: 300px;
+
+            // サイドパネルボタンのコーディング。
+            #left-panel-button {
+                // ポジショニング。
+                position: absolute;
+                // サイドパネルの約半分の高さの位置に来るように調整した。もう少し上手い方法を模索すべきだと思う。
+                top: 127.74px;
+                left: 0;
+                // ホバーした時のマウスの形を変更した。
+                cursor: pointer;
+                // 高さ指定。
+                height: 36px;
+                // 色指定。
+                color: #ffffff;
+                background-color: #748da6;
+                // 角丸の指定。左側のみ角丸にしている。
+                border-radius: 0 10px 10px 0;
+                // 影の指定。
+                box-shadow: inset 0 0 5px 5px #66829e;
+            }
+        }
+
+        // サイドパネルボタンが押下された時。
+        .content.open {
+            // メインコンテンツの最大幅を指定している。これを指定しないとアコーディオンの開閉時に横幅の挙動がおかしくなる。コメントアウトして確認を。
+            max-width: 68.7%; // 右下の3つの固定ボタンの位置関係上，70%は避けている。本来はサイドパネルが30%になるので70%にすべきだと思われる。
         }
     }
 }
 
-// エラーメッセージ。現在未使用。
-// .wrapper .main-area #left-panel form .error-message {
-//     // 色指定。
-//     color: #FF4A52;
-// }
-
 // SCSSここから。
-
-// 「作成する」ボタンのコーディング。
-.wrapper .main-area #left-panel form .create-button {
-    // 色指定。
-    color: #fff;
-    // background-color: #0E70FF;
-    background-color: #00a690;
-    // 外側の余白指定。
-    margin-top: 15px;
-    // 内側の余白指定。
-    padding: 8px;
-    // 角丸指定。
-    border-radius: 4px;
-    // 範囲選択できなくしている。
-    user-select: none;
-}
-.wrapper .main-area #left-panel form .create-button:focus {
-    background-color: #00c4aa;
-}
-// ここまでサイドパネルの計画作成欄のコーディング。
-
-// サイドパネルのアイコンボタンがクリックされた時。
-.wrapper .main-area #left-panel.open {
-    // 非表示➡表示。
-    display: block;
-}
-
-// メインコンテンツ。
-.wrapper .main-area .content {
-    // ポジショニングのため。エラーメッセージやモーダルウインドウのポジショニングでも使用。
-    position: relative;
-    // .contentの領域を広げるため。コメントアウトして確認。
-    // （考察）↓
-    // MDNに「row または row-reverse を選択した場合、主軸はインライン要素の並ぶ方向に伸びる軸となります。」との記述あり。
-    // かといって.wrapper .main-area .content{}をブロックレベル要素にしても横幅全てを占有する性質とフレックスアイテムとしての性質は相容れないので
-    // 横並びを実現するために後者が優先され，インライン要素としてのふるまいとなった。もし，占有できる最大の横幅（親要素内における最大幅）としてフレックスアイテムを設定したい場合はwidth: 100%;を指定する必要がある。
-    // width: 100%;  // flex-grow: 1;を指定しない場合はこれをコメントアウトして。
-    // 或いはflex-grow: 1;を指定してもOK。
-    // 厳密には上記の考察は誤り？➡flex-basis: auto;（既定値）によってフレックスアイテムの横幅が設定されるが（具体的➡サイドパネルは上記より200px，コンテンツは絶対値指定なしなので最低限の横幅で設定？），分配可能な余白が右端に残る形となる。
-    // その余白を各アイテムに分配するためのプロパティがflex-grow（余白の分配を割合で決定する）。既定値はflex-grow: 0;（サイドパネルにはこれが指定されている）で，コンテンツ側にflex-grow: 1;を指定すれば0:1（0:100）により残り全ての分配可能な余白がコンテンツ側の横幅として設定される形になる（width: 100%;と同じ挙動になる）。
-    flex-grow: 1;
-    // 高さの最小値を指定。サイドパネルの高さと同じにした。これにより，計画数が少なくてもcontent部分の高さが300px以下になることはない。
-    min-height: 300px;
-}
-// サイドパネルボタンが押下された時。
-.wrapper .main-area .content.open {
-    // メインコンテンツの最大幅を指定している。これを指定しないとアコーディオンの開閉時に横幅の挙動がおかしくなる。コメントアウトして確認を。
-    max-width: 68.7%; // 右下の3つの固定ボタンの位置関係上，70%は避けている。本来はサイドパネルが30%になるので70%にすべきだと思われる。
-}
-
-// サイドパネルボタンのコーディング。
-.wrapper .main-area .content #left-panel-button {
-    // ポジショニング。
-    position: absolute;
-    // サイドパネルの約半分の高さの位置に来るように調整した。もう少し上手い方法を模索すべきだと思う。
-    top: 127.74px;
-    left: 0;
-    // ホバーした時のマウスの形を変更した。
-    cursor: pointer;
-    // 高さ指定。
-    height: 36px;
-    // 色指定。
-    color: #ffffff;
-    background-color: #748da6;
-    // 角丸の指定。左側のみ角丸にしている。
-    border-radius: 0 10px 10px 0;
-    // 影の指定。
-    box-shadow: inset 0 0 5px 5px #66829e;
-}
 
 .wrapper .main-area .content #left-panel-button i {
     // 上下にpaddingの指定をするため。
