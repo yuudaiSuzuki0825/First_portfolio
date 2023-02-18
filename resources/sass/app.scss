@@ -420,7 +420,33 @@ img {
                 border-radius: 0 10px 10px 0;
                 // 影の指定。
                 box-shadow: inset 0 0 5px 5px #66829e;
+
+                i {
+                    // 上下にpaddingの指定をするため。
+                    display: inline-block;
+                    /* アイコンなのでfont-sizeで大きさ指定を行う。1.5×16px=24px。 */
+                    font-size: 1.5rem;
+                    /* 余白にてポジションの微調整。 */
+                    margin-right: 2px;
+                    padding-top: 6px;
+                    padding-bottom: 6px;
+                    // アニメーションの調整（イージング）。
+                    transition: transform 0.2s;
+                }
             }
+
+            // #left-panel-button i {
+            //     // 上下にpaddingの指定をするため。
+            //     display: inline-block;
+            //     /* アイコンなのでfont-sizeで大きさ指定を行う。1.5×16px=24px。 */
+            //     font-size: 1.5rem;
+            //     /* 余白にてポジションの微調整。 */
+            //     margin-right: 2px;
+            //     padding-top: 6px;
+            //     padding-bottom: 6px;
+            //     // アニメーションの調整（イージング）。
+            //     transition: transform 0.2s;
+            // }
         }
 
         // サイドパネルボタンが押下された時。
@@ -432,19 +458,6 @@ img {
 }
 
 // SCSSここから。
-
-.wrapper .main-area .content #left-panel-button i {
-    // 上下にpaddingの指定をするため。
-    display: inline-block;
-    /* アイコンなのでfont-sizeで大きさ指定を行う。1.5×16px=24px。 */
-    font-size: 1.5rem;
-    /* 余白にてポジションの微調整。 */
-    margin-right: 2px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    // アニメーションの調整（イージング）。
-    transition: transform 0.2s;
-}
 
 // サイドパネルボタンのアイコンのアニメーション指定。ボタンがクリックされた時，以下が読み込まれる（app.jsのサイドパネルの実装を参照）。
 .wrapper .main-area .content #left-panel-button.open i {
