@@ -161,7 +161,7 @@ img {
   padding: 50px 0;
 }
 .wrapper .main-area #left-panel {
-  width: 30%;
+  width: 25%;
   height: 580px;
   padding: 20px;
   /* 色指定。 */
@@ -237,7 +237,7 @@ img {
   transition: transform 0.2s;
 }
 .wrapper .main-area .content.open {
-  max-width: 68.7%;
+  max-width: 74%;
 }
 
 .wrapper .main-area .content #left-panel-button.open i {
@@ -519,7 +519,7 @@ img {
 .wrapper #to_top {
   position: fixed;
   bottom: 10px;
-  right: 10px;
+  right: 5px;
   color: #333333;
   background-color: #fff;
   border-radius: 50%;
@@ -538,7 +538,7 @@ img {
 .wrapper #AllplanDetailButton {
   position: fixed;
   bottom: 60px;
-  right: 10px;
+  right: 5px;
   color: #fff;
   background-color: #333;
   padding: 5.015px 6.9px 5.665px;
@@ -559,7 +559,7 @@ img {
 .wrapper #sub-left-panel-button {
   position: fixed;
   bottom: 110px;
-  right: 10px;
+  right: 5px;
   color: #fff;
   background-color: #333;
   padding: 5.015px 8.2px 5.665px;
