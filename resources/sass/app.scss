@@ -313,7 +313,7 @@ img {
             // 高さの指定。絶対値指定しないと，例えばレコード数が少ないときに縦に縮んでしまう。
             height: 580px;
             // 内側の余白。
-            padding: 20px;
+            padding: 15px;
             /* 色指定。 */
             // background-color: #333;
             background-color: #748da6;
@@ -780,7 +780,7 @@ img {
 
 // 隣接兄弟結合子。td間にmargin-leftを指定している。
 .wrapper .main-area .content .content-area .table tbody tr td + td {
-    margin-left: 45px;
+    margin-left: 20px;
 }
 
 // 応急処置。trace.blade.phpはtdの数の関係で空タグのtd（class="FirstAid"）を追加する必要があった。

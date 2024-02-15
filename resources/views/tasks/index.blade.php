@@ -145,10 +145,11 @@
 
                                 {!! Form::close() !!}
 
-                                <button id="task-delete-decoying"><i class="fa-solid fa-trash-can"></i>削除する</button>
+                                <button id="task-delete-decoying"><i class="fa-regular fa-circle-stop"></i>中断する</button>
 
                                 <button id="return-button"><i class="fa-solid fa-rotate-left"></i>戻る</button>
 
+                                {{-- ユーザーが視認できない本命の削除ボタン。 --}}
                                 <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" id="task-delete-form">
                                         <button type="submit" id="task-delete">削除</button>
                                         @method('DELETE')
@@ -163,8 +164,17 @@
                                 <i class="fa-solid fa-circle-check"></i><span class="balloon">完了する</span>
                             </td>
                             <td>{{ $task->title }}</td>
-                            <td>開始日:{{ $task->start }}</td>
-                            <td>完了日:{{ $task->end }}</td>
+                            {{-- 計画の開始日と完了日の表示を変更するため。例）2022-11-28 → 11/28。 --}}
+                            @php
+                                // 開始日の西暦と西暦右隣の「-」を削除し、「-」と「/」の入れ替えを行っている。
+                                $start = str_replace( "-", "/", substr($task->start, 5));
+                                // 完了日も上記と同じ処理を行っている。
+                                $end = str_replace( "-", "/", substr($task->end, 5));
+                            @endphp
+                            {{-- 加工済みの開始日を表示している。 --}}
+                            <td>開始:{{ $start }}</td>
+                            {{-- 加工済みの完了日を表示している。 --}}
+                            <td>完了:{{ $end }}</td>
                             <!-- アイコンをクリックすると計画概要がアコーディオンメニュー形式で表示される。 -->
                             <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i></td>
                         </tr>

@@ -163,7 +163,7 @@ img {
 .wrapper .main-area #left-panel {
   width: 25%;
   height: 580px;
-  padding: 20px;
+  padding: 15px;
   /* 色指定。 */
   background-color: #748da6;
   color: #fff;
@@ -451,7 +451,7 @@ img {
 }
 
 .wrapper .main-area .content .content-area .table tbody tr td + td {
-  margin-left: 45px;
+  margin-left: 20px;
 }
 
 .wrapper .main-area .content .content-area .table tbody tr #modalWindowOpen {
