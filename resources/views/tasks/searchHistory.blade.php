@@ -9,7 +9,7 @@
                 <!-- 第二引数をurlにしてもOK。['url' => '/tasks']。 -->
 
                 {!! Form::label('title', 'テーマ', ['class' => 'form-label']) !!}
-                {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内"]) !!}
+                {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内・未入力不可"]) !!}
                 @if ($errors->first('title'))
                     <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p>
                 @endif
@@ -29,7 +29,7 @@
                 @endif
 
                 {!! Form::label('content', '概要', ['class' => 'form-label']) !!}
-                {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内"]) !!}
+                {!! Form::textarea('content', null, ['class' => 'form-input textarea-input', "placeholder" => "255字以内・未入力不可"]) !!}
                 @if ($errors->first('content'))
                     <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('content') }}</p>
                 @endif
@@ -94,8 +94,17 @@
                                 <i class="fa-solid fa-trash-can"></i><span class="balloon">削除する</span>
                             </td>
                             <td>{{ $history->title }}</td>
-                            <td>開始日:{{ $history->start }}</td>
-                            <td>完了日:{{ $history->end }}</td>
+                            {{-- 計画の開始日と完了日の表示を変更するため。例）2022-11-28 → 11/28。 --}}
+                            @php
+                                // 開始日の西暦と西暦右隣の「-」を削除し、「-」と「/」の入れ替えを行っている。
+                                $start = str_replace( "-", "/", substr($history->start, 5));
+                                // 完了日も上記と同じ処理を行っている。
+                                $end = str_replace( "-", "/", substr($history->end, 5));
+                            @endphp
+                            {{-- 加工済みの開始日を表示している。 --}}
+                            <td>開始:{{ $start }}</td>
+                            {{-- 加工済みの完了日を表示している。 --}}
+                            <td>完了:{{ $end }}</td>
                             <!-- アイコンをクリックすると計画概要がアコーディオンメニュー形式で表示される。 -->
                             <td id="planDetailButton" class="parent-balloon"><i class="fa-solid fa-chevron-down"></i></td>
                         </tr>
