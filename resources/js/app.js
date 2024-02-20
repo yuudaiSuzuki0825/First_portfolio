@@ -481,6 +481,7 @@
     const textareaInput = document.querySelector(".textarea-input");
     const createButton = document.querySelector(".create-button");
 
+    /* フラグのセット。 */
     let flg = false;
 
     // -----作成欄-----
@@ -495,8 +496,6 @@
         if (e.code == "ArrowDown" && titleInput.selectionStart == titleInput.value.length) {
             // フラグを反転。下で使用。
             flg = true;
-            // デバック用。
-            console.log("hoge");
         }
     });
 
@@ -504,8 +503,6 @@
     titleInput.addEventListener("keyup", (e) => {
         // もう一度入力されたキーが下矢印であるのを確認し，さらにフラグが反転しているか（trueか）判定している。
         if (e.code == "ArrowDown" && flg) {
-            // デバック用。
-            console.log("hoge2");
             // フラグを元に戻しておく。
             flg = false;
             // 概要入力欄へフォーカス。
@@ -521,15 +518,11 @@
     textareaInput.addEventListener("keydown", (e) => {
         if (e.code == "ArrowUp" && textareaInput.selectionStart == 0) {
             flg = true;
-            // デバック用。
-            console.log("hoge");
         }
     });
 
     textareaInput.addEventListener("keyup", (e) => {
         if (e.code == "ArrowUp" && flg) {
-            // デバック用。
-            console.log("hoge2");
             flg = false;
             titleInput.focus();
             titleInput.setSelectionRange(titleInput.value.length, titleInput.value.length);
@@ -541,15 +534,11 @@
     textareaInput.addEventListener("keydown", (e) => {
         if (e.code == "ArrowDown" && textareaInput.selectionStart == textareaInput.value.length) {
             flg = true;
-            // デバック用。
-            console.log("hoge");
         }
     });
 
     textareaInput.addEventListener("keyup", (e) => {
         if (e.code == "ArrowDown" && flg) {
-            // デバック用。
-            console.log("hoge2");
             flg = false;
             createButton.focus();
         }
@@ -560,15 +549,11 @@
     createButton.addEventListener("keydown", (e) => {
         if (e.code == "ArrowUp") {
             flg = true;
-            // デバック用。
-            console.log("hoge");
         }
     });
 
     createButton.addEventListener("keyup", (e) => {
         if (e.code == "ArrowUp" && flg) {
-            // デバック用。
-            console.log("hoge100");
             flg = false;
             textareaInput.focus();
             textareaInput.setSelectionRange(textareaInput.value.length, textareaInput.value.length);
@@ -612,8 +597,6 @@
                 ) {
                     // フラグを反転。
                     flg = true;
-                    // デバック用。
-                    console.log("hoge");
                 }
             }
         );
@@ -622,8 +605,6 @@
             "keyup",
             (e) => {
                 if (e.code == "ArrowDown" && flg) {
-                    // デバック用。
-                    console.log("hoge2");
                     flg = false;
                     tr.previousElementSibling.children[0].children[0].children[9].focus();
                     tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(
@@ -645,8 +626,6 @@
                         0
                 ) {
                     flg = true;
-                    // デバック用。
-                    console.log("hoge");
                 }
             }
         );
@@ -655,8 +634,6 @@
             "keyup",
             (e) => {
                 if (e.code == "ArrowUp" && flg) {
-                    // デバック用。
-                    console.log("hoge2");
                     flg = false;
                     tr.previousElementSibling.children[0].children[0].children[3].focus();
                     tr.previousElementSibling.children[0].children[0].children[3].setSelectionRange(
@@ -678,8 +655,6 @@
                         tr.previousElementSibling.children[0].children[0].children[9].value.length
                 ) {
                     flg = true;
-                    // デバック用。
-                    console.log("hoge");
                 }
             }
         );
@@ -688,8 +663,6 @@
             "keyup",
             (e) => {
                 if (e.code == "ArrowDown" && flg) {
-                    // デバック用。
-                    console.log("hoge2");
                     flg = false;
                     tr.previousElementSibling.children[0].children[0].children[10].focus();
                 }
@@ -703,8 +676,6 @@
             (e) => {
                 if (e.code == "ArrowUp") {
                     flg = true;
-                    // デバック用。
-                    console.log("hoge");
                 }
             }
         );
@@ -713,8 +684,6 @@
             "keyup",
             (e) => {
                 if (e.code == "ArrowUp" && flg) {
-                    // デバック用。
-                    console.log("hoge100");
                     flg = false;
                     tr.previousElementSibling.children[0].children[0].children[9].focus();
                     tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(
@@ -731,8 +700,6 @@
             (e) => {
                 if (e.code == "ArrowRight") {
                     flg = true;
-                    // デバック用。
-                    console.log("hoge110");
                 }
             }
         );
@@ -741,11 +708,8 @@
             "keyup",
             (e) => {
                 if (e.code == "ArrowRight" && flg) {
-                    // デバック用。
-                    console.log("hoge111");
                     flg = false;
                     tr.previousElementSibling.children[0].children[1].focus();
-                    console.log("hoge112");
                 }
             }
         );
@@ -755,18 +719,13 @@
         tr.previousElementSibling.children[0].children[1].addEventListener("keydown", (e) => {
             if (e.code == "ArrowLeft") {
                 flg = true;
-                // デバック用。
-                console.log("hoge113");
             }
         });
 
         tr.previousElementSibling.children[0].children[1].addEventListener("keyup", (e) => {
             if (e.code == "ArrowLeft" && flg) {
-                // デバック用。
-                console.log("hoge114");
                 flg = false;
                 tr.previousElementSibling.children[0].children[0].children[10].focus();
-                console.log("hoge115");
             }
         });
 
@@ -774,14 +733,12 @@
 
         tr.previousElementSibling.children[0].children[1].addEventListener("keydown", (e) => {
             if (e.code == "ArrowRight") {
-                console.log("hoge116");
                 flg = true;
             }
         });
 
         tr.previousElementSibling.children[0].children[1].addEventListener("keyup", (e) => {
             if (e.code == "ArrowRight" && flg) {
-                console.log("hoge117");
                 flg = false;
                 tr.previousElementSibling.children[0].children[2].focus();
             }
@@ -791,14 +748,12 @@
 
         tr.previousElementSibling.children[0].children[2].addEventListener("keydown", (e) => {
             if (e.code == "ArrowLeft") {
-                console.log("hoge118");
                 flg = true;
             }
         });
 
         tr.previousElementSibling.children[0].children[2].addEventListener("keyup", (e) => {
             if (e.code == "ArrowLeft" && flg) {
-                console.log("hoge119");
                 flg = false;
                 tr.previousElementSibling.children[0].children[1].focus();
             }
@@ -809,15 +764,11 @@
         tr.previousElementSibling.children[0].children[1].addEventListener("keydown", (e) => {
             if (e.code == "ArrowUp") {
                 flg = true;
-                // デバック用。
-                console.log("hoge120");
             }
         });
 
         tr.previousElementSibling.children[0].children[1].addEventListener("keyup", (e) => {
             if (e.code == "ArrowUp" && flg) {
-                // デバック用。
-                console.log("hoge121");
                 flg = false;
                 tr.previousElementSibling.children[0].children[0].children[9].focus();
                 tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(
@@ -832,15 +783,11 @@
         tr.previousElementSibling.children[0].children[2].addEventListener("keydown", (e) => {
             if (e.code == "ArrowUp") {
                 flg = true;
-                // デバック用。
-                console.log("hoge122");
             }
         });
 
         tr.previousElementSibling.children[0].children[2].addEventListener("keyup", (e) => {
             if (e.code == "ArrowUp" && flg) {
-                // デバック用。
-                console.log("hoge123");
                 flg = false;
                 tr.previousElementSibling.children[0].children[0].children[9].focus();
                 tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(
@@ -850,9 +797,4 @@
             }
         });
     });
-
-    // ------------------------
-
-    // console.log(Laravel.name);
-    // console.log(Laravel.array);
 }
