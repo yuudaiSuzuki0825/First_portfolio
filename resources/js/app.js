@@ -124,9 +124,6 @@
 
         // trの子Nodeのうち上から5番目のtdタグ（id="planDetailButton"が付いている最後のtdタグ）にアクセスし，そのタグがクリックされたかどうかチェックしている。
         children[5].addEventListener("click", () => {
-            // デバック用。イベントリスナーが実行されているか確認するため。
-            /* console.log('hoge'); */
-
             // デバック用。nextSiblingプロパティとnextElementSiblingプロパティの違いをコンソールにて確認してほしい。
             // classListにアクセスしたい場合は後者を選択すること。
             /* console.log(tr.nextSibling); */
@@ -144,8 +141,6 @@
         children[4].addEventListener("click", () => {
             // trの子Nodeのうち上から6番目のtdタグをクリック➡5番目のそれをクリックした扱いにしてしまうことで（シュミレートすることで）detailOpenの付け外しを達成している。
             children[5].click();
-            // デバック用。
-            /* console.log("hoge"); */
         });
     });
 
@@ -153,19 +148,10 @@
     AllplanDetailButton.addEventListener("click", () => {
         // 表示されている開閉ボタンのアイコンに応じて処理を分岐。
         if (AllplanDetailButtonChild.className === "fa-solid fa-unlock") {
-            // デバック用。
-            /* console.log('hoge1'); */
-
             // 上記と同じくtrs(class="tr"のついた全てのNode)の各Nodeにアクセスしている。
             trs.forEach((tr) => {
-                // デバック用。
-                /* console.log('hoge2'); */
-
                 // 計画概要のtrタグのclass属性が何もなく，かつclass="tr"のtrタグにdetailOpen（class属性値）が付いていない時。
                 if (tr.nextElementSibling.className === "" && tr.className === "tr") {
-                    // デバック用。
-                    /* console.log('hoge3'); */
-
                     // 計画概要のtrタグとclass="tr"のtrタグ両方にdetailOpen（class属性値）を追加している。
                     tr.nextElementSibling.classList.add("detailOpen");
                     tr.classList.add("detailOpen");
@@ -179,19 +165,10 @@
                 }
             });
         } else {
-            // デバック用。
-            /* console.log('hoge4'); */
-
             // 上記と同じくtrs(class="tr"のついた全てのNode)の各Nodeにアクセスしている。
             trs.forEach((tr) => {
-                // デバック用。
-                /* console.log('hoge5'); */
-
                 // 計画概要のtrタグのclass属性がdetailOpenであり，かつclass="tr"のtrタグにdetailOpen（class属性値）が付いていない時。
                 if (tr.nextElementSibling.className === "detailOpen" && tr.className === "tr") {
-                    // デバック用。
-                    /* console.log('hoge6'); */
-
                     // 計画概要のtrタグの方にだけclass="detailOpen"を取り除けばOK。
                     tr.nextElementSibling.classList.remove("detailOpen");
                 } else if (
@@ -323,8 +300,6 @@
             () => {
                 // マスク部分がクリックされた時と同じ挙動。
                 mask.click();
-                // デバック用。
-                /* console.log('hoge'); */
             }
         );
     });
