@@ -687,7 +687,7 @@
       if (e.code == "ArrowDown" && flg) {
         flg = false; // 現在の位置が末尾レコードまで達した場合に下矢印キーをタイプすると先頭レコードに戻る仕様。
 
-        if (num === 19) {
+        if (num === trs.length - 1) {
           // 先頭レコードに移動。
           document.querySelector(".number0").focus();
         } else {
@@ -707,7 +707,7 @@
 
         if (num === 0) {
           // 末尾レコードに移動。
-          document.querySelector(".number19").focus();
+          document.querySelector(".number".concat(trs.length - 1)).focus();
         } else {
           document.querySelector(".number".concat(num - 1)).focus();
         }
@@ -737,6 +737,8 @@
   // 追記予定。
   // 計画作成欄の作成ボタンから先頭レコードの編集ボタンへ移動。
   // 追記予定。
+  // 加えてapp2.jsにもページ内移動を実装させる予定。
+  // さらに、ページ内移動における欠陥を修理する必要がある。具体的には、計画編集欄の戻るボタンを押下するとフォーカスが外れてしまう問題を解決してほしい。
 }
 
 /***/ }),

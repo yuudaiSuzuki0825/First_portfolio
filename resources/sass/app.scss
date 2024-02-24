@@ -880,6 +880,11 @@ button:focus .parent-balloon .balloon {
     // background-color: #333333;
     background-color: #748da6;
     color: #fff;
+    padding: 10px;
+    user-select: none;
+    letter-spacing: 3px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 // ページトップへ遷移するボタンのコーディング。

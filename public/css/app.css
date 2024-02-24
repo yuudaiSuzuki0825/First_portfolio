@@ -515,6 +515,13 @@ button:focus .parent-balloon .balloon {
 .wrapper .main-area .content .content-area .alt {
   background-color: #748da6;
   color: #fff;
+  padding: 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  letter-spacing: 3px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .wrapper #to_top {
