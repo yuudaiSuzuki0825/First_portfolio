@@ -84,7 +84,7 @@
   // ページごとに読み込むjsファイルを変更する必要がある（複数ファイルに分割すること）。
 
   /* =================================================== */
-  // ハンバーガーメニューの実装。
+  // ハンバーガーメニューの実装。（追記）万が一のために残してはいるが、PCユーザを想定した操作を多く実装した関係から必要なくなった。全て消去しても構わない。
 
   /* =================================================== */
 
@@ -201,9 +201,6 @@
     // trの子Nodeのうち上から5番目のtdタグ（id="planDetailButton"が付いている最後のtdタグ）にアクセスし，そのタグがクリックされたかどうかチェックしている。
 
     children[5].addEventListener("click", function () {
-      // デバック用。イベントリスナーが実行されているか確認するため。
-
-      /* console.log('hoge'); */
       // デバック用。nextSiblingプロパティとnextElementSiblingプロパティの違いをコンソールにて確認してほしい。
       // classListにアクセスしたい場合は後者を選択すること。
 
@@ -221,28 +218,17 @@
 
     children[4].addEventListener("click", function () {
       // trの子Nodeのうち上から6番目のtdタグをクリック➡5番目のそれをクリックした扱いにしてしまうことで（シュミレートすることで）detailOpenの付け外しを達成している。
-      children[5].click(); // デバック用。
-
-      /* console.log("hoge"); */
+      children[5].click();
     });
   }); // 全アコーディオンの開閉を制御している。
 
   AllplanDetailButton.addEventListener("click", function () {
     // 表示されている開閉ボタンのアイコンに応じて処理を分岐。
     if (AllplanDetailButtonChild.className === "fa-solid fa-unlock") {
-      // デバック用。
-
-      /* console.log('hoge1'); */
       // 上記と同じくtrs(class="tr"のついた全てのNode)の各Nodeにアクセスしている。
       trs.forEach(function (tr) {
-        // デバック用。
-
-        /* console.log('hoge2'); */
         // 計画概要のtrタグのclass属性が何もなく，かつclass="tr"のtrタグにdetailOpen（class属性値）が付いていない時。
         if (tr.nextElementSibling.className === "" && tr.className === "tr") {
-          // デバック用。
-
-          /* console.log('hoge3'); */
           // 計画概要のtrタグとclass="tr"のtrタグ両方にdetailOpen（class属性値）を追加している。
           tr.nextElementSibling.classList.add("detailOpen");
           tr.classList.add("detailOpen");
@@ -253,19 +239,10 @@
         }
       });
     } else {
-      // デバック用。
-
-      /* console.log('hoge4'); */
       // 上記と同じくtrs(class="tr"のついた全てのNode)の各Nodeにアクセスしている。
       trs.forEach(function (tr) {
-        // デバック用。
-
-        /* console.log('hoge5'); */
         // 計画概要のtrタグのclass属性がdetailOpenであり，かつclass="tr"のtrタグにdetailOpen（class属性値）が付いていない時。
         if (tr.nextElementSibling.className === "detailOpen" && tr.className === "tr") {
-          // デバック用。
-
-          /* console.log('hoge6'); */
           // 計画概要のtrタグの方にだけclass="detailOpen"を取り除けばOK。
           tr.nextElementSibling.classList.remove("detailOpen");
         } else if (tr.nextElementSibling.className === "detailOpen" && tr.className === "tr detailOpen") {
@@ -351,9 +328,7 @@
 
     tr.previousElementSibling.previousElementSibling.children[0].children[1].children[0].addEventListener("click", function () {
       // マスク部分がクリックされた時と同じ挙動。
-      mask.click(); // デバック用。
-
-      /* console.log('hoge'); */
+      mask.click();
     });
   });
   /* =================================================== */
@@ -365,9 +340,9 @@
 
   trs.forEach(function (tr) {
     // tr（class="tr"のついたtrタグ）の子Nodeを全て取得。今回は直下のtdタグを全て取得。
-    var children = tr.children; // 先頭の子Node（「編集する」ボタン）がクリックされた時。
+    var children = tr.children; // 先頭の子Node（「編集する」ボタン）がクリックされた時。（追記）只今全ページカーソルキー移動実装中。
 
-    children[0].addEventListener("click", function () {
+    children[0].children[0].addEventListener("click", function () {
       // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前のNode（id="subModalWindow）のclassListにアクセス。
       // モーダルウインドウ部分を表示させるため。
       tr.previousElementSibling.classList.remove("hidden"); // マスク部分を表示させるため。
@@ -382,9 +357,7 @@
     }); // 「戻る」ボタンがクリックされた時。
 
     tr.previousElementSibling.children[0].children[2].addEventListener("click", function () {
-      mask.click(); // デバック用。
-
-      /* console.log('hogehoge'); */
+      mask.click();
     });
     tr.previousElementSibling.children[0].children[1].addEventListener("click", function () {
       // デバック用。
@@ -472,6 +445,8 @@
 
   var textareaInput = document.querySelector(".textarea-input");
   var createButton = document.querySelector(".create-button");
+  /* フラグのセット。 */
+
   var flg = false; // -----作成欄-----
   // -----titleInputからtextareaInputに移動-----
   // キーボートがタイプされた時にkeydownイベントとkeyupイベントが発生する。
@@ -482,18 +457,14 @@
     // タイプされたキーが下矢印で，かつ選択中の現在地点がテーマ入力欄の末尾だった時（何も入力していなければ末尾扱い，何か入力していればその文字列の末尾に相当する）。また，末尾をvalueのlengthで表現している（末尾＝欄内の文字列の最後＝長さ）。
     if (e.code == "ArrowDown" && titleInput.selectionStart == titleInput.value.length) {
       // フラグを反転。下で使用。
-      flg = true; // デバック用。
-
-      console.log("hoge");
+      flg = true;
     }
   }); // テーマ入力欄においてキーボード入力があったとき。keydownとkeyup両方でイベントリスナーを作るのは，1つだけの場合，フォーカスとフォーカス地点指定の両方の処理が正常に動作しないため。
 
   titleInput.addEventListener("keyup", function (e) {
     // もう一度入力されたキーが下矢印であるのを確認し，さらにフラグが反転しているか（trueか）判定している。
     if (e.code == "ArrowDown" && flg) {
-      // デバック用。
-      console.log("hoge2"); // フラグを元に戻しておく。
-
+      // フラグを元に戻しておく。
       flg = false; // 概要入力欄へフォーカス。
 
       textareaInput.focus(); // フォーカスされる位置を指定（選択中の現在地点の指定）。今回は末尾に指定した。
@@ -505,15 +476,11 @@
 
   textareaInput.addEventListener("keydown", function (e) {
     if (e.code == "ArrowUp" && textareaInput.selectionStart == 0) {
-      flg = true; // デバック用。
-
-      console.log("hoge");
+      flg = true;
     }
   });
   textareaInput.addEventListener("keyup", function (e) {
     if (e.code == "ArrowUp" && flg) {
-      // デバック用。
-      console.log("hoge2");
       flg = false;
       titleInput.focus();
       titleInput.setSelectionRange(titleInput.value.length, titleInput.value.length);
@@ -522,15 +489,11 @@
 
   textareaInput.addEventListener("keydown", function (e) {
     if (e.code == "ArrowDown" && textareaInput.selectionStart == textareaInput.value.length) {
-      flg = true; // デバック用。
-
-      console.log("hoge");
+      flg = true;
     }
   });
   textareaInput.addEventListener("keyup", function (e) {
     if (e.code == "ArrowDown" && flg) {
-      // デバック用。
-      console.log("hoge2");
       flg = false;
       createButton.focus();
     }
@@ -538,20 +501,18 @@
 
   createButton.addEventListener("keydown", function (e) {
     if (e.code == "ArrowUp") {
-      flg = true; // デバック用。
-
-      console.log("hoge");
+      flg = true;
     }
   });
   createButton.addEventListener("keyup", function (e) {
     if (e.code == "ArrowUp" && flg) {
-      // デバック用。
-      console.log("hoge100");
       flg = false;
       textareaInput.focus();
       textareaInput.setSelectionRange(textareaInput.value.length, textareaInput.value.length);
     }
-  }); // -----編集欄-----
+  }); // ---ページを読み込んだ時、計画作成欄のテーマ入力フォームにフォーカスが当たるようにするため。
+
+  titleInput.focus(); // -----編集欄とページ内カーソルキー移動-----
   // -----注意点-----
   // tr.previousElementSibling.children[0].children[0].children[3]はテーマ入力欄（inputタグ）を指している。
   // tr.previousElementSibling.children[0].children[0].children[9]は概要入力欄（textareaタグ）を指している。
@@ -561,8 +522,11 @@
   // モーダルウィンドウの際と同じ手順。tr（class="tr"のついたtrタグ）にアクセスしている。
 
   trs.forEach(function (tr) {
+    var num = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     // trの子Nodeを取得している。
-    var children = tr.children; // 編集ボタンをクリックしたらテーマ欄にフォーカスされるようにするため。
+    var children = tr.children;
+    /* 編集欄 */
+    // 編集ボタンをクリックしたらテーマ欄にフォーカスされるようにするため。
 
     children[0].addEventListener("click", function () {
       // フォーカス。
@@ -575,15 +539,11 @@
       if ( // 入力されたカーソルキーが下矢印で，かつテーマ入力欄において末尾の位置が選択中だった時。
       e.code == "ArrowDown" && tr.previousElementSibling.children[0].children[0].children[3].selectionStart == tr.previousElementSibling.children[0].children[0].children[3].value.length) {
         // フラグを反転。
-        flg = true; // デバック用。
-
-        console.log("hoge");
+        flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[0].children[3].addEventListener("keyup", function (e) {
       if (e.code == "ArrowDown" && flg) {
-        // デバック用。
-        console.log("hoge2");
         flg = false;
         tr.previousElementSibling.children[0].children[0].children[9].focus();
         tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(tr.previousElementSibling.children[0].children[0].children[9].value.length, tr.previousElementSibling.children[0].children[0].children[9].value.length);
@@ -592,15 +552,11 @@
 
     tr.previousElementSibling.children[0].children[0].children[9].addEventListener("keydown", function (e) {
       if (e.code == "ArrowUp" && tr.previousElementSibling.children[0].children[0].children[9].selectionStart == 0) {
-        flg = true; // デバック用。
-
-        console.log("hoge");
+        flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[0].children[9].addEventListener("keyup", function (e) {
       if (e.code == "ArrowUp" && flg) {
-        // デバック用。
-        console.log("hoge2");
         flg = false;
         tr.previousElementSibling.children[0].children[0].children[3].focus();
         tr.previousElementSibling.children[0].children[0].children[3].setSelectionRange(tr.previousElementSibling.children[0].children[0].children[3].value.length, tr.previousElementSibling.children[0].children[0].children[3].value.length);
@@ -609,15 +565,11 @@
 
     tr.previousElementSibling.children[0].children[0].children[9].addEventListener("keydown", function (e) {
       if (e.code == "ArrowDown" && tr.previousElementSibling.children[0].children[0].children[9].selectionStart == tr.previousElementSibling.children[0].children[0].children[9].value.length) {
-        flg = true; // デバック用。
-
-        console.log("hoge");
+        flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[0].children[9].addEventListener("keyup", function (e) {
       if (e.code == "ArrowDown" && flg) {
-        // デバック用。
-        console.log("hoge2");
         flg = false;
         tr.previousElementSibling.children[0].children[0].children[10].focus();
       }
@@ -625,15 +577,11 @@
 
     tr.previousElementSibling.children[0].children[0].children[10].addEventListener("keydown", function (e) {
       if (e.code == "ArrowUp") {
-        flg = true; // デバック用。
-
-        console.log("hoge");
+        flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[0].children[10].addEventListener("keyup", function (e) {
       if (e.code == "ArrowUp" && flg) {
-        // デバック用。
-        console.log("hoge100");
         flg = false;
         tr.previousElementSibling.children[0].children[0].children[9].focus();
         tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(tr.previousElementSibling.children[0].children[0].children[9].value.length, tr.previousElementSibling.children[0].children[0].children[9].value.length);
@@ -642,47 +590,35 @@
 
     tr.previousElementSibling.children[0].children[0].children[10].addEventListener("keydown", function (e) {
       if (e.code == "ArrowRight") {
-        flg = true; // デバック用。
-
-        console.log("hoge110");
+        flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[0].children[10].addEventListener("keyup", function (e) {
       if (e.code == "ArrowRight" && flg) {
-        // デバック用。
-        console.log("hoge111");
         flg = false;
         tr.previousElementSibling.children[0].children[1].focus();
-        console.log("hoge112");
       }
     }); // 削除ボタンから更新ボタンへ移動。
 
     tr.previousElementSibling.children[0].children[1].addEventListener("keydown", function (e) {
       if (e.code == "ArrowLeft") {
-        flg = true; // デバック用。
-
-        console.log("hoge113");
+        flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[1].addEventListener("keyup", function (e) {
       if (e.code == "ArrowLeft" && flg) {
-        // デバック用。
-        console.log("hoge114");
         flg = false;
         tr.previousElementSibling.children[0].children[0].children[10].focus();
-        console.log("hoge115");
       }
     }); // 削除ボタンから戻るボタンへ移動。
 
     tr.previousElementSibling.children[0].children[1].addEventListener("keydown", function (e) {
       if (e.code == "ArrowRight") {
-        console.log("hoge116");
         flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[1].addEventListener("keyup", function (e) {
       if (e.code == "ArrowRight" && flg) {
-        console.log("hoge117");
         flg = false;
         tr.previousElementSibling.children[0].children[2].focus();
       }
@@ -690,13 +626,11 @@
 
     tr.previousElementSibling.children[0].children[2].addEventListener("keydown", function (e) {
       if (e.code == "ArrowLeft") {
-        console.log("hoge118");
         flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[2].addEventListener("keyup", function (e) {
       if (e.code == "ArrowLeft" && flg) {
-        console.log("hoge119");
         flg = false;
         tr.previousElementSibling.children[0].children[1].focus();
       }
@@ -704,15 +638,11 @@
 
     tr.previousElementSibling.children[0].children[1].addEventListener("keydown", function (e) {
       if (e.code == "ArrowUp") {
-        flg = true; // デバック用。
-
-        console.log("hoge120");
+        flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[1].addEventListener("keyup", function (e) {
       if (e.code == "ArrowUp" && flg) {
-        // デバック用。
-        console.log("hoge121");
         flg = false;
         tr.previousElementSibling.children[0].children[0].children[9].focus();
         tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(tr.previousElementSibling.children[0].children[0].children[9].value.length, tr.previousElementSibling.children[0].children[0].children[9].value.length);
@@ -721,23 +651,92 @@
 
     tr.previousElementSibling.children[0].children[2].addEventListener("keydown", function (e) {
       if (e.code == "ArrowUp") {
-        flg = true; // デバック用。
-
-        console.log("hoge122");
+        flg = true;
       }
     });
     tr.previousElementSibling.children[0].children[2].addEventListener("keyup", function (e) {
       if (e.code == "ArrowUp" && flg) {
-        // デバック用。
-        console.log("hoge123");
         flg = false;
         tr.previousElementSibling.children[0].children[0].children[9].focus();
         tr.previousElementSibling.children[0].children[0].children[9].setSelectionRange(tr.previousElementSibling.children[0].children[0].children[9].value.length, tr.previousElementSibling.children[0].children[0].children[9].value.length);
       }
     });
-  }); // ------------------------
-  // console.log(Laravel.name);
-  // console.log(Laravel.array);
+    /* ページ内カーソルキー移動 */
+    // 各レコードを特定するために一意のクラス名を命名している。デベロッパーツール参照。
+
+    children[0].children[0].classList.add("number".concat(num)); // 各レコードの編集ボタンから計画作成欄のテーマへ移動。
+
+    document.querySelector(".number".concat(num)).addEventListener("keydown", function (e) {
+      if (e.code == "ArrowLeft") {
+        flg = true;
+      }
+    });
+    document.querySelector(".number".concat(num)).addEventListener("keyup", function (e) {
+      if (e.code == "ArrowLeft" && flg) {
+        flg = false;
+        titleInput.focus();
+      }
+    }); // レコード間移動。下に降りる。
+
+    document.querySelector(".number".concat(num)).addEventListener("keydown", function (e) {
+      if (e.code == "ArrowDown") {
+        flg = true;
+      }
+    });
+    document.querySelector(".number".concat(num)).addEventListener("keyup", function (e) {
+      if (e.code == "ArrowDown" && flg) {
+        flg = false; // 現在の位置が末尾レコードまで達した場合に下矢印キーをタイプすると先頭レコードに戻る仕様。
+
+        if (num === 19) {
+          // 先頭レコードに移動。
+          document.querySelector(".number0").focus();
+        } else {
+          document.querySelector(".number".concat(num + 1)).focus();
+        }
+      }
+    }); // レコード間移動。上に上がる。
+
+    document.querySelector(".number".concat(num)).addEventListener("keydown", function (e) {
+      if (e.code == "ArrowUp") {
+        flg = true;
+      }
+    });
+    document.querySelector(".number".concat(num)).addEventListener("keyup", function (e) {
+      if (e.code == "ArrowUp" && flg) {
+        flg = false; // 現在の位置が先頭レコードの場合に上矢印キーをタイプすると末尾レコードに移動する仕様。
+
+        if (num === 0) {
+          // 末尾レコードに移動。
+          document.querySelector(".number19").focus();
+        } else {
+          document.querySelector(".number".concat(num - 1)).focus();
+        }
+      }
+    }); // レコード内移動。右に移る。
+    // 追記予定。アコーディオンまで到達したい。
+    // レコード内移動。左に移る。
+    // 追記予定。
+  }); // 計画作成欄のテーマ入力フォームから先頭レコードの編集ボタンへ移動。
+
+  titleInput.addEventListener("keydown", function (e) {
+    // イベントオブジェクトの中に先程ユーザーがタイプしたキーが格納されている。
+    // タイプされたキーが右矢印で，かつ選択中の現在地点がテーマ入力欄の末尾だった時（何も入力していなければ末尾扱い，何か入力していればその文字列の末尾に相当する）。また，末尾をvalueのlengthで表現している（末尾＝欄内の文字列の最後＝長さ）。
+    if (e.code == "ArrowRight" && titleInput.selectionStart == titleInput.value.length) {
+      // フラグを反転。下で使用。
+      flg = true;
+    }
+  });
+  titleInput.addEventListener("keyup", function (e) {
+    // もう一度入力されたキーが右矢印であるのを確認し，さらにフラグが反転しているか（trueか）判定している。
+    if (e.code == "ArrowRight" && flg) {
+      // フラグを元に戻しておく。
+      flg = false;
+      document.querySelector(".number0").focus();
+    }
+  }); // 計画作成欄の概要から先頭レコードの編集ボタンへ移動。
+  // 追記予定。
+  // 計画作成欄の作成ボタンから先頭レコードの編集ボタンへ移動。
+  // 追記予定。
 }
 
 /***/ }),

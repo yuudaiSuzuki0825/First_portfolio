@@ -132,7 +132,7 @@
                             </td>
                         </tr>
                         <tr class="tr">
-                            <td class="FirstAid"><a href="#" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
+                            <td class="FirstAid"><button><a href="#" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></button></td>
                             <!-- 「完了する」アイコン（ダミー）。 -->
                             <td id="modalWindowOpen" class="parent-balloon">
                                 <i class="fa-solid fa-circle-check"></i><span class="balloon">完了する</span>

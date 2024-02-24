@@ -371,8 +371,6 @@
         if (e.code == "ArrowDown" && titleInput.selectionStart == titleInput.value.length) {
             // フラグを反転。下で使用。
             flg = true;
-            // デバック用。
-            console.log("hoge");
         }
     });
 
@@ -380,8 +378,6 @@
     titleInput.addEventListener("keyup", (e) => {
         // もう一度入力されたキーが下矢印であるのを確認し，さらにフラグが反転しているか（trueか）判定している。
         if (e.code == "ArrowDown" && flg) {
-            // デバック用。
-            console.log("hoge2");
             // フラグを元に戻しておく。
             flg = false;
             // 概要入力欄へフォーカス。
@@ -397,15 +393,11 @@
     textareaInput.addEventListener("keydown", (e) => {
         if (e.code == "ArrowUp" && textareaInput.selectionStart == 0) {
             flg = true;
-            // デバック用。
-            console.log("hoge");
         }
     });
 
     textareaInput.addEventListener("keyup", (e) => {
         if (e.code == "ArrowUp" && flg) {
-            // デバック用。
-            console.log("hoge2");
             flg = false;
             titleInput.focus();
             titleInput.setSelectionRange(titleInput.value.length, titleInput.value.length);
@@ -417,15 +409,11 @@
     textareaInput.addEventListener("keydown", (e) => {
         if (e.code == "ArrowDown" && textareaInput.selectionStart == textareaInput.value.length) {
             flg = true;
-            // デバック用。
-            console.log("hoge");
         }
     });
 
     textareaInput.addEventListener("keyup", (e) => {
         if (e.code == "ArrowDown" && flg) {
-            // デバック用。
-            console.log("hoge2");
             flg = false;
             createButton.focus();
         }
@@ -436,18 +424,17 @@
     createButton.addEventListener("keydown", (e) => {
         if (e.code == "ArrowUp") {
             flg = true;
-            // デバック用。
-            console.log("hoge");
         }
     });
 
     createButton.addEventListener("keyup", (e) => {
         if (e.code == "ArrowUp" && flg) {
-            // デバック用。
-            console.log("hoge100");
             flg = false;
             textareaInput.focus();
             textareaInput.setSelectionRange(textareaInput.value.length, textareaInput.value.length);
         }
     });
+
+    // ---ページを読み込んだ時、計画作成欄のテーマ入力フォームにフォーカスが当たるようにするため。
+    titleInput.focus();
 }
