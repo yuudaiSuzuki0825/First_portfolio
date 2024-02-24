@@ -545,7 +545,7 @@
     // tr.previousElementSibling.children[0].children[1]は削除ボタンを指している。
     // tr.previousElementSibling.children[0].children[2]は戻るボタンを指している。
 
-    // モーダルウィンドウの際と同じ手順。tr（class="tr"のついたtrタグ）にアクセスしている。
+    // モーダルウィンドウの際と同じ手順。tr（class="tr"のついたtrタグ）にアクセスしている。「num = 0」はページ内カーソルキー移動の際に使用。一意のクラス名を各レコードに命名するため。
     trs.forEach((tr, num = 0) => {
         // trの子Nodeを取得している。
         let children = tr.children;
@@ -808,7 +808,7 @@
                 flg = false;
 
                 // 現在の位置が末尾レコードまで達した場合に下矢印キーをタイプすると先頭レコードに戻る仕様。
-                if (num === 19) {
+                if (num === trs.length - 1) {
                     // 先頭レコードに移動。
                     document.querySelector(`.number0`).focus();
                 } else {
@@ -832,7 +832,7 @@
                 // 現在の位置が先頭レコードの場合に上矢印キーをタイプすると末尾レコードに移動する仕様。
                 if (num === 0) {
                     // 末尾レコードに移動。
-                    document.querySelector(`.number19`).focus();
+                    document.querySelector(`.number${trs.length - 1}`).focus();
                 } else {
                     document.querySelector(`.number${num - 1}`).focus();
                 }
