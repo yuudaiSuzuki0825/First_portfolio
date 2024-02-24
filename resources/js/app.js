@@ -4,7 +4,7 @@
     // ページごとに読み込むjsファイルを変更する必要がある（複数ファイルに分割すること）。
 
     /* =================================================== */
-    // ハンバーガーメニューの実装。
+    // ハンバーガーメニューの実装。（追記）万が一のために残してはいるが、PCユーザを想定した操作を多く実装した関係から必要なくなった。全て消去しても構わない。
     /* =================================================== */
 
     /* DOM操作 */
@@ -124,9 +124,6 @@
 
         // trの子Nodeのうち上から5番目のtdタグ（id="planDetailButton"が付いている最後のtdタグ）にアクセスし，そのタグがクリックされたかどうかチェックしている。
         children[5].addEventListener("click", () => {
-            // デバック用。イベントリスナーが実行されているか確認するため。
-            /* console.log('hoge'); */
-
             // デバック用。nextSiblingプロパティとnextElementSiblingプロパティの違いをコンソールにて確認してほしい。
             // classListにアクセスしたい場合は後者を選択すること。
             /* console.log(tr.nextSibling); */
@@ -144,8 +141,6 @@
         children[4].addEventListener("click", () => {
             // trの子Nodeのうち上から6番目のtdタグをクリック➡5番目のそれをクリックした扱いにしてしまうことで（シュミレートすることで）detailOpenの付け外しを達成している。
             children[5].click();
-            // デバック用。
-            /* console.log("hoge"); */
         });
     });
 
@@ -153,19 +148,10 @@
     AllplanDetailButton.addEventListener("click", () => {
         // 表示されている開閉ボタンのアイコンに応じて処理を分岐。
         if (AllplanDetailButtonChild.className === "fa-solid fa-unlock") {
-            // デバック用。
-            /* console.log('hoge1'); */
-
             // 上記と同じくtrs(class="tr"のついた全てのNode)の各Nodeにアクセスしている。
             trs.forEach((tr) => {
-                // デバック用。
-                /* console.log('hoge2'); */
-
                 // 計画概要のtrタグのclass属性が何もなく，かつclass="tr"のtrタグにdetailOpen（class属性値）が付いていない時。
                 if (tr.nextElementSibling.className === "" && tr.className === "tr") {
-                    // デバック用。
-                    /* console.log('hoge3'); */
-
                     // 計画概要のtrタグとclass="tr"のtrタグ両方にdetailOpen（class属性値）を追加している。
                     tr.nextElementSibling.classList.add("detailOpen");
                     tr.classList.add("detailOpen");
@@ -179,19 +165,10 @@
                 }
             });
         } else {
-            // デバック用。
-            /* console.log('hoge4'); */
-
             // 上記と同じくtrs(class="tr"のついた全てのNode)の各Nodeにアクセスしている。
             trs.forEach((tr) => {
-                // デバック用。
-                /* console.log('hoge5'); */
-
                 // 計画概要のtrタグのclass属性がdetailOpenであり，かつclass="tr"のtrタグにdetailOpen（class属性値）が付いていない時。
                 if (tr.nextElementSibling.className === "detailOpen" && tr.className === "tr") {
-                    // デバック用。
-                    /* console.log('hoge6'); */
-
                     // 計画概要のtrタグの方にだけclass="detailOpen"を取り除けばOK。
                     tr.nextElementSibling.classList.remove("detailOpen");
                 } else if (
@@ -323,8 +300,6 @@
             () => {
                 // マスク部分がクリックされた時と同じ挙動。
                 mask.click();
-                // デバック用。
-                /* console.log('hoge'); */
             }
         );
     });
@@ -338,8 +313,8 @@
     trs.forEach((tr) => {
         // tr（class="tr"のついたtrタグ）の子Nodeを全て取得。今回は直下のtdタグを全て取得。
         let children = tr.children;
-        // 先頭の子Node（「編集する」ボタン）がクリックされた時。
-        children[0].addEventListener("click", () => {
+        // 先頭の子Node（「編集する」ボタン）がクリックされた時。（追記）只今全ページカーソルキー移動実装中。
+        children[0].children[0].addEventListener("click", () => {
             // tr（class="tr"のついたtrタグ）の兄弟要素のうち，一個前のNode（id="subModalWindow）のclassListにアクセス。
             // モーダルウインドウ部分を表示させるため。
             tr.previousElementSibling.classList.remove("hidden");
@@ -355,8 +330,6 @@
         // 「戻る」ボタンがクリックされた時。
         tr.previousElementSibling.children[0].children[2].addEventListener("click", () => {
             mask.click();
-            // デバック用。
-            /* console.log('hogehoge'); */
         });
 
         tr.previousElementSibling.children[0].children[1].addEventListener("click", () => {
@@ -560,7 +533,10 @@
         }
     });
 
-    // -----編集欄-----
+    // ---ページを読み込んだ時、計画作成欄のテーマ入力フォームにフォーカスが当たるようにするため。
+    titleInput.focus();
+
+    // -----編集欄とページ内カーソルキー移動-----
 
     // -----注意点-----
     // tr.previousElementSibling.children[0].children[0].children[3]はテーマ入力欄（inputタグ）を指している。
@@ -570,9 +546,11 @@
     // tr.previousElementSibling.children[0].children[2]は戻るボタンを指している。
 
     // モーダルウィンドウの際と同じ手順。tr（class="tr"のついたtrタグ）にアクセスしている。
-    trs.forEach((tr) => {
+    trs.forEach((tr, num = 0) => {
         // trの子Nodeを取得している。
         let children = tr.children;
+
+        /* 編集欄 */
 
         // 編集ボタンをクリックしたらテーマ欄にフォーカスされるようにするため。
         children[0].addEventListener("click", () => {
@@ -796,5 +774,104 @@
                 );
             }
         });
+
+        /* ページ内カーソルキー移動 */
+
+        // 各レコードを特定するために一意のクラス名を命名している。デベロッパーツール参照。
+        children[0].children[0].classList.add(`number${num}`);
+
+        // 各レコードの編集ボタンから計画作成欄のテーマへ移動。
+
+        document.querySelector(`.number${num}`).addEventListener("keydown", (e) => {
+            if (e.code == "ArrowLeft") {
+                flg = true;
+            }
+        });
+
+        document.querySelector(`.number${num}`).addEventListener("keyup", (e) => {
+            if (e.code == "ArrowLeft" && flg) {
+                flg = false;
+                titleInput.focus();
+            }
+        });
+
+        // レコード間移動。下に降りる。
+
+        document.querySelector(`.number${num}`).addEventListener("keydown", (e) => {
+            if (e.code == "ArrowDown") {
+                flg = true;
+            }
+        });
+
+        document.querySelector(`.number${num}`).addEventListener("keyup", (e) => {
+            if (e.code == "ArrowDown" && flg) {
+                flg = false;
+
+                // 現在の位置が末尾レコードまで達した場合に下矢印キーをタイプすると先頭レコードに戻る仕様。
+                if (num === 19) {
+                    // 先頭レコードに移動。
+                    document.querySelector(`.number0`).focus();
+                } else {
+                    document.querySelector(`.number${num + 1}`).focus();
+                }
+            }
+        });
+
+        // レコード間移動。上に上がる。
+
+        document.querySelector(`.number${num}`).addEventListener("keydown", (e) => {
+            if (e.code == "ArrowUp") {
+                flg = true;
+            }
+        });
+
+        document.querySelector(`.number${num}`).addEventListener("keyup", (e) => {
+            if (e.code == "ArrowUp" && flg) {
+                flg = false;
+
+                // 現在の位置が先頭レコードの場合に上矢印キーをタイプすると末尾レコードに移動する仕様。
+                if (num === 0) {
+                    // 末尾レコードに移動。
+                    document.querySelector(`.number19`).focus();
+                } else {
+                    document.querySelector(`.number${num - 1}`).focus();
+                }
+            }
+        });
+
+        // レコード内移動。右に移る。
+        // 追記予定。アコーディオンまで到達したい。
+
+        // レコード内移動。左に移る。
+        // 追記予定。
     });
+
+    // 計画作成欄のテーマ入力フォームから先頭レコードの編集ボタンへ移動。
+
+    titleInput.addEventListener("keydown", (e) => {
+        // イベントオブジェクトの中に先程ユーザーがタイプしたキーが格納されている。
+        // タイプされたキーが右矢印で，かつ選択中の現在地点がテーマ入力欄の末尾だった時（何も入力していなければ末尾扱い，何か入力していればその文字列の末尾に相当する）。また，末尾をvalueのlengthで表現している（末尾＝欄内の文字列の最後＝長さ）。
+        if (e.code == "ArrowRight" && titleInput.selectionStart == titleInput.value.length) {
+            // フラグを反転。下で使用。
+            flg = true;
+        }
+    });
+
+    titleInput.addEventListener("keyup", (e) => {
+        // もう一度入力されたキーが右矢印であるのを確認し，さらにフラグが反転しているか（trueか）判定している。
+        if (e.code == "ArrowRight" && flg) {
+            // フラグを元に戻しておく。
+            flg = false;
+            document.querySelector(".number0").focus();
+        }
+    });
+
+    // 計画作成欄の概要から先頭レコードの編集ボタンへ移動。
+    // 追記予定。
+
+    // 計画作成欄の作成ボタンから先頭レコードの編集ボタンへ移動。
+    // 追記予定。
+
+    // 加えてapp2.jsにもページ内移動を実装させる予定。
+    // さらに、ページ内移動における欠陥を修理する必要がある。具体的には、計画編集欄の戻るボタンを押下するとフォーカスが外れてしまう問題を解決してほしい。
 }

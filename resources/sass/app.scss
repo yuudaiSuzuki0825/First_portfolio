@@ -865,7 +865,9 @@ img {
 }
 
 // メインコンテンツのツールチップのアニメーション指定。アイコンがホバーされた時。
-.parent-balloon:hover .balloon {
+// あるいはカーソルキー移動にて編集ボタンにフォーカスが当たった時。
+.parent-balloon:hover .balloon,
+button:focus .parent-balloon .balloon {
     // 非表示➡表示。
     display: inline-block;
     // 横幅指定。コメントアウトして確認。文字数に応じてそれぞれ微調整が必要。
@@ -1339,6 +1341,7 @@ img {
 #footer p {
     text-align: center;
     font-size: 1.375rem;
+    font-weight: bold;
     line-height: 40px;
     color: #333333;
 }

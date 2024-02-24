@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,9 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .js('resources/js/hoge.js', 'public/js')  // Laravel MixにてJavaScriptファイルをコンパイルするため。
-   .sass('resources/sass/app.scss', 'public/css')
+mix.js("resources/js/app.js", "public/js")
+    .js("resources/js/app2.js", "public/js") // Laravel MixにてJavaScriptファイルをコンパイルするため。
+    .sass("resources/sass/app.scss", "public/css")
     .options({
-        processCssUrls: false
+        processCssUrls: false,
     });

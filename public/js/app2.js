@@ -2,7 +2,7 @@
 /******/ 	"use strict";
 var __webpack_exports__ = {};
 /*!******************************!*\
-  !*** ./resources/js/hoge.js ***!
+  !*** ./resources/js/app2.js ***!
   \******************************/
 
 
@@ -364,18 +364,14 @@ var __webpack_exports__ = {};
     // タイプされたキーが下矢印で，かつ選択中の現在地点がテーマ入力欄の末尾だった時（何も入力していなければ末尾扱い，何か入力していればその文字列の末尾に相当する）。また，末尾をvalueのlengthで表現している（末尾＝欄内の文字列の最後＝長さ）。
     if (e.code == "ArrowDown" && titleInput.selectionStart == titleInput.value.length) {
       // フラグを反転。下で使用。
-      flg = true; // デバック用。
-
-      console.log("hoge");
+      flg = true;
     }
   }); // テーマ入力欄においてキーボード入力があったとき。keydownとkeyup両方でイベントリスナーを作るのは，1つだけの場合，フォーカスとフォーカス地点指定の両方の処理が正常に動作しないため。
 
   titleInput.addEventListener("keyup", function (e) {
     // もう一度入力されたキーが下矢印であるのを確認し，さらにフラグが反転しているか（trueか）判定している。
     if (e.code == "ArrowDown" && flg) {
-      // デバック用。
-      console.log("hoge2"); // フラグを元に戻しておく。
-
+      // フラグを元に戻しておく。
       flg = false; // 概要入力欄へフォーカス。
 
       textareaInput.focus(); // フォーカスされる位置を指定（選択中の現在地点の指定）。今回は末尾に指定した。
@@ -387,15 +383,11 @@ var __webpack_exports__ = {};
 
   textareaInput.addEventListener("keydown", function (e) {
     if (e.code == "ArrowUp" && textareaInput.selectionStart == 0) {
-      flg = true; // デバック用。
-
-      console.log("hoge");
+      flg = true;
     }
   });
   textareaInput.addEventListener("keyup", function (e) {
     if (e.code == "ArrowUp" && flg) {
-      // デバック用。
-      console.log("hoge2");
       flg = false;
       titleInput.focus();
       titleInput.setSelectionRange(titleInput.value.length, titleInput.value.length);
@@ -404,15 +396,11 @@ var __webpack_exports__ = {};
 
   textareaInput.addEventListener("keydown", function (e) {
     if (e.code == "ArrowDown" && textareaInput.selectionStart == textareaInput.value.length) {
-      flg = true; // デバック用。
-
-      console.log("hoge");
+      flg = true;
     }
   });
   textareaInput.addEventListener("keyup", function (e) {
     if (e.code == "ArrowDown" && flg) {
-      // デバック用。
-      console.log("hoge2");
       flg = false;
       createButton.focus();
     }
@@ -420,15 +408,11 @@ var __webpack_exports__ = {};
 
   createButton.addEventListener("keydown", function (e) {
     if (e.code == "ArrowUp") {
-      flg = true; // デバック用。
-
-      console.log("hoge");
+      flg = true;
     }
   });
   createButton.addEventListener("keyup", function (e) {
     if (e.code == "ArrowUp" && flg) {
-      // デバック用。
-      console.log("hoge100");
       flg = false;
       textareaInput.focus();
       textareaInput.setSelectionRange(textareaInput.value.length, textareaInput.value.length);

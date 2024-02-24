@@ -13,10 +13,10 @@
 
                 {!! Form::label('title', 'テーマ', ['class' => 'form-label']) !!}
                 {!! Form::text('title', null, ['class' => 'form-input title-input', "placeholder" => "20字以内・未入力不可"]) !!}
-                @if ($errors->first('title'))
+                {{-- @if ($errors->first('title'))
                      <!-- <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>{{ $errors->first('title') }}</p> -->
                      <!-- <p class="error-message"><i class="fa-solid fa-triangle-exclamation"></i>字数制限と未入力にご注意下さい。</p> -->
-                @endif
+                @endif --}}
 
                 {!! Form::label('start', '開始日', ['class' => 'form-label']) !!}
                 {!! Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-input start-input']) !!}
@@ -110,7 +110,7 @@
                         <!-- モーダルウインドウ部分その２。 -->
                         <tr id="subModalWindow" class="hidden">
                             <td>
-                                <!-- <h2>計画更新</h2> -->
+                                <!-- 計画更新。 -->
 
                                 {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put'], ['class' => 'form']) !!}
 
@@ -158,7 +158,7 @@
                             </td>
                         </tr>
                         <tr class="tr">
-                            <td class="FirstAid"><a href="#" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></td>
+                            <td class="FirstAid"><button><a href="#" class="parent-balloon"><i class="fa-solid fa-pencil"></i><span class="balloon">編集する</span></a></button></td>
                             <!-- 「完了する」アイコン（ダミー）。 -->
                             <td id="modalWindowOpen" class="parent-balloon">
                                 <i class="fa-solid fa-circle-check"></i><span class="balloon">完了する</span>
