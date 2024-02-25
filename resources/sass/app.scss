@@ -816,8 +816,9 @@ img {
     transform: rotate(180deg);
 }
 
-// index.blade.phpのみ。「編集する」ボタンのコーディング。
-.wrapper .main-area .content .content-area .table tbody tr td a {
+// index.blade.phpのみ。「編集する」ボタンと「完了する」ボタンのコーディング。
+.wrapper .main-area .content .content-area .table tbody tr td a,
+.wrapper .main-area .content .content-area .table tbody tr td button {
     // 色指定。
     color: #fff;
 }
@@ -867,7 +868,8 @@ img {
 // メインコンテンツのツールチップのアニメーション指定。アイコンがホバーされた時。
 // あるいはカーソルキー移動にて編集ボタンにフォーカスが当たった時。
 .parent-balloon:hover .balloon,
-button:focus .parent-balloon .balloon {
+button:focus .parent-balloon .balloon,
+.parent-balloon button:focus .balloon {
     // 非表示➡表示。
     display: inline-block;
     // 横幅指定。コメントアウトして確認。文字数に応じてそれぞれ微調整が必要。

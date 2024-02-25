@@ -475,7 +475,8 @@ img {
   transform: rotate(180deg);
 }
 
-.wrapper .main-area .content .content-area .table tbody tr td a {
+.wrapper .main-area .content .content-area .table tbody tr td a,
+.wrapper .main-area .content .content-area .table tbody tr td button {
   color: #fff;
 }
 
@@ -507,7 +508,8 @@ img {
 }
 
 .parent-balloon:hover .balloon,
-button:focus .parent-balloon .balloon {
+button:focus .parent-balloon .balloon,
+.parent-balloon button:focus .balloon {
   display: inline-block;
   width: 78px;
 }
