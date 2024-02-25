@@ -326,10 +326,14 @@
             // class="hidden"を追加することで再度モーダルウインドウ部分とマスク部分を非表示にしている。
             tr.previousElementSibling.classList.add("hidden");
             mask.classList.add("hidden");
+            // モーダルウインドウ部分とマスク部分非表示後に、計画作成欄のテーマにフォーカスが当たるようにしている。
+            titleInput.focus();
         });
         // 「戻る」ボタンがクリックされた時。
         tr.previousElementSibling.children[0].children[2].addEventListener("click", () => {
             mask.click();
+            // モーダルウインドウ部分とマスク部分非表示後に、計画作成欄のテーマにフォーカスが当たるようにしている。
+            titleInput.focus();
         });
 
         tr.previousElementSibling.children[0].children[1].addEventListener("click", () => {
@@ -778,72 +782,145 @@
         /* ページ内カーソルキー移動 */
 
         // 各レコードを特定するために一意のクラス名を命名している。デベロッパーツール参照。
-        children[0].children[0].classList.add(`number${num}`);
+
+        // 各レコードの編集ボタンに一意のクラス名を命名。
+        children[0].children[0].classList.add(`edit-number${num}`);
+
+        // 各レコードの完了ボタンに一意のクラス名を命名。
+        children[1].children[0].classList.add(`done-number${num}`);
 
         // 各レコードの編集ボタンから計画作成欄のテーマへ移動。
 
-        document.querySelector(`.number${num}`).addEventListener("keydown", (e) => {
+        document.querySelector(`.edit-number${num}`).addEventListener("keydown", (e) => {
             if (e.code == "ArrowLeft") {
                 flg = true;
             }
         });
 
-        document.querySelector(`.number${num}`).addEventListener("keyup", (e) => {
+        document.querySelector(`.edit-number${num}`).addEventListener("keyup", (e) => {
             if (e.code == "ArrowLeft" && flg) {
                 flg = false;
                 titleInput.focus();
             }
         });
 
-        // レコード間移動。下に降りる。
+        // レコード間移動。下に降りる。編集ボタン間移動。
 
-        document.querySelector(`.number${num}`).addEventListener("keydown", (e) => {
+        document.querySelector(`.edit-number${num}`).addEventListener("keydown", (e) => {
             if (e.code == "ArrowDown") {
                 flg = true;
             }
         });
 
-        document.querySelector(`.number${num}`).addEventListener("keyup", (e) => {
+        document.querySelector(`.edit-number${num}`).addEventListener("keyup", (e) => {
             if (e.code == "ArrowDown" && flg) {
                 flg = false;
 
                 // 現在の位置が末尾レコードまで達した場合に下矢印キーをタイプすると先頭レコードに戻る仕様。
                 if (num === trs.length - 1) {
                     // 先頭レコードに移動。
-                    document.querySelector(`.number0`).focus();
+                    document.querySelector(`.edit-number0`).focus();
                 } else {
-                    document.querySelector(`.number${num + 1}`).focus();
+                    document.querySelector(`.edit-number${num + 1}`).focus();
                 }
             }
         });
 
-        // レコード間移動。上に上がる。
+        // レコード間移動。下に降りる。完了ボタン間移動。
 
-        document.querySelector(`.number${num}`).addEventListener("keydown", (e) => {
+        document.querySelector(`.done-number${num}`).addEventListener("keydown", (e) => {
+            if (e.code == "ArrowDown") {
+                flg = true;
+            }
+        });
+
+        document.querySelector(`.done-number${num}`).addEventListener("keyup", (e) => {
+            if (e.code == "ArrowDown" && flg) {
+                flg = false;
+
+                // 現在の位置が末尾レコードまで達した場合に下矢印キーをタイプすると先頭レコードに戻る仕様。
+                if (num === trs.length - 1) {
+                    // 先頭レコードに移動。
+                    document.querySelector(`.done-number0`).focus();
+                } else {
+                    document.querySelector(`.done-number${num + 1}`).focus();
+                }
+            }
+        });
+
+        // レコード間移動。上に上がる。編集ボタン間移動。
+
+        document.querySelector(`.edit-number${num}`).addEventListener("keydown", (e) => {
             if (e.code == "ArrowUp") {
                 flg = true;
             }
         });
 
-        document.querySelector(`.number${num}`).addEventListener("keyup", (e) => {
+        document.querySelector(`.edit-number${num}`).addEventListener("keyup", (e) => {
             if (e.code == "ArrowUp" && flg) {
                 flg = false;
 
                 // 現在の位置が先頭レコードの場合に上矢印キーをタイプすると末尾レコードに移動する仕様。
                 if (num === 0) {
                     // 末尾レコードに移動。
-                    document.querySelector(`.number${trs.length - 1}`).focus();
+                    document.querySelector(`.edit-number${trs.length - 1}`).focus();
                 } else {
-                    document.querySelector(`.number${num - 1}`).focus();
+                    document.querySelector(`.edit-number${num - 1}`).focus();
+                }
+            }
+        });
+
+        // レコード間移動。上に上がる。完了ボタン間移動。
+
+        document.querySelector(`.done-number${num}`).addEventListener("keydown", (e) => {
+            if (e.code == "ArrowUp") {
+                flg = true;
+            }
+        });
+
+        document.querySelector(`.done-number${num}`).addEventListener("keyup", (e) => {
+            if (e.code == "ArrowUp" && flg) {
+                flg = false;
+
+                // 現在の位置が先頭レコードの場合に上矢印キーをタイプすると末尾レコードに移動する仕様。
+                if (num === 0) {
+                    // 末尾レコードに移動。
+                    document.querySelector(`.done-number${trs.length - 1}`).focus();
+                } else {
+                    document.querySelector(`.done-number${num - 1}`).focus();
                 }
             }
         });
 
         // レコード内移動。右に移る。
-        // 追記予定。アコーディオンまで到達したい。
+        document.querySelector(`.edit-number${num}`).addEventListener("keydown", (e) => {
+            if (e.code == "ArrowRight") {
+                flg = true;
+            }
+        });
+
+        document.querySelector(`.edit-number${num}`).addEventListener("keyup", (e) => {
+            if (e.code == "ArrowRight" && flg) {
+                flg = false;
+
+                document.querySelector(`.done-number${num}`).focus();
+            }
+        });
 
         // レコード内移動。左に移る。
-        // 追記予定。
+        document.querySelector(`.done-number${num}`).addEventListener("keydown", (e) => {
+            if (e.code == "ArrowLeft") {
+                flg = true;
+            }
+        });
+
+        document.querySelector(`.done-number${num}`).addEventListener("keyup", (e) => {
+            if (e.code == "ArrowLeft" && flg) {
+                flg = false;
+
+                document.querySelector(`.edit-number${num}`).focus();
+            }
+        });
     });
 
     // 計画作成欄のテーマ入力フォームから先頭レコードの編集ボタンへ移動。
@@ -862,16 +939,43 @@
         if (e.code == "ArrowRight" && flg) {
             // フラグを元に戻しておく。
             flg = false;
-            document.querySelector(".number0").focus();
+            document.querySelector(".edit-number0").focus();
         }
     });
 
     // 計画作成欄の概要から先頭レコードの編集ボタンへ移動。
-    // 追記予定。
+
+    textareaInput.addEventListener("keydown", (e) => {
+        if (e.code == "ArrowRight" && textareaInput.selectionStart == textareaInput.value.length) {
+            flg = true;
+        }
+    });
+
+    textareaInput.addEventListener("keyup", (e) => {
+        if (e.code == "ArrowRight" && flg) {
+            flg = false;
+            if (trs.length >= 1) {
+                document.querySelector(".edit-number0").focus();
+            }
+        }
+    });
 
     // 計画作成欄の作成ボタンから先頭レコードの編集ボタンへ移動。
-    // 追記予定。
+
+    createButton.addEventListener("keydown", (e) => {
+        if (e.code == "ArrowRight") {
+            flg = true;
+        }
+    });
+
+    createButton.addEventListener("keyup", (e) => {
+        if (e.code == "ArrowRight" && flg) {
+            flg = false;
+            if (trs.length >= 1) {
+                document.querySelector(".edit-number0").focus();
+            }
+        }
+    });
 
     // 加えてapp2.jsにもページ内移動を実装させる予定。
-    // さらに、ページ内移動における欠陥を修理する必要がある。具体的には、計画編集欄の戻るボタンを押下するとフォーカスが外れてしまう問題を解決してほしい。
 }
