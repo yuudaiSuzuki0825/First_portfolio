@@ -4,28 +4,6 @@
     // ページごとに読み込むjsファイルを変更する必要がある（複数ファイルに分割すること）。
 
     /* =================================================== */
-    // ハンバーガーメニューの実装。
-    /* =================================================== */
-
-    /* DOM操作 */
-    const open = document.getElementById("open");
-    const overlay = document.querySelector(".overlay");
-    const close = document.getElementById("close");
-
-    // ハンバーガーメニューボタンをクリックした時。
-    open.addEventListener("click", () => {
-        // class="show"を追加している。
-        // 「.header .overlay.show{}」を読み込むため。
-        overlay.classList.add("show");
-    });
-
-    // オーバーレイ画面の×ボタンがクリックされた時。
-    close.addEventListener("click", () => {
-        // class="show"を取り除いている。
-        overlay.classList.remove("show");
-    });
-
-    /* =================================================== */
     // サイドパネルの実装。
     /* =================================================== */
 
